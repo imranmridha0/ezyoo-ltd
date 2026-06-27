@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brand Collaboration — EAZYOO | Partner With Us</title>
+  <meta name="description" content="Partner with EAZYOO — we work with influencers, fitness studios, outdoor brands, and kitchen content creators for PR gifting, co-branding, and affiliate partnerships.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ========== NAVIGATION ========== -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="index.html" class="nav-brand">
+        <span class="logo-text">EAZYOO</span>
+        <span class="logo-dot"></span>
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="wholesale.html">Wholesale</a>
+        <a href="collaborate.html" class="active">Collaborate</a>
+        <a href="about.html">About</a>
+      </div>
+      <div class="nav-actions">
+        <a href="wholesale.html" class="btn btn-primary btn-sm nav-cta">Become a Stockist</a>
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ========== PAGE HEADER ========== -->
+  <div class="page-header">
+    <div class="container">
+      <h1>Brand Collaboration</h1>
+      <p>Let's create something amazing together. We partner with influencers, fitness studios, outdoor brands, and creative content makers.</p>
+    </div>
+  </div>
+
+  <!-- ========== COLLAB TYPES ========== -->
+  <section class="section" style="background: var(--color-white);">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">How We Collaborate</span>
+        <h2>Partnership Opportunities</h2>
+        <p>Whether you're a content creator with a growing audience or a complementary brand looking to co-create, we'd love to explore a partnership.</p>
+      </div>
+      
+      <div class="collab-types reveal">
+        <div class="collab-card">
+          <div class="icon">🤳</div>
+          <h4>Influencer & Content Creator</h4>
+          <p>Receive EAZYOO products for review, unboxing, and lifestyle content. We work with fitness, outdoor, cooking, and lifestyle creators on Instagram, TikTok, and YouTube.</p>
+        </div>
+        <div class="collab-card">
+          <div class="icon">🏋️</div>
+          <h4>Gym & Fitness Studio</h4>
+          <p>Co-branded merchandise, member gifting programmes, and exclusive retail partnerships for your studio or fitness facility.</p>
+        </div>
+        <div class="collab-card">
+          <div class="icon">🏕️</div>
+          <h4>Outdoor & Adventure Brand</h4>
+          <p>Joint campaigns, event sponsorships, and product bundles with complementary outdoor and adventure brands.</p>
+        </div>
+        <div class="collab-card">
+          <div class="icon">🍽️</div>
+          <h4>Kitchen & Food Brand</h4>
+          <p>Recipe collaborations, meal prep bundles, and co-branded kitchen product collections with food and cookware brands.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== COLLAB FORM ========== -->
+  <section class="form-section section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Get In Touch</span>
+        <h2>Collaboration Enquiry</h2>
+        <p>Tell us about yourself and your collaboration idea. We review all enquiries and respond within 5 business days.</p>
+      </div>
+      
+      <div class="form-container reveal" id="collabFormContainer">
+        <form id="collabForm" onsubmit="handleCollabSubmit(event)">
+          
+          <h4 style="margin-bottom: var(--space-xl); padding-bottom: var(--space-md); border-bottom: 1px solid var(--color-border);">
+            👤 About You
+          </h4>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="collabName">Your Name <span class="required">*</span></label>
+              <input type="text" class="form-control" id="collabName" name="name" placeholder="Jane Smith" required>
+            </div>
+            <div class="form-group">
+              <label for="collabEmail">Email Address <span class="required">*</span></label>
+              <input type="email" class="form-control" id="collabEmail" name="email" placeholder="jane@yourbrand.com" required>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="collabType">Partnership Type <span class="required">*</span></label>
+              <select class="form-control" id="collabType" name="type" required>
+                <option value="" disabled selected>Select type...</option>
+                <option value="influencer">Influencer / Content Creator</option>
+                <option value="gym">Gym / Fitness Studio</option>
+                <option value="brand">Brand / Company</option>
+                <option value="media">Press / Media</option>
+                <option value="event">Event / Sponsorship</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="platform">Primary Platform <span class="required">*</span></label>
+              <select class="form-control" id="platform" name="platform" required>
+                <option value="" disabled selected>Select platform...</option>
+                <option value="instagram">Instagram</option>
+                <option value="tiktok">TikTok</option>
+                <option value="youtube">YouTube</option>
+                <option value="blog">Blog / Website</option>
+                <option value="physical">Physical Location</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="handle">Social Media Handle / Website</label>
+              <input type="text" class="form-control" id="handle" name="handle" placeholder="@yourhandle or www.yourbrand.com">
+            </div>
+            <div class="form-group">
+              <label for="audience">Audience Size</label>
+              <select class="form-control" id="audience" name="audience">
+                <option value="" disabled selected>Select range...</option>
+                <option value="1k-5k">1K – 5K followers</option>
+                <option value="5k-25k">5K – 25K followers</option>
+                <option value="25k-100k">25K – 100K followers</option>
+                <option value="100k+">100K+ followers</option>
+                <option value="na">Not applicable</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="collabIdea">Your Collaboration Idea <span class="required">*</span></label>
+            <textarea class="form-control" id="collabIdea" name="idea" placeholder="Tell us about your collaboration idea — what you'd like to create, your audience demographics, and how EAZYOO fits into your content or business..." required></textarea>
+          </div>
+          
+          <div class="form-submit">
+            <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
+              Submit Enquiry →
+            </button>
+            <p class="form-note">We review all collaboration enquiries and respond within 5 business days.</p>
+          </div>
+        </form>
+        
+        <div class="success-message" id="collabSuccess">
+          <div class="success-icon">🤝</div>
+          <h3>Enquiry Submitted!</h3>
+          <p>Thank you for your interest in collaborating with EAZYOO. We'll review your proposal and get back to you soon.</p>
+          <br>
+          <a href="index.html" class="btn btn-primary">Back to Homepage</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo-text">EAZYOO</div>
+          <p class="tagline">"Smart Products. Smarter Living."</p>
+          <p>Innovative, space-saving products for active lifestyles and modern kitchens. Proudly UK-based.</p>
+          <div class="footer-newsletter">
+            <input type="email" placeholder="Your email address" aria-label="Email for newsletter">
+            <button type="button">Subscribe</button>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h5>Shop</h5>
+          <ul>
+            <li><a href="products.html">All Products</a></li>
+            <li><a href="https://www.amazon.co.uk/Running-Water-Bottle-500ml-pcs/dp/B0FNC3W5CP" target="_blank" rel="noopener">Running Water Bottle</a></li>
+            <li><a href="https://www.amazon.co.uk/Collapsible-Cutting-Board-Chopping-Foldable/dp/B0FN9FJXKS" target="_blank" rel="noopener">Collapsible Cutting Board</a></li>
+            <li><a href="https://www.amazon.co.uk/s?me=AGGGQPAQ7YS4X" target="_blank" rel="noopener">Amazon Store</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h5>Business</h5>
+          <ul>
+            <li><a href="wholesale.html">Wholesale Application</a></li>
+            <li><a href="collaborate.html">Brand Collaboration</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h5>Company</h5>
+          <ul>
+            <li><a href="about.html">About EAZYOO</a></li>
+            <li><a href="about.html#contact">Contact Us</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 EAZYOO. All rights reserved. UK Registered Brand.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook">FB</a>
+          <a href="#" aria-label="Instagram">IG</a>
+          <a href="#" aria-label="TikTok">TT</a>
+          <a href="#" aria-label="YouTube">YT</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/content.js"></script>
+</body>
+</html>
+

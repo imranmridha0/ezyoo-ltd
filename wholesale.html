@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wholesale Application — EAZYOO | Stock Our Products</title>
+  <meta name="description" content="Apply to become an EAZYOO wholesale stockist. We supply innovative kitchen and outdoor products to sports shops, kitchen stores, gyms, and online retailers across the UK.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ========== NAVIGATION ========== -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="index.html" class="nav-brand">
+        <span class="logo-text">EAZYOO</span>
+        <span class="logo-dot"></span>
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="wholesale.html" class="active">Wholesale</a>
+        <a href="collaborate.html">Collaborate</a>
+        <a href="about.html">About</a>
+      </div>
+      <div class="nav-actions">
+        <a href="wholesale.html" class="btn btn-primary btn-sm nav-cta">Become a Stockist</a>
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ========== PAGE HEADER ========== -->
+  <div class="page-header">
+    <div class="container">
+      <h1>Wholesale Application</h1>
+      <p>Partner with EAZYOO and stock our innovative, space-saving products in your store. Join our growing network of UK retailers.</p>
+    </div>
+  </div>
+
+  <!-- ========== WHY STOCK EAZYOO ========== -->
+  <section class="section" style="background: var(--color-white);">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Why Stock EAZYOO?</span>
+        <h2>Benefits of Partnering With Us</h2>
+      </div>
+      <div class="values-grid">
+        <div class="value-card reveal reveal-delay-1">
+          <div class="value-icon">📈</div>
+          <h4>Proven Amazon Sales</h4>
+          <p>Our products are Amazon bestsellers with 4.4+ star ratings and growing demand.</p>
+        </div>
+        <div class="value-card reveal reveal-delay-2">
+          <div class="value-icon">💰</div>
+          <h4>Competitive Margins</h4>
+          <p>Attractive wholesale pricing designed to maximise your profit margins.</p>
+        </div>
+        <div class="value-card reveal reveal-delay-3">
+          <div class="value-icon">📦</div>
+          <h4>Low MOQ</h4>
+          <p>Flexible minimum order quantities to suit businesses of all sizes.</p>
+        </div>
+        <div class="value-card reveal reveal-delay-4">
+          <div class="value-icon">🚚</div>
+          <h4>UK Fulfilment</h4>
+          <p>Fast delivery from UK warehouses. No import hassles or long wait times.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== WHO CAN APPLY ========== -->
+  <section class="section" id="moq">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Who Can Apply</span>
+        <h2>We Work With All Types of Retailers</h2>
+        <p>Whether you run a physical shop, online store, or fitness studio — we'd love to hear from you.</p>
+      </div>
+      <div class="collab-types reveal">
+        <div class="collab-card">
+          <div class="icon">🏋️</div>
+          <h4>Gyms & Fitness Studios</h4>
+          <p>Stock our running water bottles for your members. Perfect for retail corners and vending areas.</p>
+        </div>
+        <div class="collab-card">
+          <div class="icon">🏪</div>
+          <h4>Sports & Outdoor Shops</h4>
+          <p>Add our collapsible flasks to your hydration range. Ideal for runners, hikers, and cyclists.</p>
+        </div>
+        <div class="collab-card">
+          <div class="icon">🍽️</div>
+          <h4>Kitchen & Home Stores</h4>
+          <p>Our foldable cutting boards are perfect for the space-saving kitchen gadget section.</p>
+        </div>
+        <div class="collab-card">
+          <div class="icon">🌐</div>
+          <h4>Online Retailers</h4>
+          <p>List our products on your e-commerce store with our provided images and product copy.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== APPLICATION FORM ========== -->
+  <section class="form-section section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Apply Now</span>
+        <h2>Wholesale Application Form</h2>
+        <p>Fill in the form below and our team will review your application within 2-3 business days.</p>
+      </div>
+      
+      <div class="form-container reveal" id="wholesaleFormContainer">
+        <form id="wholesaleForm" onsubmit="handleWholesaleSubmit(event)">
+          
+          <!-- Business Information -->
+          <h4 style="margin-bottom: var(--space-xl); padding-bottom: var(--space-md); border-bottom: 1px solid var(--color-border);">
+            🏢 Business Information
+          </h4>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="businessName">Business Name <span class="required">*</span></label>
+              <input type="text" class="form-control" id="businessName" name="businessName" placeholder="e.g. Active Life Sports Ltd" required>
+            </div>
+            <div class="form-group">
+              <label for="businessType">Business Type <span class="required">*</span></label>
+              <select class="form-control" id="businessType" name="businessType" required>
+                <option value="" disabled selected>Select type...</option>
+                <option value="physical-retail">Physical Retail Store</option>
+                <option value="online-retail">Online Retailer</option>
+                <option value="gym-fitness">Gym / Fitness Studio</option>
+                <option value="outdoor-store">Outdoor / Adventure Store</option>
+                <option value="kitchen-home">Kitchen & Home Store</option>
+                <option value="gift-shop">Gift Shop</option>
+                <option value="department-store">Department Store</option>
+                <option value="distributor">Distributor</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="website">Business Website</label>
+              <input type="url" class="form-control" id="website" name="website" placeholder="https://www.yourstore.co.uk">
+            </div>
+            <div class="form-group">
+              <label for="businessAddress">Business Location <span class="required">*</span></label>
+              <input type="text" class="form-control" id="businessAddress" name="businessAddress" placeholder="City, County, UK" required>
+            </div>
+          </div>
+          
+          <!-- Contact Information -->
+          <h4 style="margin: var(--space-2xl) 0 var(--space-xl); padding-bottom: var(--space-md); border-bottom: 1px solid var(--color-border);">
+            👤 Contact Information
+          </h4>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="contactName">Your Full Name <span class="required">*</span></label>
+              <input type="text" class="form-control" id="contactName" name="contactName" placeholder="John Smith" required>
+            </div>
+            <div class="form-group">
+              <label for="jobTitle">Job Title</label>
+              <input type="text" class="form-control" id="jobTitle" name="jobTitle" placeholder="e.g. Purchasing Manager">
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Email Address <span class="required">*</span></label>
+              <input type="email" class="form-control" id="email" name="email" placeholder="john@yourstore.co.uk" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number <span class="required">*</span></label>
+              <input type="tel" class="form-control" id="phone" name="phone" placeholder="+44 7XXX XXXXXX" required>
+            </div>
+          </div>
+          
+          <!-- Order Details -->
+          <h4 style="margin: var(--space-2xl) 0 var(--space-xl); padding-bottom: var(--space-md); border-bottom: 1px solid var(--color-border);">
+            📦 Order Details
+          </h4>
+          
+          <div class="form-group">
+            <label>Which products are you interested in? <span class="required">*</span></label>
+            <div class="checkbox-group">
+              <label>
+                <input type="checkbox" name="products" value="water-bottle">
+                Running Water Bottle — 500ml Soft Flask (Pack of 2)
+              </label>
+              <label>
+                <input type="checkbox" name="products" value="cutting-board">
+                Collapsible Cutting Board — Foldable Chopping Board
+              </label>
+              <label>
+                <input type="checkbox" name="products" value="both">
+                Both Products
+              </label>
+              <label>
+                <input type="checkbox" name="products" value="future">
+                Interested in future EAZYOO products
+              </label>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="orderVolume">Estimated Monthly Order Volume <span class="required">*</span></label>
+              <select class="form-control" id="orderVolume" name="orderVolume" required>
+                <option value="" disabled selected>Select volume...</option>
+                <option value="10-50">10 – 50 units</option>
+                <option value="50-100">50 – 100 units</option>
+                <option value="100-500">100 – 500 units</option>
+                <option value="500-1000">500 – 1,000 units</option>
+                <option value="1000+">1,000+ units</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="timeline">When would you like to start?</label>
+              <select class="form-control" id="timeline" name="timeline">
+                <option value="" disabled selected>Select timeline...</option>
+                <option value="immediately">Immediately</option>
+                <option value="1-month">Within 1 month</option>
+                <option value="3-months">Within 3 months</option>
+                <option value="exploring">Just exploring</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="message">Additional Message</label>
+            <textarea class="form-control" id="message" name="message" placeholder="Tell us about your business and why you'd like to stock EAZYOO products..."></textarea>
+          </div>
+          
+          <div class="form-submit">
+            <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
+              Submit Application →
+            </button>
+            <p class="form-note">We review all applications within 2-3 business days. We'll contact you via email with next steps.</p>
+          </div>
+        </form>
+        
+        <!-- Success Message -->
+        <div class="success-message" id="wholesaleSuccess">
+          <div class="success-icon">✅</div>
+          <h3>Application Submitted!</h3>
+          <p>Thank you for your interest in stocking EAZYOO products. Our team will review your application and get back to you within 2-3 business days.</p>
+          <br>
+          <a href="index.html" class="btn btn-primary">Back to Homepage</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo-text">EAZYOO</div>
+          <p class="tagline">"Smart Products. Smarter Living."</p>
+          <p>Innovative, space-saving products for active lifestyles and modern kitchens. Proudly UK-based.</p>
+          <div class="footer-newsletter">
+            <input type="email" placeholder="Your email address" aria-label="Email for newsletter">
+            <button type="button">Subscribe</button>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h5>Shop</h5>
+          <ul>
+            <li><a href="products.html">All Products</a></li>
+            <li><a href="https://www.amazon.co.uk/Running-Water-Bottle-500ml-pcs/dp/B0FNC3W5CP" target="_blank" rel="noopener">Running Water Bottle</a></li>
+            <li><a href="https://www.amazon.co.uk/Collapsible-Cutting-Board-Chopping-Foldable/dp/B0FN9FJXKS" target="_blank" rel="noopener">Collapsible Cutting Board</a></li>
+            <li><a href="https://www.amazon.co.uk/s?me=AGGGQPAQ7YS4X" target="_blank" rel="noopener">Amazon Store</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h5>Business</h5>
+          <ul>
+            <li><a href="wholesale.html">Wholesale Application</a></li>
+            <li><a href="collaborate.html">Brand Collaboration</a></li>
+            <li><a href="wholesale.html#moq">MOQ & Pricing</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h5>Company</h5>
+          <ul>
+            <li><a href="about.html">About EAZYOO</a></li>
+            <li><a href="about.html#values">Our Values</a></li>
+            <li><a href="about.html#contact">Contact Us</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 EAZYOO. All rights reserved. UK Registered Brand.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook">FB</a>
+          <a href="#" aria-label="Instagram">IG</a>
+          <a href="#" aria-label="TikTok">TT</a>
+          <a href="#" aria-label="YouTube">YT</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/content.js"></script>
+</body>
+</html>
+

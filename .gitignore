@@ -1,0 +1,24 @@
+# Node modules (not needed for static site)
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor files
+.vscode/
+*.swp
+*.swo
+
+# Credentials (never commit these!)
+credentials.json
+*.env
+.env*
+
+# Logs
+*.log
+
+# Temp files
+*.tmp
+*.bak
