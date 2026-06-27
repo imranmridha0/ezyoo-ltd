@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en-GB">
 <head>
   <meta charset="UTF-8">
@@ -106,6 +106,7 @@
       <div class="nav-item" data-panel="product1" onclick="showPanel(this,'product1')">Water Bottle</div>
       <div class="nav-item" data-panel="product2" onclick="showPanel(this,'product2')">Cutting Board</div>
       <div class="sidebar-label" style="margin-top:24px">Settings</div>
+      <div class="nav-item" data-panel="contact" onclick="showPanel(this,'contact')">Contact &amp; Social</div>
       <div class="nav-item" data-panel="password" onclick="showPanel(this,'password')">Change Password</div>
       <div class="nav-item" data-panel="reset" onclick="showPanel(this,'reset')">Reset All</div>
     </aside>
@@ -222,6 +223,28 @@
         </div>
       </div>
 
+      <!-- CONTACT & SOCIAL -->
+      <div class="panel" id="panel-contact">
+        <div class="panel-title">Contact &amp; Social Links</div>
+        <div class="panel-desc">Update your email, phone, and social media URLs across the site.</div>
+        <div class="card">
+          <div class="card-title">Contact Info</div>
+          <div class="form-grid">
+            <div class="form-group"><label>Email Address</label><input type="email" id="contactEmail" placeholder="hello@eazyoo.co.uk"></div>
+            <div class="form-group"><label>Phone Number</label><input type="text" id="contactPhone" placeholder="+44 1234 567890"></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Social Media Links (Leave blank to hide)</div>
+          <div class="form-grid">
+            <div class="form-group"><label>Facebook URL</label><input type="url" id="socialFb" placeholder="https://facebook.com/eazyoo"></div>
+            <div class="form-group"><label>Instagram URL</label><input type="url" id="socialIg" placeholder="https://instagram.com/eazyoo"></div>
+            <div class="form-group"><label>TikTok URL</label><input type="url" id="socialTt" placeholder="https://tiktok.com/@eazyoo"></div>
+            <div class="form-group"><label>YouTube URL</label><input type="url" id="socialYt" placeholder="https://youtube.com/@eazyoo"></div>
+          </div>
+        </div>
+      </div>
+
       <!-- PASSWORD -->
       <div class="panel" id="panel-password">
         <div class="panel-title">Change Password</div>
@@ -266,7 +289,8 @@ const DEFAULTS = {
   p2Price:'14.99', p2Badge:'New Arrival', p2Category:'Kitchen & Home',
   p2AmazonUrl:'https://www.amazon.co.uk/Collapsible-Cutting-Board-Chopping-Foldable/dp/B0FN9FJXKS',
   p2ImgUrl:'images/cutting-board.png',
-  p2Features:['Folds Flat - compact storage','Built-in Drain - raised edges','Food Safe - BPA-free materials','Multi-Use - home, camping, travel','Sturdy Surface - durable cutting surface']
+  p2Features:['Folds Flat - compact storage','Built-in Drain - raised edges','Food Safe - BPA-free materials','Multi-Use - home, camping, travel','Sturdy Surface - durable cutting surface'],
+  contactEmail:'hello@eazyoo.co.uk', contactPhone:'', socialFb:'#', socialIg:'#', socialTt:'#', socialYt:'#'
 };
 
 function doLogin(){
@@ -305,7 +329,8 @@ function loadAll(){
   const d = {...DEFAULTS,...saved};
   ['brandName','heroTagline','heroSubtitle','ctaText','ctaUrl','navCtaText','heroImgUrl',
    'p1Name','p1Desc','p1Price','p1Rating','p1Category','p1AmazonUrl','p1ImgUrl',
-   'p2Name','p2Desc','p2Price','p2Badge','p2Category','p2AmazonUrl','p2ImgUrl'
+   'p2Name','p2Desc','p2Price','p2Badge','p2Category','p2AmazonUrl','p2ImgUrl',
+   'contactEmail','contactPhone','socialFb','socialIg','socialTt','socialYt'
   ].forEach(k => { const el=document.getElementById(k); if(el) el.value=d[k]||''; });
   previewImg('heroImgUrl','heroImgPreview');
   previewImg('p1ImgUrl','p1ImgPreview');
@@ -316,7 +341,8 @@ function loadAll(){
 function saveAll(){
   const keys = ['brandName','heroTagline','heroSubtitle','ctaText','ctaUrl','navCtaText','heroImgUrl',
     'p1Name','p1Desc','p1Price','p1Rating','p1Category','p1AmazonUrl','p1ImgUrl',
-    'p2Name','p2Desc','p2Price','p2Badge','p2Category','p2AmazonUrl','p2ImgUrl'];
+    'p2Name','p2Desc','p2Price','p2Badge','p2Category','p2AmazonUrl','p2ImgUrl',
+    'contactEmail','contactPhone','socialFb','socialIg','socialTt','socialYt'];
   const data = {};
   keys.forEach(k => { const el=document.getElementById(k); if(el) data[k]=el.value; });
   data.p1Features = getFeatures('p1Features');

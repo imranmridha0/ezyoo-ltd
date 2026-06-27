@@ -1,4 +1,4 @@
-﻿/**
+/**
  * EAZYOO Content Manager
  * Reads saved admin settings from localStorage and applies them to every page.
  * Include this script at the bottom of every HTML page.
@@ -112,6 +112,46 @@
     if (data.p2Price)  { const p = cards[1].querySelector('.product-price'); if(p) p.textContent = data.p2Price.startsWith('£') ? data.p2Price : '£'+data.p2Price; }
     if (data.p2AmazonUrl) { const a = cards[1].querySelector('a[href*="amazon"]'); if(a) a.href = data.p2AmazonUrl; }
   }
+
+  // Contact Info
+  if (data.contactEmail) {
+    const emailEls = document.querySelectorAll('p, a');
+    emailEls.forEach(el => {
+      if (el.textContent.includes('hello@eazyoo.co.uk')) {
+        el.textContent = el.textContent.replace('hello@eazyoo.co.uk', data.contactEmail);
+      }
+      if (el.href && el.href.includes('mailto:hello@eazyoo.co.uk')) {
+        el.href = el.href.replace('hello@eazyoo.co.uk', data.contactEmail);
+      }
+    });
+  }
+  if (data.contactPhone) {
+    // Add phone number to footer copyright text area if not already there
+    const footerBottom = document.querySelector('.footer-bottom p');
+    if (footerBottom && !footerBottom.textContent.includes('Tel:')) {
+      footerBottom.innerHTML += ` | Tel: ${data.contactPhone}`;
+    }
+  }
+
+  // Social Links
+  const socialConfig = [
+    { label: 'Facebook', url: data.socialFb },
+    { label: 'Instagram', url: data.socialIg },
+    { label: 'TikTok', url: data.socialTt },
+    { label: 'YouTube', url: data.socialYt }
+  ];
+  
+  socialConfig.forEach(soc => {
+    const link = document.querySelector(`.social-links a[aria-label="${soc.label}"]`);
+    if (link) {
+      if (soc.url && soc.url !== '#') {
+        link.href = soc.url;
+        link.style.display = 'inline-flex';
+      } else {
+        link.style.display = 'none';
+      }
+    }
+  });
 
   // Page title update
   if (data.brandName) {
