@@ -88,26 +88,53 @@ document.addEventListener('DOMContentLoaded', async () => {
     const prodContainers = document.querySelectorAll('#dynamic-products, .products-grid');
     if (prodContainers.length > 0 && data.products) {
       
-      const renderProductCard = (p) => `
-        <div class="product-card" id="${p.id}">
-          <div class="product-img-wrapper">
-            <img src="${p.imgUrl}" alt="${p.name}">
-            ${p.badge ? `<div style="position:absolute;top:15px;right:15px;background:var(--color-primary);color:white;padding:4px 12px;border-radius:20px;font-size:0.8rem;font-weight:600;">${p.badge}</div>` : ''}
+      const isWholesale = localStorage.getItem('eazyoo_wholesale_logged_in') === 'true';
+
+      const renderProductCard = (p) => {
+        let priceHtml = `<span style="font-size:1.5rem; font-weight:700;">£${p.price}</span>`;
+        if (isWholesale && p.priceWholesale) {
+          priceHtml = `
+            <div style="display:flex; flex-direction:column; align-items:flex-start;">
+              <span style="font-size:0.9rem; text-decoration:line-through; color:var(--color-text-light);">Retail: £${p.price}</span>
+              <span style="font-size:1.5rem; font-weight:700; color:var(--color-primary);">B2B: £${p.priceWholesale}</span>
+            </div>
+          `;
+        }
+
+        let imagesHtml = '';
+        const imgs = p.images && p.images.length > 0 ? p.images : (p.imgUrl ? [p.imgUrl] : []);
+        if (imgs.length === 1) {
+          imagesHtml = `<img src="${imgs[0]}" alt="${p.name}">`;
+        } else if (imgs.length > 1) {
+          imagesHtml = `
+            <div class="product-slider" style="position:relative; width:100%; height:100%; overflow:hidden;">
+              ${imgs.map((src, i) => `<img src="${src}" class="slide" style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:contain; opacity:${i===0?1:0}; transition:opacity 0.5s ease;" data-index="${i}">`).join('')}
+            </div>
+          `;
+        } else {
+           imagesHtml = `<img src="https://via.placeholder.com/400" alt="No image">`;
+        }
+
+        return `
+        <div class="product-card" id="${p.id}" style="display:flex; flex-direction:column; height:100%;">
+          <div class="product-img-wrapper" style="position:relative; height:250px; background:#f8f9fa;">
+            ${imagesHtml}
+            ${p.badge ? `<div style="position:absolute;top:15px;right:15px;background:var(--color-primary);color:white;padding:4px 12px;border-radius:20px;font-size:0.8rem;font-weight:600;z-index:2;">${p.badge}</div>` : ''}
           </div>
-          <div class="product-info">
+          <div class="product-info" style="display:flex; flex-direction:column; flex-grow:1; text-align:left;">
             <div style="font-size:0.8rem;color:var(--color-primary);font-weight:600;margin-bottom:8px;">${p.category || ''}</div>
-            <h3>${p.name}</h3>
-            <p>${p.description}</p>
+            <h3 style="margin-bottom:8px;">${p.name}</h3>
+            <p style="flex-grow:1;">${p.description}</p>
             <ul style="margin:16px 0; list-style:none; padding:0;">
               ${(p.features||[]).map(f => `<li style="padding:4px 0; color:var(--color-text-light); display:flex; gap:8px;"><span>&#x2705;</span><span>${f}</span></li>`).join('')}
             </ul>
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:20px;">
-              <span style="font-size:1.5rem; font-weight:700;">${p.price.toString().startsWith('£') ? p.price : '£'+p.price}</span>
-              <a href="${p.amazonUrl}" target="_blank" class="btn btn-primary">Buy on Amazon</a>
+            <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-top:auto; padding-top:20px;">
+              ${priceHtml}
+              <a href="${p.amazonUrl}" target="_blank" class="btn btn-primary" style="margin-left:auto;">Buy on Amazon</a>
             </div>
           </div>
         </div>
-      `;
+      `};
 
       prodContainers.forEach(container => {
         // Clear old static products if any
@@ -115,6 +142,19 @@ document.addEventListener('DOMContentLoaded', async () => {
           container.innerHTML = data.products.map(renderProductCard).join('');
         }
       });
+
+      // Init auto-slider
+      setInterval(() => {
+        document.querySelectorAll('.product-slider').forEach(slider => {
+          const slides = slider.querySelectorAll('.slide');
+          if (slides.length <= 1) return;
+          let activeIdx = Array.from(slides).findIndex(s => s.style.opacity === '1' || s.style.opacity === 1);
+          if (activeIdx < 0) activeIdx = 0;
+          slides[activeIdx].style.opacity = '0';
+          const nextIdx = (activeIdx + 1) % slides.length;
+          slides[nextIdx].style.opacity = '1';
+        });
+      }, 3000);
     }
 
     // ==========================================

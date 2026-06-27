@@ -205,11 +205,12 @@
           <div class="form-grid">
             <div class="form-group full-width"><label>Product Name</label><input type="text" id="prod-name"></div>
             <div class="form-group full-width"><label>Short Description</label><input type="text" id="prod-desc"></div>
-            <div class="form-group"><label>Price (e.g. 14.99)</label><input type="text" id="prod-price"></div>
+            <div class="form-group"><label>Retail Price (e.g. 14.99)</label><input type="text" id="prod-price"></div>
+            <div class="form-group"><label>Wholesale Price (e.g. 8.50)</label><input type="text" id="prod-price-wholesale"></div>
             <div class="form-group"><label>Badge / Rating Text</label><input type="text" id="prod-badge" placeholder="e.g. 4.4 stars"></div>
             <div class="form-group"><label>Category</label><input type="text" id="prod-category"></div>
-            <div class="form-group"><label>Amazon URL</label><input type="url" id="prod-amazon"></div>
-            <div class="form-group full-width"><label>Image URL</label><input type="url" id="prod-img"></div>
+            <div class="form-group full-width"><label>Amazon URL</label><input type="url" id="prod-amazon"></div>
+            <div class="form-group full-width"><label>Image URLs (one per line)</label><textarea id="prod-img" style="min-height:80px; font-family:monospace;"></textarea></div>
           </div>
         </div>
         <div class="card">
@@ -504,17 +505,18 @@ function editProduct(id) {
   const isNew = id === 'new';
   document.getElementById('productEditorTitle').textContent = isNew ? 'Add Product' : 'Edit Product';
   
-  let p = isNew ? { id: 'p_'+Date.now(), name:'', description:'', price:'', badge:'', category:'', amazonUrl:'', imgUrl:'', features:[] } 
+  let p = isNew ? { id: 'p_'+Date.now(), name:'', description:'', price:'', priceWholesale:'', badge:'', category:'', amazonUrl:'', images:[], features:[] } 
                 : siteData.products.find(x => x.id === id);
                 
   document.getElementById('prod-id').value = p.id;
   document.getElementById('prod-name').value = p.name || '';
   document.getElementById('prod-desc').value = p.description || '';
   document.getElementById('prod-price').value = p.price || '';
+  document.getElementById('prod-price-wholesale').value = p.priceWholesale || '';
   document.getElementById('prod-badge').value = p.badge || '';
   document.getElementById('prod-category').value = p.category || '';
   document.getElementById('prod-amazon').value = p.amazonUrl || '';
-  document.getElementById('prod-img').value = p.imgUrl || '';
+  document.getElementById('prod-img').value = (p.images || (p.imgUrl ? [p.imgUrl] : [])).join('\n');
   
   const container = document.getElementById('prod-features-container');
   container.innerHTML = '';
@@ -531,10 +533,11 @@ function saveProduct() {
     name: document.getElementById('prod-name').value,
     description: document.getElementById('prod-desc').value,
     price: document.getElementById('prod-price').value,
+    priceWholesale: document.getElementById('prod-price-wholesale').value,
     badge: document.getElementById('prod-badge').value,
     category: document.getElementById('prod-category').value,
     amazonUrl: document.getElementById('prod-amazon').value,
-    imgUrl: document.getElementById('prod-img').value,
+    images: document.getElementById('prod-img').value.split('\n').map(u => u.trim()).filter(u => u),
     features: Array.from(document.querySelectorAll('#prod-features-container input')).map(i => i.value).filter(v => v.trim())
   };
   
