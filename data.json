@@ -1,0 +1,67 @@
+{
+  "settings": {
+    "brandName": "EAZYOO",
+    "heroTagline": "Smart Products. Smarter Living.",
+    "heroSubtitle": "Innovative collapsible gear designed for active lifestyles and modern kitchens. Fold it. Store it. Go further.",
+    "ctaText": "Shop on Amazon",
+    "ctaUrl": "https://www.amazon.co.uk/s?me=AGGGQPAQ7YS4X",
+    "navCtaText": "Become a Stockist",
+    "heroImgUrl": "images/hero-banner.png",
+    "contactEmail": "hello@eazyoo.co.uk",
+    "contactPhone": "",
+    "socialFb": "#",
+    "socialIg": "#",
+    "socialTt": "#",
+    "socialYt": "#"
+  },
+  "seo": {
+    "metaTitle": "EAZYOO - Smart Products for Smarter Living",
+    "metaDescription": "EAZYOO creates innovative collapsible gear for active lifestyles and modern kitchens."
+  },
+  "products": [
+    {
+      "id": "p1",
+      "name": "Running Water Bottle",
+      "description": "500ml Soft Foldable Hydration Flask - Pack of 2",
+      "price": "12.97",
+      "badge": "4.4 stars",
+      "category": "Sports & Outdoors",
+      "amazonUrl": "https://www.amazon.co.uk/Running-Water-Bottle-500ml-pcs/dp/B0FNC3W5CP",
+      "imgUrl": "images/water-bottle.png",
+      "features": [
+        "Collapsible Design - folds flat when empty",
+        "BPA-Free - food-grade TPU material",
+        "Leakproof - secure bite valve",
+        "Versatile - running, hiking, gym",
+        "Pack of 2 - great value"
+      ]
+    },
+    {
+      "id": "p2",
+      "name": "Collapsible Cutting Board",
+      "description": "Foldable Chopping Board with Built-in Drain",
+      "price": "14.99",
+      "badge": "New Arrival",
+      "category": "Kitchen & Home",
+      "amazonUrl": "https://www.amazon.co.uk/Collapsible-Cutting-Board-Chopping-Foldable/dp/B0FN9FJXKS",
+      "imgUrl": "images/cutting-board.png",
+      "features": [
+        "Folds Flat - compact storage",
+        "Built-in Drain - raised edges",
+        "Food Safe - BPA-free materials",
+        "Multi-Use - home, camping, travel",
+        "Sturdy Surface - durable cutting surface"
+      ]
+    }
+  ],
+  "posts": [
+    {
+      "id": "post-1",
+      "title": "Welcome to the EAZYOO Blog",
+      "date": "2024-01-01",
+      "excerpt": "We are excited to launch our new blog where we will share updates, tips, and news about our products.",
+      "content": "<p>Welcome to the EAZYOO Blog! We are thrilled to have you here.</p><p>We will be using this space to share our latest product updates, tips and tricks for using our collapsible gear, and news about our brand.</p><p>Stay tuned for more updates!</p>",
+      "imgUrl": "images/hero-banner.png"
+    }
+  ]
+}

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Panel — EAZYOO</title>
+  <title>CMS Admin Panel — EAZYOO</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
@@ -14,259 +14,311 @@
       --danger: #f87171; --text: #e8eaf6; --text-muted: #8892b0; --radius: 12px;
     }
     body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    
+    /* Login Screen */
     #loginScreen { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: radial-gradient(ellipse at top left, #1a1040 0%, #0f1117 60%); }
-    .login-card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 48px 40px; width: 100%; max-width: 400px; text-align: center; box-shadow: 0 25px 60px rgba(108,99,255,0.15); }
+    .login-card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 48px 40px; width: 100%; max-width: 450px; text-align: center; box-shadow: 0 25px 60px rgba(108,99,255,0.15); }
     .login-logo { font-size: 2rem; font-weight: 800; background: linear-gradient(135deg, #6c63ff, #4fc3f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 8px; }
     .login-sub { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 32px; }
-    .login-card label { display: block; text-align: left; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 500; }
-    .login-card input { width: 100%; padding: 12px 16px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-size: 1rem; margin-bottom: 20px; outline: none; transition: border-color 0.2s; }
-    .login-card input:focus { border-color: var(--accent); }
-    .btn-login { width: 100%; padding: 14px; background: linear-gradient(135deg, #6c63ff, #4fc3f7); border: none; border-radius: var(--radius); color: white; font-weight: 700; font-size: 1rem; cursor: pointer; transition: opacity 0.2s; }
-    .btn-login:hover { opacity: 0.9; }
+    .form-group { text-align: left; margin-bottom: 20px; }
+    .form-group label { display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 500; }
+    input[type="text"], input[type="url"], input[type="password"], textarea, select { width: 100%; padding: 12px 16px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-size: 1rem; outline: none; transition: border-color 0.2s; font-family: inherit; }
+    input:focus, textarea:focus, select:focus { border-color: var(--accent); }
+    textarea { resize: vertical; min-height: 100px; }
+    .btn-primary { width: 100%; padding: 14px; background: linear-gradient(135deg, #6c63ff, #4fc3f7); border: none; border-radius: var(--radius); color: white; font-weight: 700; font-size: 1rem; cursor: pointer; transition: opacity 0.2s; }
+    .btn-primary:hover { opacity: 0.9; }
+    .btn-secondary { padding: 10px 20px; background: transparent; border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-weight: 600; cursor: pointer; }
+    .btn-secondary:hover { background: var(--surface2); }
+    .btn-danger { background: rgba(248,113,113,0.1); color: var(--danger); border: 1px solid rgba(248,113,113,0.2); }
+    .btn-danger:hover { background: rgba(248,113,113,0.2); }
     .login-error { color: var(--danger); font-size: 0.85rem; margin-top: 12px; display: none; }
+    
+    /* Layout */
     #adminPanel { display: none; }
     .admin-header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
     .admin-brand { font-weight: 800; font-size: 1.2rem; background: linear-gradient(135deg, #6c63ff, #4fc3f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     .header-actions { display: flex; gap: 12px; align-items: center; }
-    .btn-save { padding: 10px 24px; background: linear-gradient(135deg, #6c63ff, #4fc3f7); border: none; border-radius: var(--radius); color: white; font-weight: 600; cursor: pointer; font-size: 0.9rem; }
-    .btn-save:hover { opacity: 0.85; }
-    .btn-logout { padding: 10px 20px; background: transparent; border: 1px solid var(--border); border-radius: var(--radius); color: var(--text-muted); font-weight: 500; cursor: pointer; font-size: 0.9rem; }
-    .btn-logout:hover { border-color: var(--danger); color: var(--danger); }
     .admin-body { display: flex; min-height: calc(100vh - 65px); }
-    .sidebar { width: 220px; background: var(--surface); border-right: 1px solid var(--border); padding: 24px 0; flex-shrink: 0; }
-    .sidebar-label { font-size: 0.7rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; padding: 0 20px; margin-bottom: 8px; }
-    .nav-item { display: flex; align-items: center; gap: 10px; padding: 11px 20px; cursor: pointer; font-size: 0.9rem; color: var(--text-muted); transition: background 0.15s, color 0.15s; border-left: 3px solid transparent; }
+    .sidebar { width: 240px; background: var(--surface); border-right: 1px solid var(--border); padding: 24px 0; flex-shrink: 0; }
+    .sidebar-label { font-size: 0.7rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; padding: 0 20px; margin-bottom: 8px; margin-top: 24px; }
+    .sidebar-label:first-child { margin-top: 0; }
+    .nav-item { display: flex; align-items: center; gap: 10px; padding: 11px 20px; cursor: pointer; font-size: 0.95rem; color: var(--text-muted); transition: all 0.2s; border-left: 3px solid transparent; }
     .nav-item:hover { background: var(--surface2); color: var(--text); }
     .nav-item.active { background: rgba(108,99,255,0.12); color: var(--accent); border-left-color: var(--accent); font-weight: 600; }
-    .content { flex: 1; padding: 32px; overflow-y: auto; }
-    .panel { display: none; }
+    .content { flex: 1; padding: 32px; overflow-y: auto; max-width: 1000px; margin: 0 auto; }
+    
+    /* Panels */
+    .panel { display: none; animation: fadeIn 0.3s ease; }
     .panel.active { display: block; }
-    .panel-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 6px; }
-    .panel-desc { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 28px; }
-    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; margin-bottom: 20px; }
-    .card-title { font-size: 1rem; font-weight: 600; margin-bottom: 20px; }
-    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .panel-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 28px; }
+    .panel-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 6px; }
+    .panel-desc { color: var(--text-muted); font-size: 0.95rem; }
+    
+    /* Cards & Grids */
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; margin-bottom: 24px; }
+    .card-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     .form-grid.single { grid-template-columns: 1fr; }
-    .form-group { display: flex; flex-direction: column; gap: 6px; }
-    .form-group.full { grid-column: 1 / -1; }
-    label { font-size: 0.82rem; font-weight: 500; color: var(--text-muted); }
-    input[type="text"], input[type="url"], input[type="password"], textarea { padding: 10px 14px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-size: 0.9rem; font-family: inherit; outline: none; transition: border-color 0.2s; width: 100%; }
-    input:focus, textarea:focus { border-color: var(--accent); }
-    textarea { resize: vertical; min-height: 80px; }
-    .image-row { display: grid; grid-template-columns: 140px 1fr; gap: 16px; align-items: start; }
-    .img-preview-box { width: 140px; height: 140px; background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 0.8rem; text-align: center; }
-    .img-preview-box img { width: 100%; height: 100%; object-fit: contain; }
-    .file-upload-area { border: 2px dashed var(--border); border-radius: var(--radius); padding: 20px; text-align: center; cursor: pointer; transition: border-color 0.2s; position: relative; }
-    .file-upload-area:hover { border-color: var(--accent); background: rgba(108,99,255,0.05); }
-    .file-upload-area input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
-    .upload-icon { font-size: 1.5rem; margin-bottom: 6px; }
-    .upload-text { font-size: 0.82rem; color: var(--text-muted); }
-    .features-list { display: flex; flex-direction: column; gap: 8px; }
-    .feature-item { display: flex; gap: 8px; align-items: center; }
+    .full-width { grid-column: 1 / -1; }
+    
+    /* Lists (Products/Posts) */
+    .item-list { display: grid; gap: 12px; }
+    .item-row { display: flex; justify-content: space-between; align-items: center; padding: 16px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); transition: all 0.2s; }
+    .item-row:hover { border-color: var(--accent); transform: translateX(4px); }
+    .item-info { display: flex; align-items: center; gap: 16px; }
+    .item-img { width: 48px; height: 48px; border-radius: 8px; object-fit: cover; background: var(--surface2); }
+    .item-title { font-weight: 600; font-size: 1rem; color: var(--text); margin-bottom: 4px; }
+    .item-meta { font-size: 0.8rem; color: var(--text-muted); }
+    .item-actions { display: flex; gap: 8px; }
+    
+    /* Features List */
+    .feature-item { display: flex; gap: 8px; margin-bottom: 8px; }
     .feature-item input { flex: 1; }
-    .btn-remove-feature { background: transparent; border: 1px solid var(--border); border-radius: 6px; color: var(--danger); cursor: pointer; padding: 8px 12px; font-size: 0.8rem; flex-shrink: 0; }
-    .btn-remove-feature:hover { background: rgba(248,113,113,0.1); }
-    .btn-add-feature { background: transparent; border: 1px dashed var(--border); border-radius: 8px; color: var(--accent); cursor: pointer; padding: 9px; font-size: 0.85rem; width: 100%; margin-top: 6px; }
-    .btn-add-feature:hover { background: rgba(108,99,255,0.1); }
-    #toast { position: fixed; bottom: 32px; right: 32px; background: var(--success); color: #0a1a0a; padding: 14px 22px; border-radius: var(--radius); font-weight: 600; font-size: 0.9rem; transform: translateY(80px); opacity: 0; transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1); z-index: 9999; }
+    .btn-icon { padding: 12px; background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); cursor: pointer; }
+    .btn-icon:hover { background: var(--border); }
+    .btn-icon.danger:hover { background: rgba(248,113,113,0.1); color: var(--danger); border-color: rgba(248,113,113,0.2); }
+    
+    /* Toast */
+    #toast { position: fixed; bottom: 32px; right: 32px; padding: 16px 24px; border-radius: var(--radius); font-weight: 600; font-size: 0.95rem; transform: translateY(100px); opacity: 0; transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1); z-index: 9999; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
     #toast.show { transform: translateY(0); opacity: 1; }
-    .preview-links { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 24px; }
-    .preview-link { padding: 8px 16px; background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; color: var(--accent2); text-decoration: none; font-size: 0.82rem; font-weight: 500; }
-    .preview-link:hover { background: var(--border); }
-    .status-badge { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; background: rgba(74,222,128,0.15); color: var(--success); }
-    .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+    .toast-success { background: var(--success); color: #0a1a0a; }
+    .toast-error { background: var(--danger); color: white; }
+    .toast-info { background: var(--accent); color: white; }
+    
+    /* Editor */
+    .editor-toolbar { display: flex; gap: 8px; padding: 8px; background: var(--surface2); border: 1px solid var(--border); border-bottom: none; border-radius: var(--radius) var(--radius) 0 0; }
+    .editor-toolbar button { background: transparent; border: none; color: var(--text); cursor: pointer; padding: 4px 8px; border-radius: 4px; }
+    .editor-toolbar button:hover { background: var(--border); }
+    .editor-content { min-height: 200px; padding: 16px; background: var(--bg); border: 1px solid var(--border); border-radius: 0 0 var(--radius) var(--radius); color: var(--text); outline: none; }
+    .editor-content:focus { border-color: var(--accent); }
+    
+    /* Loader */
+    .loader { display: none; align-items: center; justify-content: center; position: fixed; inset: 0; background: rgba(15,17,23,0.8); backdrop-filter: blur(4px); z-index: 9999; flex-direction: column; gap: 16px; }
+    .spinner { width: 40px; height: 40px; border: 3px solid rgba(108,99,255,0.2); border-top-color: var(--accent); border-radius: 50%; animation: spin 1s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
   </style>
 </head>
 <body>
+
+<!-- Loader -->
+<div class="loader" id="loader">
+  <div class="spinner"></div>
+  <div id="loaderText" style="font-weight:600; color:var(--text)">Loading...</div>
+</div>
+
+<!-- Login Screen -->
 <div id="loginScreen">
   <div class="login-card">
-    <div class="login-logo">EAZYOO</div>
-    <p class="login-sub">Admin Panel &middot; Secure Access</p>
-    <label for="adminPassword">Password</label>
-    <input type="password" id="adminPassword" placeholder="Enter admin password" onkeydown="if(event.key==='Enter') doLogin()">
-    <button class="btn-login" onclick="doLogin()">Sign In &rarr;</button>
-    <div class="login-error" id="loginError">Wrong password. Try again.</div>
+    <div class="login-logo">EAZYOO CMS</div>
+    <p class="login-sub">Connect to GitHub to manage content</p>
+    <div class="form-group">
+      <label>GitHub Repository</label>
+      <input type="text" id="repoName" value="imranmridha0/ezyoo-ltd" disabled>
+    </div>
+    <div class="form-group">
+      <label>Personal Access Token (PAT)</label>
+      <input type="password" id="ghToken" placeholder="ghp_xxxxxxxxxxxx" onkeydown="if(event.key==='Enter') login()">
+      <div style="font-size:0.8rem; color:var(--text-muted); margin-top:8px; text-align:left;">Needs 'repo' scope to save changes.</div>
+    </div>
+    <button class="btn-primary" onclick="login()">Connect &rarr;</button>
+    <div class="login-error" id="loginError"></div>
   </div>
 </div>
 
+<!-- Admin Panel -->
 <div id="adminPanel">
   <header class="admin-header">
-    <div class="admin-brand">EAZYOO Admin</div>
+    <div class="admin-brand">EAZYOO CMS</div>
     <div class="header-actions">
-      <span class="status-badge"><span class="badge-dot"></span> Live</span>
-      <button class="btn-save" onclick="saveAll()">Save Changes</button>
-      <button class="btn-logout" onclick="doLogout()">Logout</button>
+      <a href="index.html" target="_blank" class="btn-secondary" style="font-size:0.85rem; padding:8px 16px;">View Site</a>
+      <button class="btn-primary" style="width:auto; padding:8px 24px;" onclick="saveToGitHub()">Publish Changes</button>
+      <button class="btn-secondary" style="font-size:0.85rem; padding:8px 16px; border-color:var(--border);" onclick="logout()">Disconnect</button>
     </div>
   </header>
+  
   <div class="admin-body">
     <aside class="sidebar">
       <div class="sidebar-label">Content</div>
-      <div class="nav-item active" data-panel="brand" onclick="showPanel(this,'brand')">Brand &amp; Logo</div>
-      <div class="nav-item" data-panel="hero" onclick="showPanel(this,'hero')">Hero Banner</div>
-      <div class="nav-item" data-panel="product1" onclick="showPanel(this,'product1')">Water Bottle</div>
-      <div class="nav-item" data-panel="product2" onclick="showPanel(this,'product2')">Cutting Board</div>
-      <div class="sidebar-label" style="margin-top:24px">Settings</div>
-      <div class="nav-item" data-panel="contact" onclick="showPanel(this,'contact')">Contact &amp; Social</div>
-      <div class="nav-item" data-panel="password" onclick="showPanel(this,'password')">Change Password</div>
-      <div class="nav-item" data-panel="reset" onclick="showPanel(this,'reset')">Reset All</div>
+      <div class="nav-item active" onclick="switchPanel('dashboard')">Dashboard</div>
+      <div class="nav-item" onclick="switchPanel('products')">Products</div>
+      <div class="nav-item" onclick="switchPanel('posts')">Blog Posts</div>
+      
+      <div class="sidebar-label">Settings</div>
+      <div class="nav-item" onclick="switchPanel('settings')">General Settings</div>
+      <div class="nav-item" onclick="switchPanel('seo')">SEO &amp; Meta</div>
     </aside>
+    
     <main class="content">
-      <div class="preview-links">
-        <a href="index.html" target="_blank" class="preview-link">Home</a>
-        <a href="products.html" target="_blank" class="preview-link">Products</a>
-        <a href="about.html" target="_blank" class="preview-link">About</a>
-        <a href="wholesale.html" target="_blank" class="preview-link">Wholesale</a>
+      
+      <!-- Dashboard -->
+      <div class="panel active" id="panel-dashboard">
+        <div class="panel-header">
+          <div>
+            <h1 class="panel-title">Welcome to EAZYOO CMS</h1>
+            <p class="panel-desc">Manage your products, blog posts, and website settings from here.</p>
+          </div>
+        </div>
+        <div class="form-grid">
+          <div class="card" style="text-align:center; cursor:pointer;" onclick="switchPanel('products')">
+            <div style="font-size:3rem; margin-bottom:12px;">🛍️</div>
+            <h3>Products</h3>
+            <p style="color:var(--text-muted); margin-top:8px;"><span id="stat-products">0</span> active products</p>
+          </div>
+          <div class="card" style="text-align:center; cursor:pointer;" onclick="switchPanel('posts')">
+            <div style="font-size:3rem; margin-bottom:12px;">📝</div>
+            <h3>Blog Posts</h3>
+            <p style="color:var(--text-muted); margin-top:8px;"><span id="stat-posts">0</span> published posts</p>
+          </div>
+        </div>
       </div>
 
-      <!-- BRAND -->
-      <div class="panel active" id="panel-brand">
-        <div class="panel-title">Brand &amp; Logo</div>
-        <div class="panel-desc">Update your brand name and hero text shown across all pages.</div>
+      <!-- Products List -->
+      <div class="panel" id="panel-products">
+        <div class="panel-header">
+          <div>
+            <h1 class="panel-title">Products</h1>
+            <p class="panel-desc">Add, edit, or remove products from your store.</p>
+          </div>
+          <button class="btn-primary" style="width:auto; padding:10px 20px;" onclick="editProduct('new')">+ Add Product</button>
+        </div>
         <div class="card">
-          <div class="card-title">Brand Settings</div>
+          <div class="item-list" id="productsList">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Product Editor -->
+      <div class="panel" id="panel-edit-product">
+        <div class="panel-header">
+          <div>
+            <h1 class="panel-title" id="productEditorTitle">Edit Product</h1>
+          </div>
+          <div style="display:flex; gap:12px;">
+            <button class="btn-secondary" onclick="switchPanel('products')">Cancel</button>
+            <button class="btn-primary" style="width:auto;" onclick="saveProduct()">Done</button>
+          </div>
+        </div>
+        <input type="hidden" id="prod-id">
+        <div class="card">
+          <div class="form-grid">
+            <div class="form-group full-width"><label>Product Name</label><input type="text" id="prod-name"></div>
+            <div class="form-group full-width"><label>Short Description</label><input type="text" id="prod-desc"></div>
+            <div class="form-group"><label>Price (e.g. 14.99)</label><input type="text" id="prod-price"></div>
+            <div class="form-group"><label>Badge / Rating Text</label><input type="text" id="prod-badge" placeholder="e.g. 4.4 stars"></div>
+            <div class="form-group"><label>Category</label><input type="text" id="prod-category"></div>
+            <div class="form-group"><label>Amazon URL</label><input type="url" id="prod-amazon"></div>
+            <div class="form-group full-width"><label>Image URL</label><input type="url" id="prod-img"></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Features (Bullet Points)</div>
+          <div id="prod-features-container"></div>
+          <button class="btn-secondary" style="width:100%; margin-top:12px; border-style:dashed;" onclick="addFeatureInput('#prod-features-container', '')">+ Add Feature</button>
+        </div>
+      </div>
+
+      <!-- Posts List -->
+      <div class="panel" id="panel-posts">
+        <div class="panel-header">
+          <div>
+            <h1 class="panel-title">Blog Posts</h1>
+            <p class="panel-desc">Manage your news and blog articles.</p>
+          </div>
+          <button class="btn-primary" style="width:auto; padding:10px 20px;" onclick="editPost('new')">+ Write Post</button>
+        </div>
+        <div class="card">
+          <div class="item-list" id="postsList">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Post Editor -->
+      <div class="panel" id="panel-edit-post">
+        <div class="panel-header">
+          <div>
+            <h1 class="panel-title" id="postEditorTitle">Edit Post</h1>
+          </div>
+          <div style="display:flex; gap:12px;">
+            <button class="btn-secondary" onclick="switchPanel('posts')">Cancel</button>
+            <button class="btn-primary" style="width:auto;" onclick="savePost()">Done</button>
+          </div>
+        </div>
+        <input type="hidden" id="post-id">
+        <div class="card">
+          <div class="form-grid">
+            <div class="form-group full-width"><label>Post Title</label><input type="text" id="post-title"></div>
+            <div class="form-group"><label>Publish Date</label><input type="date" id="post-date"></div>
+            <div class="form-group"><label>Featured Image URL</label><input type="url" id="post-img"></div>
+            <div class="form-group full-width"><label>Short Excerpt</label><textarea id="post-excerpt" style="min-height:60px"></textarea></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Post Content (HTML allowed)</div>
+          <div class="form-group">
+            <textarea id="post-content" style="min-height:300px; font-family:monospace;"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- General Settings -->
+      <div class="panel" id="panel-settings">
+        <div class="panel-header">
+          <div>
+            <h1 class="panel-title">General Settings</h1>
+            <p class="panel-desc">Update brand info, hero section, and contact details.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Brand &amp; Hero</div>
+          <div class="form-grid">
+            <div class="form-group"><label>Brand Name</label><input type="text" id="set-brandName"></div>
+            <div class="form-group"><label>Hero Tagline</label><input type="text" id="set-heroTagline"></div>
+            <div class="form-group full-width"><label>Hero Subtitle</label><textarea id="set-heroSubtitle"></textarea></div>
+            <div class="form-group full-width"><label>Hero Image URL</label><input type="url" id="set-heroImgUrl"></div>
+            <div class="form-group"><label>CTA Button Text</label><input type="text" id="set-ctaText"></div>
+            <div class="form-group"><label>CTA Button URL</label><input type="url" id="set-ctaUrl"></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Contact &amp; Social</div>
+          <div class="form-grid">
+            <div class="form-group"><label>Email Address</label><input type="email" id="set-contactEmail"></div>
+            <div class="form-group"><label>Phone Number</label><input type="text" id="set-contactPhone"></div>
+            <div class="form-group"><label>Facebook</label><input type="url" id="set-socialFb"></div>
+            <div class="form-group"><label>Instagram</label><input type="url" id="set-socialIg"></div>
+            <div class="form-group"><label>TikTok</label><input type="url" id="set-socialTt"></div>
+            <div class="form-group"><label>YouTube</label><input type="url" id="set-socialYt"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SEO Settings -->
+      <div class="panel" id="panel-seo">
+        <div class="panel-header">
+          <div>
+            <h1 class="panel-title">SEO &amp; Meta</h1>
+            <p class="panel-desc">Configure search engine optimization for your homepage.</p>
+          </div>
+        </div>
+        <div class="card">
           <div class="form-grid single">
-            <div class="form-group"><label>Brand / Logo Name</label><input type="text" id="brandName" placeholder="EAZYOO"></div>
-            <div class="form-group"><label>Hero Tagline</label><input type="text" id="heroTagline" placeholder="Smart Products. Smarter Living."></div>
-            <div class="form-group"><label>Hero Subtitle</label><textarea id="heroSubtitle"></textarea></div>
-            <div class="form-group"><label>Primary CTA Button Text</label><input type="text" id="ctaText" placeholder="Shop on Amazon"></div>
-            <div class="form-group"><label>Primary CTA Button URL</label><input type="url" id="ctaUrl" placeholder="https://www.amazon.co.uk/..."></div>
-            <div class="form-group"><label>Nav CTA Button Text</label><input type="text" id="navCtaText" placeholder="Become a Stockist"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- HERO -->
-      <div class="panel" id="panel-hero">
-        <div class="panel-title">Hero Banner Image</div>
-        <div class="panel-desc">Update the large banner image on the homepage.</div>
-        <div class="card">
-          <div class="card-title">Hero Image</div>
-          <div class="image-row">
-            <div class="img-preview-box" id="heroImgPreview"><span>No image</span></div>
-            <div>
-              <div class="form-group" style="margin-bottom:12px">
-                <label>Image URL</label>
-                <input type="url" id="heroImgUrl" placeholder="https://example.com/hero.jpg" oninput="previewImg('heroImgUrl','heroImgPreview')">
-              </div>
-              <div style="text-align:center;color:var(--text-muted);font-size:0.8rem;margin-bottom:12px">or upload file</div>
-              <div class="file-upload-area">
-                <input type="file" id="heroImgFile" accept="image/*" onchange="handleFile(this,'heroImgUrl','heroImgPreview')">
-                <div class="upload-icon">&#128193;</div>
-                <div class="upload-text">Click to upload from computer</div>
-              </div>
+            <div class="form-group">
+              <label>Global Meta Title</label>
+              <input type="text" id="seo-metaTitle">
+              <div style="font-size:0.8rem; color:var(--text-muted); margin-top:4px;">Appears in browser tabs and Google search results.</div>
+            </div>
+            <div class="form-group">
+              <label>Global Meta Description</label>
+              <textarea id="seo-metaDescription"></textarea>
+              <div style="font-size:0.8rem; color:var(--text-muted); margin-top:4px;">Brief summary of your site (150-160 characters recommended).</div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- PRODUCT 1 -->
-      <div class="panel" id="panel-product1">
-        <div class="panel-title">Water Bottle Product</div>
-        <div class="panel-desc">Edit the Running Water Bottle product details.</div>
-        <div class="card">
-          <div class="card-title">Product Image</div>
-          <div class="image-row">
-            <div class="img-preview-box" id="p1ImgPreview"><span>Loading...</span></div>
-            <div>
-              <div class="form-group" style="margin-bottom:12px"><label>Image URL</label><input type="url" id="p1ImgUrl" oninput="previewImg('p1ImgUrl','p1ImgPreview')"></div>
-              <div class="file-upload-area"><input type="file" accept="image/*" onchange="handleFile(this,'p1ImgUrl','p1ImgPreview')"><div class="upload-icon">&#128193;</div><div class="upload-text">Upload photo</div></div>
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Product Details</div>
-          <div class="form-grid">
-            <div class="form-group full"><label>Product Name</label><input type="text" id="p1Name"></div>
-            <div class="form-group full"><label>Short Description</label><input type="text" id="p1Desc"></div>
-            <div class="form-group"><label>Price</label><input type="text" id="p1Price"></div>
-            <div class="form-group"><label>Rating Text</label><input type="text" id="p1Rating"></div>
-            <div class="form-group"><label>Category Label</label><input type="text" id="p1Category"></div>
-            <div class="form-group"><label>Amazon Buy Link</label><input type="url" id="p1AmazonUrl"></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Feature Bullets</div>
-          <div class="features-list" id="p1Features"></div>
-          <button class="btn-add-feature" onclick="addFeature('p1Features','')">+ Add Feature</button>
-        </div>
-      </div>
-
-      <!-- PRODUCT 2 -->
-      <div class="panel" id="panel-product2">
-        <div class="panel-title">Cutting Board Product</div>
-        <div class="panel-desc">Edit the Collapsible Cutting Board product details.</div>
-        <div class="card">
-          <div class="card-title">Product Image</div>
-          <div class="image-row">
-            <div class="img-preview-box" id="p2ImgPreview"><span>Loading...</span></div>
-            <div>
-              <div class="form-group" style="margin-bottom:12px"><label>Image URL</label><input type="url" id="p2ImgUrl" oninput="previewImg('p2ImgUrl','p2ImgPreview')"></div>
-              <div class="file-upload-area"><input type="file" accept="image/*" onchange="handleFile(this,'p2ImgUrl','p2ImgPreview')"><div class="upload-icon">&#128193;</div><div class="upload-text">Upload photo</div></div>
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Product Details</div>
-          <div class="form-grid">
-            <div class="form-group full"><label>Product Name</label><input type="text" id="p2Name"></div>
-            <div class="form-group full"><label>Short Description</label><input type="text" id="p2Desc"></div>
-            <div class="form-group"><label>Price</label><input type="text" id="p2Price"></div>
-            <div class="form-group"><label>Badge Text</label><input type="text" id="p2Badge"></div>
-            <div class="form-group"><label>Category Label</label><input type="text" id="p2Category"></div>
-            <div class="form-group"><label>Amazon Buy Link</label><input type="url" id="p2AmazonUrl"></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Feature Bullets</div>
-          <div class="features-list" id="p2Features"></div>
-          <button class="btn-add-feature" onclick="addFeature('p2Features','')">+ Add Feature</button>
-        </div>
-      </div>
-
-      <!-- CONTACT & SOCIAL -->
-      <div class="panel" id="panel-contact">
-        <div class="panel-title">Contact &amp; Social Links</div>
-        <div class="panel-desc">Update your email, phone, and social media URLs across the site.</div>
-        <div class="card">
-          <div class="card-title">Contact Info</div>
-          <div class="form-grid">
-            <div class="form-group"><label>Email Address</label><input type="email" id="contactEmail" placeholder="hello@eazyoo.co.uk"></div>
-            <div class="form-group"><label>Phone Number</label><input type="text" id="contactPhone" placeholder="+44 1234 567890"></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Social Media Links (Leave blank to hide)</div>
-          <div class="form-grid">
-            <div class="form-group"><label>Facebook URL</label><input type="url" id="socialFb" placeholder="https://facebook.com/eazyoo"></div>
-            <div class="form-group"><label>Instagram URL</label><input type="url" id="socialIg" placeholder="https://instagram.com/eazyoo"></div>
-            <div class="form-group"><label>TikTok URL</label><input type="url" id="socialTt" placeholder="https://tiktok.com/@eazyoo"></div>
-            <div class="form-group"><label>YouTube URL</label><input type="url" id="socialYt" placeholder="https://youtube.com/@eazyoo"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- PASSWORD -->
-      <div class="panel" id="panel-password">
-        <div class="panel-title">Change Password</div>
-        <div class="panel-desc">Set a new admin login password.</div>
-        <div class="card">
-          <div class="form-grid single">
-            <div class="form-group"><label>New Password</label><input type="password" id="newPass1" placeholder="Enter new password"></div>
-            <div class="form-group"><label>Confirm Password</label><input type="password" id="newPass2" placeholder="Confirm new password"></div>
-            <button class="btn-save" style="width:fit-content;margin-top:4px" onclick="changePassword()">Update Password</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- RESET -->
-      <div class="panel" id="panel-reset">
-        <div class="panel-title">Reset All Content</div>
-        <div class="panel-desc">Restore all website content to original defaults.</div>
-        <div class="card">
-          <p style="color:var(--text-muted);margin-bottom:20px">This will clear all your saved changes and restore the original text, prices, and images.</p>
-          <button onclick="resetAll()" style="padding:12px 28px;background:var(--danger);border:none;border-radius:var(--radius);color:white;font-weight:600;cursor:pointer">Reset to Defaults</button>
-        </div>
-      </div>
     </main>
   </div>
 </div>
@@ -274,118 +326,335 @@
 <div id="toast"></div>
 
 <script>
-const DEFAULT_PASS = 'eazyoo2024';
-const DEFAULTS = {
-  brandName:'EAZYOO', heroTagline:'Smart Products. Smarter Living.',
-  heroSubtitle:'Innovative collapsible gear designed for active lifestyles and modern kitchens. Fold it. Store it. Go further.',
-  ctaText:'Shop on Amazon', ctaUrl:'https://www.amazon.co.uk/s?me=AGGGQPAQ7YS4X',
-  navCtaText:'Become a Stockist', heroImgUrl:'images/hero-banner.png',
-  p1Name:'Running Water Bottle', p1Desc:'500ml Soft Foldable Hydration Flask - Pack of 2',
-  p1Price:'12.97', p1Rating:'4.4 stars', p1Category:'Sports & Outdoors',
-  p1AmazonUrl:'https://www.amazon.co.uk/Running-Water-Bottle-500ml-pcs/dp/B0FNC3W5CP',
-  p1ImgUrl:'images/water-bottle.png',
-  p1Features:['Collapsible Design - folds flat when empty','BPA-Free - food-grade TPU material','Leakproof - secure bite valve','Versatile - running, hiking, gym','Pack of 2 - great value'],
-  p2Name:'Collapsible Cutting Board', p2Desc:'Foldable Chopping Board with Built-in Drain',
-  p2Price:'14.99', p2Badge:'New Arrival', p2Category:'Kitchen & Home',
-  p2AmazonUrl:'https://www.amazon.co.uk/Collapsible-Cutting-Board-Chopping-Foldable/dp/B0FN9FJXKS',
-  p2ImgUrl:'images/cutting-board.png',
-  p2Features:['Folds Flat - compact storage','Built-in Drain - raised edges','Food Safe - BPA-free materials','Multi-Use - home, camping, travel','Sturdy Surface - durable cutting surface'],
-  contactEmail:'hello@eazyoo.co.uk', contactPhone:'', socialFb:'#', socialIg:'#', socialTt:'#', socialYt:'#'
+// ==========================================
+// STATE & GITHUB API
+// ==========================================
+const REPO = 'imranmridha0/ezyoo-ltd';
+const DATA_FILE = 'data.json';
+let siteData = { settings:{}, seo:{}, products:[], posts:[] };
+let fileSha = '';
+
+// Check if token exists on load
+window.onload = () => {
+  const token = localStorage.getItem('eazyoo_gh_token');
+  if (token) {
+    document.getElementById('ghToken').value = token;
+    login();
+  }
 };
 
-function doLogin(){
-  const p = document.getElementById('adminPassword').value;
-  const stored = localStorage.getItem('eazyoo_admin_pass') || DEFAULT_PASS;
-  if(p === stored){
+async function login() {
+  const token = document.getElementById('ghToken').value.trim();
+  if (!token) return showError('Token is required');
+  
+  showLoader('Connecting to GitHub...');
+  try {
+    const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${DATA_FILE}`, {
+      headers: { 'Authorization': `token ${token}` }
+    });
+    
+    if (res.status === 401) throw new Error('Invalid Token');
+    if (res.status === 404) {
+      // File doesn't exist yet, that's fine we'll create it on save
+      siteData = { settings:{}, seo:{}, products:[], posts:[] };
+    } else if (res.ok) {
+      const data = await res.json();
+      fileSha = data.sha;
+      // Decode Base64 (handle utf8 safely)
+      const content = decodeURIComponent(escape(atob(data.content)));
+      siteData = JSON.parse(content);
+    } else {
+      throw new Error('API Error: ' + res.status);
+    }
+    
+    localStorage.setItem('eazyoo_gh_token', token);
     document.getElementById('loginScreen').style.display = 'none';
     document.getElementById('adminPanel').style.display = 'block';
-    loadAll();
-  } else {
-    document.getElementById('loginError').style.display = 'block';
+    
+    // Make sure structure exists
+    if(!siteData.products) siteData.products = [];
+    if(!siteData.posts) siteData.posts = [];
+    if(!siteData.settings) siteData.settings = {};
+    if(!siteData.seo) siteData.seo = {};
+    
+    populateUI();
+    hideLoader();
+  } catch (err) {
+    hideLoader();
+    showError(err.message);
   }
 }
-function doLogout(){
-  document.getElementById('adminPanel').style.display='none';
-  document.getElementById('loginScreen').style.display='flex';
-  document.getElementById('adminPassword').value='';
-  document.getElementById('loginError').style.display='none';
+
+function logout() {
+  localStorage.removeItem('eazyoo_gh_token');
+  document.getElementById('adminPanel').style.display = 'none';
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('ghToken').value = '';
 }
-function changePassword(){
-  const p1=document.getElementById('newPass1').value, p2=document.getElementById('newPass2').value;
-  if(!p1) return toast('Password cannot be empty','#fbbf24');
-  if(p1!==p2) return toast('Passwords do not match','#fbbf24');
-  localStorage.setItem('eazyoo_admin_pass',p1);
-  toast('Password updated!');
-  document.getElementById('newPass1').value=''; document.getElementById('newPass2').value='';
+
+async function saveToGitHub() {
+  const token = localStorage.getItem('eazyoo_gh_token');
+  if (!token) return;
+  
+  // Scrape settings and SEO from inputs before saving
+  syncSettingsFromUI();
+  
+  showLoader('Publishing to GitHub... (This updates the live site)');
+  try {
+    const contentStr = JSON.stringify(siteData, null, 2);
+    const base64Content = btoa(unescape(encodeURIComponent(contentStr)));
+    
+    const body = {
+      message: 'CMS Update via Admin Panel',
+      content: base64Content
+    };
+    if (fileSha) body.sha = fileSha; // Required to update existing file
+    
+    const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${DATA_FILE}`, {
+      method: 'PUT',
+      headers: { 'Authorization': `token ${token}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+    
+    if (!res.ok) {
+      const errData = await res.json();
+      throw new Error(errData.message || 'Failed to push');
+    }
+    
+    const data = await res.json();
+    fileSha = data.content.sha; // update SHA for next save
+    
+    hideLoader();
+    showToast('Success! Live site will update in ~1 minute.', 'success');
+  } catch (err) {
+    hideLoader();
+    showToast('Error: ' + err.message, 'error');
+  }
 }
-function showPanel(el, name){
-  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-  document.getElementById('panel-'+name).classList.add('active');
-  el.classList.add('active');
+
+// ==========================================
+// UI MANAGEMENT
+// ==========================================
+function switchPanel(name) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.sidebar .nav-item').forEach(n => n.classList.remove('active'));
+  
+  document.getElementById('panel-' + name).classList.add('active');
+  const nav = Array.from(document.querySelectorAll('.sidebar .nav-item')).find(el => el.textContent.toLowerCase().includes(name.split('-')[0]));
+  if(nav) nav.classList.add('active');
+  
+  if (name === 'products') renderProductsList();
+  if (name === 'posts') renderPostsList();
 }
-function loadAll(){
-  const saved = JSON.parse(localStorage.getItem('eazyoo_content')||'{}');
-  const d = {...DEFAULTS,...saved};
-  ['brandName','heroTagline','heroSubtitle','ctaText','ctaUrl','navCtaText','heroImgUrl',
-   'p1Name','p1Desc','p1Price','p1Rating','p1Category','p1AmazonUrl','p1ImgUrl',
-   'p2Name','p2Desc','p2Price','p2Badge','p2Category','p2AmazonUrl','p2ImgUrl',
-   'contactEmail','contactPhone','socialFb','socialIg','socialTt','socialYt'
-  ].forEach(k => { const el=document.getElementById(k); if(el) el.value=d[k]||''; });
-  previewImg('heroImgUrl','heroImgPreview');
-  previewImg('p1ImgUrl','p1ImgPreview');
-  previewImg('p2ImgUrl','p2ImgPreview');
-  renderFeatures('p1Features', d.p1Features);
-  renderFeatures('p2Features', d.p2Features);
+
+function populateUI() {
+  // Stats
+  document.getElementById('stat-products').textContent = siteData.products.length;
+  document.getElementById('stat-posts').textContent = siteData.posts.length;
+  
+  // Settings
+  const s = siteData.settings;
+  const ids = ['brandName','heroTagline','heroSubtitle','heroImgUrl','ctaText','ctaUrl','contactEmail','contactPhone','socialFb','socialIg','socialTt','socialYt'];
+  ids.forEach(id => {
+    if(document.getElementById('set-'+id)) document.getElementById('set-'+id).value = s[id] || '';
+  });
+  
+  // SEO
+  if(document.getElementById('seo-metaTitle')) document.getElementById('seo-metaTitle').value = siteData.seo.metaTitle || '';
+  if(document.getElementById('seo-metaDescription')) document.getElementById('seo-metaDescription').value = siteData.seo.metaDescription || '';
 }
-function saveAll(){
-  const keys = ['brandName','heroTagline','heroSubtitle','ctaText','ctaUrl','navCtaText','heroImgUrl',
-    'p1Name','p1Desc','p1Price','p1Rating','p1Category','p1AmazonUrl','p1ImgUrl',
-    'p2Name','p2Desc','p2Price','p2Badge','p2Category','p2AmazonUrl','p2ImgUrl',
-    'contactEmail','contactPhone','socialFb','socialIg','socialTt','socialYt'];
-  const data = {};
-  keys.forEach(k => { const el=document.getElementById(k); if(el) data[k]=el.value; });
-  data.p1Features = getFeatures('p1Features');
-  data.p2Features = getFeatures('p2Features');
-  localStorage.setItem('eazyoo_content', JSON.stringify(data));
-  toast('Changes saved! Reload any page to see updates.');
+
+function syncSettingsFromUI() {
+  const ids = ['brandName','heroTagline','heroSubtitle','heroImgUrl','ctaText','ctaUrl','contactEmail','contactPhone','socialFb','socialIg','socialTt','socialYt'];
+  ids.forEach(id => {
+    siteData.settings[id] = document.getElementById('set-'+id).value;
+  });
+  siteData.seo.metaTitle = document.getElementById('seo-metaTitle').value;
+  siteData.seo.metaDescription = document.getElementById('seo-metaDescription').value;
 }
-function resetAll(){
-  if(!confirm('Reset everything to defaults?')) return;
-  localStorage.removeItem('eazyoo_content');
-  loadAll();
-  toast('Reset to defaults','#fbbf24');
+
+// ==========================================
+// PRODUCTS MANAGER
+// ==========================================
+function renderProductsList() {
+  const list = document.getElementById('productsList');
+  if (siteData.products.length === 0) {
+    list.innerHTML = '<div style="padding:24px;text-align:center;color:var(--text-muted)">No products found. Add one!</div>';
+    return;
+  }
+  
+  list.innerHTML = siteData.products.map(p => `
+    <div class="item-row">
+      <div class="item-info">
+        <img src="${p.imgUrl || 'https://via.placeholder.com/48'}" class="item-img">
+        <div>
+          <div class="item-title">${p.name}</div>
+          <div class="item-meta">${p.category || 'Uncategorized'} &middot; £${p.price || '0.00'}</div>
+        </div>
+      </div>
+      <div class="item-actions">
+        <button class="btn-icon" onclick="editProduct('${p.id}')">✏️</button>
+        <button class="btn-icon danger" onclick="deleteProduct('${p.id}')">🗑️</button>
+      </div>
+    </div>
+  `).join('');
 }
-function previewImg(inputId, previewId){
-  const url=document.getElementById(inputId)?.value;
-  const box=document.getElementById(previewId);
-  if(!box) return;
-  box.innerHTML = url ? '<img src="'+url+'" alt="preview" onerror="this.parentElement.innerHTML=\'No image\'">' : '<span>No image</span>';
+
+function editProduct(id) {
+  const isNew = id === 'new';
+  document.getElementById('productEditorTitle').textContent = isNew ? 'Add Product' : 'Edit Product';
+  
+  let p = isNew ? { id: 'p_'+Date.now(), name:'', description:'', price:'', badge:'', category:'', amazonUrl:'', imgUrl:'', features:[] } 
+                : siteData.products.find(x => x.id === id);
+                
+  document.getElementById('prod-id').value = p.id;
+  document.getElementById('prod-name').value = p.name || '';
+  document.getElementById('prod-desc').value = p.description || '';
+  document.getElementById('prod-price').value = p.price || '';
+  document.getElementById('prod-badge').value = p.badge || '';
+  document.getElementById('prod-category').value = p.category || '';
+  document.getElementById('prod-amazon').value = p.amazonUrl || '';
+  document.getElementById('prod-img').value = p.imgUrl || '';
+  
+  const container = document.getElementById('prod-features-container');
+  container.innerHTML = '';
+  (p.features || []).forEach(f => addFeatureInput('#prod-features-container', f));
+  if(isNew) addFeatureInput('#prod-features-container', ''); // add one empty by default
+  
+  switchPanel('edit-product');
 }
-function handleFile(input, urlId, previewId){
-  const file=input.files[0]; if(!file) return;
-  const reader=new FileReader();
-  reader.onload=e=>{ document.getElementById(urlId).value=e.target.result; previewImg(urlId,previewId); };
-  reader.readAsDataURL(file);
+
+function saveProduct() {
+  const id = document.getElementById('prod-id').value;
+  const p = {
+    id: id,
+    name: document.getElementById('prod-name').value,
+    description: document.getElementById('prod-desc').value,
+    price: document.getElementById('prod-price').value,
+    badge: document.getElementById('prod-badge').value,
+    category: document.getElementById('prod-category').value,
+    amazonUrl: document.getElementById('prod-amazon').value,
+    imgUrl: document.getElementById('prod-img').value,
+    features: Array.from(document.querySelectorAll('#prod-features-container input')).map(i => i.value).filter(v => v.trim())
+  };
+  
+  const idx = siteData.products.findIndex(x => x.id === id);
+  if (idx >= 0) siteData.products[idx] = p;
+  else siteData.products.push(p);
+  
+  showToast('Product saved locally. Remember to Publish!', 'info');
+  populateUI(); // update dashboard count
+  switchPanel('products');
 }
-function renderFeatures(id, arr){
-  document.getElementById(id).innerHTML='';
-  (arr||[]).forEach(v=>addFeature(id,v));
+
+function deleteProduct(id) {
+  if(!confirm('Are you sure you want to delete this product?')) return;
+  siteData.products = siteData.products.filter(x => x.id !== id);
+  renderProductsList();
+  populateUI();
 }
-function addFeature(id, val){
-  const c=document.getElementById(id);
-  const d=document.createElement('div'); d.className='feature-item';
-  const v=(val||'').replace(/"/g,'&quot;');
-  d.innerHTML='<input type="text" value="'+v+'" placeholder="Feature..."><button class="btn-remove-feature" onclick="this.parentElement.remove()">X</button>';
-  c.appendChild(d);
+
+function addFeatureInput(containerId, value) {
+  const c = document.querySelector(containerId);
+  const div = document.createElement('div');
+  div.className = 'feature-item';
+  const val = (value||'').replace(/"/g, '&quot;');
+  div.innerHTML = `<input type="text" value="${val}" placeholder="Enter a feature bullet point"><button class="btn-icon danger" onclick="this.parentElement.remove()" style="padding:10px;">X</button>`;
+  c.appendChild(div);
 }
-function getFeatures(id){
-  return Array.from(document.querySelectorAll('#'+id+' input')).map(i=>i.value).filter(v=>v.trim());
+
+// ==========================================
+// POSTS MANAGER
+// ==========================================
+function renderPostsList() {
+  const list = document.getElementById('postsList');
+  if (siteData.posts.length === 0) {
+    list.innerHTML = '<div style="padding:24px;text-align:center;color:var(--text-muted)">No posts yet. Write your first blog post!</div>';
+    return;
+  }
+  
+  list.innerHTML = siteData.posts.sort((a,b)=>new Date(b.date)-new Date(a.date)).map(p => `
+    <div class="item-row">
+      <div class="item-info">
+        <div>
+          <div class="item-title">${p.title}</div>
+          <div class="item-meta">${p.date}</div>
+        </div>
+      </div>
+      <div class="item-actions">
+        <button class="btn-icon" onclick="editPost('${p.id}')">✏️</button>
+        <button class="btn-icon danger" onclick="deletePost('${p.id}')">🗑️</button>
+      </div>
+    </div>
+  `).join('');
 }
-function toast(msg, bg){
-  const t=document.getElementById('toast');
-  t.textContent=msg; t.style.background=bg||'#4ade80'; t.style.color=bg?'#1a1a1a':'#0a1a0a';
-  t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),3500);
+
+function editPost(id) {
+  const isNew = id === 'new';
+  document.getElementById('postEditorTitle').textContent = isNew ? 'Write Post' : 'Edit Post';
+  
+  let p = isNew ? { id: 'post_'+Date.now(), title:'', date: new Date().toISOString().split('T')[0], excerpt:'', content:'', imgUrl:'' } 
+                : siteData.posts.find(x => x.id === id);
+                
+  document.getElementById('post-id').value = p.id;
+  document.getElementById('post-title').value = p.title || '';
+  document.getElementById('post-date').value = p.date || '';
+  document.getElementById('post-excerpt').value = p.excerpt || '';
+  document.getElementById('post-content').value = p.content || '';
+  document.getElementById('post-img').value = p.imgUrl || '';
+  
+  switchPanel('edit-post');
+}
+
+function savePost() {
+  const id = document.getElementById('post-id').value;
+  const p = {
+    id: id,
+    title: document.getElementById('post-title').value,
+    date: document.getElementById('post-date').value,
+    excerpt: document.getElementById('post-excerpt').value,
+    content: document.getElementById('post-content').value,
+    imgUrl: document.getElementById('post-img').value
+  };
+  
+  const idx = siteData.posts.findIndex(x => x.id === id);
+  if (idx >= 0) siteData.posts[idx] = p;
+  else siteData.posts.push(p);
+  
+  showToast('Post saved locally. Remember to Publish!', 'info');
+  populateUI();
+  switchPanel('posts');
+}
+
+function deletePost(id) {
+  if(!confirm('Are you sure you want to delete this post?')) return;
+  siteData.posts = siteData.posts.filter(x => x.id !== id);
+  renderPostsList();
+  populateUI();
+}
+
+// ==========================================
+// UTILS
+// ==========================================
+function showError(msg) {
+  const e = document.getElementById('loginError');
+  e.textContent = msg; e.style.display = 'block';
+}
+
+function showLoader(text) {
+  document.getElementById('loaderText').textContent = text;
+  document.getElementById('loader').style.display = 'flex';
+}
+
+function hideLoader() {
+  document.getElementById('loader').style.display = 'none';
+}
+
+function showToast(msg, type='success') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast-' + type + ' show';
+  setTimeout(() => t.classList.remove('show'), 4000);
 }
 </script>
 </body>

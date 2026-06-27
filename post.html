@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post — EAZYOO</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .post-header { padding: 40px 0; border-bottom: 1px solid var(--color-border); }
+  </style>
+</head>
+<body>
+
+  <!-- ========== NAVIGATION ========== -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="index.html" class="nav-brand">
+        <span class="logo-text">EAZYOO</span>
+        <span class="logo-dot"></span>
+      </a>
+      
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="wholesale.html">Wholesale</a>
+        <a href="collaborate.html">Collaborate</a>
+        <a href="about.html">About</a>
+        <a href="blog.html" class="active">Blog</a>
+      </div>
+      
+      <div class="nav-actions">
+        <a href="wholesale.html" class="btn btn-primary btn-sm nav-cta">Become a Stockist</a>
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ========== SINGLE POST VIEW ========== -->
+  <section class="section" style="min-height: 60vh;">
+    <div class="container" id="single-post-view">
+      <!-- Dynamically populated by content.js -->
+      <p style="text-align:center; padding:100px 0; color:var(--color-text-light);">Loading post...</p>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo-text">EAZYOO</div>
+          <p class="tagline">"Smart Products. Smarter Living."</p>
+          <p>Innovative, space-saving products for active lifestyles and modern kitchens. Proudly UK-based.</p>
+        </div>
+        
+        <div class="footer-column">
+          <h5>Shop</h5>
+          <ul>
+            <li><a href="products.html">All Products</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h5>Business</h5>
+          <ul>
+            <li><a href="wholesale.html">Wholesale Application</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h5>Company</h5>
+          <ul>
+            <li><a href="about.html">About EAZYOO</a></li>
+            <li><a href="blog.html">Blog</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2025 EAZYOO. All rights reserved. UK Registered Brand.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook">FB</a>
+          <a href="#" aria-label="Instagram">IG</a>
+          <a href="#" aria-label="TikTok">TT</a>
+          <a href="#" aria-label="YouTube">YT</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/content.js"></script>
+</body>
+</html>

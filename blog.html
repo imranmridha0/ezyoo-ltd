@@ -3,9 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Our Products — EAZYOO | Collapsible Kitchen & Outdoor Gear</title>
-  <meta name="description" content="Explore EAZYOO's innovative product range — Running Water Bottle 500ml Soft Flask and Collapsible Cutting Board. BPA-free, foldable, and built to last.">
+  <title>Blog — EAZYOO</title>
+  <meta name="description" content="Read the latest news, updates, and articles from EAZYOO.">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    .page-header { background: var(--color-surface); padding: 80px 0 40px; text-align: center; border-bottom: 1px solid var(--color-border); }
+    .page-header h1 { font-size: 3rem; margin-bottom: 16px; background: linear-gradient(135deg, var(--color-primary), var(--color-accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .page-header p { color: var(--color-text-light); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+  </style>
 </head>
 <body>
 
@@ -16,51 +21,41 @@
         <span class="logo-text">EAZYOO</span>
         <span class="logo-dot"></span>
       </a>
+      
       <div class="nav-links" id="navLinks">
         <a href="index.html">Home</a>
-        <a href="products.html" class="active">Products</a>
+        <a href="products.html">Products</a>
         <a href="wholesale.html">Wholesale</a>
         <a href="collaborate.html">Collaborate</a>
         <a href="about.html">About</a>
+        <a href="blog.html" class="active">Blog</a>
       </div>
+      
       <div class="nav-actions">
         <a href="wholesale.html" class="btn btn-primary btn-sm nav-cta">Become a Stockist</a>
         <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
-          <span></span><span></span><span></span>
+          <span></span>
+          <span></span>
+          <span></span>
         </button>
       </div>
     </div>
   </nav>
 
-  <!-- ========== PAGE HEADER ========== -->
-  <div class="page-header">
+  <!-- ========== HEADER ========== -->
+  <header class="page-header">
     <div class="container">
-      <h1>Our Products</h1>
-      <p>Innovative, collapsible gear engineered for portability without compromising on quality.</p>
+      <h1>Latest News & Updates</h1>
+      <p>Stay up to date with the latest from EAZYOO, including product launches, tips, and behind-the-scenes stories.</p>
     </div>
-  </div>
+  </header>
 
-  <!-- ========== PRODUCTS GRID ========== -->
-  <section class="section" style="background: var(--color-white);">
+  <!-- ========== BLOG LIST ========== -->
+  <section class="section" style="min-height: 50vh;">
     <div class="container">
-      <div class="products-grid" id="dynamic-products">
-        <p style="text-align:center; width:100%; color:var(--color-text-light);">Loading products...</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== WHOLESALE CTA ========== -->
-  <section class="wholesale-cta section">
-    <div class="container">
-      <div class="wholesale-inner reveal">
-        <div class="wholesale-content">
-          <span class="wholesale-label">🏬 For Retailers</span>
-          <h2>Want to Stock Our Products?</h2>
-          <p>Apply for a wholesale account and bring EAZYOO's innovative products to your customers.</p>
-        </div>
-        <div class="wholesale-action">
-          <a href="wholesale.html" class="btn btn-amber btn-lg">Apply Now →</a>
-        </div>
+      <div class="products-grid" id="dynamic-posts">
+        <!-- Dynamically populated by content.js -->
+        <p style="text-align:center; width:100%; color:var(--color-text-light);">Loading posts...</p>
       </div>
     </div>
   </section>
@@ -78,6 +73,7 @@
             <button type="button">Subscribe</button>
           </div>
         </div>
+        
         <div class="footer-column">
           <h5>Shop</h5>
           <ul>
@@ -87,22 +83,27 @@
             <li><a href="https://www.amazon.co.uk/s?me=AGGGQPAQ7YS4X" target="_blank" rel="noopener">Amazon Store</a></li>
           </ul>
         </div>
+        
         <div class="footer-column">
           <h5>Business</h5>
           <ul>
             <li><a href="wholesale.html">Wholesale Application</a></li>
             <li><a href="collaborate.html">Brand Collaboration</a></li>
+            <li><a href="wholesale.html#moq">MOQ & Pricing</a></li>
           </ul>
         </div>
+        
         <div class="footer-column">
           <h5>Company</h5>
           <ul>
             <li><a href="about.html">About EAZYOO</a></li>
+            <li><a href="about.html#values">Our Values</a></li>
             <li><a href="about.html#contact">Contact Us</a></li>
-            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="blog.html">Blog</a></li>
           </ul>
         </div>
       </div>
+      
       <div class="footer-bottom">
         <p>&copy; 2025 EAZYOO. All rights reserved. UK Registered Brand.</p>
         <div class="social-links">
@@ -119,4 +120,3 @@
   <script src="js/content.js"></script>
 </body>
 </html>
-

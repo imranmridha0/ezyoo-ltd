@@ -1,160 +1,173 @@
 /**
- * EAZYOO Content Manager
- * Reads saved admin settings from localStorage and applies them to every page.
- * Include this script at the bottom of every HTML page.
+ * EAZYOO CMS Content Manager
+ * Fetches data.json and populates the page dynamically.
  */
-(function() {
-  const data = JSON.parse(localStorage.getItem('eazyoo_content') || '{}');
-  if (!data || Object.keys(data).length === 0) return;
+document.addEventListener('DOMContentLoaded', async () => {
+  try {
+    // 1. Fetch data
+    const res = await fetch('data.json');
+    if (!res.ok) throw new Error('Could not load site data');
+    const data = await res.json();
+    
+    // Helper functions
+    const set = (sel, prop, val) => {
+      if (!val) return;
+      document.querySelectorAll(sel).forEach(el => el[prop] = val);
+    };
+    const setSrc = (sel, val) => {
+      if (!val) return;
+      document.querySelectorAll(sel).forEach(el => el.src = val);
+    };
+    const setHref = (sel, val) => {
+      if (!val) return;
+      document.querySelectorAll(sel).forEach(el => el.href = val);
+    };
 
-  function set(sel, prop, val) {
-    if (!val) return;
-    document.querySelectorAll(sel).forEach(el => { el[prop] = val; });
-  }
-  function setSrc(sel, val) { if (!val) return; document.querySelectorAll(sel).forEach(el => el.src = val); }
-  function setHref(sel, val) { if (!val) return; document.querySelectorAll(sel).forEach(el => el.href = val); }
-
-  // Brand / Logo
-  if (data.brandName) document.querySelectorAll('.logo-text').forEach(el => el.textContent = data.brandName);
-
-  // Hero section
-  if (data.heroTagline) {
-    const h1 = document.querySelector('.hero h1');
-    if (h1) h1.innerHTML = data.heroTagline.replace('. ', '.<br>');
-  }
-  if (data.heroSubtitle) set('.hero-subtitle', 'textContent', data.heroSubtitle);
-  if (data.heroImgUrl) setSrc('.hero-bg img', data.heroImgUrl);
-  if (data.ctaText) {
-    const btn = document.querySelector('.hero-buttons .btn-primary');
-    if (btn) { const icon = btn.querySelector('.btn-icon'); btn.textContent = data.ctaText; if(icon) btn.prepend(icon); }
-  }
-  if (data.ctaUrl) {
-    const btn = document.querySelector('.hero-buttons .btn-primary');
-    if (btn) btn.href = data.ctaUrl;
-  }
-  if (data.navCtaText) set('.nav-cta', 'textContent', data.navCtaText);
-
-  // Product 1 - Water Bottle
-  if (data.p1ImgUrl) setSrc('#water-bottle img, .product-card:first-child img', data.p1ImgUrl);
-  if (data.p1Name) set('#water-bottle h2', 'textContent', data.p1Name);
-  if (data.p1Desc) {
-    const desc = document.querySelector('#water-bottle .about-content > p');
-    if (desc) desc.textContent = data.p1Desc;
-  }
-  if (data.p1Price) {
-    const price = document.querySelector('#water-bottle [style*="font-size: 2rem"]');
-    if (price) price.textContent = data.p1Price.startsWith('£') ? data.p1Price : '£' + data.p1Price;
-  }
-  if (data.p1Rating) {
-    const rating = document.querySelector('#water-bottle [style*="color-warm-amber"] span');
-    if (rating) rating.textContent = data.p1Rating;
-  }
-  if (data.p1Category) {
-    const cat = document.querySelector('#water-bottle .section-label');
-    if (cat) cat.textContent = data.p1Category;
-  }
-  if (data.p1AmazonUrl) {
-    const btn = document.querySelector('#water-bottle .btn-primary');
-    if (btn) btn.href = data.p1AmazonUrl;
-  }
-  if (data.p1Features && data.p1Features.length) {
-    const ul = document.querySelector('#water-bottle ul');
-    if (ul) {
-      ul.innerHTML = data.p1Features.map(f =>
-        '<li style="padding: var(--space-sm) 0; color: var(--color-text-light); display: flex; gap: var(--space-sm);"><span>&#x2705;</span><span>' + f + '</span></li>'
-      ).join('');
-    }
-  }
-
-  // Product 2 - Cutting Board
-  if (data.p2ImgUrl) setSrc('#cutting-board img', data.p2ImgUrl);
-  if (data.p2Name) set('#cutting-board h2', 'textContent', data.p2Name);
-  if (data.p2Desc) {
-    const desc = document.querySelector('#cutting-board .about-content > p');
-    if (desc) desc.textContent = data.p2Desc;
-  }
-  if (data.p2Price) {
-    const price = document.querySelector('#cutting-board [style*="font-size: 2rem"]');
-    if (price) price.textContent = data.p2Price.startsWith('£') ? data.p2Price : '£' + data.p2Price;
-  }
-  if (data.p2Badge) {
-    const badge = document.querySelector('#cutting-board [style*="color: white"]');
-    if (badge) badge.textContent = data.p2Badge;
-  }
-  if (data.p2Category) {
-    const cat = document.querySelector('#cutting-board .section-label');
-    if (cat) cat.textContent = data.p2Category;
-  }
-  if (data.p2AmazonUrl) {
-    const btn = document.querySelector('#cutting-board .btn-secondary');
-    if (btn) btn.href = data.p2AmazonUrl;
-  }
-  if (data.p2Features && data.p2Features.length) {
-    const ul = document.querySelector('#cutting-board ul');
-    if (ul) {
-      ul.innerHTML = data.p2Features.map(f =>
-        '<li style="padding: var(--space-sm) 0; color: var(--color-text-light); display: flex; gap: var(--space-sm);"><span>&#x2705;</span><span>' + f + '</span></li>'
-      ).join('');
-    }
-  }
-
-  // Homepage product cards (index.html)
-  const cards = document.querySelectorAll('.products-grid .product-card, #products .product-card');
-  if (cards.length >= 1) {
-    if (data.p1ImgUrl) { const img = cards[0].querySelector('img'); if(img) img.src = data.p1ImgUrl; }
-    if (data.p1Name)   { const h = cards[0].querySelector('h3'); if(h) h.textContent = data.p1Name; }
-    if (data.p1Price)  { const p = cards[0].querySelector('.product-price'); if(p) p.textContent = data.p1Price.startsWith('£') ? data.p1Price : '£'+data.p1Price; }
-    if (data.p1AmazonUrl) { const a = cards[0].querySelector('a[href*="amazon"]'); if(a) a.href = data.p1AmazonUrl; }
-  }
-  if (cards.length >= 2) {
-    if (data.p2ImgUrl) { const img = cards[1].querySelector('img'); if(img) img.src = data.p2ImgUrl; }
-    if (data.p2Name)   { const h = cards[1].querySelector('h3'); if(h) h.textContent = data.p2Name; }
-    if (data.p2Price)  { const p = cards[1].querySelector('.product-price'); if(p) p.textContent = data.p2Price.startsWith('£') ? data.p2Price : '£'+data.p2Price; }
-    if (data.p2AmazonUrl) { const a = cards[1].querySelector('a[href*="amazon"]'); if(a) a.href = data.p2AmazonUrl; }
-  }
-
-  // Contact Info
-  if (data.contactEmail) {
-    const emailEls = document.querySelectorAll('p, a');
-    emailEls.forEach(el => {
-      if (el.textContent.includes('hello@eazyoo.co.uk')) {
-        el.textContent = el.textContent.replace('hello@eazyoo.co.uk', data.contactEmail);
+    // ==========================================
+    // INJECT SETTINGS & SEO
+    // ==========================================
+    const s = data.settings || {};
+    
+    // SEO
+    if (data.seo) {
+      if (data.seo.metaTitle) document.title = data.seo.metaTitle;
+      if (data.seo.metaDescription) {
+        let metaDesc = document.querySelector('meta[name="description"]');
+        if (!metaDesc) {
+          metaDesc = document.createElement('meta');
+          metaDesc.name = 'description';
+          document.head.appendChild(metaDesc);
+        }
+        metaDesc.content = data.seo.metaDescription;
       }
-      if (el.href && el.href.includes('mailto:hello@eazyoo.co.uk')) {
-        el.href = el.href.replace('hello@eazyoo.co.uk', data.contactEmail);
+    }
+
+    // Brand
+    if (s.brandName) document.querySelectorAll('.logo-text').forEach(el => el.textContent = s.brandName);
+
+    // Hero
+    if (s.heroTagline) {
+      const h1 = document.querySelector('.hero h1');
+      if (h1) h1.innerHTML = s.heroTagline.replace('. ', '.<br>');
+    }
+    set('.hero-subtitle', 'textContent', s.heroSubtitle);
+    setSrc('.hero-bg img', s.heroImgUrl);
+    
+    if (s.ctaText) {
+      const btn = document.querySelector('.hero-buttons .btn-primary');
+      if (btn) { const icon = btn.querySelector('.btn-icon'); btn.textContent = s.ctaText; if(icon) btn.prepend(icon); }
+    }
+    if (s.ctaUrl) setHref('.hero-buttons .btn-primary', s.ctaUrl);
+    set('.nav-cta', 'textContent', s.navCtaText);
+
+    // Contact
+    if (s.contactEmail) {
+      document.querySelectorAll('p, a').forEach(el => {
+        if (el.textContent.includes('hello@eazyoo.co.uk')) el.textContent = el.textContent.replace('hello@eazyoo.co.uk', s.contactEmail);
+        if (el.href && el.href.includes('mailto:hello@eazyoo.co.uk')) el.href = el.href.replace('hello@eazyoo.co.uk', s.contactEmail);
+      });
+    }
+    if (s.contactPhone) {
+      const f = document.querySelector('.footer-bottom p');
+      if (f && !f.textContent.includes('Tel:')) f.innerHTML += ` | Tel: ${s.contactPhone}`;
+    }
+
+    // Social
+    const socials = [{l:'Facebook',u:s.socialFb},{l:'Instagram',u:s.socialIg},{l:'TikTok',u:s.socialTt},{l:'YouTube',u:s.socialYt}];
+    socials.forEach(soc => {
+      const link = document.querySelector(`.social-links a[aria-label="${soc.l}"]`);
+      if (link) {
+        if (soc.u && soc.u !== '#') { link.href = soc.u; link.style.display = 'inline-flex'; } 
+        else { link.style.display = 'none'; }
       }
     });
-  }
-  if (data.contactPhone) {
-    // Add phone number to footer copyright text area if not already there
-    const footerBottom = document.querySelector('.footer-bottom p');
-    if (footerBottom && !footerBottom.textContent.includes('Tel:')) {
-      footerBottom.innerHTML += ` | Tel: ${data.contactPhone}`;
-    }
-  }
 
-  // Social Links
-  const socialConfig = [
-    { label: 'Facebook', url: data.socialFb },
-    { label: 'Instagram', url: data.socialIg },
-    { label: 'TikTok', url: data.socialTt },
-    { label: 'YouTube', url: data.socialYt }
-  ];
-  
-  socialConfig.forEach(soc => {
-    const link = document.querySelector(`.social-links a[aria-label="${soc.label}"]`);
-    if (link) {
-      if (soc.url && soc.url !== '#') {
-        link.href = soc.url;
-        link.style.display = 'inline-flex';
+    // ==========================================
+    // RENDER PRODUCTS
+    // ==========================================
+    const prodContainers = document.querySelectorAll('#dynamic-products, .products-grid');
+    if (prodContainers.length > 0 && data.products) {
+      
+      const renderProductCard = (p) => `
+        <div class="product-card" id="${p.id}">
+          <div class="product-img-wrapper">
+            <img src="${p.imgUrl}" alt="${p.name}">
+            ${p.badge ? `<div style="position:absolute;top:15px;right:15px;background:var(--color-primary);color:white;padding:4px 12px;border-radius:20px;font-size:0.8rem;font-weight:600;">${p.badge}</div>` : ''}
+          </div>
+          <div class="product-info">
+            <div style="font-size:0.8rem;color:var(--color-primary);font-weight:600;margin-bottom:8px;">${p.category || ''}</div>
+            <h3>${p.name}</h3>
+            <p>${p.description}</p>
+            <ul style="margin:16px 0; list-style:none; padding:0;">
+              ${(p.features||[]).map(f => `<li style="padding:4px 0; color:var(--color-text-light); display:flex; gap:8px;"><span>&#x2705;</span><span>${f}</span></li>`).join('')}
+            </ul>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:20px;">
+              <span style="font-size:1.5rem; font-weight:700;">${p.price.toString().startsWith('£') ? p.price : '£'+p.price}</span>
+              <a href="${p.amazonUrl}" target="_blank" class="btn btn-primary">Buy on Amazon</a>
+            </div>
+          </div>
+        </div>
+      `;
+
+      prodContainers.forEach(container => {
+        // Clear old static products if any
+        if (container.id === 'dynamic-products' || container.innerHTML.includes('product-card')) {
+          container.innerHTML = data.products.map(renderProductCard).join('');
+        }
+      });
+    }
+
+    // ==========================================
+    // RENDER POSTS (BLOG)
+    // ==========================================
+    const blogListContainer = document.getElementById('dynamic-posts');
+    if (blogListContainer && data.posts) {
+      const renderPostCard = (p) => `
+        <div class="product-card">
+          <div class="product-img-wrapper" style="height:200px;">
+            <img src="${p.imgUrl || 'images/hero-banner.png'}" style="object-fit:cover; width:100%; height:100%;">
+          </div>
+          <div class="product-info">
+            <div style="font-size:0.8rem;color:var(--color-text-light);margin-bottom:8px;">${p.date}</div>
+            <h3>${p.title}</h3>
+            <p style="margin: 12px 0;">${p.excerpt}</p>
+            <a href="post.html?id=${p.id}" class="btn btn-secondary" style="width:100%; text-align:center;">Read More</a>
+          </div>
+        </div>
+      `;
+      blogListContainer.innerHTML = data.posts.sort((a,b)=>new Date(b.date)-new Date(a.date)).map(renderPostCard).join('');
+    }
+
+    // ==========================================
+    // RENDER SINGLE POST
+    // ==========================================
+    const singlePostContainer = document.getElementById('single-post-view');
+    if (singlePostContainer && data.posts) {
+      const urlParams = new URLSearchParams(window.location.search);
+      const postId = urlParams.get('id');
+      const post = data.posts.find(p => p.id === postId);
+      
+      if (!post) {
+        singlePostContainer.innerHTML = '<h2>Post not found</h2><a href="blog.html">Back to Blog</a>';
       } else {
-        link.style.display = 'none';
+        document.title = post.title + " | " + (s.brandName || 'EAZYOO');
+        singlePostContainer.innerHTML = `
+          <div style="text-align:center; max-width:800px; margin:0 auto; padding-bottom:40px;">
+            <div style="font-size:0.9rem; color:var(--color-text-light); margin-bottom:12px;">${post.date}</div>
+            <h1 style="font-size:2.5rem; margin-bottom:30px;">${post.title}</h1>
+            <img src="${post.imgUrl || 'images/hero-banner.png'}" style="width:100%; border-radius:12px; margin-bottom:40px; box-shadow:0 15px 40px rgba(0,0,0,0.1);">
+            <div style="text-align:left; font-size:1.1rem; line-height:1.8; color:var(--color-text);">
+              ${post.content}
+            </div>
+            <div style="margin-top:50px; text-align:center;">
+              <a href="blog.html" class="btn btn-secondary">← Back to all posts</a>
+            </div>
+          </div>
+        `;
       }
     }
-  });
 
-  // Page title update
-  if (data.brandName) {
-    document.title = document.title.replace(/EAZYOO/g, data.brandName);
+  } catch (err) {
+    console.error('Error loading CMS data:', err);
   }
-})();
+});
