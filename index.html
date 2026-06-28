@@ -10,6 +10,7 @@
   <meta property="og:description" content="Innovative collapsible gear for active lifestyles & modern kitchens. UK-based brand on Amazon.">
   <meta property="og:type" content="website">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/shop.css">
 </head>
 <body>
 
@@ -27,9 +28,14 @@
         <a href="wholesale.html">Wholesale</a>
         <a href="collaborate.html">Collaborate</a>
         <a href="about.html">About</a>
+        <a href="blog.html">Blog</a>
       </div>
       
       <div class="nav-actions">
+        <button class="cart-btn snipcart-checkout" aria-label="Open cart">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <span class="cart-badge snipcart-items-count">0</span>
+        </button>
         <a href="wholesale.html" class="btn btn-primary btn-sm nav-cta">Become a Stockist</a>
         <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
           <span></span>
@@ -89,6 +95,24 @@
       <div class="products-grid" id="dynamic-products">
         <!-- Products will be dynamically populated here by content.js -->
         <p style="text-align:center; width:100%; color:var(--color-text-light);">Loading products...</p>
+      </div>
+
+      <div style="text-align:center; margin-top:var(--space-2xl);">
+        <a href="products.html" class="btn btn-primary btn-lg">View All Products →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SHOP BY CATEGORY ========== -->
+  <section class="section" style="background:var(--color-white);">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Shop by Category</span>
+        <h2>Browse Our Collections</h2>
+        <p>Explore 8 curated categories of premium products.</p>
+      </div>
+      <div class="categories-grid" id="categories-showcase">
+        <!-- Populated by content.js -->
       </div>
     </div>
   </section>
@@ -195,7 +219,7 @@
       </div>
       
       <div class="footer-bottom">
-        <p>&copy; 2025 EAZYOO. All rights reserved. UK Registered Brand.</p>
+        <p>&copy; 2026 EAZYOO. All rights reserved. UK Registered Brand.</p>
         <div class="social-links">
           <a href="#" aria-label="Facebook">FB</a>
           <a href="#" aria-label="Instagram">IG</a>

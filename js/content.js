@@ -1,213 +1,331 @@
 /**
- * EAZYOO CMS Content Manager
- * Fetches data.json and populates the page dynamically.
+ * EAZYOO CMS Content Manager v2
+ * Fetches data.json and populates all pages dynamically.
+ * Supports: Products, Categories, Blog, Cart, B2B Pricing
  */
+
+// ==========================================
+// SNIPCART INTEGRATION
+// ==========================================
+function initSnipcart(apiKey) {
+  if (!apiKey) {
+    console.warn('Snipcart API Key is missing. Cart checkout will not work.');
+    return;
+  }
+  
+  if (document.getElementById('snipcart')) return; // Already injected
+
+  // Add Preconnects
+  const preconnect1 = document.createElement('link');
+  preconnect1.rel = 'preconnect';
+  preconnect1.href = 'https://app.snipcart.com';
+  const preconnect2 = document.createElement('link');
+  preconnect2.rel = 'preconnect';
+  preconnect2.href = 'https://cdn.snipcart.com';
+  document.head.appendChild(preconnect1);
+  document.head.appendChild(preconnect2);
+
+  // Add CSS
+  const css = document.createElement('link');
+  css.rel = 'stylesheet';
+  css.href = 'https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css';
+  document.head.appendChild(css);
+
+  // Add Script
+  const script = document.createElement('script');
+  script.src = 'https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.js';
+  script.async = true;
+  document.body.appendChild(script);
+
+  // Add hidden Snipcart div
+  const snipcartDiv = document.createElement('div');
+  snipcartDiv.id = 'snipcart';
+  snipcartDiv.setAttribute('data-api-key', apiKey);
+  snipcartDiv.setAttribute('hidden', 'true');
+  // Configure Snipcart to allow dynamic product injection (no server validation for this demo)
+  snipcartDiv.setAttribute('data-config-add-product-behavior', 'none'); 
+  document.body.appendChild(snipcartDiv);
+}
+
+// ==========================================
+// MAIN INIT
+// ==========================================
 document.addEventListener('DOMContentLoaded', async () => {
   try {
-    // 1. Fetch data
     const res = await fetch('data.json');
     if (!res.ok) throw new Error('Could not load site data');
     const data = await res.json();
     
-    // Helper functions
-    const set = (sel, prop, val) => {
-      if (!val) return;
-      document.querySelectorAll(sel).forEach(el => el[prop] = val);
-    };
-    const setSrc = (sel, val) => {
-      if (!val) return;
-      document.querySelectorAll(sel).forEach(el => el.src = val);
-    };
-    const setHref = (sel, val) => {
-      if (!val) return;
-      document.querySelectorAll(sel).forEach(el => el.href = val);
-    };
+    const isWholesale = localStorage.getItem('eazyoo_wholesale_logged_in') === 'true';
 
     // ==========================================
-    // INJECT SETTINGS & SEO
+    // INJECT SEO & SETTINGS
     // ==========================================
     const s = data.settings || {};
     
-    // SEO
+    // Inject Snipcart
+    // Use test key if none provided in settings for demo purposes
+    const snipcartKey = s.snipcartApiKey || 'NmU2YWI4NDEtYTNhYi00NGQ2LTljNjUtYjM0ZTUwZDcxOTIxNjM4NTM3NjI3MjA1NTY4MDMx';
+    initSnipcart(snipcartKey);
+
     if (data.seo) {
       if (data.seo.metaTitle) document.title = data.seo.metaTitle;
       if (data.seo.metaDescription) {
         let metaDesc = document.querySelector('meta[name="description"]');
-        if (!metaDesc) {
-          metaDesc = document.createElement('meta');
-          metaDesc.name = 'description';
-          document.head.appendChild(metaDesc);
-        }
+        if (!metaDesc) { metaDesc = document.createElement('meta'); metaDesc.name = 'description'; document.head.appendChild(metaDesc); }
         metaDesc.content = data.seo.metaDescription;
       }
     }
-
-    // Brand
     if (s.brandName) document.querySelectorAll('.logo-text').forEach(el => el.textContent = s.brandName);
 
-    // Hero
-    if (s.heroTagline) {
-      const h1 = document.querySelector('.hero h1');
-      if (h1) h1.innerHTML = s.heroTagline.replace('. ', '.<br>');
+    // ==========================================
+    // RENDER CATEGORY NAV (Mega Menu)
+    // ==========================================
+    const catNav = document.getElementById('category-nav');
+    if (catNav && data.categories) {
+      catNav.innerHTML = data.categories.map(c => `
+        <a href="products.html?cat=${c.id}" class="cat-link" data-cat="${c.id}">
+          <span class="cat-icon">${c.icon}</span>
+          <span class="cat-name">${c.name}</span>
+        </a>
+      `).join('');
     }
-    set('.hero-subtitle', 'textContent', s.heroSubtitle);
-    setSrc('.hero-bg img', s.heroImgUrl);
-    
-    if (s.ctaText) {
-      const btn = document.querySelector('.hero-buttons .btn-primary');
-      if (btn) { const icon = btn.querySelector('.btn-icon'); btn.textContent = s.ctaText; if(icon) btn.prepend(icon); }
-    }
-    if (s.ctaUrl) setHref('.hero-buttons .btn-primary', s.ctaUrl);
-    set('.nav-cta', 'textContent', s.navCtaText);
-
-    // Contact
-    if (s.contactEmail) {
-      document.querySelectorAll('p, a').forEach(el => {
-        if (el.textContent.includes('hello@eazyoo.co.uk')) el.textContent = el.textContent.replace('hello@eazyoo.co.uk', s.contactEmail);
-        if (el.href && el.href.includes('mailto:hello@eazyoo.co.uk')) el.href = el.href.replace('hello@eazyoo.co.uk', s.contactEmail);
-      });
-    }
-    if (s.contactPhone) {
-      const f = document.querySelector('.footer-bottom p');
-      if (f && !f.textContent.includes('Tel:')) f.innerHTML += ` | Tel: ${s.contactPhone}`;
-    }
-
-    // Social
-    const socials = [{l:'Facebook',u:s.socialFb},{l:'Instagram',u:s.socialIg},{l:'TikTok',u:s.socialTt},{l:'YouTube',u:s.socialYt}];
-    socials.forEach(soc => {
-      const link = document.querySelector(`.social-links a[aria-label="${soc.l}"]`);
-      if (link) {
-        if (soc.u && soc.u !== '#') { link.href = soc.u; link.style.display = 'inline-flex'; } 
-        else { link.style.display = 'none'; }
-      }
-    });
 
     // ==========================================
-    // RENDER PRODUCTS
+    // RENDER PRODUCT CARD (Shared function)
     // ==========================================
-    const prodContainers = document.querySelectorAll('#dynamic-products, .products-grid');
-    if (prodContainers.length > 0 && data.products) {
+    function renderProductCard(p) {
+      const imgs = p.images && p.images.length > 0 ? p.images : ['https://placehold.co/600x600/e2e8f0/475569?text=No+Image'];
+      const firstImg = imgs[0];
       
-      const isWholesale = localStorage.getItem('eazyoo_wholesale_logged_in') === 'true';
-
-      const renderProductCard = (p) => {
-        let priceHtml = `<span style="font-size:1.5rem; font-weight:700;">£${p.price}</span>`;
-        if (isWholesale && p.priceWholesale) {
-          priceHtml = `
-            <div style="display:flex; flex-direction:column; align-items:flex-start;">
-              <span style="font-size:0.9rem; text-decoration:line-through; color:var(--color-text-light);">Retail: £${p.price}</span>
-              <span style="font-size:1.5rem; font-weight:700; color:var(--color-primary);">B2B: £${p.priceWholesale}</span>
-            </div>
-          `;
-        }
-
-        let imagesHtml = '';
-        const imgs = p.images && p.images.length > 0 ? p.images : (p.imgUrl ? [p.imgUrl] : []);
-        if (imgs.length === 1) {
-          imagesHtml = `<img src="${imgs[0]}" alt="${p.name}">`;
-        } else if (imgs.length > 1) {
-          imagesHtml = `
-            <div class="product-slider" style="position:relative; width:100%; height:100%; overflow:hidden;">
-              ${imgs.map((src, i) => `<img src="${src}" class="slide" style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:contain; opacity:${i===0?1:0}; transition:opacity 0.5s ease;" data-index="${i}">`).join('')}
-            </div>
-          `;
-        } else {
-           imagesHtml = `<img src="https://via.placeholder.com/400" alt="No image">`;
-        }
-
-        return `
-        <div class="product-card" id="${p.id}" style="display:flex; flex-direction:column; height:100%;">
-          <div class="product-img-wrapper" style="position:relative; height:250px; background:#f8f9fa;">
-            ${imagesHtml}
-            ${p.badge ? `<div style="position:absolute;top:15px;right:15px;background:var(--color-primary);color:white;padding:4px 12px;border-radius:20px;font-size:0.8rem;font-weight:600;z-index:2;">${p.badge}</div>` : ''}
-          </div>
-          <div class="product-info" style="display:flex; flex-direction:column; flex-grow:1; text-align:left;">
-            <div style="font-size:0.8rem;color:var(--color-primary);font-weight:600;margin-bottom:8px;">${p.category || ''}</div>
-            <h3 style="margin-bottom:8px;">${p.name}</h3>
-            <p style="flex-grow:1;">${p.description}</p>
-            <ul style="margin:16px 0; list-style:none; padding:0;">
-              ${(p.features||[]).map(f => `<li style="padding:4px 0; color:var(--color-text-light); display:flex; gap:8px;"><span>&#x2705;</span><span>${f}</span></li>`).join('')}
-            </ul>
-            <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-top:auto; padding-top:20px;">
-              ${priceHtml}
-              <a href="${p.amazonUrl}" target="_blank" class="btn btn-primary" style="margin-left:auto;">Buy on Amazon</a>
-            </div>
-          </div>
-        </div>
-      `};
-
-      prodContainers.forEach(container => {
-        // Clear old static products if any
-        if (container.id === 'dynamic-products' || container.innerHTML.includes('product-card')) {
-          container.innerHTML = data.products.map(renderProductCard).join('');
-        }
-      });
-
-      // Init auto-slider
-      setInterval(() => {
-        document.querySelectorAll('.product-slider').forEach(slider => {
-          const slides = slider.querySelectorAll('.slide');
-          if (slides.length <= 1) return;
-          let activeIdx = Array.from(slides).findIndex(s => s.style.opacity === '1' || s.style.opacity === 1);
-          if (activeIdx < 0) activeIdx = 0;
-          slides[activeIdx].style.opacity = '0';
-          const nextIdx = (activeIdx + 1) % slides.length;
-          slides[nextIdx].style.opacity = '1';
-        });
-      }, 3000);
-    }
-
-    // ==========================================
-    // RENDER POSTS (BLOG)
-    // ==========================================
-    const blogListContainer = document.getElementById('dynamic-posts');
-    if (blogListContainer && data.posts) {
-      const renderPostCard = (p) => `
-        <div class="product-card">
-          <div class="product-img-wrapper" style="height:200px;">
-            <img src="${p.imgUrl || 'images/hero-banner.png'}" style="object-fit:cover; width:100%; height:100%;">
-          </div>
-          <div class="product-info">
-            <div style="font-size:0.8rem;color:var(--color-text-light);margin-bottom:8px;">${p.date}</div>
-            <h3>${p.title}</h3>
-            <p style="margin: 12px 0;">${p.excerpt}</p>
-            <a href="post.html?id=${p.id}" class="btn btn-secondary" style="width:100%; text-align:center;">Read More</a>
-          </div>
-        </div>
-      `;
-      blogListContainer.innerHTML = data.posts.sort((a,b)=>new Date(b.date)-new Date(a.date)).map(renderPostCard).join('');
-    }
-
-    // ==========================================
-    // RENDER SINGLE POST
-    // ==========================================
-    const singlePostContainer = document.getElementById('single-post-view');
-    if (singlePostContainer && data.posts) {
-      const urlParams = new URLSearchParams(window.location.search);
-      const postId = urlParams.get('id');
-      const post = data.posts.find(p => p.id === postId);
-      
-      if (!post) {
-        singlePostContainer.innerHTML = '<h2>Post not found</h2><a href="blog.html">Back to Blog</a>';
-      } else {
-        document.title = post.title + " | " + (s.brandName || 'EAZYOO');
-        singlePostContainer.innerHTML = `
-          <div style="text-align:center; max-width:800px; margin:0 auto; padding-bottom:40px;">
-            <div style="font-size:0.9rem; color:var(--color-text-light); margin-bottom:12px;">${post.date}</div>
-            <h1 style="font-size:2.5rem; margin-bottom:30px;">${post.title}</h1>
-            <img src="${post.imgUrl || 'images/hero-banner.png'}" style="width:100%; border-radius:12px; margin-bottom:40px; box-shadow:0 15px 40px rgba(0,0,0,0.1);">
-            <div style="text-align:left; font-size:1.1rem; line-height:1.8; color:var(--color-text);">
-              ${post.content}
-            </div>
-            <div style="margin-top:50px; text-align:center;">
-              <a href="blog.html" class="btn btn-secondary">← Back to all posts</a>
-            </div>
+      let priceHtml = `<span class="product-price">£${parseFloat(p.price).toFixed(2)}</span>`;
+      if (isWholesale && p.priceWholesale) {
+        priceHtml = `
+          <div class="price-group">
+            <span class="product-price-old">£${parseFloat(p.price).toFixed(2)}</span>
+            <span class="product-price wholesale">£${parseFloat(p.priceWholesale).toFixed(2)}</span>
+            <span class="wholesale-badge">B2B</span>
           </div>
         `;
       }
+
+      // Image slider HTML
+      let imageHtml;
+      if (imgs.length > 1) {
+        imageHtml = `
+          <div class="product-slider">
+            ${imgs.map((src, i) => `<img src="${src}" alt="${p.name}" class="slide" style="opacity:${i === 0 ? 1 : 0};" data-index="${i}">`).join('')}
+          </div>
+        `;
+      } else {
+        imageHtml = `<img src="${firstImg}" alt="${p.name}" class="product-card-img">`;
+      }
+
+      // Star rating
+      const rating = p.rating || 0;
+      const fullStars = Math.floor(rating);
+      const halfStar = rating % 1 >= 0.5 ? 1 : 0;
+      const emptyStars = 5 - fullStars - halfStar;
+      const starsHtml = '★'.repeat(fullStars) + (halfStar ? '½' : '') + '☆'.repeat(emptyStars);
+
+      const badgeHtml = p.badge ? `<span class="card-badge ${p.badge === 'Best Seller' ? 'badge-hot' : 'badge-new'}">${p.badge}</span>` : '';
+
+      const priceToUse = isWholesale && p.priceWholesale ? p.priceWholesale : p.price;
+
+      return `
+        <div class="product-card" data-category="${p.category}" data-price="${p.price}" data-rating="${rating}" data-id="${p.id}">
+          <div class="product-card-visual">
+            ${badgeHtml}
+            ${imageHtml}
+          </div>
+          <div class="product-card-body">
+            <span class="product-card-category">${(data.categories || []).find(c => c.id === p.category)?.name || p.category}</span>
+            <h3 class="product-card-title">${p.name}</h3>
+            <p class="product-card-desc">${p.description}</p>
+            <div class="product-card-rating">
+              <span class="stars">${starsHtml}</span>
+              <span class="rating-num">${rating}</span>
+            </div>
+            <div class="product-card-footer">
+              ${priceHtml}
+              <button class="snipcart-add-item btn-add-cart" 
+                data-item-id="${p.id}"
+                data-item-price="${priceToUse}"
+                data-item-url="/"
+                data-item-description="${p.description}"
+                data-item-image="${firstImg}"
+                data-item-name="${p.name.replace(/"/g, '&quot;')}">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
     }
 
+    // ==========================================
+    // HOME PAGE: Featured Products + Categories
+    // ==========================================
+    const dynProducts = document.getElementById('dynamic-products');
+    if (dynProducts && data.products) {
+      // Show first 8 products (one from each category if possible)
+      const featured = [];
+      const cats = data.categories || [];
+      cats.forEach(c => {
+        const p = data.products.find(prod => prod.category === c.id);
+        if (p) featured.push(p);
+      });
+      dynProducts.innerHTML = featured.slice(0, 8).map(renderProductCard).join('');
+    }
+
+    // Categories showcase on homepage
+    const catShowcase = document.getElementById('categories-showcase');
+    if (catShowcase && data.categories) {
+      catShowcase.innerHTML = data.categories.map(c => {
+        const count = (data.products || []).filter(p => p.category === c.id).length;
+        return `
+          <a href="products.html?cat=${c.id}" class="category-card">
+            <span class="category-icon">${c.icon}</span>
+            <h4>${c.name}</h4>
+            <p>${count} products</p>
+          </a>
+        `;
+      }).join('');
+    }
+
+    // ==========================================
+    // PRODUCTS PAGE: Full catalog with filters
+    // ==========================================
+    const productGrid = document.getElementById('product-grid');
+    if (productGrid && data.products) {
+      const urlParams = new URLSearchParams(window.location.search);
+      const activeCat = urlParams.get('cat') || 'all';
+      let products = [...data.products];
+
+      // Highlight active category in filter
+      document.querySelectorAll('.filter-cat-btn').forEach(btn => {
+        if (btn.dataset.cat === activeCat) btn.classList.add('active');
+      });
+
+      // Filter by category from URL
+      if (activeCat !== 'all') {
+        products = products.filter(p => p.category === activeCat);
+      }
+
+      // Update page title
+      const pageTitle = document.getElementById('products-page-title');
+      if (pageTitle && activeCat !== 'all') {
+        const catObj = (data.categories || []).find(c => c.id === activeCat);
+        if (catObj) pageTitle.textContent = catObj.name;
+      }
+
+      // Product count
+      const countEl = document.getElementById('product-count');
+      if (countEl) countEl.textContent = `${products.length} products`;
+
+      productGrid.innerHTML = products.map(renderProductCard).join('');
+
+      // Build category filter buttons
+      const filterContainer = document.getElementById('filter-categories');
+      if (filterContainer && data.categories) {
+        filterContainer.innerHTML = `
+          <a href="products.html" class="filter-cat-btn ${activeCat === 'all' ? 'active' : ''}" data-cat="all">All</a>
+          ${data.categories.map(c => {
+            const count = data.products.filter(p => p.category === c.id).length;
+            return `<a href="products.html?cat=${c.id}" class="filter-cat-btn ${activeCat === c.id ? 'active' : ''}" data-cat="${c.id}">${c.icon} ${c.name} <span class="filter-count">${count}</span></a>`;
+          }).join('')}
+        `;
+      }
+
+      // Price filter
+      const priceSlider = document.getElementById('price-range');
+      const priceLabel = document.getElementById('price-label');
+      if (priceSlider) {
+        priceSlider.addEventListener('input', () => {
+          const maxPrice = parseFloat(priceSlider.value);
+          if (priceLabel) priceLabel.textContent = `Up to £${maxPrice.toFixed(0)}`;
+          document.querySelectorAll('.product-card').forEach(card => {
+            const cardPrice = parseFloat(card.dataset.price);
+            card.style.display = cardPrice <= maxPrice ? '' : 'none';
+          });
+        });
+      }
+
+      // Sort
+      const sortSelect = document.getElementById('sort-select');
+      if (sortSelect) {
+        sortSelect.addEventListener('change', () => {
+          const val = sortSelect.value;
+          const grid = document.getElementById('product-grid');
+          const cards = Array.from(grid.querySelectorAll('.product-card'));
+          cards.sort((a, b) => {
+            if (val === 'price-asc') return parseFloat(a.dataset.price) - parseFloat(b.dataset.price);
+            if (val === 'price-desc') return parseFloat(b.dataset.price) - parseFloat(a.dataset.price);
+            if (val === 'rating') return parseFloat(b.dataset.rating) - parseFloat(a.dataset.rating);
+            return 0;
+          });
+          cards.forEach(c => grid.appendChild(c));
+        });
+      }
+    }
+
+    // ==========================================
+    // BLOG
+    // ==========================================
+    const blogList = document.getElementById('dynamic-posts');
+    if (blogList && data.posts) {
+      blogList.innerHTML = data.posts.sort((a, b) => new Date(b.date) - new Date(a.date)).map(p => `
+        <div class="product-card">
+          <div class="product-card-visual">
+            <img src="${p.imgUrl || 'images/hero-banner.png'}" alt="${p.title}" class="product-card-img" style="object-fit:cover; height:200px;">
+          </div>
+          <div class="product-card-body">
+            <span class="product-card-category">${p.date}</span>
+            <h3 class="product-card-title">${p.title}</h3>
+            <p class="product-card-desc">${p.excerpt}</p>
+            <a href="post.html?id=${p.id}" class="btn-add-cart" style="text-decoration:none; text-align:center;">Read More →</a>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Single Post
+    const singlePost = document.getElementById('single-post-view');
+    if (singlePost && data.posts) {
+      const postId = new URLSearchParams(window.location.search).get('id');
+      const post = data.posts.find(p => p.id === postId);
+      if (post) {
+        document.title = post.title + ' — EAZYOO';
+        singlePost.innerHTML = `
+          <article style="max-width:760px; margin:0 auto; padding:80px 0;">
+            <a href="blog.html" style="color:var(--color-primary); text-decoration:none; font-weight:600;">← Back to Blog</a>
+            <h1 style="font-size:2.5rem; margin:24px 0 12px;">${post.title}</h1>
+            <p style="color:var(--color-text-light); margin-bottom:32px;">${post.date}</p>
+            ${post.imgUrl ? `<img src="${post.imgUrl}" style="width:100%; border-radius:16px; margin-bottom:32px;">` : ''}
+            <div style="line-height:1.8; font-size:1.05rem;">${post.content}</div>
+          </article>
+        `;
+      } else {
+        singlePost.innerHTML = '<p style="text-align:center; padding:100px 0;">Post not found.</p>';
+      }
+    }
+
+    // ==========================================
+    // IMAGE SLIDER AUTO-PLAY
+    // ==========================================
+    setInterval(() => {
+      document.querySelectorAll('.product-slider').forEach(slider => {
+        const slides = slider.querySelectorAll('.slide');
+        if (slides.length <= 1) return;
+        let activeIdx = Array.from(slides).findIndex(s => s.style.opacity === '1' || s.style.opacity === 1);
+        if (activeIdx < 0) activeIdx = 0;
+        slides[activeIdx].style.opacity = '0';
+        slides[(activeIdx + 1) % slides.length].style.opacity = '1';
+      });
+    }, 3000);
+
   } catch (err) {
-    console.error('Error loading CMS data:', err);
+    console.error('EAZYOO CMS Error:', err);
   }
 });
