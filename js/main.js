@@ -168,29 +168,41 @@ function handleCollabSubmit(event) {
 }
 
 /* === NEWSLETTER SIGNUP (Footer) === */
+const NEWSLETTER_KEY = 'eazyoo_newsletter_subs';
+
+function getNewsletterSubs() {
+  return JSON.parse(localStorage.getItem(NEWSLETTER_KEY) || '[]');
+}
+
+function saveNewsletterSub(email) {
+  const subs = getNewsletterSubs();
+  if (subs.find(s => s.email === email)) return false;
+  subs.push({ email, date: new Date().toISOString().split('T')[0] });
+  localStorage.setItem(NEWSLETTER_KEY, JSON.stringify(subs));
+  return true;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const newsletterBtns = document.querySelectorAll('.footer-newsletter button');
-  
+
   newsletterBtns.forEach(btn => {
     btn.addEventListener('click', function() {
       const input = this.parentElement.querySelector('input');
       const email = input?.value?.trim();
-      
+
       if (!email || !email.includes('@')) {
         input.style.borderColor = '#EF4444';
         input.focus();
         setTimeout(() => { input.style.borderColor = ''; }, 2000);
         return;
       }
-      
-      console.log('Newsletter signup:', email);
-      
-      // Visual feedback
+
+      const isNew = saveNewsletterSub(email);
       const originalText = this.textContent;
-      this.textContent = '✓ Subscribed!';
+      this.textContent = isNew ? '✓ Subscribed!' : '✓ Already subscribed';
       this.style.background = '#4A7C59';
       input.value = '';
-      
+
       setTimeout(() => {
         this.textContent = originalText;
         this.style.background = '';

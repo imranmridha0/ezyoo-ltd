@@ -185,6 +185,7 @@
       <div class="nav-item" data-panel="wholesale-settings" onclick="switchPanel('wholesale-settings')"><span class="nav-icon">🏬</span> Wholesale / B2B</div>
 
       <div class="sidebar-label">Tools</div>
+      <div class="nav-item" data-panel="subscribers" onclick="switchPanel('subscribers')"><span class="nav-icon">📧</span> Subscribers</div>
       <div class="nav-item" data-panel="backup" onclick="switchPanel('backup')"><span class="nav-icon">💾</span> Backup &amp; Export</div>
     </aside>
 
@@ -211,9 +212,9 @@
             <div class="stat-number" id="stat-posts">0</div>
             <div class="stat-label">Blog Posts</div>
           </div>
-          <div class="stat-card" onclick="switchPanel('settings')">
-            <div class="stat-number">⚙️</div>
-            <div class="stat-label">Settings</div>
+          <div class="stat-card" onclick="switchPanel('subscribers')">
+            <div class="stat-number" id="stat-subscribers">0</div>
+            <div class="stat-label">Subscribers</div>
           </div>
         </div>
 
@@ -452,6 +453,22 @@
         </div>
       </div>
 
+      <!-- ==================== SUBSCRIBERS ==================== -->
+      <div class="panel" id="panel-subscribers">
+        <div class="panel-header">
+          <div>
+            <h1 class="panel-title">Newsletter Subscribers</h1>
+            <p class="panel-desc">Visitors who signed up via the footer newsletter form.</p>
+          </div>
+          <button class="btn-secondary btn-success" onclick="exportSubscribers()">Export CSV</button>
+        </div>
+        <div class="card">
+          <div class="card-title">Subscriber List</div>
+          <div class="info-box info">Subscribers are stored in each visitor's browser (localStorage). Export regularly to keep a master list.</div>
+          <div id="subscribers-list"></div>
+        </div>
+      </div>
+
       <!-- ==================== BACKUP & EXPORT ==================== -->
       <div class="panel" id="panel-backup">
         <div class="panel-header">
@@ -626,12 +643,14 @@ function switchPanel(name) {
   if (name === 'posts') renderPostsList();
   if (name === 'categories') renderCategoriesEditor();
   if (name === 'wholesale-settings') renderWholesalePrices();
+  if (name === 'subscribers') renderSubscribers();
 }
 
 function populateUI() {
   document.getElementById('stat-products').textContent = siteData.products.length;
   document.getElementById('stat-categories').textContent = siteData.categories.length;
   document.getElementById('stat-posts').textContent = siteData.posts.length;
+  document.getElementById('stat-subscribers').textContent = getSubscribers().length;
 
   const s = siteData.settings;
   const ids = ['brandName','heroTagline','heroSubtitle','heroImgUrl','ctaText','ctaUrl','navCtaText','contactEmail','contactPhone','socialFb','socialIg','socialTt','socialYt','snipcartApiKey'];
@@ -918,6 +937,53 @@ function importBackup(event) {
     }
   };
   reader.readAsText(file);
+}
+
+// ==========================================
+// SUBSCRIBERS
+// ==========================================
+const NEWSLETTER_KEY = 'eazyoo_newsletter_subs';
+
+function getSubscribers() {
+  return JSON.parse(localStorage.getItem(NEWSLETTER_KEY) || '[]');
+}
+
+function renderSubscribers() {
+  const subs = getSubscribers();
+  const el = document.getElementById('subscribers-list');
+  if (!el) return;
+  if (subs.length === 0) {
+    el.innerHTML = '<div style="padding:24px;text-align:center;color:var(--text-muted)">No subscribers yet. Share your site and they\'ll appear here.</div>';
+    return;
+  }
+  el.innerHTML = '<table style="width:100%;border-collapse:collapse;font-size:0.9rem;">' +
+    '<tr style="border-bottom:1px solid var(--border);"><th style="text-align:left;padding:10px 8px;color:var(--text-muted);">Email</th><th style="text-align:left;padding:10px 8px;color:var(--text-muted);">Date</th><th style="padding:10px 8px;"></th></tr>' +
+    subs.map((s, i) =>
+      '<tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 8px;">' + s.email + '</td><td style="padding:10px 8px;color:var(--text-muted);">' + (s.date || '—') + '</td><td style="padding:10px 8px;text-align:right;"><button class="btn-icon danger" onclick="deleteSubscriber(' + i + ')" style="padding:6px 10px;font-size:0.75rem;">Remove</button></td></tr>'
+    ).join('') + '</table>';
+}
+
+function deleteSubscriber(index) {
+  if (!confirm('Remove this subscriber?')) return;
+  const subs = getSubscribers();
+  subs.splice(index, 1);
+  localStorage.setItem(NEWSLETTER_KEY, JSON.stringify(subs));
+  document.getElementById('stat-subscribers').textContent = subs.length;
+  renderSubscribers();
+}
+
+function exportSubscribers() {
+  const subs = getSubscribers();
+  if (subs.length === 0) { showToast('No subscribers to export.', 'error'); return; }
+  const csv = 'Email,Date\n' + subs.map(s => s.email + ',' + (s.date || '')).join('\n');
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'eazyoo-subscribers-' + new Date().toISOString().split('T')[0] + '.csv';
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('Subscribers exported!', 'success');
 }
 
 // ==========================================
