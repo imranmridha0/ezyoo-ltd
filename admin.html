@@ -185,6 +185,7 @@
       <div class="nav-item" data-panel="wholesale-settings" onclick="switchPanel('wholesale-settings')"><span class="nav-icon">🏬</span> Wholesale / B2B</div>
 
       <div class="sidebar-label">Tools</div>
+      <div class="nav-item" data-panel="accounts" onclick="switchPanel('accounts')"><span class="nav-icon">👥</span> Accounts</div>
       <div class="nav-item" data-panel="subscribers" onclick="switchPanel('subscribers')"><span class="nav-icon">📧</span> Subscribers</div>
       <div class="nav-item" data-panel="backup" onclick="switchPanel('backup')"><span class="nav-icon">💾</span> Backup &amp; Export</div>
     </aside>
@@ -199,7 +200,7 @@
             <p class="panel-desc">Overview of your website content and quick actions.</p>
           </div>
         </div>
-        <div class="stat-grid">
+        <div class="stat-grid" style="grid-template-columns:repeat(5,1fr);">
           <div class="stat-card" onclick="switchPanel('products')">
             <div class="stat-number" id="stat-products">0</div>
             <div class="stat-label">Products</div>
@@ -211,6 +212,10 @@
           <div class="stat-card" onclick="switchPanel('posts')">
             <div class="stat-number" id="stat-posts">0</div>
             <div class="stat-label">Blog Posts</div>
+          </div>
+          <div class="stat-card" onclick="switchPanel('accounts')">
+            <div class="stat-number" id="stat-accounts">0</div>
+            <div class="stat-label">Accounts</div>
           </div>
           <div class="stat-card" onclick="switchPanel('subscribers')">
             <div class="stat-number" id="stat-subscribers">0</div>
@@ -469,6 +474,21 @@
         </div>
       </div>
 
+      <!-- ==================== ACCOUNTS ==================== -->
+      <div class="panel" id="panel-accounts">
+        <div class="panel-header">
+          <div>
+            <h1 class="panel-title">Customer Accounts</h1>
+            <p class="panel-desc">View and manage registered customers and wholesale applicants.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Registered Users</div>
+          <div class="info-box info">Accounts are stored in each visitor's browser (localStorage). Users who register on <strong>account.html</strong> appear here. Approve wholesale applicants to grant them B2B access.</div>
+          <div id="accounts-list"></div>
+        </div>
+      </div>
+
       <!-- ==================== BACKUP & EXPORT ==================== -->
       <div class="panel" id="panel-backup">
         <div class="panel-header">
@@ -644,12 +664,14 @@ function switchPanel(name) {
   if (name === 'categories') renderCategoriesEditor();
   if (name === 'wholesale-settings') renderWholesalePrices();
   if (name === 'subscribers') renderSubscribers();
+  if (name === 'accounts') renderAccounts();
 }
 
 function populateUI() {
   document.getElementById('stat-products').textContent = siteData.products.length;
   document.getElementById('stat-categories').textContent = siteData.categories.length;
   document.getElementById('stat-posts').textContent = siteData.posts.length;
+  document.getElementById('stat-accounts').textContent = getAccounts().length;
   document.getElementById('stat-subscribers').textContent = getSubscribers().length;
 
   const s = siteData.settings;
@@ -984,6 +1006,58 @@ function exportSubscribers() {
   a.click();
   URL.revokeObjectURL(url);
   showToast('Subscribers exported!', 'success');
+}
+
+// ==========================================
+// ACCOUNTS MANAGER
+// ==========================================
+const USERS_KEY = 'eazyoo_users';
+
+function getAccounts() {
+  return JSON.parse(localStorage.getItem(USERS_KEY) || '[]');
+}
+
+function renderAccounts() {
+  const users = getAccounts();
+  const el = document.getElementById('accounts-list');
+  if (!el) return;
+  if (users.length === 0) {
+    el.innerHTML = '<div style="padding:24px;text-align:center;color:var(--text-muted)">No registered accounts yet.</div>';
+    return;
+  }
+  el.innerHTML = '<table style="width:100%;border-collapse:collapse;font-size:0.9rem;">' +
+    '<tr style="border-bottom:1px solid var(--border);"><th style="text-align:left;padding:10px 8px;color:var(--text-muted);">Name</th><th style="text-align:left;padding:10px 8px;color:var(--text-muted);">Email</th><th style="text-align:left;padding:10px 8px;color:var(--text-muted);">Type</th><th style="text-align:left;padding:10px 8px;color:var(--text-muted);">Joined</th><th style="text-align:left;padding:10px 8px;color:var(--text-muted);">Status</th><th style="padding:10px 8px;"></th></tr>' +
+    users.map(u => {
+      const isApproved = u.approved;
+      const badge = isApproved
+        ? '<span class="badge-tag badge-green">Approved</span>'
+        : '<span class="badge-tag badge-amber">Pending</span>';
+      const approveBtn = !isApproved
+        ? '<button class="btn-icon btn-success" onclick="approveAccount(\'' + u.email + '\')" style="padding:6px 10px;font-size:0.75rem;margin-right:4px;">Approve</button>'
+        : '';
+      return '<tr style="border-bottom:1px solid var(--border);">' +
+        '<td style="padding:10px 8px;">' + (u.name || '—') + '</td>' +
+        '<td style="padding:10px 8px;">' + u.email + '</td>' +
+        '<td style="padding:10px 8px;text-transform:capitalize;">' + (u.type || 'retail') + '</td>' +
+        '<td style="padding:10px 8px;color:var(--text-muted);">' + (u.joined || '—') + '</td>' +
+        '<td style="padding:10px 8px;">' + badge + '</td>' +
+        '<td style="padding:10px 8px;text-align:right;">' + approveBtn + '<button class="btn-icon danger" onclick="removeAccount(\'' + u.email + '\')" style="padding:6px 10px;font-size:0.75rem;">Remove</button></td>' +
+        '</tr>';
+    }).join('') + '</table>';
+}
+
+function approveAccount(email) {
+  const users = getAccounts();
+  const u = users.find(x => x.email === email);
+  if (u) { u.approved = true; localStorage.setItem(USERS_KEY, JSON.stringify(users)); renderAccounts(); showToast('Account approved!', 'success'); }
+}
+
+function removeAccount(email) {
+  if (!confirm('Remove this account?')) return;
+  const users = getAccounts().filter(x => x.email !== email);
+  localStorage.setItem(USERS_KEY, JSON.stringify(users));
+  renderAccounts();
+  showToast('Account removed.', 'info');
 }
 
 // ==========================================
