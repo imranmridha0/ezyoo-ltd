@@ -1,15 +1,15 @@
 {
   "settings": {
-    "brandName": "EAZYOO",
+    "brandName": "EAZYOO LTD",
     "heroTagline": "Smart Products. Smarter Living.",
     "heroSubtitle": "Innovative collapsible gear designed for active lifestyles and modern kitchens. Fold it. Store it. Go further.",
     "ctaText": "Shop Now",
     "ctaUrl": "products.html",
     "navCtaText": "Become a Stockist",
     "heroImgUrl": "images/hero-banner.png",
-    "contactEmail": "hello@eazyoo.co.uk",
+    "contactEmail": "contact@eazyoo.co.uk",
     "contactPhone": "",
-    "socialFb": "#",
+    "socialFb": "https://www.facebook.com/eazyoo.az",
     "socialIg": "#",
     "socialTt": "#",
     "socialYt": "#",
@@ -20,304 +20,970 @@
     "metaDescription": "Shop EAZYOO's innovative product range across 8 categories. Premium quality, UK-based brand. Free delivery on orders over £25."
   },
   "categories": [
-    { "id": "automotive", "name": "Automotive", "icon": "🚗", "description": "Smart car accessories for every journey" },
-    { "id": "home-kitchen", "name": "Home & Kitchen", "icon": "🏠", "description": "Innovative solutions for modern living spaces" },
-    { "id": "garden", "name": "Garden", "icon": "🌿", "description": "Tools and accessories for your outdoor space" },
-    { "id": "pet-supplies", "name": "Pet Supplies", "icon": "🐾", "description": "Quality essentials for your furry friends" },
-    { "id": "toys-games", "name": "Toys & Games", "icon": "🎮", "description": "Fun and engaging products for all ages" },
-    { "id": "sports-outdoors", "name": "Sports & Outdoors", "icon": "⛰️", "description": "Gear up for your next adventure" },
-    { "id": "stationery-office", "name": "Stationery & Office", "icon": "📎", "description": "Organise your workspace in style" },
-    { "id": "travel-accessories", "name": "Travel Accessories", "icon": "✈️", "description": "Pack smarter, travel lighter" }
+    {
+      "id": "automotive",
+      "name": "Automotive",
+      "icon": "🚗",
+      "description": "Smart car accessories for every journey"
+    },
+    {
+      "id": "home-kitchen",
+      "name": "Home & Kitchen",
+      "icon": "🏠",
+      "description": "Innovative solutions for modern living spaces"
+    },
+    {
+      "id": "garden",
+      "name": "Garden",
+      "icon": "🌿",
+      "description": "Tools and accessories for your outdoor space"
+    },
+    {
+      "id": "pet-supplies",
+      "name": "Pet Supplies",
+      "icon": "🐾",
+      "description": "Quality essentials for your furry friends"
+    },
+    {
+      "id": "toys-games",
+      "name": "Toys & Games",
+      "icon": "🎮",
+      "description": "Fun and engaging products for all ages"
+    },
+    {
+      "id": "sports-outdoors",
+      "name": "Sports & Outdoors",
+      "icon": "⛰️",
+      "description": "Gear up for your next adventure"
+    },
+    {
+      "id": "stationery-office",
+      "name": "Stationery & Office",
+      "icon": "📎",
+      "description": "Organise your workspace in style"
+    },
+    {
+      "id": "travel-accessories",
+      "name": "Travel Accessories",
+      "icon": "✈️",
+      "description": "Pack smarter, travel lighter"
+    }
   ],
   "products": [
     {
-      "id": "auto-1", "name": "Car Boot Organiser", "description": "Collapsible multi-compartment trunk storage with anti-slip base",
-      "price": "18.99", "priceWholesale": "11.00", "badge": "Best Seller", "category": "automotive",
-      "amazonUrl": "#", "images": ["images/auto-organiser.png"],
-      "features": ["Foldable design", "Anti-slip base", "Multiple compartments", "Waterproof lining", "Universal fit"], "rating": 4.5, "stock": 120
+      "id": "auto-1",
+      "name": "Car Boot Organiser",
+      "description": "Collapsible multi-compartment trunk storage with anti-slip base",
+      "price": "18.99",
+      "priceWholesale": "11.00",
+      "badge": "Best Seller",
+      "category": "automotive",
+      "amazonUrl": "#",
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Car+Boot+Organiser"
+      ],
+      "features": [
+        "Foldable design",
+        "Anti-slip base",
+        "Multiple compartments",
+        "Waterproof lining",
+        "Universal fit"
+      ],
+      "rating": 4.5,
+      "stock": 120
     },
     {
-      "id": "auto-2", "name": "Steering Wheel Phone Mount", "description": "360° rotating magnetic car phone holder with secure grip",
-      "price": "12.99", "priceWholesale": "7.00", "badge": "", "category": "automotive",
-      "amazonUrl": "#", "images": ["images/auto-phone-mount.png"],
-      "features": ["Magnetic hold", "360° rotation", "One-hand operation", "Universal fit", "Anti-scratch pad"], "rating": 4.3, "stock": 200
+      "id": "auto-2",
+      "name": "Steering Wheel Phone Mount",
+      "description": "360° rotating magnetic car phone holder with secure grip",
+      "price": "12.99",
+      "priceWholesale": "7.00",
+      "badge": "",
+      "category": "automotive",
+      "amazonUrl": "#",
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Phone+Mount"
+      ],
+      "features": [
+        "Magnetic hold",
+        "360° rotation",
+        "One-hand operation",
+        "Universal fit",
+        "Anti-scratch pad"
+      ],
+      "rating": 4.3,
+      "stock": 200
     },
     {
-      "id": "auto-3", "name": "Car Seat Gap Filler", "description": "Premium leather console side pocket — 2 pack",
-      "price": "14.99", "priceWholesale": "8.50", "badge": "New", "category": "automotive",
-      "amazonUrl": "#", "images": ["images/auto-organiser.png"],
-      "features": ["Premium leather", "Prevents drops", "Easy install", "Universal fit", "Pack of 2"], "rating": 4.6, "stock": 85
+      "id": "auto-3",
+      "name": "Car Seat Gap Filler",
+      "description": "Premium leather console side pocket — 2 pack",
+      "price": "14.99",
+      "priceWholesale": "8.50",
+      "badge": "New",
+      "category": "automotive",
+      "amazonUrl": "#",
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Seat+Gap+Filler"
+      ],
+      "features": [
+        "Premium leather",
+        "Prevents drops",
+        "Easy install",
+        "Universal fit",
+        "Pack of 2"
+      ],
+      "rating": 4.6,
+      "stock": 85
     },
     {
-      "id": "auto-4", "name": "Windscreen Sun Shade", "description": "Foldable UV-blocking windshield sunshade with storage pouch",
-      "price": "9.99", "priceWholesale": "5.50", "badge": "", "category": "automotive",
-      "amazonUrl": "#", "images": ["images/auto-phone-mount.png"],
-      "features": ["UV protection", "Folds compact", "Easy setup", "Storage pouch included", "Reflective surface"], "rating": 4.2, "stock": 150
-    },
-
-    {
-      "id": "hk-1", "name": "Collapsible Cutting Board", "description": "Foldable chopping board with built-in drain and wash basin",
-      "price": "14.99", "priceWholesale": "8.50", "badge": "Best Seller", "category": "home-kitchen",
-      "amazonUrl": "https://www.amazon.co.uk/Collapsible-Cutting-Board-Chopping-Foldable/dp/B0FN9FJXKS", "images": ["images/cutting-board.png"],
-      "features": ["Folds flat", "Built-in drain", "Food safe", "Multi-use", "Sturdy surface"], "rating": 4.7, "stock": 200
-    },
-    {
-      "id": "hk-2", "name": "Silicone Utensil Set", "description": "12-piece heat-resistant silicone cooking utensils with wooden handles",
-      "price": "22.99", "priceWholesale": "13.00", "badge": "New", "category": "home-kitchen",
-      "amazonUrl": "#", "images": ["images/cutting-board.png"],
-      "features": ["Heat resistant", "Non-stick safe", "Wooden handles", "12 pieces", "Dishwasher safe"], "rating": 4.5, "stock": 150
-    },
-    {
-      "id": "hk-3", "name": "Stackable Storage Containers", "description": "Airtight food storage set — 6 pack with snap-lock lids",
-      "price": "19.99", "priceWholesale": "11.50", "badge": "", "category": "home-kitchen",
-      "amazonUrl": "#", "images": ["images/cutting-board.png"],
-      "features": ["Airtight seal", "Stackable design", "BPA-free", "Microwave safe", "6-pack"], "rating": 4.4, "stock": 180
+      "id": "auto-4",
+      "name": "Windscreen Sun Shade",
+      "description": "Foldable UV-blocking windshield sunshade with storage pouch",
+      "price": "9.99",
+      "priceWholesale": "5.50",
+      "badge": "",
+      "category": "automotive",
+      "amazonUrl": "#",
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Sun+Shade"
+      ],
+      "features": [
+        "UV protection",
+        "Folds compact",
+        "Easy setup",
+        "Storage pouch included",
+        "Reflective surface"
+      ],
+      "rating": 4.2,
+      "stock": 150
     },
     {
-      "id": "hk-4", "name": "Magnetic Knife Strip", "description": "Wall-mounted bamboo magnetic knife holder — 40cm",
-      "price": "15.99", "priceWholesale": "9.00", "badge": "", "category": "home-kitchen",
-      "amazonUrl": "#", "images": ["images/cutting-board.png"],
-      "features": ["Strong magnetic hold", "Natural bamboo", "Easy wall mount", "Space saving", "40cm length"], "rating": 4.3, "stock": 100
+      "id": "auto-5",
+      "name": "Back Seat Protector",
+      "description": "Waterproof kick mat with tablet holder and storage pockets",
+      "price": "16.99",
+      "priceWholesale": "9.50",
+      "badge": "",
+      "category": "automotive",
+      "amazonUrl": "#",
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Seat+Protector"
+      ],
+      "features": [
+        "Waterproof",
+        "Tablet holder",
+        "Multiple pockets",
+        "Easy clean",
+        "Adjustable straps"
+      ],
+      "rating": 4.4,
+      "stock": 95
     },
     {
-      "id": "hk-5", "name": "Over-Sink Dish Rack", "description": "Adjustable roll-up dish drying rack — stainless steel",
-      "price": "17.99", "priceWholesale": "10.00", "badge": "", "category": "home-kitchen",
-      "amazonUrl": "#", "images": ["images/cutting-board.png"],
-      "features": ["Adjustable width", "Rolls up flat", "Stainless steel", "Heat resistant", "Multi-purpose"], "rating": 4.6, "stock": 130
+      "id": "hk-1",
+      "name": "Collapsible Cutting Board",
+      "description": "Foldable chopping board with built-in drain and wash basin",
+      "price": "14.99",
+      "priceWholesale": "8.50",
+      "badge": "Best Seller",
+      "category": "home-kitchen",
+      "amazonUrl": "https://www.amazon.co.uk/Collapsible-Cutting-Board-Chopping-Foldable/dp/B0FN9FJXKS",
+      "images": [
+        "images/cutting-board.png"
+      ],
+      "features": [
+        "Folds flat",
+        "Built-in drain",
+        "Food safe",
+        "Multi-use",
+        "Sturdy surface"
+      ],
+      "rating": 4.7,
+      "stock": 200
     },
     {
-      "id": "hk-6", "name": "Collapsible Salad Spinner", "description": "Space-saving fold-flat salad spinner with non-slip base",
-      "price": "16.99", "priceWholesale": "9.50", "badge": "New", "category": "home-kitchen",
-      "amazonUrl": "#", "images": ["images/cutting-board.png"],
-      "features": ["Folds completely flat", "BPA-free", "Non-slip base", "Easy spin mechanism", "Dishwasher safe"], "rating": 4.5, "stock": 90
-    },
-
-    {
-      "id": "gd-1", "name": "Garden Kneeling Pad", "description": "Memory foam garden kneeler with waterproof cover",
-      "price": "11.99", "priceWholesale": "6.50", "badge": "Best Seller", "category": "garden",
-      "amazonUrl": "#", "images": ["images/garden-kneeling-pad.png"],
-      "features": ["Memory foam", "Waterproof", "Lightweight", "Non-slip base", "Easy clean"], "rating": 4.5, "stock": 200
-    },
-    {
-      "id": "gd-2", "name": "Expandable Garden Hose", "description": "50ft expandable hose with 8-pattern spray nozzle",
-      "price": "24.99", "priceWholesale": "14.00", "badge": "", "category": "garden",
-      "amazonUrl": "#", "images": ["images/garden-kneeling-pad.png"],
-      "features": ["Expands 3x", "8 spray patterns", "Leak-proof", "Lightweight", "50ft length"], "rating": 4.3, "stock": 90
-    },
-    {
-      "id": "gd-3", "name": "Solar Garden Lights", "description": "LED solar pathway lights — waterproof, 8 pack",
-      "price": "18.99", "priceWholesale": "10.50", "badge": "New", "category": "garden",
-      "amazonUrl": "#", "images": ["images/garden-solar-lights.png"],
-      "features": ["Solar powered", "Waterproof IP65", "Auto on/off", "8 pack", "Warm white LED"], "rating": 4.4, "stock": 160
+      "id": "hk-2",
+      "name": "Silicone Utensil Set",
+      "description": "12-piece heat-resistant silicone cooking utensils with wooden handles",
+      "price": "22.99",
+      "priceWholesale": "13.00",
+      "badge": "New",
+      "category": "home-kitchen",
+      "amazonUrl": "#",
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Utensil+Set"
+      ],
+      "features": [
+        "Heat resistant",
+        "Non-stick safe",
+        "Wooden handles",
+        "12 pieces",
+        "Dishwasher safe"
+      ],
+      "rating": 4.5,
+      "stock": 150
     },
     {
-      "id": "gd-4", "name": "Collapsible Garden Bag", "description": "Pop-up garden waste bag — heavy duty, 120L capacity",
-      "price": "8.99", "priceWholesale": "5.00", "badge": "", "category": "garden",
-      "amazonUrl": "#", "images": ["images/garden-kneeling-pad.png"],
-      "features": ["120L capacity", "Self-standing", "Heavy duty", "Folds flat", "Carry handles"], "rating": 4.2, "stock": 250
+      "id": "hk-3",
+      "name": "Stackable Storage Containers",
+      "description": "Airtight food storage set — 6 pack with snap-lock lids",
+      "price": "19.99",
+      "priceWholesale": "11.50",
+      "badge": "",
+      "category": "home-kitchen",
+      "amazonUrl": "#",
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Storage+Containers"
+      ],
+      "features": [
+        "Airtight seal",
+        "Stackable design",
+        "BPA-free",
+        "Microwave safe",
+        "6-pack"
+      ],
+      "rating": 4.4,
+      "stock": 180
     },
     {
-      "id": "gd-5", "name": "Plant Watering Globes", "description": "Self-watering glass globes for indoor plants — 4 pack",
-      "price": "13.99", "priceWholesale": "7.50", "badge": "", "category": "garden",
-      "amazonUrl": "#", "images": ["images/garden-solar-lights.png"],
-      "features": ["Self-watering", "Glass design", "2 week supply", "4 pack", "Decorative"], "rating": 4.5, "stock": 140
+      "id": "hk-4",
+      "name": "Magnetic Knife Strip",
+      "description": "Wall-mounted bamboo magnetic knife holder — 40cm",
+      "price": "15.99",
+      "priceWholesale": "9.00",
+      "badge": "",
+      "category": "home-kitchen",
+      "amazonUrl": "#",
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Knife+Strip"
+      ],
+      "features": [
+        "Strong magnetic hold",
+        "Natural bamboo",
+        "Easy wall mount",
+        "Space saving",
+        "40cm length"
+      ],
+      "rating": 4.3,
+      "stock": 100
     },
     {
-      "id": "gd-6", "name": "Raised Bed Planter Kit", "description": "Modular wooden raised garden bed planter — easy assembly",
-      "price": "29.99", "priceWholesale": "17.50", "badge": "New", "category": "garden",
-      "amazonUrl": "#", "images": ["images/garden-kneeling-pad.png"],
-      "features": ["Easy assembly", "Natural cedar wood", "Modular design", "Deep root space", "Weather resistant"], "rating": 4.6, "stock": 60
-    },
-
-    {
-      "id": "pet-1", "name": "Collapsible Pet Bowl", "description": "Portable silicone travel bowl for dogs and cats — 2 pack",
-      "price": "7.99", "priceWholesale": "4.50", "badge": "Best Seller", "category": "pet-supplies",
-      "amazonUrl": "#", "images": ["images/pet-collapsible-bowl.png"],
-      "features": ["Food-grade silicone", "Folds flat", "Clip-on carabiner", "Dishwasher safe", "Pack of 2"], "rating": 4.6, "stock": 300
-    },
-    {
-      "id": "pet-2", "name": "Pet Grooming Glove", "description": "Deshedding brush glove for dogs and cats — gentle massage",
-      "price": "9.99", "priceWholesale": "5.50", "badge": "", "category": "pet-supplies",
-      "amazonUrl": "#", "images": ["images/pet-collapsible-bowl.png"],
-      "features": ["Gentle bristles", "Fits both hands", "Reduces shedding", "Machine washable", "Adjustable strap"], "rating": 4.4, "stock": 180
-    },
-    {
-      "id": "pet-3", "name": "Poo Bag Dispenser", "description": "Bone-shaped dispenser with 200 leak-proof biodegradable bags",
-      "price": "11.99", "priceWholesale": "6.50", "badge": "New", "category": "pet-supplies",
-      "amazonUrl": "#", "images": ["images/pet-collapsible-bowl.png"],
-      "features": ["200 bags included", "Biodegradable", "Leak-proof", "Clip-on design", "Bone shaped"], "rating": 4.5, "stock": 220
+      "id": "hk-5",
+      "name": "Over-Sink Dish Rack",
+      "description": "Adjustable roll-up dish drying rack — stainless steel",
+      "price": "17.99",
+      "priceWholesale": "10.00",
+      "badge": "",
+      "category": "home-kitchen",
+      "amazonUrl": "#",
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Dish+Rack"
+      ],
+      "features": [
+        "Adjustable width",
+        "Rolls up flat",
+        "Stainless steel",
+        "Heat resistant",
+        "Multi-purpose"
+      ],
+      "rating": 4.6,
+      "stock": 130
     },
     {
-      "id": "pet-4", "name": "Slow Feeder Bowl", "description": "Anti-gulp puzzle bowl for dogs — reduces eating speed by 80%",
-      "price": "10.99", "priceWholesale": "6.00", "badge": "", "category": "pet-supplies",
-      "amazonUrl": "#", "images": ["images/pet-slow-feeder.png"],
-      "features": ["Reduces gulping 80%", "Non-slip base", "BPA-free", "Dishwasher safe", "Multiple sizes"], "rating": 4.3, "stock": 150
+      "id": "gd-1",
+      "name": "Garden Kneeling Pad",
+      "description": "Memory foam garden kneeler with waterproof cover",
+      "price": "11.99",
+      "priceWholesale": "6.50",
+      "badge": "Best Seller",
+      "category": "garden",
+      "amazonUrl": "#",
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Kneeling+Pad"
+      ],
+      "features": [
+        "Memory foam",
+        "Waterproof",
+        "Lightweight",
+        "Non-slip base",
+        "Easy clean"
+      ],
+      "rating": 4.5,
+      "stock": 200
     },
     {
-      "id": "pet-5", "name": "Pet Car Seat Cover", "description": "Waterproof back seat protector for dogs — scratch-proof",
-      "price": "21.99", "priceWholesale": "12.00", "badge": "", "category": "pet-supplies",
-      "amazonUrl": "#", "images": ["images/pet-collapsible-bowl.png"],
-      "features": ["Waterproof", "Scratch-proof", "Universal fit", "Easy install", "Machine washable"], "rating": 4.6, "stock": 100
-    },
-
-    {
-      "id": "toy-1", "name": "Magnetic Building Blocks", "description": "50-piece 3D magnetic construction set for kids 3+",
-      "price": "19.99", "priceWholesale": "11.00", "badge": "Best Seller", "category": "toys-games",
-      "amazonUrl": "#", "images": ["images/toys-magnetic-blocks.png"],
-      "features": ["50 pieces", "Strong magnets", "BPA-free", "Ages 3+", "Storage bag included"], "rating": 4.7, "stock": 200
-    },
-    {
-      "id": "toy-2", "name": "LED Finger Lights", "description": "Multi-colour party finger lights — 40 pack",
-      "price": "6.99", "priceWholesale": "3.50", "badge": "", "category": "toys-games",
-      "amazonUrl": "#", "images": ["images/toys-magnetic-blocks.png"],
-      "features": ["40 pack", "4 colours", "Elastic bands", "Battery included", "Party favourite"], "rating": 4.2, "stock": 500
-    },
-    {
-      "id": "toy-3", "name": "Fidget Cube Set", "description": "Stress relief sensory fidget toy set — 6 pack assorted",
-      "price": "8.99", "priceWholesale": "4.50", "badge": "New", "category": "toys-games",
-      "amazonUrl": "#", "images": ["images/toys-magnetic-blocks.png"],
-      "features": ["6 different designs", "Stress relief", "Pocket-sized", "Silent clicking", "Ages 6+"], "rating": 4.4, "stock": 350
+      "id": "gd-2",
+      "name": "Expandable Garden Hose",
+      "description": "50ft expandable hose with 8-pattern spray nozzle",
+      "price": "24.99",
+      "priceWholesale": "14.00",
+      "badge": "",
+      "category": "garden",
+      "amazonUrl": "#",
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Garden+Hose"
+      ],
+      "features": [
+        "Expands 3x",
+        "8 spray patterns",
+        "Leak-proof",
+        "Lightweight",
+        "50ft length"
+      ],
+      "rating": 4.3,
+      "stock": 90
     },
     {
-      "id": "toy-4", "name": "Water Gun Set", "description": "High-pressure water blaster set — 2 pack, 600ml capacity",
-      "price": "14.99", "priceWholesale": "8.00", "badge": "", "category": "toys-games",
-      "amazonUrl": "#", "images": ["images/toys-magnetic-blocks.png"],
-      "features": ["600ml capacity", "10m range", "Easy pump", "Leak-proof", "Pack of 2"], "rating": 4.3, "stock": 180
-    },
-
-    {
-      "id": "sp-1", "name": "Running Water Bottle", "description": "500ml soft foldable hydration flask — BPA-free, pack of 2",
-      "price": "12.97", "priceWholesale": "7.50", "badge": "Best Seller", "category": "sports-outdoors",
-      "amazonUrl": "https://www.amazon.co.uk/Running-Water-Bottle-500ml-pcs/dp/B0FNC3W5CP", "images": ["images/water-bottle.png", "images/sports-water-bottle.png"],
-      "features": ["Collapsible design", "BPA-free", "Leakproof", "Versatile", "Pack of 2"], "rating": 4.4, "stock": 250
-    },
-    {
-      "id": "sp-2", "name": "Resistance Bands Set", "description": "5-level latex resistance bands with carry bag",
-      "price": "11.99", "priceWholesale": "6.50", "badge": "", "category": "sports-outdoors",
-      "amazonUrl": "#", "images": ["images/sports-water-bottle.png"],
-      "features": ["5 resistance levels", "Natural latex", "Carry bag", "Exercise guide", "Lightweight"], "rating": 4.5, "stock": 200
-    },
-    {
-      "id": "sp-3", "name": "Microfibre Sports Towel", "description": "Quick-dry travel towel with zip pouch — 2 sizes included",
-      "price": "9.99", "priceWholesale": "5.50", "badge": "New", "category": "sports-outdoors",
-      "amazonUrl": "#", "images": ["images/sports-water-bottle.png"],
-      "features": ["Quick-dry", "Ultra compact", "2 sizes", "Antibacterial", "Zip carry pouch"], "rating": 4.6, "stock": 300
+      "id": "gd-3",
+      "name": "Solar Garden Lights",
+      "description": "LED solar pathway lights — waterproof, 8 pack",
+      "price": "18.99",
+      "priceWholesale": "10.50",
+      "badge": "New",
+      "category": "garden",
+      "amazonUrl": "#",
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Solar+Lights"
+      ],
+      "features": [
+        "Solar powered",
+        "Waterproof IP65",
+        "Auto on/off",
+        "8 pack",
+        "Warm white LED"
+      ],
+      "rating": 4.4,
+      "stock": 160
     },
     {
-      "id": "sp-4", "name": "Grip Strength Trainer", "description": "Adjustable hand grip strengthener — 10-60kg resistance",
-      "price": "8.99", "priceWholesale": "4.50", "badge": "", "category": "sports-outdoors",
-      "amazonUrl": "#", "images": ["images/sports-water-bottle.png"],
-      "features": ["Adjustable 10-60kg", "Rep counter", "Ergonomic grip", "Compact size", "Spring steel"], "rating": 4.3, "stock": 170
+      "id": "gd-4",
+      "name": "Collapsible Garden Bag",
+      "description": "Pop-up garden waste bag — heavy duty, 120L capacity",
+      "price": "8.99",
+      "priceWholesale": "5.00",
+      "badge": "",
+      "category": "garden",
+      "amazonUrl": "#",
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Garden+Bag"
+      ],
+      "features": [
+        "120L capacity",
+        "Self-standing",
+        "Heavy duty",
+        "Folds flat",
+        "Carry handles"
+      ],
+      "rating": 4.2,
+      "stock": 250
     },
     {
-      "id": "sp-5", "name": "Foam Roller Set", "description": "High-density EVA foam roller with massage ball — 3 piece set",
-      "price": "16.99", "priceWholesale": "9.50", "badge": "", "category": "sports-outdoors",
-      "amazonUrl": "#", "images": ["images/sports-water-bottle.png"],
-      "features": ["High density EVA", "3-piece set", "Muscle recovery", "Exercise guide", "Carry bag"], "rating": 4.5, "stock": 140
+      "id": "gd-5",
+      "name": "Plant Watering Globes",
+      "description": "Self-watering glass globes for indoor plants — 4 pack",
+      "price": "13.99",
+      "priceWholesale": "7.50",
+      "badge": "",
+      "category": "garden",
+      "amazonUrl": "#",
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Water+Globes"
+      ],
+      "features": [
+        "Self-watering",
+        "Glass design",
+        "2 week supply",
+        "4 pack",
+        "Decorative"
+      ],
+      "rating": 4.5,
+      "stock": 140
     },
     {
-      "id": "sp-6", "name": "Jump Rope Speed Cable", "description": "Adjustable professional speed skipping rope with ball bearings",
-      "price": "7.99", "priceWholesale": "4.00", "badge": "New", "category": "sports-outdoors",
-      "amazonUrl": "#", "images": ["images/sports-water-bottle.png"],
-      "features": ["Ball bearings", "Adjustable length", "Speed cable", "Ergonomic handles", "Carry pouch"], "rating": 4.4, "stock": 280
-    },
-
-    {
-      "id": "st-1", "name": "Desk Organiser Set", "description": "Bamboo desktop organiser with phone stand and pen holder",
-      "price": "15.99", "priceWholesale": "9.00", "badge": "Best Seller", "category": "stationery-office",
-      "amazonUrl": "#", "images": ["images/stationery-desk-organiser.png"],
-      "features": ["Natural bamboo", "Phone stand", "Pen holder", "Cable management", "Compact design"], "rating": 4.6, "stock": 120
-    },
-    {
-      "id": "st-2", "name": "Erasable Notebook", "description": "Reusable smart notebook — wipe clean, cloud sync compatible",
-      "price": "12.99", "priceWholesale": "7.00", "badge": "New", "category": "stationery-office",
-      "amazonUrl": "#", "images": ["images/stationery-desk-organiser.png"],
-      "features": ["Reusable pages", "Wipe clean", "Cloud compatible", "A5 size", "Pen included"], "rating": 4.4, "stock": 200
-    },
-    {
-      "id": "st-3", "name": "Cable Management Kit", "description": "Adhesive cable clips and cord organiser — 30 piece set",
-      "price": "7.99", "priceWholesale": "4.00", "badge": "", "category": "stationery-office",
-      "amazonUrl": "#", "images": ["images/stationery-desk-organiser.png"],
-      "features": ["30 pieces", "Self-adhesive", "Multiple sizes", "Reusable", "Clean design"], "rating": 4.3, "stock": 350
+      "id": "pet-1",
+      "name": "Collapsible Pet Bowl",
+      "description": "Portable silicone travel bowl for dogs and cats — 2 pack",
+      "price": "7.99",
+      "priceWholesale": "4.50",
+      "badge": "Best Seller",
+      "category": "pet-supplies",
+      "amazonUrl": "#",
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Pet+Bowl"
+      ],
+      "features": [
+        "Food-grade silicone",
+        "Folds flat",
+        "Clip-on carabiner",
+        "Dishwasher safe",
+        "Pack of 2"
+      ],
+      "rating": 4.6,
+      "stock": 300
     },
     {
-      "id": "st-4", "name": "Monitor Stand Riser", "description": "Adjustable monitor riser with USB ports and storage drawer",
-      "price": "24.99", "priceWholesale": "14.00", "badge": "", "category": "stationery-office",
-      "amazonUrl": "#", "images": ["images/stationery-desk-organiser.png"],
-      "features": ["Height adjustable", "USB ports", "Storage drawer", "Cable routing", "Supports 20kg"], "rating": 4.5, "stock": 80
-    },
-
-    {
-      "id": "tr-1", "name": "Packing Cubes Set", "description": "Compression packing cubes — 6 piece set with shoe bag",
-      "price": "16.99", "priceWholesale": "9.50", "badge": "Best Seller", "category": "travel-accessories",
-      "amazonUrl": "#", "images": ["images/travel-packing-cubes.png"],
-      "features": ["6-piece set", "Compression zips", "Mesh window", "Shoe bag included", "Lightweight"], "rating": 4.7, "stock": 250
-    },
-    {
-      "id": "tr-2", "name": "Travel Toiletry Bag", "description": "Hanging toiletry organiser — waterproof with multiple compartments",
-      "price": "11.99", "priceWholesale": "6.50", "badge": "", "category": "travel-accessories",
-      "amazonUrl": "#", "images": ["images/travel-packing-cubes.png"],
-      "features": ["Hanging hook", "Waterproof", "Multiple pockets", "Compact folding", "Mirror included"], "rating": 4.5, "stock": 190
-    },
-    {
-      "id": "tr-3", "name": "Neck Pillow Memory Foam", "description": "Ergonomic travel neck pillow with eye mask and earplugs",
-      "price": "14.99", "priceWholesale": "8.00", "badge": "New", "category": "travel-accessories",
-      "amazonUrl": "#", "images": ["images/travel-packing-cubes.png"],
-      "features": ["Memory foam", "360° support", "Eye mask included", "Earplugs included", "Carry pouch"], "rating": 4.4, "stock": 170
+      "id": "pet-2",
+      "name": "Pet Grooming Glove",
+      "description": "Deshedding brush glove for dogs and cats — gentle massage",
+      "price": "9.99",
+      "priceWholesale": "5.50",
+      "badge": "",
+      "category": "pet-supplies",
+      "amazonUrl": "#",
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Grooming+Glove"
+      ],
+      "features": [
+        "Gentle bristles",
+        "Fits both hands",
+        "Reduces shedding",
+        "Machine washable",
+        "Adjustable strap"
+      ],
+      "rating": 4.4,
+      "stock": 180
     },
     {
-      "id": "tr-4", "name": "Luggage Scale Digital", "description": "Portable digital luggage scale with LCD display — max 50kg",
-      "price": "8.99", "priceWholesale": "4.50", "badge": "", "category": "travel-accessories",
-      "amazonUrl": "#", "images": ["images/travel-packing-cubes.png"],
-      "features": ["Max 50kg", "LCD display", "Tare function", "Battery included", "Compact size"], "rating": 4.3, "stock": 220
+      "id": "pet-3",
+      "name": "Poo Bag Dispenser",
+      "description": "Bone-shaped dispenser with 200 leak-proof biodegradable bags",
+      "price": "11.99",
+      "priceWholesale": "6.50",
+      "badge": "New",
+      "category": "pet-supplies",
+      "amazonUrl": "#",
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Poo+Bags"
+      ],
+      "features": [
+        "200 bags included",
+        "Biodegradable",
+        "Leak-proof",
+        "Clip-on design",
+        "Bone shaped"
+      ],
+      "rating": 4.5,
+      "stock": 220
     },
     {
-      "id": "tr-5", "name": "RFID Blocking Wallet", "description": "Slim travel wallet with RFID protection — holds passport and cards",
-      "price": "13.99", "priceWholesale": "7.50", "badge": "", "category": "travel-accessories",
-      "amazonUrl": "#", "images": ["images/travel-packing-cubes.png"],
-      "features": ["RFID blocking", "Passport pocket", "Card slots", "Slim design", "Premium PU leather"], "rating": 4.6, "stock": 160
+      "id": "pet-4",
+      "name": "Slow Feeder Bowl",
+      "description": "Anti-gulp puzzle bowl for dogs — reduces eating speed by 80%",
+      "price": "10.99",
+      "priceWholesale": "6.00",
+      "badge": "",
+      "category": "pet-supplies",
+      "amazonUrl": "#",
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Slow+Feeder"
+      ],
+      "features": [
+        "Reduces gulping 80%",
+        "Non-slip base",
+        "BPA-free",
+        "Dishwasher safe",
+        "Multiple sizes"
+      ],
+      "rating": 4.3,
+      "stock": 150
+    },
+    {
+      "id": "pet-5",
+      "name": "Pet Car Seat Cover",
+      "description": "Waterproof back seat protector for dogs — scratch-proof",
+      "price": "21.99",
+      "priceWholesale": "12.00",
+      "badge": "",
+      "category": "pet-supplies",
+      "amazonUrl": "#",
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Car+Seat+Cover"
+      ],
+      "features": [
+        "Waterproof",
+        "Scratch-proof",
+        "Universal fit",
+        "Easy install",
+        "Machine washable"
+      ],
+      "rating": 4.6,
+      "stock": 100
+    },
+    {
+      "id": "toy-1",
+      "name": "Magnetic Building Blocks",
+      "description": "50-piece 3D magnetic construction set for kids 3+",
+      "price": "19.99",
+      "priceWholesale": "11.00",
+      "badge": "Best Seller",
+      "category": "toys-games",
+      "amazonUrl": "#",
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Magnetic+Blocks"
+      ],
+      "features": [
+        "50 pieces",
+        "Strong magnets",
+        "BPA-free",
+        "Ages 3+",
+        "Storage bag included"
+      ],
+      "rating": 4.7,
+      "stock": 200
+    },
+    {
+      "id": "toy-2",
+      "name": "LED Finger Lights",
+      "description": "Multi-colour party finger lights — 40 pack",
+      "price": "6.99",
+      "priceWholesale": "3.50",
+      "badge": "",
+      "category": "toys-games",
+      "amazonUrl": "#",
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Finger+Lights"
+      ],
+      "features": [
+        "40 pack",
+        "4 colours",
+        "Elastic bands",
+        "Battery included",
+        "Party favourite"
+      ],
+      "rating": 4.2,
+      "stock": 500
+    },
+    {
+      "id": "toy-3",
+      "name": "Fidget Cube Set",
+      "description": "Stress relief sensory fidget toy set — 6 pack assorted",
+      "price": "8.99",
+      "priceWholesale": "4.50",
+      "badge": "New",
+      "category": "toys-games",
+      "amazonUrl": "#",
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Fidget+Cubes"
+      ],
+      "features": [
+        "6 different designs",
+        "Stress relief",
+        "Pocket-sized",
+        "Silent clicking",
+        "Ages 6+"
+      ],
+      "rating": 4.4,
+      "stock": 350
+    },
+    {
+      "id": "toy-4",
+      "name": "Water Gun Set",
+      "description": "High-pressure water blaster set — 2 pack, 600ml capacity",
+      "price": "14.99",
+      "priceWholesale": "8.00",
+      "badge": "",
+      "category": "toys-games",
+      "amazonUrl": "#",
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Water+Guns"
+      ],
+      "features": [
+        "600ml capacity",
+        "10m range",
+        "Easy pump",
+        "Leak-proof",
+        "Pack of 2"
+      ],
+      "rating": 4.3,
+      "stock": 180
+    },
+    {
+      "id": "toy-5",
+      "name": "Glow Sticks Party Pack",
+      "description": "200-piece premium glow sticks with connectors",
+      "price": "10.99",
+      "priceWholesale": "6.00",
+      "badge": "",
+      "category": "toys-games",
+      "amazonUrl": "#",
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Glow+Sticks"
+      ],
+      "features": [
+        "200 pieces",
+        "8+ hour glow",
+        "Non-toxic",
+        "Connectors included",
+        "Multi-colour"
+      ],
+      "rating": 4.5,
+      "stock": 250
+    },
+    {
+      "id": "sp-1",
+      "name": "Running Water Bottle",
+      "description": "500ml soft foldable hydration flask — BPA-free, pack of 2",
+      "price": "12.97",
+      "priceWholesale": "7.50",
+      "badge": "Best Seller",
+      "category": "sports-outdoors",
+      "amazonUrl": "https://www.amazon.co.uk/Running-Water-Bottle-500ml-pcs/dp/B0FNC3W5CP",
+      "images": [
+        "images/water-bottle.png"
+      ],
+      "features": [
+        "Collapsible design",
+        "BPA-free",
+        "Leakproof",
+        "Versatile",
+        "Pack of 2"
+      ],
+      "rating": 4.4,
+      "stock": 250
+    },
+    {
+      "id": "sp-2",
+      "name": "Resistance Bands Set",
+      "description": "5-level latex resistance bands with carry bag",
+      "price": "11.99",
+      "priceWholesale": "6.50",
+      "badge": "",
+      "category": "sports-outdoors",
+      "amazonUrl": "#",
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Resistance+Bands"
+      ],
+      "features": [
+        "5 resistance levels",
+        "Natural latex",
+        "Carry bag",
+        "Exercise guide",
+        "Lightweight"
+      ],
+      "rating": 4.5,
+      "stock": 200
+    },
+    {
+      "id": "sp-3",
+      "name": "Microfibre Sports Towel",
+      "description": "Quick-dry travel towel with zip pouch — 2 sizes included",
+      "price": "9.99",
+      "priceWholesale": "5.50",
+      "badge": "New",
+      "category": "sports-outdoors",
+      "amazonUrl": "#",
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Sports+Towel"
+      ],
+      "features": [
+        "Quick-dry",
+        "Ultra compact",
+        "2 sizes",
+        "Antibacterial",
+        "Zip carry pouch"
+      ],
+      "rating": 4.6,
+      "stock": 300
+    },
+    {
+      "id": "sp-4",
+      "name": "Grip Strength Trainer",
+      "description": "Adjustable hand grip strengthener — 10-60kg resistance",
+      "price": "8.99",
+      "priceWholesale": "4.50",
+      "badge": "",
+      "category": "sports-outdoors",
+      "amazonUrl": "#",
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Grip+Trainer"
+      ],
+      "features": [
+        "Adjustable 10-60kg",
+        "Rep counter",
+        "Ergonomic grip",
+        "Compact size",
+        "Spring steel"
+      ],
+      "rating": 4.3,
+      "stock": 170
+    },
+    {
+      "id": "sp-5",
+      "name": "Foam Roller Set",
+      "description": "High-density EVA foam roller with massage ball — 3 piece set",
+      "price": "16.99",
+      "priceWholesale": "9.50",
+      "badge": "",
+      "category": "sports-outdoors",
+      "amazonUrl": "#",
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Foam+Roller"
+      ],
+      "features": [
+        "High density EVA",
+        "3-piece set",
+        "Muscle recovery",
+        "Exercise guide",
+        "Carry bag"
+      ],
+      "rating": 4.5,
+      "stock": 140
+    },
+    {
+      "id": "st-1",
+      "name": "Desk Organiser Set",
+      "description": "Bamboo desktop organiser with phone stand and pen holder",
+      "price": "15.99",
+      "priceWholesale": "9.00",
+      "badge": "Best Seller",
+      "category": "stationery-office",
+      "amazonUrl": "#",
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Desk+Organiser"
+      ],
+      "features": [
+        "Natural bamboo",
+        "Phone stand",
+        "Pen holder",
+        "Cable management",
+        "Compact design"
+      ],
+      "rating": 4.6,
+      "stock": 120
+    },
+    {
+      "id": "st-2",
+      "name": "Erasable Notebook",
+      "description": "Reusable smart notebook — wipe clean, cloud sync compatible",
+      "price": "12.99",
+      "priceWholesale": "7.00",
+      "badge": "New",
+      "category": "stationery-office",
+      "amazonUrl": "#",
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Smart+Notebook"
+      ],
+      "features": [
+        "Reusable pages",
+        "Wipe clean",
+        "Cloud compatible",
+        "A5 size",
+        "Pen included"
+      ],
+      "rating": 4.4,
+      "stock": 200
+    },
+    {
+      "id": "st-3",
+      "name": "Cable Management Kit",
+      "description": "Adhesive cable clips and cord organiser — 30 piece set",
+      "price": "7.99",
+      "priceWholesale": "4.00",
+      "badge": "",
+      "category": "stationery-office",
+      "amazonUrl": "#",
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Cable+Clips"
+      ],
+      "features": [
+        "30 pieces",
+        "Self-adhesive",
+        "Multiple sizes",
+        "Reusable",
+        "Clean design"
+      ],
+      "rating": 4.3,
+      "stock": 350
+    },
+    {
+      "id": "st-4",
+      "name": "Monitor Stand Riser",
+      "description": "Adjustable monitor riser with USB ports and storage drawer",
+      "price": "24.99",
+      "priceWholesale": "14.00",
+      "badge": "",
+      "category": "stationery-office",
+      "amazonUrl": "#",
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Monitor+Stand"
+      ],
+      "features": [
+        "Height adjustable",
+        "USB ports",
+        "Storage drawer",
+        "Cable routing",
+        "Supports 20kg"
+      ],
+      "rating": 4.5,
+      "stock": 80
+    },
+    {
+      "id": "st-5",
+      "name": "Whiteboard Planner",
+      "description": "Magnetic weekly planner whiteboard with markers — A3 size",
+      "price": "13.99",
+      "priceWholesale": "7.50",
+      "badge": "",
+      "category": "stationery-office",
+      "amazonUrl": "#",
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Whiteboard"
+      ],
+      "features": [
+        "Magnetic back",
+        "Weekly layout",
+        "Markers included",
+        "A3 size",
+        "Dry wipe surface"
+      ],
+      "rating": 4.4,
+      "stock": 110
+    },
+    {
+      "id": "tr-1",
+      "name": "Packing Cubes Set",
+      "description": "Compression packing cubes — 6 piece set with shoe bag",
+      "price": "16.99",
+      "priceWholesale": "9.50",
+      "badge": "Best Seller",
+      "category": "travel-accessories",
+      "amazonUrl": "#",
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Packing+Cubes"
+      ],
+      "features": [
+        "6-piece set",
+        "Compression zips",
+        "Mesh window",
+        "Shoe bag included",
+        "Lightweight"
+      ],
+      "rating": 4.7,
+      "stock": 250
+    },
+    {
+      "id": "tr-2",
+      "name": "Travel Toiletry Bag",
+      "description": "Hanging toiletry organiser — waterproof with multiple compartments",
+      "price": "11.99",
+      "priceWholesale": "6.50",
+      "badge": "",
+      "category": "travel-accessories",
+      "amazonUrl": "#",
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Toiletry+Bag"
+      ],
+      "features": [
+        "Hanging hook",
+        "Waterproof",
+        "Multiple pockets",
+        "Compact folding",
+        "Mirror included"
+      ],
+      "rating": 4.5,
+      "stock": 190
+    },
+    {
+      "id": "tr-3",
+      "name": "Neck Pillow Memory Foam",
+      "description": "Ergonomic travel neck pillow with eye mask and earplugs",
+      "price": "14.99",
+      "priceWholesale": "8.00",
+      "badge": "New",
+      "category": "travel-accessories",
+      "amazonUrl": "#",
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Neck+Pillow"
+      ],
+      "features": [
+        "Memory foam",
+        "360° support",
+        "Eye mask included",
+        "Earplugs included",
+        "Carry pouch"
+      ],
+      "rating": 4.4,
+      "stock": 170
+    },
+    {
+      "id": "tr-4",
+      "name": "Luggage Scale Digital",
+      "description": "Portable digital luggage scale with LCD display — max 50kg",
+      "price": "8.99",
+      "priceWholesale": "4.50",
+      "badge": "",
+      "category": "travel-accessories",
+      "amazonUrl": "#",
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Luggage+Scale"
+      ],
+      "features": [
+        "Max 50kg",
+        "LCD display",
+        "Tare function",
+        "Battery included",
+        "Compact size"
+      ],
+      "rating": 4.3,
+      "stock": 220
+    },
+    {
+      "id": "tr-5",
+      "name": "RFID Blocking Wallet",
+      "description": "Slim travel wallet with RFID protection — holds passport and cards",
+      "price": "13.99",
+      "priceWholesale": "7.50",
+      "badge": "",
+      "category": "travel-accessories",
+      "amazonUrl": "#",
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=RFID+Wallet"
+      ],
+      "features": [
+        "RFID blocking",
+        "Passport pocket",
+        "Card slots",
+        "Slim design",
+        "Premium PU leather"
+      ],
+      "rating": 4.6,
+      "stock": 160
     }
   ],
   "posts": [
     {
       "id": "post-1",
-      "title": "Welcome to the EAZYOO Blog",
-      "date": "2024-01-01",
-      "excerpt": "We are excited to launch our new blog where we will share updates, tips, and news about our products.",
-      "content": "<p>Welcome to the EAZYOO Blog! We are thrilled to have you here.</p><p>We will be using this space to share our latest product updates, tips and tricks for using our collapsible gear, and news about our brand.</p><p>Stay tuned for more updates!</p>",
+      "title": "Welcome to EAZYOO — Smart Products for Smarter Living",
+      "date": "2026-01-15",
+      "excerpt": "We're EAZYOO, a UK-based brand on a mission to make everyday products more portable, more practical, and built to last.",
+      "content": "<p>Welcome to the EAZYOO blog! We're a UK-based brand creating innovative, space-saving products for active lifestyles and modern kitchens.</p><p>Our journey started with a simple observation: the products we use every day — water bottles, cutting boards, storage containers — take up far too much space. So we asked ourselves: <em>what if they could fold?</em></p><p>That question led to our first two products, now available on Amazon UK: the <strong>Collapsible Running Water Bottle</strong> and the <strong>Foldable Cutting Board</strong>. Both are designed to fold flat when not in use, saving you valuable space at home or on the go.</p><p>This blog is where we'll share product updates, practical tips, and behind-the-scenes stories as we grow. Thanks for being here — we're just getting started.</p>",
       "imgUrl": "images/hero-banner.png"
     },
     {
       "id": "post-2",
-      "title": "5 Reasons Why Collapsible Products Will Change Your Life",
-      "date": "2024-03-15",
-      "excerpt": "From saving kitchen space to making outdoor adventures easier, collapsible products are the smart choice for modern living.",
-      "content": "<p>In today's fast-paced world, space and efficiency matter more than ever. That's why collapsible products have become a game-changer for households and outdoor enthusiasts alike.</p><h3>1. Save Valuable Kitchen Space</h3><p>Our <strong>Collapsible Cutting Board</strong> folds completely flat, slipping into even the tightest kitchen drawer. No more bulky boards cluttering your countertops.</p><h3>2. Perfect for Travel and Adventures</h3><p>The <strong>Running Water Bottle</strong> collapses when empty, taking up virtually no space in your backpack. Whether you're hiking, cycling, or at the gym — it's always ready.</p><h3>3. Reduce Clutter at Home</h3><p>Collapsible products stack, fold, and store neatly. Your home feels more organised and spacious with minimal effort.</p><h3>4. Durable and Long-Lasting</h3><p>Our products are made from food-grade silicone and high-quality materials designed to withstand everyday use — without the wear that traditional rigid products suffer.</p><h3>5. Eco-Friendly Choice</h3><p>By investing in durable, reusable collapsible products, you reduce reliance on single-use items — better for your wallet and the planet.</p><p><a href='products.html' style='color:#005FCC; font-weight:600;'>Browse our full range →</a></p>",
-      "imgUrl": "images/cutting-board.png"
-    },
-    {
-      "id": "post-3",
-      "title": "EAZYOO Running Water Bottle — Now Available on Amazon UK",
-      "date": "2024-05-20",
-      "excerpt": "Our bestselling 500ml collapsible running water bottle is now live on Amazon UK with Prime delivery. Here's everything you need to know.",
-      "content": "<p>We are proud to announce that our <strong>Running Water Bottle</strong> is now officially live on Amazon UK with Prime delivery available.</p><p>This 500ml soft flask is designed for runners, cyclists, hikers, and gym-goers who refuse to compromise on hydration — without the bulk of a traditional water bottle.</p><h3>Key Features</h3><ul><li>✅ Folds completely flat when empty</li><li>✅ BPA-free food-grade material</li><li>✅ Leakproof screw cap</li><li>✅ Fits in running belt, vest pockets, and bike bottle cages</li><li>✅ Pack of 2 — in two colours</li></ul><h3>Customer Reviews</h3><p>Since launch, we've received hundreds of 5-star reviews. Customers love the quality, the compact design, and the value of getting 2 bottles in one pack.</p><p><a href='https://www.amazon.co.uk/Running-Water-Bottle-500ml-pcs/dp/B0FNC3W5CP' target='_blank' rel='noopener' style='color:#005FCC; font-weight:600;'>Buy on Amazon UK →</a></p>",
+      "title": "5 Reasons a Collapsible Water Bottle Beats a Regular One",
+      "date": "2026-02-10",
+      "excerpt": "Still carrying a bulky water bottle? Here are five reasons to switch to a collapsible flask for running, hiking, and everyday hydration.",
+      "content": "<p>If you're still lugging around a rigid water bottle, you're carrying more than you need to. Here's why collapsible bottles are the smarter choice:</p><h3>1. They Fold Flat</h3><p>When empty, a collapsible bottle rolls up or folds down to a fraction of its size. Toss it in a pocket, handbag, or gym bag without the bulk.</p><h3>2. They're Lighter</h3><p>Made from flexible, food-grade silicone, collapsible bottles weigh significantly less than metal or hard plastic alternatives.</p><h3>3. Perfect for Travel</h3><p>Fold it flat before airport security, then fill up at a water fountain on the other side. No more buying overpriced bottled water at the gate.</p><h3>4. Easy to Clean</h3><p>The wide mouth on most collapsible designs means you can turn them inside out for a thorough wash — something you can't do with a narrow-neck bottle.</p><h3>5. Better for the Planet</h3><p>Reusable and durable, a single collapsible bottle replaces hundreds of single-use plastic bottles over its lifetime.</p><p>Our <strong>EAZYOO Running Water Bottle</strong> (500ml, pack of 2) ticks all five boxes. <a href='https://www.amazon.co.uk/Running-Water-Bottle-500ml-pcs/dp/B0FNC3W5CP' target='_blank'>Check it out on Amazon UK →</a></p>",
       "imgUrl": "images/water-bottle.png"
     },
     {
-      "id": "post-4",
-      "title": "How to Apply for EAZYOO Wholesale",
-      "date": "2024-07-10",
-      "excerpt": "Are you a retailer, gym owner, or online seller? Here's a step-by-step guide to becoming an EAZYOO stockist.",
-      "content": "<p>We welcome wholesale applications from all types of businesses — from small boutique shops to large online retailers. Here's how to get started:</p><h3>Step 1: Check If You Qualify</h3><p>We work with gyms, sports shops, kitchen stores, pet stores, online retailers, and more. If you have a business that sells consumer products, we want to hear from you.</p><h3>Step 2: Submit Your Application</h3><p>Visit our <a href='wholesale.html' style='color:#005FCC; font-weight:600;'>Wholesale page</a> and fill in the application form. Tell us about your business, monthly volume, and which products you're interested in.</p><h3>Step 3: We'll Be in Touch Within 48 Hours</h3><p>Our team reviews every application personally. We'll respond with your customised wholesale pricing sheet and minimum order quantities.</p><h3>Our Wholesale Benefits</h3><ul><li>📦 Low MOQ — minimum orders start from 20 units per SKU</li><li>💰 Up to 45% off retail price</li><li>🚚 UK warehouse — fast dispatch</li><li>🤝 Dedicated wholesale support</li></ul><p>Ready to get started? <a href='wholesale.html' style='color:#005FCC; font-weight:600;'>Apply Now →</a></p>",
-      "imgUrl": "images/hero-banner.png"
+      "id": "post-3",
+      "title": "Small Kitchen? 7 Space-Saving Hacks You Need to Try",
+      "date": "2026-03-20",
+      "excerpt": "Living with a compact kitchen doesn't mean compromising. These seven practical tips will help you make the most of every inch.",
+      "content": "<p>A small kitchen doesn't have to feel cramped. With the right approach, you can cook, prep, and store everything you need — without clutter. Here are seven hacks we swear by:</p><h3>1. Use Collapsible Tools</h3><p>Foldable cutting boards, collapsible colanders, and nesting bowls store flat in drawers instead of hogging cupboard space.</p><h3>2. Go Vertical</h3><p>Wall-mounted magnetic knife strips, hanging racks, and shelf risers turn dead wall and cupboard space into usable storage.</p><h3>3. Clear Your Worktops</h3><p>If you don't use it daily, store it. A clear worktop makes a small kitchen feel twice the size.</p><h3>4. Use the Inside of Cupboard Doors</h3><p>Stick-on hooks or small racks on the inside of doors are perfect for lids, measuring spoons, or tea towels.</p><h3>5. Stackable Containers Over Mismatched Tubs</h3><p>Invest in a uniform set of stackable, airtight containers. They nest inside each other when empty and stack neatly when full.</p><h3>6. Over-Sink Drying Racks</h3><p>A roll-up rack over the sink gives you drying or prep space without taking up any worktop area.</p><h3>7. One In, One Out</h3><p>For every new gadget you bring in, remove one you haven't used in six months. It keeps things lean.</p><p>Our <strong>EAZYOO Collapsible Cutting Board</strong> folds flat and doubles as a wash basin — perfect for tip number one. <a href='https://www.amazon.co.uk/Collapsible-Cutting-Board-Chopping-Foldable/dp/B0FN9FJXKS' target='_blank'>See it on Amazon UK →</a></p>",
+      "imgUrl": "images/cutting-board.png"
     },
     {
-      "id": "post-5",
-      "title": "Top 8 Garden Gadgets for a Smarter Garden This Summer",
-      "date": "2024-09-01",
-      "excerpt": "Summer is here and it's time to upgrade your garden setup. We've rounded up our top 8 must-have garden accessories from the EAZYOO range.",
-      "content": "<p>Summer is the perfect time to invest in your garden. Whether you're a seasoned green thumb or just starting out, these smart accessories will make garden life easier and more enjoyable.</p><h3>1. Memory Foam Garden Kneeling Pad</h3><p>Protect your knees while weeding, planting, and pruning. Our waterproof kneeling pad is lightweight and wipes clean after every use.</p><h3>2. Solar Garden Path Lights</h3><p>Illuminate your pathways without any wiring. Our solar LED lights charge by day and glow all night — with an IP65 waterproof rating.</p><h3>3. Expandable Garden Hose</h3><p>Our 50ft expandable hose is lightweight and kink-free, expanding 3x its size when in use and shrinking back when finished.</p><h3>4. Collapsible Garden Waste Bag</h3><p>Self-standing and 120L capacity — this pop-up garden bag holds everything from leaves to grass cuttings, then folds flat for storage.</p><h3>5. Self-Watering Plant Globes</h3><p>Going on holiday? Let these glass globes slowly water your indoor plants for up to 2 weeks.</p><p><a href='products.html?cat=garden' style='color:#005FCC; font-weight:600;'>Shop All Garden Products →</a></p>",
-      "imgUrl": "images/garden-solar-lights.png"
+      "id": "post-4",
+      "title": "EAZYOO Now Open to Wholesale Partners Across the UK",
+      "date": "2026-05-05",
+      "excerpt": "We're inviting sports shops, kitchen stores, gyms, and online retailers to stock EAZYOO products. Here's how to apply.",
+      "content": "<p>We're excited to announce that EAZYOO is now accepting wholesale applications from retailers across the United Kingdom.</p><p>Whether you run a physical shop, an online store, a gym, or an outdoor outfitter — if your customers would love smart, space-saving products, we'd love to work with you.</p><h3>What We Offer Partners</h3><ul><li><strong>Competitive wholesale pricing</strong> with healthy margins for your business</li><li><strong>Low minimum order quantities</strong> to suit businesses of all sizes</li><li><strong>UK-based fulfilment</strong> — fast delivery, no import headaches</li><li><strong>Marketing support</strong> — product images, descriptions, and brand assets provided</li></ul><h3>How to Apply</h3><p>Visit our <a href='wholesale.html'>Wholesale Application page</a> and fill in the form. Our team reviews every application and responds within 2-3 business days.</p><p>We're building a network of partners who share our passion for practical, well-designed products. If that sounds like you, we'd love to hear from you.</p>",
+      "imgUrl": "images/hero-banner.png"
     }
-  ]
+  ],
+  "accounts": []
 }
