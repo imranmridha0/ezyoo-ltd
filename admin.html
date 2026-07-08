@@ -113,13 +113,14 @@
     <div class="login-logo">EAZYOO CMS</div>
     <p class="login-sub">Connect to GitHub to manage content</p>
     <div class="form-group">
-      <label>GitHub Repository</label>
-      <input type="text" id="repoName" value="imranmridha0/ezyoo-ltd" disabled>
+      <label>GitHub Repository <span style="color:var(--text-muted); font-size:0.8rem;">(owner/repo-name)</span></label>
+      <input type="text" id="repoName" placeholder="e.g. yourname/eazyoo-website" value="">
+      <div style="font-size:0.8rem; color:var(--text-muted); margin-top:6px;">Find this in your GitHub repo URL after github.com/</div>
     </div>
     <div class="form-group">
       <label>Personal Access Token (PAT)</label>
       <input type="password" id="ghToken" placeholder="ghp_xxxxxxxxxxxx" onkeydown="if(event.key==='Enter') login()">
-      <div style="font-size:0.8rem; color:var(--text-muted); margin-top:8px; text-align:left;">Needs 'repo' scope to save changes.</div>
+      <div style="font-size:0.8rem; color:var(--text-muted); margin-top:8px; text-align:left;">Needs 'repo' or 'contents' scope. <a href="https://github.com/settings/tokens" target="_blank" rel="noopener" style="color:var(--accent)">Generate one here →</a></div>
     </div>
     <button class="btn-primary" onclick="login()">Connect &rarr;</button>
     <div class="login-error" id="loginError"></div>
@@ -330,23 +331,33 @@
 // ==========================================
 // STATE & GITHUB API
 // ==========================================
-const REPO = 'imranmridha0/ezyoo-ltd';
+let REPO = '';
 const DATA_FILE = 'data.json';
 let siteData = { settings:{}, seo:{}, products:[], posts:[] };
 let fileSha = '';
 
-// Check if token exists on load
+// Check if token + repo exists on load
 window.onload = () => {
   const token = localStorage.getItem('eazyoo_gh_token');
+  const savedRepo = localStorage.getItem('eazyoo_gh_repo');
   if (token) {
     document.getElementById('ghToken').value = token;
+  }
+  if (savedRepo) {
+    document.getElementById('repoName').value = savedRepo;
+  }
+  if (token && savedRepo) {
     login();
   }
 };
 
 async function login() {
   const token = document.getElementById('ghToken').value.trim();
+  const repoInput = document.getElementById('repoName').value.trim();
   if (!token) return showError('Token is required');
+  if (!repoInput || !repoInput.includes('/')) return showError('Enter a valid repo (e.g. yourname/repo-name)');
+  
+  REPO = repoInput;
   
   showLoader('Connecting to GitHub...');
   try {
@@ -354,9 +365,10 @@ async function login() {
       headers: { 'Authorization': `token ${token}` }
     });
     
-    if (res.status === 401) throw new Error('Invalid Token');
+    if (res.status === 401) throw new Error('Invalid Token — please check and try again.');
+    if (res.status === 403) throw new Error('Token lacks permission. Enable "repo" or "contents:write" scope.');
     if (res.status === 404) {
-      // File doesn't exist yet, that's fine we'll create it on save
+      // File doesn't exist yet, that's fine — we'll create it on first publish
       siteData = { settings:{}, seo:{}, products:[], posts:[] };
     } else if (res.ok) {
       const data = await res.json();
@@ -369,6 +381,7 @@ async function login() {
     }
     
     localStorage.setItem('eazyoo_gh_token', token);
+    localStorage.setItem('eazyoo_gh_repo', REPO);
     document.getElementById('loginScreen').style.display = 'none';
     document.getElementById('adminPanel').style.display = 'block';
     
@@ -388,6 +401,8 @@ async function login() {
 
 function logout() {
   localStorage.removeItem('eazyoo_gh_token');
+  localStorage.removeItem('eazyoo_gh_repo');
+  REPO = '';
   document.getElementById('adminPanel').style.display = 'none';
   document.getElementById('loginScreen').style.display = 'flex';
   document.getElementById('ghToken').value = '';
@@ -484,13 +499,19 @@ function renderProductsList() {
     return;
   }
   
-  list.innerHTML = siteData.products.map(p => `
+  list.innerHTML = siteData.products.map(p => {
+    // Support both p.images[] array AND legacy p.imgUrl string
+    const thumbSrc = (p.images && p.images.length > 0) ? p.images[0] : (p.imgUrl || '');
+    const thumbDisplay = thumbSrc
+      ? `<img src="${thumbSrc}" class="item-img" onerror="this.style.display='none'">`
+      : `<div class="item-img" style="background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:1.5rem;">📦</div>`;
+    return `
     <div class="item-row">
       <div class="item-info">
-        <img src="${p.imgUrl || 'https://via.placeholder.com/48'}" class="item-img">
+        ${thumbDisplay}
         <div>
           <div class="item-title">${p.name}</div>
-          <div class="item-meta">${p.category || 'Uncategorized'} &middot; £${p.price || '0.00'}</div>
+          <div class="item-meta">${p.category || 'Uncategorized'} &middot; £${p.price || '0.00'} ${p.badge ? `<span style="background:var(--accent);color:white;padding:1px 6px;border-radius:4px;font-size:0.7rem;">${p.badge}</span>` : ''}</div>
         </div>
       </div>
       <div class="item-actions">
@@ -498,7 +519,8 @@ function renderProductsList() {
         <button class="btn-icon danger" onclick="deleteProduct('${p.id}')">🗑️</button>
       </div>
     </div>
-  `).join('');
+  `;
+  }).join('');
 }
 
 function editProduct(id) {
