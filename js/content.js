@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', async () => {
               <button class="snipcart-add-item btn-add-cart" 
                 data-item-id="${p.id}"
                 data-item-price="${priceToUse}"
-                data-item-url="${window.location.pathname}"
+                data-item-url="/"
                 data-item-description="${p.description}"
                 data-item-image="${firstImg}"
                 data-item-name="${p.name.replace(/"/g, '&quot;')}">
@@ -165,18 +165,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     // ==========================================
-    // HOME PAGE: Featured Products + Categories
+    // HOME PAGE: Featured Products (Random Mix)
     // ==========================================
     const dynProducts = document.getElementById('dynamic-products');
     if (dynProducts && data.products) {
-      // Show first 8 products (one from each category if possible)
-      const featured = [];
-      const cats = data.categories || [];
-      cats.forEach(c => {
-        const p = data.products.find(prod => prod.category === c.id);
-        if (p) featured.push(p);
-      });
-      dynProducts.innerHTML = featured.slice(0, 8).map(renderProductCard).join('');
+      // Shuffle all products and pick 8 random ones for a fresh homepage feel
+      const shuffled = [...data.products].sort(() => Math.random() - 0.5);
+      dynProducts.innerHTML = shuffled.slice(0, 8).map(renderProductCard).join('');
     }
 
     // Categories showcase on homepage
