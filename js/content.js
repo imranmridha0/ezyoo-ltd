@@ -1,7 +1,8 @@
 /**
- * EAZYOO CMS Content Manager v2
+ * EAZYOO CMS Content Manager v3
  * Fetches data.json and populates all pages dynamically.
- * Supports: Products, Categories, Blog, Cart, B2B Pricing
+ * Supports: Products, Categories, Blog, Cart, B2B Pricing,
+ *           Noticeboard, Social Links, Nav Sign-Out
  */
 
 // ==========================================
@@ -9,10 +10,10 @@
 // ==========================================
 function initSnipcart(apiKey) {
   if (!apiKey) {
-    console.warn('Snipcart API Key is missing. Cart checkout will not work.');
+    console.warn('Snipcart API Key is missing. Using Amazon redirect fallback for cart.');
     return;
   }
-  
+
   if (document.getElementById('snipcart')) return; // Already injected
 
   // Add Preconnects
@@ -42,9 +43,118 @@ function initSnipcart(apiKey) {
   snipcartDiv.id = 'snipcart';
   snipcartDiv.setAttribute('data-api-key', apiKey);
   snipcartDiv.setAttribute('hidden', 'true');
-  // Configure Snipcart to allow dynamic product injection (no server validation for this demo)
-  snipcartDiv.setAttribute('data-config-add-product-behavior', 'none'); 
+  snipcartDiv.setAttribute('data-config-add-product-behavior', 'none');
   document.body.appendChild(snipcartDiv);
+}
+
+// ==========================================
+// NOTICEBOARD BANNER
+// ==========================================
+const NB_ICONS = {
+  maintenance: { label: '⚠️ Maintenance',  emoji: '🚧' },
+  deals:       { label: '🔥 Big Deals',    emoji: '🔥' },
+  hourly_deal: { label: '⏰ Hourly Deal',  emoji: '⏰' },
+  sale:        { label: '💸 Sale',         emoji: '💸' },
+  custom:      { label: '📢 Notice',       emoji: '📢' }
+};
+
+function renderNoticeboard(nb) {
+  if (!nb || !nb.enabled) return;
+
+  const nav = document.getElementById('navbar');
+  if (!nav) return;
+
+  const type  = nb.type || 'custom';
+  const speed = nb.speed || 'normal';
+  const info  = NB_ICONS[type] || NB_ICONS.custom;
+
+  const board = document.createElement('div');
+  board.id = 'site-noticeboard';
+  board.className = `nb-type-${type}`;
+  board.innerHTML = `
+    <div class="nb-inner">
+      <span class="nb-icon-pill">${info.label}</span>
+      <div class="nb-marquee-wrap">
+        <span class="nb-marquee speed-${speed}">${nb.text}&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;${nb.text}&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;${nb.text}</span>
+      </div>
+      <button class="nb-dismiss" onclick="this.closest('#site-noticeboard').classList.add('nb-hidden')" title="Dismiss">✕</button>
+    </div>
+  `;
+
+  // Insert after navbar
+  nav.insertAdjacentElement('afterend', board);
+}
+
+// ==========================================
+// SOCIAL LINKS INJECTION
+// ==========================================
+function injectSocialLinks(s) {
+  const map = {
+    'Facebook': s.socialFb,
+    'Instagram': s.socialIg,
+    'TikTok': s.socialTt,
+    'YouTube': s.socialYt
+  };
+  const abbr = { 'Facebook': 'FB', 'Instagram': 'IG', 'TikTok': 'TT', 'YouTube': 'YT' };
+
+  document.querySelectorAll('.social-links a').forEach(a => {
+    const label = a.getAttribute('aria-label');
+    if (label && map[label]) {
+      const url = map[label];
+      if (url && url !== '#' && url.trim() !== '') {
+        a.href = url;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+      }
+    }
+  });
+}
+
+// ==========================================
+// NAV SIGN-OUT STATE
+// ==========================================
+function updateNavAuthState() {
+  const session = JSON.parse(sessionStorage.getItem('eazyoo_session') || 'null');
+  if (!session) return;
+
+  // Look for the account icon link in nav and add sign-out option
+  const navActions = document.querySelector('.nav-actions');
+  if (!navActions) return;
+
+  // Check if already injected
+  if (document.getElementById('nav-signout-btn')) return;
+
+  const signOutBtn = document.createElement('button');
+  signOutBtn.id = 'nav-signout-btn';
+  signOutBtn.title = `Signed in as ${session.email} — click to sign out`;
+  signOutBtn.style.cssText = `
+    background: none; border: 1px solid rgba(0,95,204,0.3);
+    border-radius: 20px; padding: 5px 14px; font-size: 0.78rem;
+    font-weight: 600; color: var(--color-primary, #005fcc);
+    cursor: pointer; display: flex; align-items: center; gap: 5px;
+    font-family: inherit; transition: all 0.2s;
+    white-space: nowrap; margin-right: 6px;
+  `;
+  signOutBtn.innerHTML = `
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>
+    </svg>
+    Sign Out
+  `;
+  signOutBtn.onmouseenter = () => { signOutBtn.style.background = 'rgba(0,95,204,0.08)'; };
+  signOutBtn.onmouseleave = () => { signOutBtn.style.background = 'none'; };
+  signOutBtn.onclick = () => {
+    sessionStorage.removeItem('eazyoo_session');
+    window.location.href = 'account.html';
+  };
+
+  // Insert before the CTA button
+  const cta = navActions.querySelector('.nav-cta');
+  if (cta) {
+    navActions.insertBefore(signOutBtn, cta);
+  } else {
+    navActions.prepend(signOutBtn);
+  }
 }
 
 // ==========================================
@@ -52,21 +162,22 @@ function initSnipcart(apiKey) {
 // ==========================================
 document.addEventListener('DOMContentLoaded', async () => {
   try {
-    const res = await fetch('data.json');
+    // Cache-bust: always fetch fresh data (fixes stale product publishing)
+    const res = await fetch('data.json?v=' + Date.now());
     if (!res.ok) throw new Error('Could not load site data');
     const data = await res.json();
-    
+
     const isWholesale = localStorage.getItem('eazyoo_wholesale_logged_in') === 'true';
 
     // ==========================================
     // INJECT SEO & SETTINGS
     // ==========================================
     const s = data.settings || {};
-    
+
     // Inject Snipcart
-    // Use test key if none provided in settings for demo purposes
-    const snipcartKey = s.snipcartApiKey || 'NmU2YWI4NDEtYTNhYi00NGQ2LTljNjUtYjM0ZTUwZDcxOTIxNjM4NTM3NjI3MjA1NTY4MDMx';
+    const snipcartKey = s.snipcartApiKey || '';
     initSnipcart(snipcartKey);
+    const hasSnipcart = !!snipcartKey;
 
     if (data.seo) {
       if (data.seo.metaTitle) document.title = data.seo.metaTitle;
@@ -77,6 +188,15 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
     }
     if (s.brandName) document.querySelectorAll('.logo-text').forEach(el => el.textContent = s.brandName);
+
+    // Render noticeboard
+    renderNoticeboard(s.noticeboard);
+
+    // Inject social links into all footers
+    injectSocialLinks(s);
+
+    // Update nav auth state (show sign out if logged in)
+    updateNavAuthState();
 
     // ==========================================
     // RENDER CATEGORY NAV (Mega Menu)
@@ -95,9 +215,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     // RENDER PRODUCT CARD (Shared function)
     // ==========================================
     function renderProductCard(p) {
-      const imgs = p.images && p.images.length > 0 ? p.images : ['https://placehold.co/600x600/e2e8f0/475569?text=No+Image'];
+      const imgs = p.images && p.images.length > 0 ? p.images : ['https://placehold.co/400x400/e2e8f0/475569?text=No+Image'];
       const firstImg = imgs[0];
-      
+      const amazonUrl = p.amazonUrl || '';
+
       let priceHtml = `<span class="product-price">£${parseFloat(p.price).toFixed(2)}</span>`;
       if (isWholesale && p.priceWholesale) {
         priceHtml = `
@@ -132,6 +253,37 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       const priceToUse = isWholesale && p.priceWholesale ? p.priceWholesale : p.price;
 
+      // Cart button: use Snipcart if key exists, else Amazon redirect fallback
+      let cartBtnHtml;
+      if (hasSnipcart) {
+        cartBtnHtml = `
+          <button class="snipcart-add-item btn-add-cart"
+            data-item-id="${p.id}"
+            data-item-price="${priceToUse}"
+            data-item-url="/data.json"
+            data-item-description="${(p.description || '').replace(/"/g, '&quot;')}"
+            data-item-image="${firstImg}"
+            data-item-name="${(p.name || '').replace(/"/g, '&quot;')}">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+            Add to Cart
+          </button>
+        `;
+      } else if (amazonUrl) {
+        cartBtnHtml = `
+          <a class="btn-add-cart" href="${amazonUrl}" target="_blank" rel="noopener" title="Buy on Amazon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+            Buy on Amazon
+          </a>
+        `;
+      } else {
+        cartBtnHtml = `
+          <button class="btn-add-cart" style="opacity:0.5; cursor:not-allowed;" disabled title="Coming soon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+            Coming Soon
+          </button>
+        `;
+      }
+
       return `
         <div class="product-card" data-category="${p.category}" data-price="${p.price}" data-rating="${rating}" data-id="${p.id}">
           <div class="product-card-visual">
@@ -148,16 +300,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             </div>
             <div class="product-card-footer">
               ${priceHtml}
-              <button class="snipcart-add-item btn-add-cart" 
-                data-item-id="${p.id}"
-                data-item-price="${priceToUse}"
-                data-item-url="/"
-                data-item-description="${p.description}"
-                data-item-image="${firstImg}"
-                data-item-name="${p.name.replace(/"/g, '&quot;')}">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-                Add to Cart
-              </button>
+              ${cartBtnHtml}
             </div>
           </div>
         </div>
@@ -169,7 +312,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     // ==========================================
     const dynProducts = document.getElementById('dynamic-products');
     if (dynProducts && data.products) {
-      // Shuffle all products and pick 8 random ones for a fresh homepage feel
       const shuffled = [...data.products].sort(() => Math.random() - 0.5);
       dynProducts.innerHTML = shuffled.slice(0, 8).map(renderProductCard).join('');
     }

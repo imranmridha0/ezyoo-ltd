@@ -13,7 +13,13 @@
     "socialIg": "#",
     "socialTt": "#",
     "socialYt": "#",
-    "snipcartApiKey": ""
+    "snipcartApiKey": "",
+    "noticeboard": {
+      "enabled": true,
+      "type": "maintenance",
+      "text": "🚧 This site is currently under maintenance — Please do not make any purchases. We'll be back shortly! 🚧",
+      "speed": "normal"
+    }
   },
   "seo": {
     "metaTitle": "EAZYOO — Smart Products for Smarter Living | UK Store",

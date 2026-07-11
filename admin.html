@@ -141,13 +141,16 @@
   <div class="admin-body">
     <aside class="sidebar">
       <div class="sidebar-label">Content</div>
-      <div class="nav-item active" onclick="switchPanel('dashboard')">Dashboard</div>
-      <div class="nav-item" onclick="switchPanel('products')">Products</div>
-      <div class="nav-item" onclick="switchPanel('posts')">Blog Posts</div>
-      
+      <div class="nav-item active" onclick="switchPanel('dashboard')">📊 Dashboard</div>
+      <div class="nav-item" onclick="switchPanel('products')">🛍️ Products</div>
+      <div class="nav-item" onclick="switchPanel('posts')">📝 Blog Posts</div>
+
+      <div class="sidebar-label">Site Controls</div>
+      <div class="nav-item" onclick="switchPanel('noticeboard')">📢 Notice Board</div>
+
       <div class="sidebar-label">Settings</div>
-      <div class="nav-item" onclick="switchPanel('settings')">General Settings</div>
-      <div class="nav-item" onclick="switchPanel('seo')">SEO &amp; Meta</div>
+      <div class="nav-item" onclick="switchPanel('settings')">⚙️ General Settings</div>
+      <div class="nav-item" onclick="switchPanel('seo')">🔍 SEO &amp; Meta</div>
     </aside>
     
     <main class="content">
@@ -170,6 +173,11 @@
             <div style="font-size:3rem; margin-bottom:12px;">📝</div>
             <h3>Blog Posts</h3>
             <p style="color:var(--text-muted); margin-top:8px;"><span id="stat-posts">0</span> published posts</p>
+          </div>
+          <div class="card" style="text-align:center; cursor:pointer;" onclick="switchPanel('noticeboard')">
+            <div style="font-size:3rem; margin-bottom:12px;">📢</div>
+            <h3>Notice Board</h3>
+            <p style="color:var(--text-muted); margin-top:8px;"><span id="stat-noticeboard">Off</span></p>
           </div>
         </div>
       </div>
@@ -261,6 +269,72 @@
           <div class="card-title">Post Content (HTML allowed)</div>
           <div class="form-group">
             <textarea id="post-content" style="min-height:300px; font-family:monospace;"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Notice Board -->
+      <div class="panel" id="panel-noticeboard">
+        <div class="panel-header">
+          <div>
+            <h1 class="panel-title">📢 Notice Board</h1>
+            <p class="panel-desc">Display a scrolling banner on your site. Perfect for maintenance alerts, deals, and announcements.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Banner Status &amp; Type</div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Enable Notice Board</label>
+              <select id="nb-enabled">
+                <option value="true">✅ Enabled — Show on site</option>
+                <option value="false">❌ Disabled — Hidden</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Banner Type</label>
+              <select id="nb-type">
+                <option value="maintenance">🚧 Maintenance / Under Construction</option>
+                <option value="deals">🔥 Big Deals / Sale</option>
+                <option value="hourly_deal">⏰ Hourly Deal</option>
+                <option value="sale">💸 Sale / Discount</option>
+                <option value="custom">📢 Custom / Occasional</option>
+              </select>
+            </div>
+            <div class="form-group full-width">
+              <label>Banner Message Text</label>
+              <input type="text" id="nb-text" placeholder="e.g. 🚧 Site under maintenance — do not purchase 🚧">
+              <div style="font-size:0.8rem; color:var(--text-muted); margin-top:4px;">Emojis are supported. The text will scroll across the full width of the page.</div>
+            </div>
+            <div class="form-group">
+              <label>Scroll Speed</label>
+              <select id="nb-speed">
+                <option value="slow">🐢 Slow</option>
+                <option value="normal">➡️ Normal</option>
+                <option value="fast">⚡ Fast</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Preview</div>
+          <div style="border-radius:8px; overflow:hidden; border: 1px solid var(--border);">
+            <div id="nb-preview" style="background:#991b1b; color:#fff; padding:10px 16px; font-size:0.88rem; font-weight:600;">
+              🚧 Notice Board Preview — edit the fields above and click "Preview" to see it here
+            </div>
+          </div>
+          <button class="btn-secondary" style="margin-top:16px;" onclick="previewNoticeboard()">👁 Preview Banner</button>
+        </div>
+
+        <div class="card" style="background:rgba(251,191,36,0.08); border-color:rgba(251,191,36,0.3);">
+          <div style="display:flex; gap:12px; align-items:flex-start;">
+            <span style="font-size:1.5rem;">⚠️</span>
+            <div>
+              <div style="font-weight:600; margin-bottom:4px; color:var(--warning);">How to publish changes</div>
+              <p style="color:var(--text-muted); font-size:0.9rem; margin:0;">After editing notice board settings, click <strong style="color:var(--text)">"Publish Changes"</strong> in the top header. GitHub Pages will update your live site within <strong style="color:var(--text)">1–5 minutes</strong>. If you don't see changes, do a hard refresh (Ctrl+Shift+R).</p>
+            </div>
           </div>
         </div>
       </div>
@@ -467,6 +541,11 @@ function populateUI() {
   // Stats
   document.getElementById('stat-products').textContent = siteData.products.length;
   document.getElementById('stat-posts').textContent = siteData.posts.length;
+
+  // Noticeboard stat
+  const nb = (siteData.settings && siteData.settings.noticeboard) || {};
+  const nbStat = document.getElementById('stat-noticeboard');
+  if (nbStat) nbStat.textContent = nb.enabled ? '✅ Active: ' + (nb.type || 'custom') : '⏸ Disabled';
   
   // Settings
   const s = siteData.settings;
@@ -474,6 +553,14 @@ function populateUI() {
   ids.forEach(id => {
     if(document.getElementById('set-'+id)) document.getElementById('set-'+id).value = s[id] || '';
   });
+
+  // Noticeboard fields
+  if (document.getElementById('nb-enabled')) {
+    document.getElementById('nb-enabled').value = nb.enabled ? 'true' : 'false';
+    document.getElementById('nb-type').value = nb.type || 'maintenance';
+    document.getElementById('nb-text').value = nb.text || '';
+    document.getElementById('nb-speed').value = nb.speed || 'normal';
+  }
   
   // SEO
   if(document.getElementById('seo-metaTitle')) document.getElementById('seo-metaTitle').value = siteData.seo.metaTitle || '';
@@ -485,8 +572,29 @@ function syncSettingsFromUI() {
   ids.forEach(id => {
     siteData.settings[id] = document.getElementById('set-'+id).value;
   });
+  // Noticeboard
+  if (document.getElementById('nb-enabled')) {
+    if (!siteData.settings.noticeboard) siteData.settings.noticeboard = {};
+    siteData.settings.noticeboard.enabled = document.getElementById('nb-enabled').value === 'true';
+    siteData.settings.noticeboard.type    = document.getElementById('nb-type').value;
+    siteData.settings.noticeboard.text    = document.getElementById('nb-text').value;
+    siteData.settings.noticeboard.speed   = document.getElementById('nb-speed').value;
+  }
   siteData.seo.metaTitle = document.getElementById('seo-metaTitle').value;
   siteData.seo.metaDescription = document.getElementById('seo-metaDescription').value;
+}
+
+function previewNoticeboard() {
+  const type = document.getElementById('nb-type').value;
+  const text = document.getElementById('nb-text').value || 'Preview text goes here...';
+  const bgMap = {
+    maintenance: '#991b1b', deals: '#92400e', hourly_deal: '#1e3a5f',
+    sale: '#065f46', custom: '#312e81'
+  };
+  const preview = document.getElementById('nb-preview');
+  preview.style.background = bgMap[type] || '#312e81';
+  preview.textContent = text;
+  showToast('Preview updated!', 'info');
 }
 
 // ==========================================
