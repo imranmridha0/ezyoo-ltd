@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details — EAZYOO</title>
+  <meta name="description" content="View product specifications, description, features, stock status and purchase options.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/shop.css">
+</head>
+<body>
+
+  <!-- ========== NAVIGATION ========== -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="index.html" class="nav-brand">
+        <span class="logo-text">EAZYOO</span>
+        <span class="logo-dot"></span>
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="products.html" class="active">Products</a>
+        <a href="wholesale.html">Wholesale</a>
+        <a href="collaborate.html">Collaborate</a>
+        <a href="about.html">About</a>
+        <a href="blog.html">Blog</a>
+      </div>
+      <div class="nav-actions">
+        <a href="account.html" id="nav-account-link" aria-label="My Account" style="display:flex; align-items:center; color:var(--color-text); margin-right:4px; padding:8px; border-radius:50%; transition:all 0.2s;" onmouseenter="this.style.background='var(--color-bg)'" onmouseleave="this.style.background='none'">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </a>
+        <button class="cart-btn snipcart-checkout" aria-label="Open cart">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <span class="cart-badge snipcart-items-count">0</span>
+        </button>
+        <a href="wholesale.html" class="btn btn-primary btn-sm nav-cta">Become a Stockist</a>
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ========== NOTICE BOARD ========== -->
+  <div id="site-noticeboard"></div>
+
+  <!-- ========== PRODUCT DETAIL LAYOUT ========== -->
+  <div class="product-detail-layout">
+    <!-- Breadcrumb -->
+    <div class="breadcrumb" id="detail-breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="breadcrumb-separator">/</span>
+      <a href="products.html">Products</a>
+      <span class="breadcrumb-separator">/</span>
+      <span class="breadcrumb-current" id="crumb-product-name">Loading...</span>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="product-detail-grid" id="product-detail-view">
+      <p style="text-align:center; padding:100px 0; color:var(--color-text-light); grid-column:span 2;">Loading product details...</p>
+    </div>
+
+    <!-- Related Products -->
+    <section class="related-section">
+      <h2 class="related-title">You May Also Like</h2>
+      <div class="products-grid" id="related-products-grid">
+        <!-- Filled dynamically -->
+      </div>
+    </section>
+  </div>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo-text">EAZYOO</div>
+          <p class="tagline">"Smart Products. Smarter Living."</p>
+          <p>Premium quality products across 8 categories. Proudly UK-based.</p>
+        </div>
+        <div class="footer-column">
+          <h5>Categories</h5>
+          <ul>
+            <li><a href="products.html?cat=automotive">Automotive</a></li>
+            <li><a href="products.html?cat=home-kitchen">Home & Kitchen</a></li>
+            <li><a href="products.html?cat=sports-outdoors">Sports & Outdoors</a></li>
+            <li><a href="products.html?cat=travel-accessories">Travel Accessories</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h5>Business</h5>
+          <ul>
+            <li><a href="wholesale.html">Wholesale Application</a></li>
+            <li><a href="collaborate.html">Brand Collaboration</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h5>Company</h5>
+          <ul>
+            <li><a href="about.html">About EAZYOO</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="about.html#contact">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 EAZYOO. All rights reserved. UK Registered Brand.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook">FB</a>
+          <a href="#" aria-label="Instagram">IG</a>
+          <a href="#" aria-label="TikTok">TT</a>
+          <a href="#" aria-label="YouTube">YT</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/content.js"></script>
+</body>
+</html>

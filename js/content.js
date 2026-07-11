@@ -1,8 +1,9 @@
 /**
- * EAZYOO CMS Content Manager v3
+ * EAZYOO CMS Content Manager v4
  * Fetches data.json and populates all pages dynamically.
  * Supports: Products, Categories, Blog, Cart, B2B Pricing,
- *           Noticeboard, Social Links, Nav Sign-Out
+ *           Noticeboard, Social Links, Nav Sign-Out,
+ *           Dark Mode, Dual Card Buttons, Single Product View.
  */
 
 // ==========================================
@@ -14,9 +15,8 @@ function initSnipcart(apiKey) {
     return;
   }
 
-  if (document.getElementById('snipcart')) return; // Already injected
+  if (document.getElementById('snipcart')) return;
 
-  // Add Preconnects
   const preconnect1 = document.createElement('link');
   preconnect1.rel = 'preconnect';
   preconnect1.href = 'https://app.snipcart.com';
@@ -26,19 +26,16 @@ function initSnipcart(apiKey) {
   document.head.appendChild(preconnect1);
   document.head.appendChild(preconnect2);
 
-  // Add CSS
   const css = document.createElement('link');
   css.rel = 'stylesheet';
   css.href = 'https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css';
   document.head.appendChild(css);
 
-  // Add Script
   const script = document.createElement('script');
   script.src = 'https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.js';
   script.async = true;
   document.body.appendChild(script);
 
-  // Add hidden Snipcart div
   const snipcartDiv = document.createElement('div');
   snipcartDiv.id = 'snipcart';
   snipcartDiv.setAttribute('data-api-key', apiKey);
@@ -81,7 +78,6 @@ function renderNoticeboard(nb) {
     </div>
   `;
 
-  // Insert after navbar
   nav.insertAdjacentElement('afterend', board);
 }
 
@@ -95,7 +91,6 @@ function injectSocialLinks(s) {
     'TikTok': s.socialTt,
     'YouTube': s.socialYt
   };
-  const abbr = { 'Facebook': 'FB', 'Instagram': 'IG', 'TikTok': 'TT', 'YouTube': 'YT' };
 
   document.querySelectorAll('.social-links a').forEach(a => {
     const label = a.getAttribute('aria-label');
@@ -117,11 +112,9 @@ function updateNavAuthState() {
   const session = JSON.parse(sessionStorage.getItem('eazyoo_session') || 'null');
   if (!session) return;
 
-  // Look for the account icon link in nav and add sign-out option
   const navActions = document.querySelector('.nav-actions');
   if (!navActions) return;
 
-  // Check if already injected
   if (document.getElementById('nav-signout-btn')) return;
 
   const signOutBtn = document.createElement('button');
@@ -148,7 +141,6 @@ function updateNavAuthState() {
     window.location.href = 'account.html';
   };
 
-  // Insert before the CTA button
   const cta = navActions.querySelector('.nav-cta');
   if (cta) {
     navActions.insertBefore(signOutBtn, cta);
@@ -158,27 +150,53 @@ function updateNavAuthState() {
 }
 
 // ==========================================
+// DARK MODE CONTROL
+// ==========================================
+function initDarkMode() {
+  const navActions = document.querySelector('.nav-actions');
+  if (!navActions) return;
+
+  const savedTheme = localStorage.getItem('theme') || 'light';
+  document.documentElement.setAttribute('data-theme', savedTheme);
+
+  if (document.querySelector('.theme-toggle')) return;
+
+  const toggleBtn = document.createElement('button');
+  toggleBtn.className = 'theme-toggle';
+  toggleBtn.setAttribute('aria-label', 'Toggle theme');
+  toggleBtn.innerHTML = savedTheme === 'dark' ? '☀️' : '🌙';
+
+  toggleBtn.onclick = () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    toggleBtn.innerHTML = newTheme === 'dark' ? '☀️' : '🌙';
+  };
+
+  navActions.prepend(toggleBtn);
+}
+
+// ==========================================
 // MAIN INIT
 // ==========================================
 document.addEventListener('DOMContentLoaded', async () => {
   try {
-    // Cache-bust: always fetch fresh data (fixes stale product publishing)
     const res = await fetch('data.json?v=' + Date.now());
     if (!res.ok) throw new Error('Could not load site data');
     const data = await res.json();
 
     const isWholesale = localStorage.getItem('eazyoo_wholesale_logged_in') === 'true';
 
-    // ==========================================
-    // INJECT SEO & SETTINGS
-    // ==========================================
+    // Settings
     const s = data.settings || {};
 
-    // Inject Snipcart
+    // Initialize Snipcart
     const snipcartKey = s.snipcartApiKey || '';
     initSnipcart(snipcartKey);
     const hasSnipcart = !!snipcartKey;
 
+    // SEO Injection
     if (data.seo) {
       if (data.seo.metaTitle) document.title = data.seo.metaTitle;
       if (data.seo.metaDescription) {
@@ -189,26 +207,29 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
     if (s.brandName) document.querySelectorAll('.logo-text').forEach(el => el.textContent = s.brandName);
 
-    // Render noticeboard
+    // Initialize Dark Mode Toggle
+    initDarkMode();
+
+    // Render Noticeboard
     renderNoticeboard(s.noticeboard);
 
-    // Inject social links into all footers
+    // Social Links
     injectSocialLinks(s);
 
-    // Update nav auth state (show sign out if logged in)
+    // Nav Auth
     updateNavAuthState();
 
-    // ==========================================
     // RENDER CATEGORY NAV (Mega Menu)
-    // ==========================================
     const catNav = document.getElementById('category-nav');
     if (catNav && data.categories) {
-      catNav.innerHTML = data.categories.map(c => `
-        <a href="products.html?cat=${c.id}" class="cat-link" data-cat="${c.id}">
-          <span class="cat-icon">${c.icon}</span>
-          <span class="cat-name">${c.name}</span>
-        </a>
-      `).join('');
+      catNav.innerHTML = data.categories.map(c => {
+        return `
+          <a href="products.html?cat=${c.id}" class="cat-link" data-cat="${c.id}">
+            <span class="cat-icon">${c.icon}</span>
+            <span class="cat-name">${c.name}</span>
+          </a>
+        `;
+      }).join('');
     }
 
     // ==========================================
@@ -219,6 +240,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       const firstImg = imgs[0];
       const amazonUrl = p.amazonUrl || '';
 
+      // Pricing layout
       let priceHtml = `<span class="product-price">£${parseFloat(p.price).toFixed(2)}</span>`;
       if (isWholesale && p.priceWholesale) {
         priceHtml = `
@@ -230,7 +252,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         `;
       }
 
-      // Image slider HTML
+      // Slider or Static Image
       let imageHtml;
       if (imgs.length > 1) {
         imageHtml = `
@@ -249,74 +271,118 @@ document.addEventListener('DOMContentLoaded', async () => {
       const emptyStars = 5 - fullStars - halfStar;
       const starsHtml = '★'.repeat(fullStars) + (halfStar ? '½' : '') + '☆'.repeat(emptyStars);
 
+      // Badge (Best Seller / New)
       const badgeHtml = p.badge ? `<span class="card-badge ${p.badge === 'Best Seller' ? 'badge-hot' : 'badge-new'}">${p.badge}</span>` : '';
+
+      // Stock status badge
+      const stock = p.stockQty !== undefined ? p.stockQty : (p.stock || 0);
+      let stockBadgeHtml = '';
+      if (stock === 0) {
+        stockBadgeHtml = `<span class="card-stock-badge stock-outofstock">Out of Stock</span>`;
+      } else if (stock <= 5) {
+        stockBadgeHtml = `<span class="card-stock-badge stock-low">Only ${stock} Left</span>`;
+      } else {
+        stockBadgeHtml = `<span class="card-stock-badge stock-instock">In Stock</span>`;
+      }
 
       const priceToUse = isWholesale && p.priceWholesale ? p.priceWholesale : p.price;
 
-      // Cart button: use Snipcart if key exists, else Amazon redirect fallback
-      let cartBtnHtml;
-      if (hasSnipcart) {
-        cartBtnHtml = `
-          <button class="snipcart-add-item btn-add-cart"
-            data-item-id="${p.id}"
-            data-item-price="${priceToUse}"
-            data-item-url="/data.json"
-            data-item-description="${(p.description || '').replace(/"/g, '&quot;')}"
-            data-item-image="${firstImg}"
-            data-item-name="${(p.name || '').replace(/"/g, '&quot;')}">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-            Add to Cart
-          </button>
-        `;
-      } else if (amazonUrl) {
-        cartBtnHtml = `
-          <a class="btn-add-cart" href="${amazonUrl}" target="_blank" rel="noopener" title="Buy on Amazon">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-            Buy on Amazon
+      // Card action buttons logic
+      let actionsHtml = '';
+      let buyButtonsHtml = '';
+
+      // Amazon Button
+      const displayAmazon = p.availableOnAmazon !== false && amazonUrl && amazonUrl !== '#';
+      if (displayAmazon) {
+        buyButtonsHtml += `
+          <a class="btn-buy-amazon" href="${amazonUrl}" target="_blank" rel="noopener" title="Buy on Amazon">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+            Amazon
           </a>
         `;
+      }
+
+      // Snipcart/Buy Now Button
+      if (stock > 0) {
+        if (hasSnipcart) {
+          buyButtonsHtml += `
+            <button class="snipcart-add-item btn-buy-now"
+              data-item-id="${p.id}"
+              data-item-price="${priceToUse}"
+              data-item-url="/data.json"
+              data-item-description="${(p.description || '').replace(/"/g, '&quot;')}"
+              data-item-image="${firstImg}"
+              data-item-name="${(p.name || '').replace(/"/g, '&quot;')}">
+              Buy Now
+            </button>
+          `;
+        } else if (!displayAmazon && amazonUrl) {
+          buyButtonsHtml += `
+            <a class="btn-buy-now" href="${amazonUrl}" target="_blank" rel="noopener">
+              Buy Now
+            </a>
+          `;
+        } else if (!displayAmazon) {
+          buyButtonsHtml += `
+            <button class="btn-buy-now" style="opacity:0.5; cursor:not-allowed;" disabled>
+              Soon
+            </button>
+          `;
+        }
       } else {
-        cartBtnHtml = `
-          <button class="btn-add-cart" style="opacity:0.5; cursor:not-allowed;" disabled title="Coming soon">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-            Coming Soon
+        buyButtonsHtml += `
+          <button class="btn-buy-now" style="opacity:0.5; background:#9ca3af; cursor:not-allowed;" disabled>
+            Sold Out
           </button>
         `;
       }
 
+      actionsHtml = `
+        <div class="product-card-actions">
+          <div class="btn-card-row">
+            ${buyButtonsHtml}
+          </div>
+          <a href="product.html?id=${p.id}" class="btn-view-details">View Details</a>
+        </div>
+      `;
+
       return `
         <div class="product-card" data-category="${p.category}" data-price="${p.price}" data-rating="${rating}" data-id="${p.id}">
-          <div class="product-card-visual">
+          <div class="product-card-visual" style="cursor:pointer;" onclick="window.location.href='product.html?id=${p.id}'">
             ${badgeHtml}
+            ${stockBadgeHtml}
             ${imageHtml}
           </div>
           <div class="product-card-body">
-            <span class="product-card-category">${(data.categories || []).find(c => c.id === p.category)?.name || p.category}</span>
-            <h3 class="product-card-title">${p.name}</h3>
-            <p class="product-card-desc">${p.description}</p>
+            <span class="product-card-category" style="cursor:pointer;" onclick="window.location.href='product.html?id=${p.id}'">${(data.categories || []).find(c => c.id === p.category)?.name || p.category}</span>
+            <h3 class="product-card-title" style="cursor:pointer;" onclick="window.location.href='product.html?id=${p.id}'">${p.name}</h3>
+            <p class="product-card-desc" style="cursor:pointer;" onclick="window.location.href='product.html?id=${p.id}'">${p.description}</p>
             <div class="product-card-rating">
               <span class="stars">${starsHtml}</span>
               <span class="rating-num">${rating}</span>
             </div>
             <div class="product-card-footer">
               ${priceHtml}
-              ${cartBtnHtml}
             </div>
+            ${actionsHtml}
           </div>
         </div>
       `;
     }
 
     // ==========================================
-    // HOME PAGE: Featured Products (Random Mix)
+    // HOME PAGE: Featured Products
     // ==========================================
     const dynProducts = document.getElementById('dynamic-products');
     if (dynProducts && data.products) {
-      const shuffled = [...data.products].sort(() => Math.random() - 0.5);
-      dynProducts.innerHTML = shuffled.slice(0, 8).map(renderProductCard).join('');
+      // Prioritize featured products, then pad with random shuffled products
+      const featured = data.products.filter(p => p.featured === true);
+      const rest = data.products.filter(p => p.featured !== true).sort(() => Math.random() - 0.5);
+      const combined = [...featured, ...rest].slice(0, 8);
+      dynProducts.innerHTML = combined.map(renderProductCard).join('');
     }
 
-    // Categories showcase on homepage
+    // Categories showcase
     const catShowcase = document.getElementById('categories-showcase');
     if (catShowcase && data.categories) {
       catShowcase.innerHTML = data.categories.map(c => {
@@ -340,30 +406,26 @@ document.addEventListener('DOMContentLoaded', async () => {
       const activeCat = urlParams.get('cat') || 'all';
       let products = [...data.products];
 
-      // Highlight active category in filter
       document.querySelectorAll('.filter-cat-btn').forEach(btn => {
         if (btn.dataset.cat === activeCat) btn.classList.add('active');
       });
 
-      // Filter by category from URL
       if (activeCat !== 'all') {
         products = products.filter(p => p.category === activeCat);
       }
 
-      // Update page title
       const pageTitle = document.getElementById('products-page-title');
       if (pageTitle && activeCat !== 'all') {
         const catObj = (data.categories || []).find(c => c.id === activeCat);
         if (catObj) pageTitle.textContent = catObj.name;
       }
 
-      // Product count
       const countEl = document.getElementById('product-count');
       if (countEl) countEl.textContent = `${products.length} products`;
 
       productGrid.innerHTML = products.map(renderProductCard).join('');
 
-      // Build category filter buttons
+      // Dynamic counts inside side bar categories
       const filterContainer = document.getElementById('filter-categories');
       if (filterContainer && data.categories) {
         filterContainer.innerHTML = `
@@ -375,7 +437,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         `;
       }
 
-      // Price filter
       const priceSlider = document.getElementById('price-range');
       const priceLabel = document.getElementById('price-label');
       if (priceSlider) {
@@ -389,7 +450,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
       }
 
-      // Sort
       const sortSelect = document.getElementById('sort-select');
       if (sortSelect) {
         sortSelect.addEventListener('change', () => {
@@ -404,6 +464,188 @@ document.addEventListener('DOMContentLoaded', async () => {
           });
           cards.forEach(c => grid.appendChild(c));
         });
+      }
+    }
+
+    // ==========================================
+    // SINGLE PRODUCT DETAIL PAGE POPULATION
+    // ==========================================
+    const detailView = document.getElementById('product-detail-view');
+    if (detailView && data.products) {
+      const urlParams = new URLSearchParams(window.location.search);
+      const prodId = urlParams.get('id');
+      const p = data.products.find(x => x.id === prodId);
+
+      if (p) {
+        // Set document page title
+        document.title = `${p.name} — EAZYOO`;
+        const crumbName = document.getElementById('crumb-product-name');
+        if (crumbName) crumbName.textContent = p.name;
+
+        const imgs = p.images && p.images.length > 0 ? p.images : ['https://placehold.co/600x600/e2e8f0/475569?text=No+Image'];
+        const firstImg = imgs[0];
+
+        // Stock status
+        const stock = p.stockQty !== undefined ? p.stockQty : (p.stock || 0);
+        let stockHtml = '';
+        if (stock === 0) {
+          stockHtml = `<span class="card-stock-badge stock-outofstock" style="position:static;">Out of Stock</span>`;
+        } else if (stock <= 5) {
+          stockHtml = `<span class="card-stock-badge stock-low" style="position:static;">Only ${stock} Left</span>`;
+        } else {
+          stockHtml = `<span class="card-stock-badge stock-instock" style="position:static;">In Stock (${stock} available)</span>`;
+        }
+
+        // Prices
+        let pricingDetailHtml = `<div class="detail-price">£${parseFloat(p.price).toFixed(2)}</div>`;
+        if (isWholesale && p.priceWholesale) {
+          pricingDetailHtml = `
+            <div class="detail-price-wholesale-wrap">
+              <span class="detail-price-old">£${parseFloat(p.price).toFixed(2)}</span>
+              <span class="detail-price-wholesale">£${parseFloat(p.priceWholesale).toFixed(2)}</span>
+              <span class="wholesale-badge" style="font-size:0.75rem; padding:4px 8px;">B2B Wholesale</span>
+            </div>
+          `;
+        }
+
+        // Action Buttons Row
+        let detailButtonsHtml = '';
+        const priceToUse = isWholesale && p.priceWholesale ? p.priceWholesale : p.price;
+
+        if (stock > 0) {
+          if (hasSnipcart) {
+            detailButtonsHtml += `
+              <button class="snipcart-add-item detail-btn detail-btn-primary"
+                data-item-id="${p.id}"
+                data-item-price="${priceToUse}"
+                data-item-url="/data.json"
+                data-item-description="${(p.description || '').replace(/"/g, '&quot;')}"
+                data-item-image="${firstImg}"
+                data-item-name="${(p.name || '').replace(/"/g, '&quot;')}">
+                🛒 Add to Cart / Buy Now
+              </button>
+            `;
+          } else if (p.amazonUrl) {
+            detailButtonsHtml += `
+              <a href="${p.amazonUrl}" target="_blank" rel="noopener" class="detail-btn detail-btn-primary">
+                🛒 Buy Now
+              </a>
+            `;
+          }
+        } else {
+          detailButtonsHtml += `
+            <button class="detail-btn" style="background:#e5e7eb; color:#9ca3af; cursor:not-allowed; border:none;" disabled>
+              ❌ Out of Stock
+            </button>
+          `;
+        }
+
+        if (p.availableOnAmazon !== false && p.amazonUrl && p.amazonUrl !== '#') {
+          detailButtonsHtml += `
+            <a href="${p.amazonUrl}" target="_blank" rel="noopener" class="detail-btn detail-btn-amazon">
+              📦 Available on Amazon
+            </a>
+          `;
+        }
+
+        // Features Checklist
+        let featuresListHtml = '';
+        if (p.features && p.features.length > 0) {
+          featuresListHtml = `
+            <div class="detail-features-title">Highlights</div>
+            <ul class="detail-features">
+              ${p.features.map(f => `<li>${f}</li>`).join('')}
+            </ul>
+          `;
+        }
+
+        // Specifications
+        const specs = [
+          { label: 'Brand', value: p.brand || 'EAZYOO' },
+          { label: 'SKU Code', value: p.sku || 'EZ-' + p.id.toUpperCase() },
+          { label: 'Weight', value: p.weight || 'N/A' },
+          { label: 'Dimensions', value: p.dimensions || 'N/A' },
+          { label: 'Material', value: p.material || 'Premium Quality' },
+          { label: 'Stock Status', value: stock > 0 ? 'Available' : 'Out of stock' }
+        ];
+
+        // Gallery HTML
+        let galleryHtml = `
+          <div class="detail-gallery">
+            <div class="main-img-wrap">
+              <img src="${firstImg}" alt="${p.name}" id="main-product-image">
+            </div>
+            ${imgs.length > 1 ? `
+              <div class="thumb-list">
+                ${imgs.map((src, i) => `
+                  <div class="thumb-item ${i === 0 ? 'active' : ''}" onclick="switchProductImage('${src}', this)">
+                    <img src="${src}" alt="Thumbnail ${i+1}">
+                  </div>
+                `).join('')}
+              </div>
+            ` : ''}
+          </div>
+        `;
+
+        // Rating
+        const rating = p.rating || 0;
+        const fullStars = Math.floor(rating);
+        const halfStar = rating % 1 >= 0.5 ? 1 : 0;
+        const emptyStars = 5 - fullStars - halfStar;
+        const starsHtml = '★'.repeat(fullStars) + (halfStar ? '½' : '') + '☆'.repeat(emptyStars);
+
+        // Put it all together
+        detailView.innerHTML = `
+          ${galleryHtml}
+          <div class="detail-info">
+            <div class="detail-brand">${p.brand || 'EAZYOO'}</div>
+            <h1 class="detail-title">${p.name}</h1>
+            <div class="detail-meta">
+              <div class="detail-rating">
+                <span class="stars">${starsHtml}</span>
+                <span style="font-weight:600; color:var(--color-text);">${rating}</span>
+              </div>
+              <span class="detail-sku">SKU: ${p.sku || 'EZ-' + p.id.toUpperCase()}</span>
+              ${stockHtml}
+            </div>
+            <div class="detail-price-wrap">
+              ${pricingDetailHtml}
+            </div>
+            <p class="detail-desc">${p.fullDescription || p.description}</p>
+            
+            <div class="detail-actions">
+              <div class="detail-buttons-row">
+                ${detailButtonsHtml}
+              </div>
+            </div>
+
+            ${featuresListHtml}
+
+            <div class="detail-specs-title">Specifications</div>
+            <table class="detail-specs-table">
+              <tbody>
+                ${specs.map(s => `<tr><td>${s.label}</td><td>${s.value}</td></tr>`).join('')}
+              </tbody>
+            </table>
+          </div>
+        `;
+
+        // Load Related Products
+        const relatedGrid = document.getElementById('related-products-grid');
+        if (relatedGrid) {
+          const related = data.products
+            .filter(x => x.category === p.category && x.id !== p.id)
+            .sort(() => Math.random() - 0.5)
+            .slice(0, 4);
+          if (related.length > 0) {
+            relatedGrid.innerHTML = related.map(renderProductCard).join('');
+          } else {
+            relatedGrid.innerHTML = '<p style="color:var(--color-text-light); text-align:center; width:100%;">No related products found in this category.</p>';
+          }
+        }
+
+      } else {
+        detailView.innerHTML = '<p style="text-align:center; padding:100px 0; color:var(--color-text-light); grid-column:span 2;">Product not found.</p>';
       }
     }
 
@@ -427,7 +669,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       `).join('');
     }
 
-    // Single Post
+    // Single Post View
     const singlePost = document.getElementById('single-post-view');
     if (singlePost && data.posts) {
       const postId = new URLSearchParams(window.location.search).get('id');
@@ -449,7 +691,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     // ==========================================
-    // IMAGE SLIDER AUTO-PLAY
+    // AUTO-PLAY SLIDER
     // ==========================================
     setInterval(() => {
       document.querySelectorAll('.product-slider').forEach(slider => {
@@ -466,3 +708,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.error('EAZYOO CMS Error:', err);
   }
 });
+
+// Helper for switching image in product page details
+window.switchProductImage = function(src, element) {
+  const mainImg = document.getElementById('main-product-image');
+  if (mainImg) {
+    mainImg.src = src;
+  }
+  document.querySelectorAll('.thumb-item').forEach(el => el.classList.remove('active'));
+  element.classList.add('active');
+};

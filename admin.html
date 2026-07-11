@@ -212,7 +212,6 @@
           </div>
         </div>
       </div>
-
       <!-- ==================== PRODUCTS LIST ==================== -->
       <div class="panel" id="panel-products">
         <div class="panel-header">
@@ -221,6 +220,9 @@
             <p class="panel-desc">Add, edit, or remove products from your store.</p>
           </div>
           <button class="btn-primary" style="width:auto; padding:10px 20px;" onclick="editProduct('new')">+ Add Product</button>
+        </div>
+        <div style="display:flex; gap:12px; margin-bottom:16px;">
+          <input type="text" id="prod-search" placeholder="🔍 Search products by name, SKU, or category..." oninput="filterProductsList()" style="flex:1; padding:10px 14px; border:1.5px solid var(--border); border-radius:var(--radius); font-size:0.92rem; background:var(--bg);">
         </div>
         <div class="card">
           <div class="item-list" id="productsList"></div>
@@ -241,7 +243,7 @@
           <div class="card-title">Basic Info</div>
           <div class="form-grid">
             <div class="form-group full-width"><label>Product Name</label><input type="text" id="prod-name" placeholder="e.g. Collapsible Cutting Board"></div>
-            <div class="form-group full-width"><label>Short Description</label><input type="text" id="prod-desc" placeholder="Brief product description"></div>
+            <div class="form-group full-width"><label>Short Description (for grids)</label><input type="text" id="prod-desc" placeholder="Brief product description"></div>
             <div class="form-group"><label>Category</label><select id="prod-category"></select></div>
             <div class="form-group"><label>Badge</label>
               <select id="prod-badge">
@@ -251,10 +253,18 @@
                 <option value="Sale">Sale</option>
               </select>
             </div>
+            <div class="form-group"><label>Brand Name</label><input type="text" id="prod-brand" placeholder="e.g. EAZYOO"></div>
+            <div class="form-group"><label>SKU Code</label><input type="text" id="prod-sku" placeholder="e.g. EZ-HK-001"></div>
+            <div class="form-group"><label>Featured Status</label>
+              <select id="prod-featured">
+                <option value="false">No (Standard catalog)</option>
+                <option value="true">Yes (Show first on Homepage)</option>
+              </select>
+            </div>
           </div>
         </div>
         <div class="card">
-          <div class="card-title">Pricing &amp; Stock</div>
+          <div class="card-title">Pricing, Stock &amp; Checkout</div>
           <div class="form-grid triple">
             <div class="form-group"><label>Retail Price (GBP)</label><input type="text" id="prod-price" placeholder="14.99"></div>
             <div class="form-group"><label>Wholesale Price (GBP)</label><input type="text" id="prod-price-wholesale" placeholder="8.50"></div>
@@ -262,7 +272,29 @@
           </div>
           <div class="form-grid">
             <div class="form-group"><label>Rating (1-5)</label><input type="number" id="prod-rating" min="0" max="5" step="0.1" placeholder="4.5"></div>
-            <div class="form-group"><label>Amazon URL</label><input type="url" id="prod-amazon" placeholder="https://www.amazon.co.uk/dp/..."></div>
+            <div class="form-group"><label>Available on Amazon</label>
+              <select id="prod-avail-amazon">
+                <option value="true">Yes (Show Buy on Amazon button)</option>
+                <option value="false">No (Local sale / disabled)</option>
+              </select>
+            </div>
+            <div class="form-group"><label>Amazon URL</label><input type="url" id="prod-amazon" placeholder="https://www.amazon.co.uk/dp/... (Amazon product page)"></div>
+            <div class="form-group"><label>Buy Now URL (custom checkout fallback)</label><input type="url" id="prod-buynowurl" placeholder="https://... (Only if not using standard Snipcart)"></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Technical Specifications</div>
+          <div class="form-grid triple">
+            <div class="form-group"><label>Weight</label><input type="text" id="prod-weight" placeholder="e.g. 350g"></div>
+            <div class="form-group"><label>Dimensions</label><input type="text" id="prod-dimensions" placeholder="e.g. 35 × 25 × 2 cm"></div>
+            <div class="form-group"><label>Material</label><input type="text" id="prod-material" placeholder="e.g. Food-grade silicone"></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Full Description (for details page)</div>
+          <div class="form-group">
+            <label>Product Details (Detailed story / paragraphs)</label>
+            <textarea id="prod-full-desc" style="min-height:120px;" placeholder="Describe details, specifications, use cases and highlights of the product..."></textarea>
           </div>
         </div>
         <div class="card">
@@ -780,12 +812,22 @@ function renderProductsList() {
   }
 
   list.innerHTML = siteData.products.map(p => {
-    const img = (p.images && p.images.length > 0) ? p.images[0] : (p.imgUrl || 'https://placehold.co/48x48/22263a/8892b0?text=?');
+    const img = (p.images && p.images.length > 0) ? p.images[0] : 'https://placehold.co/48x48/22263a/8892b0?text=?';
     const cat = (siteData.categories || []).find(c => c.id === p.category);
     const catName = cat ? cat.name : (p.category || 'Uncategorized');
     const badgeHtml = p.badge ? ' <span class="badge-tag ' + (p.badge === 'Best Seller' ? 'badge-green' : p.badge === 'New' ? 'badge-blue' : 'badge-amber') + '">' + p.badge + '</span>' : '';
-    return '<div class="item-row"><div class="item-info"><img src="' + img + '" class="item-img" onerror="this.src=\'https://placehold.co/48x48/22263a/8892b0?text=?\'"><div><div class="item-title">' + p.name + badgeHtml + '</div><div class="item-meta">' + catName + ' &middot; £' + (p.price || '0.00') + (p.priceWholesale ? ' (W: £' + p.priceWholesale + ')' : '') + ' &middot; ★' + (p.rating || '-') + '</div></div></div><div class="item-actions"><button class="btn-icon" onclick="editProduct(\'' + p.id + '\')">✏️</button><button class="btn-icon danger" onclick="deleteProduct(\'' + p.id + '\')">🗑️</button></div></div>';
+    const stock = p.stockQty !== undefined ? p.stockQty : (p.stock || 0);
+    return '<div class="item-row"><div class="item-info"><img src="' + img + '" class="item-img" onerror="this.src=\'https://placehold.co/48x48/22263a/8892b0?text=?\'"><div><div class="item-title">' + p.name + badgeHtml + '</div><div class="item-meta">' + catName + ' &middot; £' + (p.price || '0.00') + ' (W: £' + (p.priceWholesale || '0.00') + ') &middot; Stock: ' + stock + ' &middot; SKU: ' + (p.sku || 'N/A') + '</div></div></div><div class="item-actions"><button class="btn-icon" onclick="editProduct(\'' + p.id + '\')">✏️</button><button class="btn-icon danger" onclick="deleteProduct(\'' + p.id + '\')">🗑️</button></div></div>';
   }).join('');
+}
+
+function filterProductsList() {
+  const query = document.getElementById('prod-search').value.toLowerCase().trim();
+  const rows = document.querySelectorAll('#productsList .item-row');
+  rows.forEach(row => {
+    const text = row.textContent.toLowerCase();
+    row.style.display = text.includes(query) ? '' : 'none';
+  });
 }
 
 function buildCategoryDropdown(selectId, selectedValue) {
@@ -798,18 +840,49 @@ function editProduct(id) {
   const isNew = id === 'new';
   document.getElementById('productEditorTitle').textContent = isNew ? 'Add Product' : 'Edit Product';
 
-  const p = isNew ? { id: 'prod-' + Date.now(), name:'', description:'', price:'', priceWholesale:'', badge:'', category:'', amazonUrl:'', images:[], features:[], rating: '', stock: '' }
-               : siteData.products.find(x => x.id === id);
+  const p = isNew ? { 
+    id: 'prod-' + Date.now(), 
+    name: '', 
+    description: '', 
+    price: '', 
+    priceWholesale: '', 
+    badge: '', 
+    category: '', 
+    amazonUrl: '', 
+    images: [], 
+    features: [], 
+    rating: '4.5', 
+    stockQty: 100, 
+    stock: 100,
+    brand: 'EAZYOO',
+    sku: '',
+    featured: false,
+    availableOnAmazon: true,
+    buyNowUrl: '',
+    weight: '',
+    dimensions: '',
+    material: '',
+    fullDescription: ''
+  } : siteData.products.find(x => x.id === id);
 
   document.getElementById('prod-id').value = p.id;
   document.getElementById('prod-name').value = p.name || '';
   document.getElementById('prod-desc').value = p.description || '';
   document.getElementById('prod-price').value = p.price || '';
   document.getElementById('prod-price-wholesale').value = p.priceWholesale || '';
-  document.getElementById('prod-stock').value = p.stock || '';
+  document.getElementById('prod-stock').value = p.stockQty !== undefined ? p.stockQty : (p.stock || 0);
   document.getElementById('prod-rating').value = p.rating || '';
   document.getElementById('prod-amazon').value = p.amazonUrl || '';
   document.getElementById('prod-img').value = (p.images || []).join('\n');
+  document.getElementById('prod-brand').value = p.brand || '';
+  document.getElementById('prod-sku').value = p.sku || '';
+  document.getElementById('prod-featured').value = p.featured ? 'true' : 'false';
+  document.getElementById('prod-avail-amazon').value = p.availableOnAmazon !== false ? 'true' : 'false';
+  document.getElementById('prod-buynowurl').value = p.buyNowUrl || '';
+  document.getElementById('prod-weight').value = p.weight || '';
+  document.getElementById('prod-dimensions').value = p.dimensions || '';
+  document.getElementById('prod-material').value = p.material || '';
+  document.getElementById('prod-full-desc').value = p.fullDescription || '';
 
   buildCategoryDropdown('prod-category', p.category || '');
 
@@ -826,6 +899,8 @@ function editProduct(id) {
 
 function saveProduct() {
   const id = document.getElementById('prod-id').value;
+  const stockVal = parseInt(document.getElementById('prod-stock').value) || 0;
+  
   const p = {
     id: id,
     name: document.getElementById('prod-name').value,
@@ -838,7 +913,17 @@ function saveProduct() {
     images: document.getElementById('prod-img').value.split('\n').map(u => u.trim()).filter(u => u),
     features: Array.from(document.querySelectorAll('#prod-features-container input')).map(i => i.value).filter(v => v.trim()),
     rating: parseFloat(document.getElementById('prod-rating').value) || 0,
-    stock: parseInt(document.getElementById('prod-stock').value) || 0
+    stock: stockVal,
+    stockQty: stockVal,
+    brand: document.getElementById('prod-brand').value,
+    sku: document.getElementById('prod-sku').value || ('EZ-' + id.replace('prod-', '').toUpperCase()),
+    featured: document.getElementById('prod-featured').value === 'true',
+    availableOnAmazon: document.getElementById('prod-avail-amazon').value === 'true',
+    buyNowUrl: document.getElementById('prod-buynowurl').value,
+    weight: document.getElementById('prod-weight').value,
+    dimensions: document.getElementById('prod-dimensions').value,
+    material: document.getElementById('prod-material').value,
+    fullDescription: document.getElementById('prod-full-desc').value
   };
 
   if (!p.name) { showToast('Product name is required', 'error'); return; }
@@ -859,6 +944,7 @@ function deleteProduct(id) {
   populateUI();
   showToast('Product deleted locally. Publish to update live site.', 'info');
 }
+
 
 function addFeatureInput(containerId, value) {
   const c = document.querySelector(containerId);
