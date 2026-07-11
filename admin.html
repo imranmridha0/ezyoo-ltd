@@ -14,39 +14,44 @@
       --danger: #f87171; --text: #e8eaf6; --text-muted: #8892b0; --radius: 12px;
     }
     body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
-    
+
     /* Login Screen */
     #loginScreen { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: radial-gradient(ellipse at top left, #1a1040 0%, #0f1117 60%); }
-    .login-card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 48px 40px; width: 100%; max-width: 450px; text-align: center; box-shadow: 0 25px 60px rgba(108,99,255,0.15); }
+    .login-card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 48px 40px; width: 100%; max-width: 480px; text-align: center; box-shadow: 0 25px 60px rgba(108,99,255,0.15); }
     .login-logo { font-size: 2rem; font-weight: 800; background: linear-gradient(135deg, #6c63ff, #4fc3f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 8px; }
     .login-sub { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 32px; }
     .form-group { text-align: left; margin-bottom: 20px; }
     .form-group label { display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 500; }
-    input[type="text"], input[type="url"], input[type="password"], textarea, select { width: 100%; padding: 12px 16px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-size: 1rem; outline: none; transition: border-color 0.2s; font-family: inherit; }
+    .form-hint { font-size: 0.8rem; color: var(--text-muted); margin-top: 6px; line-height: 1.5; }
+    input[type="text"], input[type="url"], input[type="email"], input[type="number"], input[type="password"], input[type="date"], textarea, select { width: 100%; padding: 12px 16px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-size: 1rem; outline: none; transition: border-color 0.2s; font-family: inherit; }
     input:focus, textarea:focus, select:focus { border-color: var(--accent); }
     textarea { resize: vertical; min-height: 100px; }
+    select option { background: var(--bg); color: var(--text); }
     .btn-primary { width: 100%; padding: 14px; background: linear-gradient(135deg, #6c63ff, #4fc3f7); border: none; border-radius: var(--radius); color: white; font-weight: 700; font-size: 1rem; cursor: pointer; transition: opacity 0.2s; }
     .btn-primary:hover { opacity: 0.9; }
-    .btn-secondary { padding: 10px 20px; background: transparent; border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-weight: 600; cursor: pointer; }
+    .btn-secondary { padding: 10px 20px; background: transparent; border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-weight: 600; cursor: pointer; font-size: 0.9rem; }
     .btn-secondary:hover { background: var(--surface2); }
     .btn-danger { background: rgba(248,113,113,0.1); color: var(--danger); border: 1px solid rgba(248,113,113,0.2); }
     .btn-danger:hover { background: rgba(248,113,113,0.2); }
-    .login-error { color: var(--danger); font-size: 0.85rem; margin-top: 12px; display: none; }
-    
+    .btn-success { background: rgba(74,222,128,0.1); color: var(--success); border: 1px solid rgba(74,222,128,0.2); }
+    .btn-success:hover { background: rgba(74,222,128,0.2); }
+    .login-error { color: var(--danger); font-size: 0.85rem; margin-top: 12px; display: none; line-height: 1.5; }
+
     /* Layout */
     #adminPanel { display: none; }
     .admin-header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
     .admin-brand { font-weight: 800; font-size: 1.2rem; background: linear-gradient(135deg, #6c63ff, #4fc3f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     .header-actions { display: flex; gap: 12px; align-items: center; }
     .admin-body { display: flex; min-height: calc(100vh - 65px); }
-    .sidebar { width: 240px; background: var(--surface); border-right: 1px solid var(--border); padding: 24px 0; flex-shrink: 0; }
+    .sidebar { width: 240px; background: var(--surface); border-right: 1px solid var(--border); padding: 24px 0; flex-shrink: 0; overflow-y: auto; }
     .sidebar-label { font-size: 0.7rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; padding: 0 20px; margin-bottom: 8px; margin-top: 24px; }
     .sidebar-label:first-child { margin-top: 0; }
     .nav-item { display: flex; align-items: center; gap: 10px; padding: 11px 20px; cursor: pointer; font-size: 0.95rem; color: var(--text-muted); transition: all 0.2s; border-left: 3px solid transparent; }
     .nav-item:hover { background: var(--surface2); color: var(--text); }
     .nav-item.active { background: rgba(108,99,255,0.12); color: var(--accent); border-left-color: var(--accent); font-weight: 600; }
+    .nav-icon { width: 18px; text-align: center; }
     .content { flex: 1; padding: 32px; overflow-y: auto; max-width: 1000px; margin: 0 auto; }
-    
+
     /* Panels */
     .panel { display: none; animation: fadeIn 0.3s ease; }
     .panel.active { display: block; }
@@ -54,49 +59,73 @@
     .panel-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 28px; }
     .panel-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 6px; }
     .panel-desc { color: var(--text-muted); font-size: 0.95rem; }
-    
+
     /* Cards & Grids */
     .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; margin-bottom: 24px; }
     .card-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
     .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     .form-grid.single { grid-template-columns: 1fr; }
+    .form-grid.triple { grid-template-columns: 1fr 1fr 1fr; }
     .full-width { grid-column: 1 / -1; }
-    
-    /* Lists (Products/Posts) */
+    .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px; }
+    .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; text-align: center; cursor: pointer; transition: all 0.2s; }
+    .stat-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .stat-number { font-size: 2rem; font-weight: 800; background: linear-gradient(135deg, #6c63ff, #4fc3f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .stat-label { font-size: 0.8rem; color: var(--text-muted); margin-top: 4px; }
+
+    /* Lists */
     .item-list { display: grid; gap: 12px; }
     .item-row { display: flex; justify-content: space-between; align-items: center; padding: 16px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); transition: all 0.2s; }
     .item-row:hover { border-color: var(--accent); transform: translateX(4px); }
-    .item-info { display: flex; align-items: center; gap: 16px; }
-    .item-img { width: 48px; height: 48px; border-radius: 8px; object-fit: cover; background: var(--surface2); }
-    .item-title { font-weight: 600; font-size: 1rem; color: var(--text); margin-bottom: 4px; }
+    .item-info { display: flex; align-items: center; gap: 16px; flex: 1; min-width: 0; }
+    .item-img { width: 48px; height: 48px; border-radius: 8px; object-fit: cover; background: var(--surface2); flex-shrink: 0; }
+    .item-title { font-weight: 600; font-size: 1rem; color: var(--text); margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .item-meta { font-size: 0.8rem; color: var(--text-muted); }
-    .item-actions { display: flex; gap: 8px; }
-    
-    /* Features List */
+    .item-actions { display: flex; gap: 8px; flex-shrink: 0; }
+    .badge-tag { display: inline-block; padding: 2px 8px; border-radius: 6px; font-size: 0.7rem; font-weight: 600; }
+    .badge-green { background: rgba(74,222,128,0.15); color: var(--success); }
+    .badge-blue { background: rgba(108,99,255,0.15); color: var(--accent); }
+    .badge-amber { background: rgba(251,191,36,0.15); color: var(--warning); }
+
+    /* Feature items */
     .feature-item { display: flex; gap: 8px; margin-bottom: 8px; }
     .feature-item input { flex: 1; }
-    .btn-icon { padding: 12px; background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); cursor: pointer; }
+    .btn-icon { padding: 12px; background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); cursor: pointer; font-size: 0.9rem; }
     .btn-icon:hover { background: var(--border); }
     .btn-icon.danger:hover { background: rgba(248,113,113,0.1); color: var(--danger); border-color: rgba(248,113,113,0.2); }
-    
+
     /* Toast */
-    #toast { position: fixed; bottom: 32px; right: 32px; padding: 16px 24px; border-radius: var(--radius); font-weight: 600; font-size: 0.95rem; transform: translateY(100px); opacity: 0; transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1); z-index: 9999; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+    #toast { position: fixed; bottom: 32px; right: 32px; padding: 16px 24px; border-radius: var(--radius); font-weight: 600; font-size: 0.95rem; transform: translateY(100px); opacity: 0; transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1); z-index: 9999; box-shadow: 0 10px 30px rgba(0,0,0,0.5); max-width: 500px; }
     #toast.show { transform: translateY(0); opacity: 1; }
     .toast-success { background: var(--success); color: #0a1a0a; }
     .toast-error { background: var(--danger); color: white; }
     .toast-info { background: var(--accent); color: white; }
-    
-    /* Editor */
-    .editor-toolbar { display: flex; gap: 8px; padding: 8px; background: var(--surface2); border: 1px solid var(--border); border-bottom: none; border-radius: var(--radius) var(--radius) 0 0; }
-    .editor-toolbar button { background: transparent; border: none; color: var(--text); cursor: pointer; padding: 4px 8px; border-radius: 4px; }
-    .editor-toolbar button:hover { background: var(--border); }
-    .editor-content { min-height: 200px; padding: 16px; background: var(--bg); border: 1px solid var(--border); border-radius: 0 0 var(--radius) var(--radius); color: var(--text); outline: none; }
-    .editor-content:focus { border-color: var(--accent); }
-    
+
     /* Loader */
     .loader { display: none; align-items: center; justify-content: center; position: fixed; inset: 0; background: rgba(15,17,23,0.8); backdrop-filter: blur(4px); z-index: 9999; flex-direction: column; gap: 16px; }
     .spinner { width: 40px; height: 40px; border: 3px solid rgba(108,99,255,0.2); border-top-color: var(--accent); border-radius: 50%; animation: spin 1s linear infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Category editor */
+    .cat-row { display: flex; gap: 8px; margin-bottom: 8px; align-items: center; }
+    .cat-row input { flex: 1; }
+    .cat-row input.cat-icon { max-width: 60px; text-align: center; }
+    .cat-row input.cat-id { max-width: 120px; font-family: monospace; font-size: 0.85rem; }
+
+    /* Info box */
+    .info-box { padding: 16px; border-radius: var(--radius); font-size: 0.9rem; line-height: 1.6; margin-bottom: 20px; }
+    .info-box.warning { background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.2); color: var(--warning); }
+    .info-box.info { background: rgba(79,195,247,0.1); border: 1px solid rgba(79,195,247,0.2); color: var(--accent2); }
+    .info-box code { background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px; font-size: 0.85em; }
+
+    @media (max-width: 768px) {
+      .sidebar { display: none; }
+      .stat-grid { grid-template-columns: 1fr 1fr; }
+      .form-grid { grid-template-columns: 1fr; }
+      .form-grid.triple { grid-template-columns: 1fr; }
+      .admin-header { padding: 12px 16px; }
+      .content { padding: 16px; }
+    }
   </style>
 </head>
 <body>
@@ -111,16 +140,19 @@
 <div id="loginScreen">
   <div class="login-card">
     <div class="login-logo">EAZYOO CMS</div>
-    <p class="login-sub">Connect to GitHub to manage content</p>
+    <p class="login-sub">Connect to GitHub to manage your website content</p>
     <div class="form-group">
-      <label>GitHub Repository <span style="color:var(--text-muted); font-size:0.8rem;">(owner/repo-name)</span></label>
-      <input type="text" id="repoName" placeholder="e.g. yourname/eazyoo-website" value="">
-      <div style="font-size:0.8rem; color:var(--text-muted); margin-top:6px;">Find this in your GitHub repo URL after github.com/</div>
+      <label>GitHub Repository</label>
+      <input type="text" id="repoName" value="imranmridha0/ezyoo-ltd" disabled>
     </div>
     <div class="form-group">
       <label>Personal Access Token (PAT)</label>
-      <input type="password" id="ghToken" placeholder="ghp_xxxxxxxxxxxx" onkeydown="if(event.key==='Enter') login()">
-      <div style="font-size:0.8rem; color:var(--text-muted); margin-top:8px; text-align:left;">Needs 'repo' or 'contents' scope. <a href="https://github.com/settings/tokens" target="_blank" rel="noopener" style="color:var(--accent)">Generate one here →</a></div>
+      <input type="password" id="ghToken" placeholder="ghp_xxxxxxxxxxxx or github_pat_xxxx" onkeydown="if(event.key==='Enter') login()">
+      <div class="form-hint">
+        <strong>Classic token:</strong> needs <code>repo</code> scope.<br>
+        <strong>Fine-grained token:</strong> needs <em>Contents: Read and write</em> permission on this repo.<br>
+        <a href="https://github.com/settings/tokens/new" target="_blank" rel="noopener" style="color:var(--accent2);">Create a token on GitHub &rarr;</a>
+      </div>
     </div>
     <button class="btn-primary" onclick="login()">Connect &rarr;</button>
     <div class="login-error" id="loginError"></div>
@@ -132,12 +164,13 @@
   <header class="admin-header">
     <div class="admin-brand">EAZYOO CMS</div>
     <div class="header-actions">
-      <a href="index.html" target="_blank" class="btn-secondary" style="font-size:0.85rem; padding:8px 16px;">View Site</a>
+      <button class="btn-secondary" onclick="exportBackup()" title="Download data.json backup">Backup</button>
+      <a href="index.html" target="_blank" class="btn-secondary">View Site</a>
       <button class="btn-primary" style="width:auto; padding:8px 24px;" onclick="saveToGitHub()">Publish Changes</button>
-      <button class="btn-secondary" style="font-size:0.85rem; padding:8px 16px; border-color:var(--border);" onclick="logout()">Disconnect</button>
+      <button class="btn-secondary" style="border-color:var(--border);" onclick="logout()">Disconnect</button>
     </div>
   </header>
-  
+
   <div class="admin-body">
     <aside class="sidebar">
       <div class="sidebar-label">Content</div>
@@ -152,27 +185,25 @@
       <div class="nav-item" onclick="switchPanel('settings')">⚙️ General Settings</div>
       <div class="nav-item" onclick="switchPanel('seo')">🔍 SEO &amp; Meta</div>
     </aside>
-    
+
     <main class="content">
-      
-      <!-- Dashboard -->
+
+      <!-- ==================== DASHBOARD ==================== -->
       <div class="panel active" id="panel-dashboard">
         <div class="panel-header">
           <div>
-            <h1 class="panel-title">Welcome to EAZYOO CMS</h1>
-            <p class="panel-desc">Manage your products, blog posts, and website settings from here.</p>
+            <h1 class="panel-title">Dashboard</h1>
+            <p class="panel-desc">Overview of your website content and quick actions.</p>
           </div>
         </div>
-        <div class="form-grid">
-          <div class="card" style="text-align:center; cursor:pointer;" onclick="switchPanel('products')">
-            <div style="font-size:3rem; margin-bottom:12px;">🛍️</div>
-            <h3>Products</h3>
-            <p style="color:var(--text-muted); margin-top:8px;"><span id="stat-products">0</span> active products</p>
+        <div class="stat-grid" style="grid-template-columns:repeat(5,1fr);">
+          <div class="stat-card" onclick="switchPanel('products')">
+            <div class="stat-number" id="stat-products">0</div>
+            <div class="stat-label">Products</div>
           </div>
-          <div class="card" style="text-align:center; cursor:pointer;" onclick="switchPanel('posts')">
-            <div style="font-size:3rem; margin-bottom:12px;">📝</div>
-            <h3>Blog Posts</h3>
-            <p style="color:var(--text-muted); margin-top:8px;"><span id="stat-posts">0</span> published posts</p>
+          <div class="stat-card" onclick="switchPanel('categories')">
+            <div class="stat-number" id="stat-categories">0</div>
+            <div class="stat-label">Categories</div>
           </div>
           <div class="card" style="text-align:center; cursor:pointer;" onclick="switchPanel('noticeboard')">
             <div style="font-size:3rem; margin-bottom:12px;">📢</div>
@@ -182,7 +213,7 @@
         </div>
       </div>
 
-      <!-- Products List -->
+      <!-- ==================== PRODUCTS LIST ==================== -->
       <div class="panel" id="panel-products">
         <div class="panel-header">
           <div>
@@ -192,34 +223,54 @@
           <button class="btn-primary" style="width:auto; padding:10px 20px;" onclick="editProduct('new')">+ Add Product</button>
         </div>
         <div class="card">
-          <div class="item-list" id="productsList">
-            <!-- Populated via JS -->
-          </div>
+          <div class="item-list" id="productsList"></div>
         </div>
       </div>
 
-      <!-- Product Editor -->
+      <!-- ==================== PRODUCT EDITOR ==================== -->
       <div class="panel" id="panel-edit-product">
         <div class="panel-header">
-          <div>
-            <h1 class="panel-title" id="productEditorTitle">Edit Product</h1>
-          </div>
+          <div><h1 class="panel-title" id="productEditorTitle">Edit Product</h1></div>
           <div style="display:flex; gap:12px;">
             <button class="btn-secondary" onclick="switchPanel('products')">Cancel</button>
-            <button class="btn-primary" style="width:auto;" onclick="saveProduct()">Done</button>
+            <button class="btn-primary" style="width:auto;" onclick="saveProduct()">Save Product</button>
           </div>
         </div>
         <input type="hidden" id="prod-id">
         <div class="card">
+          <div class="card-title">Basic Info</div>
           <div class="form-grid">
-            <div class="form-group full-width"><label>Product Name</label><input type="text" id="prod-name"></div>
-            <div class="form-group full-width"><label>Short Description</label><input type="text" id="prod-desc"></div>
-            <div class="form-group"><label>Retail Price (e.g. 14.99)</label><input type="text" id="prod-price"></div>
-            <div class="form-group"><label>Wholesale Price (e.g. 8.50)</label><input type="text" id="prod-price-wholesale"></div>
-            <div class="form-group"><label>Badge / Rating Text</label><input type="text" id="prod-badge" placeholder="e.g. 4.4 stars"></div>
-            <div class="form-group"><label>Category</label><input type="text" id="prod-category"></div>
-            <div class="form-group full-width"><label>Amazon URL</label><input type="url" id="prod-amazon"></div>
-            <div class="form-group full-width"><label>Image URLs (one per line)</label><textarea id="prod-img" style="min-height:80px; font-family:monospace;"></textarea></div>
+            <div class="form-group full-width"><label>Product Name</label><input type="text" id="prod-name" placeholder="e.g. Collapsible Cutting Board"></div>
+            <div class="form-group full-width"><label>Short Description</label><input type="text" id="prod-desc" placeholder="Brief product description"></div>
+            <div class="form-group"><label>Category</label><select id="prod-category"></select></div>
+            <div class="form-group"><label>Badge</label>
+              <select id="prod-badge">
+                <option value="">None</option>
+                <option value="Best Seller">Best Seller</option>
+                <option value="New">New</option>
+                <option value="Sale">Sale</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Pricing &amp; Stock</div>
+          <div class="form-grid triple">
+            <div class="form-group"><label>Retail Price (GBP)</label><input type="text" id="prod-price" placeholder="14.99"></div>
+            <div class="form-group"><label>Wholesale Price (GBP)</label><input type="text" id="prod-price-wholesale" placeholder="8.50"></div>
+            <div class="form-group"><label>Stock Quantity</label><input type="number" id="prod-stock" placeholder="100"></div>
+          </div>
+          <div class="form-grid">
+            <div class="form-group"><label>Rating (1-5)</label><input type="number" id="prod-rating" min="0" max="5" step="0.1" placeholder="4.5"></div>
+            <div class="form-group"><label>Amazon URL</label><input type="url" id="prod-amazon" placeholder="https://www.amazon.co.uk/dp/..."></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Images</div>
+          <div class="form-group">
+            <label>Image URLs (one per line)</label>
+            <textarea id="prod-img" style="min-height:80px; font-family:monospace;" placeholder="images/product.png&#10;https://placehold.co/600x600/e2e8f0/475569?text=Product"></textarea>
+            <div class="form-hint">First image is the main product image. Use relative paths for local images (e.g. images/photo.png) or full URLs.</div>
           </div>
         </div>
         <div class="card">
@@ -229,7 +280,26 @@
         </div>
       </div>
 
-      <!-- Posts List -->
+      <!-- ==================== CATEGORIES ==================== -->
+      <div class="panel" id="panel-categories">
+        <div class="panel-header">
+          <div>
+            <h1 class="panel-title">Categories</h1>
+            <p class="panel-desc">Manage product categories displayed on the site.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Category List</div>
+          <div class="info-box info">Each category needs: an <strong>Icon</strong> (emoji), a <strong>Name</strong>, an <strong>ID</strong> (lowercase, hyphenated), and a <strong>Description</strong>.</div>
+          <div id="categories-editor"></div>
+          <button class="btn-secondary" style="width:100%; margin-top:12px; border-style:dashed;" onclick="addCategoryRow()">+ Add Category</button>
+        </div>
+        <div style="text-align:right; margin-top:12px;">
+          <button class="btn-primary" style="width:auto; padding:10px 24px;" onclick="saveCategories()">Save Categories</button>
+        </div>
+      </div>
+
+      <!-- ==================== BLOG POSTS LIST ==================== -->
       <div class="panel" id="panel-posts">
         <div class="panel-header">
           <div>
@@ -239,37 +309,32 @@
           <button class="btn-primary" style="width:auto; padding:10px 20px;" onclick="editPost('new')">+ Write Post</button>
         </div>
         <div class="card">
-          <div class="item-list" id="postsList">
-            <!-- Populated via JS -->
-          </div>
+          <div class="item-list" id="postsList"></div>
         </div>
       </div>
 
-      <!-- Post Editor -->
+      <!-- ==================== POST EDITOR ==================== -->
       <div class="panel" id="panel-edit-post">
         <div class="panel-header">
-          <div>
-            <h1 class="panel-title" id="postEditorTitle">Edit Post</h1>
-          </div>
+          <div><h1 class="panel-title" id="postEditorTitle">Edit Post</h1></div>
           <div style="display:flex; gap:12px;">
             <button class="btn-secondary" onclick="switchPanel('posts')">Cancel</button>
-            <button class="btn-primary" style="width:auto;" onclick="savePost()">Done</button>
+            <button class="btn-primary" style="width:auto;" onclick="savePost()">Save Post</button>
           </div>
         </div>
         <input type="hidden" id="post-id">
         <div class="card">
           <div class="form-grid">
-            <div class="form-group full-width"><label>Post Title</label><input type="text" id="post-title"></div>
+            <div class="form-group full-width"><label>Post Title</label><input type="text" id="post-title" placeholder="Your blog post title"></div>
             <div class="form-group"><label>Publish Date</label><input type="date" id="post-date"></div>
-            <div class="form-group"><label>Featured Image URL</label><input type="url" id="post-img"></div>
-            <div class="form-group full-width"><label>Short Excerpt</label><textarea id="post-excerpt" style="min-height:60px"></textarea></div>
+            <div class="form-group"><label>Featured Image URL</label><input type="url" id="post-img" placeholder="images/blog-image.png"></div>
+            <div class="form-group full-width"><label>Short Excerpt</label><textarea id="post-excerpt" style="min-height:60px" placeholder="Brief summary shown on the blog listing page"></textarea></div>
           </div>
         </div>
         <div class="card">
-          <div class="card-title">Post Content (HTML allowed)</div>
-          <div class="form-group">
-            <textarea id="post-content" style="min-height:300px; font-family:monospace;"></textarea>
-          </div>
+          <div class="card-title">Post Content (HTML)</div>
+          <div class="form-hint" style="margin-bottom:12px;">Use HTML tags: &lt;p&gt;, &lt;h3&gt;, &lt;strong&gt;, &lt;em&gt;, &lt;ul&gt;&lt;li&gt;, &lt;a href="..."&gt;</div>
+          <textarea id="post-content" style="min-height:300px; font-family:monospace;"></textarea>
         </div>
       </div>
 
@@ -344,7 +409,7 @@
         <div class="panel-header">
           <div>
             <h1 class="panel-title">General Settings</h1>
-            <p class="panel-desc">Update brand info, hero section, and contact details.</p>
+            <p class="panel-desc">Update brand info, hero section, contact details, and integrations.</p>
           </div>
         </div>
         <div class="card">
@@ -352,26 +417,37 @@
           <div class="form-grid">
             <div class="form-group"><label>Brand Name</label><input type="text" id="set-brandName"></div>
             <div class="form-group"><label>Hero Tagline</label><input type="text" id="set-heroTagline"></div>
-            <div class="form-group full-width"><label>Hero Subtitle</label><textarea id="set-heroSubtitle"></textarea></div>
-            <div class="form-group full-width"><label>Hero Image URL</label><input type="url" id="set-heroImgUrl"></div>
+            <div class="form-group full-width"><label>Hero Subtitle</label><textarea id="set-heroSubtitle" style="min-height:60px;"></textarea></div>
+            <div class="form-group full-width"><label>Hero Image URL</label><input type="text" id="set-heroImgUrl" placeholder="images/hero-banner.png"></div>
             <div class="form-group"><label>CTA Button Text</label><input type="text" id="set-ctaText"></div>
-            <div class="form-group"><label>CTA Button URL</label><input type="url" id="set-ctaUrl"></div>
+            <div class="form-group"><label>CTA Button URL</label><input type="text" id="set-ctaUrl"></div>
+            <div class="form-group"><label>Nav CTA Text</label><input type="text" id="set-navCtaText" placeholder="Become a Stockist"></div>
           </div>
         </div>
         <div class="card">
           <div class="card-title">Contact &amp; Social</div>
           <div class="form-grid">
-            <div class="form-group"><label>Email Address</label><input type="email" id="set-contactEmail"></div>
-            <div class="form-group"><label>Phone Number</label><input type="text" id="set-contactPhone"></div>
-            <div class="form-group"><label>Facebook</label><input type="url" id="set-socialFb"></div>
-            <div class="form-group"><label>Instagram</label><input type="url" id="set-socialIg"></div>
-            <div class="form-group"><label>TikTok</label><input type="url" id="set-socialTt"></div>
-            <div class="form-group"><label>YouTube</label><input type="url" id="set-socialYt"></div>
+            <div class="form-group"><label>Email Address</label><input type="email" id="set-contactEmail" placeholder="hello@eazyoo.co.uk"></div>
+            <div class="form-group"><label>Phone Number</label><input type="text" id="set-contactPhone" placeholder="+44 xxxx xxxxxx"></div>
+            <div class="form-group"><label>Facebook URL</label><input type="text" id="set-socialFb" placeholder="https://facebook.com/eazyoo"></div>
+            <div class="form-group"><label>Instagram URL</label><input type="text" id="set-socialIg" placeholder="https://instagram.com/eazyoo"></div>
+            <div class="form-group"><label>TikTok URL</label><input type="text" id="set-socialTt" placeholder="https://tiktok.com/@eazyoo"></div>
+            <div class="form-group"><label>YouTube URL</label><input type="text" id="set-socialYt" placeholder="https://youtube.com/@eazyoo"></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Integrations</div>
+          <div class="form-grid single">
+            <div class="form-group">
+              <label>Snipcart API Key</label>
+              <input type="text" id="set-snipcartApiKey" placeholder="Your Snipcart public API key">
+              <div class="form-hint">Required for checkout to work. Get your key from <a href="https://app.snipcart.com" target="_blank" rel="noopener" style="color:var(--accent2);">app.snipcart.com</a>. Leave empty to use test mode.</div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- SEO Settings -->
+      <!-- ==================== SEO SETTINGS ==================== -->
       <div class="panel" id="panel-seo">
         <div class="panel-header">
           <div>
@@ -384,12 +460,104 @@
             <div class="form-group">
               <label>Global Meta Title</label>
               <input type="text" id="seo-metaTitle">
-              <div style="font-size:0.8rem; color:var(--text-muted); margin-top:4px;">Appears in browser tabs and Google search results.</div>
+              <div class="form-hint">Appears in browser tabs and Google search results. Keep under 60 characters.</div>
             </div>
             <div class="form-group">
               <label>Global Meta Description</label>
               <textarea id="seo-metaDescription"></textarea>
-              <div style="font-size:0.8rem; color:var(--text-muted); margin-top:4px;">Brief summary of your site (150-160 characters recommended).</div>
+              <div class="form-hint">Brief summary shown in Google results. 150-160 characters recommended.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== WHOLESALE / B2B SETTINGS ==================== -->
+      <div class="panel" id="panel-wholesale-settings">
+        <div class="panel-header">
+          <div>
+            <h1 class="panel-title">Wholesale / B2B</h1>
+            <p class="panel-desc">Manage B2B portal access and wholesale settings.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">B2B Access Code</div>
+          <div class="info-box warning">The B2B access code allows approved stockists to view wholesale pricing on the products page. Share this code only with approved partners.</div>
+          <div class="form-group">
+            <label>Current Access Code</label>
+            <div style="display:flex; gap:12px;">
+              <input type="text" id="b2b-code-display" value="B2B_EAZYOO" style="flex:1; font-family:monospace; font-size:1.1rem; letter-spacing:2px;">
+              <button class="btn-secondary" onclick="navigator.clipboard.writeText(document.getElementById('b2b-code-display').value); showToast('Code copied!','info')">Copy</button>
+            </div>
+            <div class="form-hint">To change the code, edit the <code>loginB2B()</code> function in <code>wholesale.html</code>.</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Wholesale Pricing</div>
+          <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:16px;">Wholesale prices are set per product in the Products editor. When a stockist logs in with the B2B code, they see wholesale prices instead of retail.</p>
+          <div id="wholesale-price-list"></div>
+        </div>
+      </div>
+
+      <!-- ==================== SUBSCRIBERS ==================== -->
+      <div class="panel" id="panel-subscribers">
+        <div class="panel-header">
+          <div>
+            <h1 class="panel-title">Newsletter Subscribers</h1>
+            <p class="panel-desc">Visitors who signed up via the footer newsletter form.</p>
+          </div>
+          <button class="btn-secondary btn-success" onclick="exportSubscribers()">Export CSV</button>
+        </div>
+        <div class="card">
+          <div class="card-title">Subscriber List</div>
+          <div class="info-box info">Subscribers are stored in each visitor's browser (localStorage). Export regularly to keep a master list.</div>
+          <div id="subscribers-list"></div>
+        </div>
+      </div>
+
+      <!-- ==================== ACCOUNTS ==================== -->
+      <div class="panel" id="panel-accounts">
+        <div class="panel-header">
+          <div>
+            <h1 class="panel-title">Customer Accounts</h1>
+            <p class="panel-desc">View and manage registered customers and wholesale applicants.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Registered Users</div>
+          <div class="info-box info">Accounts are stored in each visitor's browser (localStorage). Users who register on <strong>account.html</strong> appear here. Approve wholesale applicants to grant them B2B access.</div>
+          <div id="accounts-list"></div>
+        </div>
+      </div>
+
+      <!-- ==================== BACKUP & EXPORT ==================== -->
+      <div class="panel" id="panel-backup">
+        <div class="panel-header">
+          <div>
+            <h1 class="panel-title">Backup &amp; Export</h1>
+            <p class="panel-desc">Download your site data or restore from a backup.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Export Data</div>
+          <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:16px;">Download your entire site data (products, posts, categories, settings) as a JSON file.</p>
+          <button class="btn-secondary btn-success" onclick="exportBackup()">Download data.json Backup</button>
+        </div>
+        <div class="card">
+          <div class="card-title">Import / Restore Data</div>
+          <div class="info-box warning">Importing will <strong>replace all current data</strong>. Make sure to backup first!</div>
+          <input type="file" id="importFile" accept=".json" style="margin-bottom:12px;" onchange="importBackup(event)">
+          <div class="form-hint">Select a previously exported data.json file to restore.</div>
+        </div>
+        <div class="card">
+          <div class="card-title">GitHub Info</div>
+          <div class="form-grid">
+            <div>
+              <div style="font-size:0.8rem; color:var(--text-muted); margin-bottom:4px;">Repository</div>
+              <div style="font-weight:600;">imranmridha0/ezyoo-ltd</div>
+            </div>
+            <div>
+              <div style="font-size:0.8rem; color:var(--text-muted); margin-bottom:4px;">Live URL</div>
+              <a href="https://www.eazyoo.co.uk" target="_blank" rel="noopener" style="color:var(--accent2); font-weight:600;">www.eazyoo.co.uk</a>
             </div>
           </div>
         </div>
@@ -405,66 +573,63 @@
 // ==========================================
 // STATE & GITHUB API
 // ==========================================
-let REPO = '';
+const REPO = 'imranmridha0/ezyoo-ltd';
 const DATA_FILE = 'data.json';
-let siteData = { settings:{}, seo:{}, products:[], posts:[] };
+let siteData = { settings:{}, seo:{}, categories:[], products:[], posts:[] };
 let fileSha = '';
 
-// Check if token + repo exists on load
 window.onload = () => {
   const token = localStorage.getItem('eazyoo_gh_token');
-  const savedRepo = localStorage.getItem('eazyoo_gh_repo');
   if (token) {
     document.getElementById('ghToken').value = token;
-  }
-  if (savedRepo) {
-    document.getElementById('repoName').value = savedRepo;
-  }
-  if (token && savedRepo) {
     login();
   }
 };
 
+function getAuthHeader(token) {
+  if (token.startsWith('github_pat_')) {
+    return { 'Authorization': 'Bearer ' + token };
+  }
+  return { 'Authorization': 'token ' + token };
+}
+
 async function login() {
   const token = document.getElementById('ghToken').value.trim();
-  const repoInput = document.getElementById('repoName').value.trim();
   if (!token) return showError('Token is required');
-  if (!repoInput || !repoInput.includes('/')) return showError('Enter a valid repo (e.g. yourname/repo-name)');
-  
-  REPO = repoInput;
-  
+
   showLoader('Connecting to GitHub...');
   try {
-    const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${DATA_FILE}`, {
-      headers: { 'Authorization': `token ${token}` }
-    });
-    
-    if (res.status === 401) throw new Error('Invalid Token — please check and try again.');
-    if (res.status === 403) throw new Error('Token lacks permission. Enable "repo" or "contents:write" scope.');
+    const headers = getAuthHeader(token);
+    const res = await fetch('https://api.github.com/repos/' + REPO + '/contents/' + DATA_FILE, { headers });
+
+    if (res.status === 401) throw new Error('Invalid token. Please check your Personal Access Token.');
+    if (res.status === 403) {
+      const errData = await res.json();
+      throw new Error('Access denied: ' + (errData.message || 'Token lacks required permissions.') + '\n\nFor classic tokens: enable "repo" scope.\nFor fine-grained tokens: grant "Contents: Read and write" on this repo.');
+    }
     if (res.status === 404) {
-      // File doesn't exist yet, that's fine — we'll create it on first publish
-      siteData = { settings:{}, seo:{}, products:[], posts:[] };
+      siteData = { settings:{}, seo:{}, categories:[], products:[], posts:[] };
     } else if (res.ok) {
       const data = await res.json();
       fileSha = data.sha;
-      // Decode Base64 (handle utf8 safely)
-      const content = decodeURIComponent(escape(atob(data.content)));
+      const raw = data.content.replace(/\n/g, '');
+      const content = decodeURIComponent(escape(atob(raw)));
       siteData = JSON.parse(content);
     } else {
-      throw new Error('API Error: ' + res.status);
+      const errData = await res.json().catch(() => ({}));
+      throw new Error('GitHub API error (' + res.status + '): ' + (errData.message || 'Unknown error'));
     }
-    
+
     localStorage.setItem('eazyoo_gh_token', token);
-    localStorage.setItem('eazyoo_gh_repo', REPO);
     document.getElementById('loginScreen').style.display = 'none';
     document.getElementById('adminPanel').style.display = 'block';
-    
-    // Make sure structure exists
-    if(!siteData.products) siteData.products = [];
-    if(!siteData.posts) siteData.posts = [];
-    if(!siteData.settings) siteData.settings = {};
-    if(!siteData.seo) siteData.seo = {};
-    
+
+    if (!siteData.products) siteData.products = [];
+    if (!siteData.posts) siteData.posts = [];
+    if (!siteData.settings) siteData.settings = {};
+    if (!siteData.seo) siteData.seo = {};
+    if (!siteData.categories) siteData.categories = [];
+
     populateUI();
     hideLoader();
   } catch (err) {
@@ -475,8 +640,6 @@ async function login() {
 
 function logout() {
   localStorage.removeItem('eazyoo_gh_token');
-  localStorage.removeItem('eazyoo_gh_repo');
-  REPO = '';
   document.getElementById('adminPanel').style.display = 'none';
   document.getElementById('loginScreen').style.display = 'flex';
   document.getElementById('ghToken').value = '';
@@ -485,40 +648,41 @@ function logout() {
 async function saveToGitHub() {
   const token = localStorage.getItem('eazyoo_gh_token');
   if (!token) return;
-  
-  // Scrape settings and SEO from inputs before saving
+
   syncSettingsFromUI();
-  
-  showLoader('Publishing to GitHub... (This updates the live site)');
+
+  showLoader('Publishing to GitHub...');
   try {
     const contentStr = JSON.stringify(siteData, null, 2);
     const base64Content = btoa(unescape(encodeURIComponent(contentStr)));
-    
-    const body = {
-      message: 'CMS Update via Admin Panel',
-      content: base64Content
-    };
-    if (fileSha) body.sha = fileSha; // Required to update existing file
-    
-    const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${DATA_FILE}`, {
-      method: 'PUT',
-      headers: { 'Authorization': `token ${token}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify(body)
+
+    const body = { message: 'CMS Update via Admin Panel', content: base64Content };
+    if (fileSha) body.sha = fileSha;
+
+    const headers = { ...getAuthHeader(token), 'Content-Type': 'application/json' };
+    const res = await fetch('https://api.github.com/repos/' + REPO + '/contents/' + DATA_FILE, {
+      method: 'PUT', headers, body: JSON.stringify(body)
     });
-    
+
     if (!res.ok) {
-      const errData = await res.json();
-      throw new Error(errData.message || 'Failed to push');
+      const errData = await res.json().catch(() => ({}));
+      if (res.status === 403) {
+        throw new Error('Permission denied. Your token cannot write to this repo.\n\nClassic token: needs "repo" scope.\nFine-grained token: needs "Contents: Read and write".\n\nGo to github.com/settings/tokens to update your token.');
+      }
+      if (res.status === 409) {
+        throw new Error('Conflict: the file was changed on GitHub since you loaded it. Refresh the page and try again.');
+      }
+      throw new Error(errData.message || 'Failed to publish (HTTP ' + res.status + ')');
     }
-    
+
     const data = await res.json();
-    fileSha = data.content.sha; // update SHA for next save
-    
+    fileSha = data.content.sha;
+
     hideLoader();
-    showToast('Success! Live site will update in ~1 minute.', 'success');
+    showToast('Published! Live site updates in ~1-3 minutes.', 'success');
   } catch (err) {
     hideLoader();
-    showToast('Error: ' + err.message, 'error');
+    showToast(err.message, 'error');
   }
 }
 
@@ -528,18 +692,24 @@ async function saveToGitHub() {
 function switchPanel(name) {
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.sidebar .nav-item').forEach(n => n.classList.remove('active'));
-  
-  document.getElementById('panel-' + name).classList.add('active');
-  const nav = Array.from(document.querySelectorAll('.sidebar .nav-item')).find(el => el.textContent.toLowerCase().includes(name.split('-')[0]));
-  if(nav) nav.classList.add('active');
-  
+
+  const panel = document.getElementById('panel-' + name);
+  if (panel) panel.classList.add('active');
+
+  const nav = document.querySelector('.sidebar .nav-item[data-panel="' + name + '"]');
+  if (nav) nav.classList.add('active');
+
   if (name === 'products') renderProductsList();
   if (name === 'posts') renderPostsList();
+  if (name === 'categories') renderCategoriesEditor();
+  if (name === 'wholesale-settings') renderWholesalePrices();
+  if (name === 'subscribers') renderSubscribers();
+  if (name === 'accounts') renderAccounts();
 }
 
 function populateUI() {
-  // Stats
   document.getElementById('stat-products').textContent = siteData.products.length;
+  document.getElementById('stat-categories').textContent = siteData.categories.length;
   document.getElementById('stat-posts').textContent = siteData.posts.length;
 
   // Noticeboard stat
@@ -549,9 +719,10 @@ function populateUI() {
   
   // Settings
   const s = siteData.settings;
-  const ids = ['brandName','heroTagline','heroSubtitle','heroImgUrl','ctaText','ctaUrl','contactEmail','contactPhone','socialFb','socialIg','socialTt','socialYt'];
+  const ids = ['brandName','heroTagline','heroSubtitle','heroImgUrl','ctaText','ctaUrl','navCtaText','contactEmail','contactPhone','socialFb','socialIg','socialTt','socialYt','snipcartApiKey'];
   ids.forEach(id => {
-    if(document.getElementById('set-'+id)) document.getElementById('set-'+id).value = s[id] || '';
+    const el = document.getElementById('set-' + id);
+    if (el) el.value = s[id] || '';
   });
 
   // Noticeboard fields
@@ -568,9 +739,10 @@ function populateUI() {
 }
 
 function syncSettingsFromUI() {
-  const ids = ['brandName','heroTagline','heroSubtitle','heroImgUrl','ctaText','ctaUrl','contactEmail','contactPhone','socialFb','socialIg','socialTt','socialYt'];
+  const ids = ['brandName','heroTagline','heroSubtitle','heroImgUrl','ctaText','ctaUrl','navCtaText','contactEmail','contactPhone','socialFb','socialIg','socialTt','socialYt','snipcartApiKey'];
   ids.forEach(id => {
-    siteData.settings[id] = document.getElementById('set-'+id).value;
+    const el = document.getElementById('set-' + id);
+    if (el) siteData.settings[id] = el.value;
   });
   // Noticeboard
   if (document.getElementById('nb-enabled')) {
@@ -603,56 +775,52 @@ function previewNoticeboard() {
 function renderProductsList() {
   const list = document.getElementById('productsList');
   if (siteData.products.length === 0) {
-    list.innerHTML = '<div style="padding:24px;text-align:center;color:var(--text-muted)">No products found. Add one!</div>';
+    list.innerHTML = '<div style="padding:24px;text-align:center;color:var(--text-muted)">No products yet. Click "+ Add Product" to get started.</div>';
     return;
   }
-  
+
   list.innerHTML = siteData.products.map(p => {
-    // Support both p.images[] array AND legacy p.imgUrl string
-    const thumbSrc = (p.images && p.images.length > 0) ? p.images[0] : (p.imgUrl || '');
-    const thumbDisplay = thumbSrc
-      ? `<img src="${thumbSrc}" class="item-img" onerror="this.style.display='none'">`
-      : `<div class="item-img" style="background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:1.5rem;">📦</div>`;
-    return `
-    <div class="item-row">
-      <div class="item-info">
-        ${thumbDisplay}
-        <div>
-          <div class="item-title">${p.name}</div>
-          <div class="item-meta">${p.category || 'Uncategorized'} &middot; £${p.price || '0.00'} ${p.badge ? `<span style="background:var(--accent);color:white;padding:1px 6px;border-radius:4px;font-size:0.7rem;">${p.badge}</span>` : ''}</div>
-        </div>
-      </div>
-      <div class="item-actions">
-        <button class="btn-icon" onclick="editProduct('${p.id}')">✏️</button>
-        <button class="btn-icon danger" onclick="deleteProduct('${p.id}')">🗑️</button>
-      </div>
-    </div>
-  `;
+    const img = (p.images && p.images.length > 0) ? p.images[0] : (p.imgUrl || 'https://placehold.co/48x48/22263a/8892b0?text=?');
+    const cat = (siteData.categories || []).find(c => c.id === p.category);
+    const catName = cat ? cat.name : (p.category || 'Uncategorized');
+    const badgeHtml = p.badge ? ' <span class="badge-tag ' + (p.badge === 'Best Seller' ? 'badge-green' : p.badge === 'New' ? 'badge-blue' : 'badge-amber') + '">' + p.badge + '</span>' : '';
+    return '<div class="item-row"><div class="item-info"><img src="' + img + '" class="item-img" onerror="this.src=\'https://placehold.co/48x48/22263a/8892b0?text=?\'"><div><div class="item-title">' + p.name + badgeHtml + '</div><div class="item-meta">' + catName + ' &middot; £' + (p.price || '0.00') + (p.priceWholesale ? ' (W: £' + p.priceWholesale + ')' : '') + ' &middot; ★' + (p.rating || '-') + '</div></div></div><div class="item-actions"><button class="btn-icon" onclick="editProduct(\'' + p.id + '\')">✏️</button><button class="btn-icon danger" onclick="deleteProduct(\'' + p.id + '\')">🗑️</button></div></div>';
   }).join('');
+}
+
+function buildCategoryDropdown(selectId, selectedValue) {
+  const sel = document.getElementById(selectId);
+  sel.innerHTML = '<option value="">Select category...</option>' +
+    (siteData.categories || []).map(c => '<option value="' + c.id + '"' + (c.id === selectedValue ? ' selected' : '') + '>' + c.icon + ' ' + c.name + '</option>').join('');
 }
 
 function editProduct(id) {
   const isNew = id === 'new';
   document.getElementById('productEditorTitle').textContent = isNew ? 'Add Product' : 'Edit Product';
-  
-  let p = isNew ? { id: 'p_'+Date.now(), name:'', description:'', price:'', priceWholesale:'', badge:'', category:'', amazonUrl:'', images:[], features:[] } 
-                : siteData.products.find(x => x.id === id);
-                
+
+  const p = isNew ? { id: 'prod-' + Date.now(), name:'', description:'', price:'', priceWholesale:'', badge:'', category:'', amazonUrl:'', images:[], features:[], rating: '', stock: '' }
+               : siteData.products.find(x => x.id === id);
+
   document.getElementById('prod-id').value = p.id;
   document.getElementById('prod-name').value = p.name || '';
   document.getElementById('prod-desc').value = p.description || '';
   document.getElementById('prod-price').value = p.price || '';
   document.getElementById('prod-price-wholesale').value = p.priceWholesale || '';
-  document.getElementById('prod-badge').value = p.badge || '';
-  document.getElementById('prod-category').value = p.category || '';
+  document.getElementById('prod-stock').value = p.stock || '';
+  document.getElementById('prod-rating').value = p.rating || '';
   document.getElementById('prod-amazon').value = p.amazonUrl || '';
-  document.getElementById('prod-img').value = (p.images || (p.imgUrl ? [p.imgUrl] : [])).join('\n');
-  
+  document.getElementById('prod-img').value = (p.images || []).join('\n');
+
+  buildCategoryDropdown('prod-category', p.category || '');
+
+  const badgeSel = document.getElementById('prod-badge');
+  badgeSel.value = p.badge || '';
+
   const container = document.getElementById('prod-features-container');
   container.innerHTML = '';
   (p.features || []).forEach(f => addFeatureInput('#prod-features-container', f));
-  if(isNew) addFeatureInput('#prod-features-container', ''); // add one empty by default
-  
+  if (isNew || !(p.features && p.features.length)) addFeatureInput('#prod-features-container', '');
+
   switchPanel('edit-product');
 }
 
@@ -668,32 +836,77 @@ function saveProduct() {
     category: document.getElementById('prod-category').value,
     amazonUrl: document.getElementById('prod-amazon').value,
     images: document.getElementById('prod-img').value.split('\n').map(u => u.trim()).filter(u => u),
-    features: Array.from(document.querySelectorAll('#prod-features-container input')).map(i => i.value).filter(v => v.trim())
+    features: Array.from(document.querySelectorAll('#prod-features-container input')).map(i => i.value).filter(v => v.trim()),
+    rating: parseFloat(document.getElementById('prod-rating').value) || 0,
+    stock: parseInt(document.getElementById('prod-stock').value) || 0
   };
-  
+
+  if (!p.name) { showToast('Product name is required', 'error'); return; }
+
   const idx = siteData.products.findIndex(x => x.id === id);
   if (idx >= 0) siteData.products[idx] = p;
   else siteData.products.push(p);
-  
-  showToast('Product saved locally. Remember to Publish!', 'info');
-  populateUI(); // update dashboard count
+
+  showToast('Product saved locally. Publish to update live site.', 'info');
+  populateUI();
   switchPanel('products');
 }
 
 function deleteProduct(id) {
-  if(!confirm('Are you sure you want to delete this product?')) return;
+  if (!confirm('Delete this product? This cannot be undone after publishing.')) return;
   siteData.products = siteData.products.filter(x => x.id !== id);
   renderProductsList();
   populateUI();
+  showToast('Product deleted locally. Publish to update live site.', 'info');
 }
 
 function addFeatureInput(containerId, value) {
   const c = document.querySelector(containerId);
   const div = document.createElement('div');
   div.className = 'feature-item';
-  const val = (value||'').replace(/"/g, '&quot;');
-  div.innerHTML = `<input type="text" value="${val}" placeholder="Enter a feature bullet point"><button class="btn-icon danger" onclick="this.parentElement.remove()" style="padding:10px;">X</button>`;
+  const val = (value || '').replace(/"/g, '&quot;');
+  div.innerHTML = '<input type="text" value="' + val + '" placeholder="Enter a feature"><button class="btn-icon danger" onclick="this.parentElement.remove()" style="padding:10px;">X</button>';
   c.appendChild(div);
+}
+
+// ==========================================
+// CATEGORIES MANAGER
+// ==========================================
+function renderCategoriesEditor() {
+  const container = document.getElementById('categories-editor');
+  container.innerHTML = '';
+  (siteData.categories || []).forEach((c, i) => {
+    const row = document.createElement('div');
+    row.className = 'cat-row';
+    row.innerHTML = '<input type="text" class="cat-icon" value="' + (c.icon || '') + '" placeholder="🔹">' +
+      '<input type="text" value="' + (c.name || '') + '" placeholder="Category Name">' +
+      '<input type="text" class="cat-id" value="' + (c.id || '') + '" placeholder="cat-id">' +
+      '<input type="text" value="' + (c.description || '') + '" placeholder="Short description">' +
+      '<button class="btn-icon danger" onclick="this.parentElement.remove()" style="padding:8px;">X</button>';
+    container.appendChild(row);
+  });
+}
+
+function addCategoryRow() {
+  const container = document.getElementById('categories-editor');
+  const row = document.createElement('div');
+  row.className = 'cat-row';
+  row.innerHTML = '<input type="text" class="cat-icon" value="" placeholder="🔹">' +
+    '<input type="text" value="" placeholder="Category Name">' +
+    '<input type="text" class="cat-id" value="" placeholder="cat-id">' +
+    '<input type="text" value="" placeholder="Short description">' +
+    '<button class="btn-icon danger" onclick="this.parentElement.remove()" style="padding:8px;">X</button>';
+  container.appendChild(row);
+}
+
+function saveCategories() {
+  const rows = document.querySelectorAll('#categories-editor .cat-row');
+  siteData.categories = Array.from(rows).map(row => {
+    const inputs = row.querySelectorAll('input');
+    return { icon: inputs[0].value, name: inputs[1].value, id: inputs[2].value, description: inputs[3].value };
+  }).filter(c => c.name && c.id);
+  populateUI();
+  showToast('Categories saved locally. Publish to update live site.', 'info');
 }
 
 // ==========================================
@@ -702,40 +915,29 @@ function addFeatureInput(containerId, value) {
 function renderPostsList() {
   const list = document.getElementById('postsList');
   if (siteData.posts.length === 0) {
-    list.innerHTML = '<div style="padding:24px;text-align:center;color:var(--text-muted)">No posts yet. Write your first blog post!</div>';
+    list.innerHTML = '<div style="padding:24px;text-align:center;color:var(--text-muted)">No posts yet. Click "+ Write Post" to get started.</div>';
     return;
   }
-  
-  list.innerHTML = siteData.posts.sort((a,b)=>new Date(b.date)-new Date(a.date)).map(p => `
-    <div class="item-row">
-      <div class="item-info">
-        <div>
-          <div class="item-title">${p.title}</div>
-          <div class="item-meta">${p.date}</div>
-        </div>
-      </div>
-      <div class="item-actions">
-        <button class="btn-icon" onclick="editPost('${p.id}')">✏️</button>
-        <button class="btn-icon danger" onclick="deletePost('${p.id}')">🗑️</button>
-      </div>
-    </div>
-  `).join('');
+
+  list.innerHTML = siteData.posts.sort((a, b) => new Date(b.date) - new Date(a.date)).map(p =>
+    '<div class="item-row"><div class="item-info"><div><div class="item-title">' + p.title + '</div><div class="item-meta">' + (p.date || 'No date') + '</div></div></div><div class="item-actions"><button class="btn-icon" onclick="editPost(\'' + p.id + '\')">✏️</button><button class="btn-icon danger" onclick="deletePost(\'' + p.id + '\')">🗑️</button></div></div>'
+  ).join('');
 }
 
 function editPost(id) {
   const isNew = id === 'new';
   document.getElementById('postEditorTitle').textContent = isNew ? 'Write Post' : 'Edit Post';
-  
-  let p = isNew ? { id: 'post_'+Date.now(), title:'', date: new Date().toISOString().split('T')[0], excerpt:'', content:'', imgUrl:'' } 
-                : siteData.posts.find(x => x.id === id);
-                
+
+  const p = isNew ? { id: 'post-' + Date.now(), title: '', date: new Date().toISOString().split('T')[0], excerpt: '', content: '', imgUrl: '' }
+               : siteData.posts.find(x => x.id === id);
+
   document.getElementById('post-id').value = p.id;
   document.getElementById('post-title').value = p.title || '';
   document.getElementById('post-date').value = p.date || '';
   document.getElementById('post-excerpt').value = p.excerpt || '';
   document.getElementById('post-content').value = p.content || '';
   document.getElementById('post-img').value = p.imgUrl || '';
-  
+
   switchPanel('edit-post');
 }
 
@@ -749,21 +951,182 @@ function savePost() {
     content: document.getElementById('post-content').value,
     imgUrl: document.getElementById('post-img').value
   };
-  
+
+  if (!p.title) { showToast('Post title is required', 'error'); return; }
+
   const idx = siteData.posts.findIndex(x => x.id === id);
   if (idx >= 0) siteData.posts[idx] = p;
   else siteData.posts.push(p);
-  
-  showToast('Post saved locally. Remember to Publish!', 'info');
+
+  showToast('Post saved locally. Publish to update live site.', 'info');
   populateUI();
   switchPanel('posts');
 }
 
 function deletePost(id) {
-  if(!confirm('Are you sure you want to delete this post?')) return;
+  if (!confirm('Delete this post?')) return;
   siteData.posts = siteData.posts.filter(x => x.id !== id);
   renderPostsList();
   populateUI();
+  showToast('Post deleted locally. Publish to update live site.', 'info');
+}
+
+// ==========================================
+// WHOLESALE PRICES VIEW
+// ==========================================
+function renderWholesalePrices() {
+  const container = document.getElementById('wholesale-price-list');
+  const products = siteData.products.filter(p => p.priceWholesale);
+  if (products.length === 0) {
+    container.innerHTML = '<p style="color:var(--text-muted);font-size:0.9rem;">No products have wholesale prices set. Edit a product to add one.</p>';
+    return;
+  }
+  container.innerHTML = '<table style="width:100%; border-collapse:collapse; font-size:0.9rem;"><tr style="border-bottom:1px solid var(--border);"><th style="text-align:left; padding:8px; color:var(--text-muted);">Product</th><th style="text-align:right; padding:8px; color:var(--text-muted);">Retail</th><th style="text-align:right; padding:8px; color:var(--text-muted);">Wholesale</th><th style="text-align:right; padding:8px; color:var(--text-muted);">Margin</th></tr>' +
+    products.map(p => {
+      const retail = parseFloat(p.price) || 0;
+      const wholesale = parseFloat(p.priceWholesale) || 0;
+      const margin = retail > 0 ? Math.round((1 - wholesale / retail) * 100) : 0;
+      return '<tr style="border-bottom:1px solid var(--border);"><td style="padding:8px;">' + p.name + '</td><td style="text-align:right; padding:8px;">£' + retail.toFixed(2) + '</td><td style="text-align:right; padding:8px; color:var(--success);">£' + wholesale.toFixed(2) + '</td><td style="text-align:right; padding:8px;">' + margin + '%</td></tr>';
+    }).join('') + '</table>';
+}
+
+// ==========================================
+// BACKUP & EXPORT
+// ==========================================
+function exportBackup() {
+  syncSettingsFromUI();
+  const blob = new Blob([JSON.stringify(siteData, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'eazyoo-data-backup-' + new Date().toISOString().split('T')[0] + '.json';
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('Backup downloaded!', 'success');
+}
+
+function importBackup(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  if (!confirm('This will REPLACE all current data. Are you sure?')) { event.target.value = ''; return; }
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const imported = JSON.parse(e.target.result);
+      if (!imported.products && !imported.settings) throw new Error('Invalid format');
+      siteData = imported;
+      if (!siteData.products) siteData.products = [];
+      if (!siteData.posts) siteData.posts = [];
+      if (!siteData.categories) siteData.categories = [];
+      if (!siteData.settings) siteData.settings = {};
+      if (!siteData.seo) siteData.seo = {};
+      populateUI();
+      showToast('Data imported! Review and Publish when ready.', 'success');
+    } catch (err) {
+      showToast('Invalid backup file: ' + err.message, 'error');
+    }
+  };
+  reader.readAsText(file);
+}
+
+// ==========================================
+// SUBSCRIBERS
+// ==========================================
+const NEWSLETTER_KEY = 'eazyoo_newsletter_subs';
+
+function getSubscribers() {
+  return JSON.parse(localStorage.getItem(NEWSLETTER_KEY) || '[]');
+}
+
+function renderSubscribers() {
+  const subs = getSubscribers();
+  const el = document.getElementById('subscribers-list');
+  if (!el) return;
+  if (subs.length === 0) {
+    el.innerHTML = '<div style="padding:24px;text-align:center;color:var(--text-muted)">No subscribers yet. Share your site and they\'ll appear here.</div>';
+    return;
+  }
+  el.innerHTML = '<table style="width:100%;border-collapse:collapse;font-size:0.9rem;">' +
+    '<tr style="border-bottom:1px solid var(--border);"><th style="text-align:left;padding:10px 8px;color:var(--text-muted);">Email</th><th style="text-align:left;padding:10px 8px;color:var(--text-muted);">Date</th><th style="padding:10px 8px;"></th></tr>' +
+    subs.map((s, i) =>
+      '<tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 8px;">' + s.email + '</td><td style="padding:10px 8px;color:var(--text-muted);">' + (s.date || '—') + '</td><td style="padding:10px 8px;text-align:right;"><button class="btn-icon danger" onclick="deleteSubscriber(' + i + ')" style="padding:6px 10px;font-size:0.75rem;">Remove</button></td></tr>'
+    ).join('') + '</table>';
+}
+
+function deleteSubscriber(index) {
+  if (!confirm('Remove this subscriber?')) return;
+  const subs = getSubscribers();
+  subs.splice(index, 1);
+  localStorage.setItem(NEWSLETTER_KEY, JSON.stringify(subs));
+  document.getElementById('stat-subscribers').textContent = subs.length;
+  renderSubscribers();
+}
+
+function exportSubscribers() {
+  const subs = getSubscribers();
+  if (subs.length === 0) { showToast('No subscribers to export.', 'error'); return; }
+  const csv = 'Email,Date\n' + subs.map(s => s.email + ',' + (s.date || '')).join('\n');
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'eazyoo-subscribers-' + new Date().toISOString().split('T')[0] + '.csv';
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('Subscribers exported!', 'success');
+}
+
+// ==========================================
+// ACCOUNTS MANAGER
+// ==========================================
+const USERS_KEY = 'eazyoo_users';
+
+function getAccounts() {
+  return JSON.parse(localStorage.getItem(USERS_KEY) || '[]');
+}
+
+function renderAccounts() {
+  const users = getAccounts();
+  const el = document.getElementById('accounts-list');
+  if (!el) return;
+  if (users.length === 0) {
+    el.innerHTML = '<div style="padding:24px;text-align:center;color:var(--text-muted)">No registered accounts yet.</div>';
+    return;
+  }
+  el.innerHTML = '<table style="width:100%;border-collapse:collapse;font-size:0.9rem;">' +
+    '<tr style="border-bottom:1px solid var(--border);"><th style="text-align:left;padding:10px 8px;color:var(--text-muted);">Name</th><th style="text-align:left;padding:10px 8px;color:var(--text-muted);">Email</th><th style="text-align:left;padding:10px 8px;color:var(--text-muted);">Type</th><th style="text-align:left;padding:10px 8px;color:var(--text-muted);">Joined</th><th style="text-align:left;padding:10px 8px;color:var(--text-muted);">Status</th><th style="padding:10px 8px;"></th></tr>' +
+    users.map(u => {
+      const isApproved = u.approved;
+      const badge = isApproved
+        ? '<span class="badge-tag badge-green">Approved</span>'
+        : '<span class="badge-tag badge-amber">Pending</span>';
+      const approveBtn = !isApproved
+        ? '<button class="btn-icon btn-success" onclick="approveAccount(\'' + u.email + '\')" style="padding:6px 10px;font-size:0.75rem;margin-right:4px;">Approve</button>'
+        : '';
+      return '<tr style="border-bottom:1px solid var(--border);">' +
+        '<td style="padding:10px 8px;">' + (u.name || '—') + '</td>' +
+        '<td style="padding:10px 8px;">' + u.email + '</td>' +
+        '<td style="padding:10px 8px;text-transform:capitalize;">' + (u.type || 'retail') + '</td>' +
+        '<td style="padding:10px 8px;color:var(--text-muted);">' + (u.joined || '—') + '</td>' +
+        '<td style="padding:10px 8px;">' + badge + '</td>' +
+        '<td style="padding:10px 8px;text-align:right;">' + approveBtn + '<button class="btn-icon danger" onclick="removeAccount(\'' + u.email + '\')" style="padding:6px 10px;font-size:0.75rem;">Remove</button></td>' +
+        '</tr>';
+    }).join('') + '</table>';
+}
+
+function approveAccount(email) {
+  const users = getAccounts();
+  const u = users.find(x => x.email === email);
+  if (u) { u.approved = true; localStorage.setItem(USERS_KEY, JSON.stringify(users)); renderAccounts(); showToast('Account approved!', 'success'); }
+}
+
+function removeAccount(email) {
+  if (!confirm('Remove this account?')) return;
+  const users = getAccounts().filter(x => x.email !== email);
+  localStorage.setItem(USERS_KEY, JSON.stringify(users));
+  renderAccounts();
+  showToast('Account removed.', 'info');
 }
 
 // ==========================================
@@ -771,7 +1134,9 @@ function deletePost(id) {
 // ==========================================
 function showError(msg) {
   const e = document.getElementById('loginError');
-  e.textContent = msg; e.style.display = 'block';
+  e.textContent = msg;
+  e.style.display = 'block';
+  e.style.whiteSpace = 'pre-line';
 }
 
 function showLoader(text) {
@@ -783,11 +1148,11 @@ function hideLoader() {
   document.getElementById('loader').style.display = 'none';
 }
 
-function showToast(msg, type='success') {
+function showToast(msg, type) {
   const t = document.getElementById('toast');
   t.textContent = msg;
-  t.className = 'toast-' + type + ' show';
-  setTimeout(() => t.classList.remove('show'), 4000);
+  t.className = 'toast-' + (type || 'success') + ' show';
+  setTimeout(function() { t.classList.remove('show'); }, 5000);
 }
 </script>
 </body>
