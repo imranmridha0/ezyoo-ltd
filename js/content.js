@@ -47,7 +47,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     function renderProductCard(p) {
       const imgs = p.images?.length ? p.images : ['https://placehold.co/600x600/e2e8f0/475569?text=No+Image'];
       const firstImg = imgs[0];
-      const isOutOfStock = typeof p.stock === 'number' && p.stock <= 0;
+      const stockLevel = (typeof p.stockQty === 'number') ? p.stockQty : p.stock;
+      const isOutOfStock = typeof stockLevel === 'number' && stockLevel <= 0;
 
       const priceToUse = isWholesale && p.priceWholesale ? p.priceWholesale : p.price;
       let priceHtml;
@@ -113,7 +114,7 @@ document.addEventListener('DOMContentLoaded', async () => {
               <span class="stars">${starsHtml}</span>
               <span class="rating-num">${rating}</span>
             </div>
-            ${stockBadge(p.stock)}
+            ${stockBadge(stockLevel)}
             <div class="product-card-footer">
               ${priceHtml}
               ${cartBtn}
@@ -122,10 +123,57 @@ document.addEventListener('DOMContentLoaded', async () => {
         </div>`;
     }
 
-    // ── Homepage: Featured Products ──────────────────────────────────────────
+    // ── Own-Brand Card (EAZYOO Originals with Amazon CTA) ────────────────────
+    function renderOwnBrandCard(p) {
+      const imgs = p.images?.length ? p.images : ['https://placehold.co/600x600/e2e8f0/475569?text=No+Image'];
+      const firstImg = imgs[0];
+      const rating = p.rating || 0;
+      const starsHtml = '★'.repeat(Math.floor(rating)) + (rating % 1 >= 0.5 ? '½' : '') + '☆'.repeat(5 - Math.floor(rating) - (rating % 1 >= 0.5 ? 1 : 0));
+      const stockLevel = (typeof p.stockQty === 'number') ? p.stockQty : p.stock;
+      const priceToUse = isWholesale && p.priceWholesale ? p.priceWholesale : p.price;
+      const productData = JSON.stringify({ id: p.id, name: p.name, price: priceToUse, image: firstImg }).replace(/"/g, '&quot;');
+      const amazon = p.amazonUrl && p.amazonUrl !== '#' ? p.amazonUrl : 'https://www.amazon.co.uk/s?me=AGGGQPAQ7YS4X';
+      const catName = (data.categories || []).find(c => c.id === p.category)?.name || '';
+      return `
+        <div class="product-card own-brand-card" data-id="${p.id}">
+          <div class="product-card-visual">
+            <span class="card-badge badge-amazon">Available on Amazon</span>
+            <img src="${firstImg}" alt="${p.name}" class="product-card-img" loading="lazy">
+          </div>
+          <div class="product-card-body">
+            <span class="product-card-category">EAZYOO${catName ? ' · ' + catName : ''}</span>
+            <h3 class="product-card-title">${p.name}</h3>
+            <p class="product-card-desc">${p.description}</p>
+            <div class="product-card-rating">
+              <span class="stars">${starsHtml}</span>
+              <span class="rating-num">${rating}</span>
+            </div>
+            ${stockBadge(stockLevel)}
+            <div class="product-card-footer">
+              <span class="product-price">£${parseFloat(priceToUse || 0).toFixed(2)}</span>
+            </div>
+            <div class="own-brand-actions">
+              <button class="btn-add-cart" onclick="addToCart(JSON.parse(this.dataset.product))" data-product="${productData}">Add to Cart</button>
+              <a href="${amazon}" target="_blank" rel="noopener" class="btn-amazon">View on Amazon →</a>
+            </div>
+          </div>
+        </div>`;
+    }
+
+    // ── Homepage: EAZYOO Originals (own brand) ───────────────────────────────
+    const ownBrandEl = document.getElementById('own-brand-products');
+    if (ownBrandEl && data.products) {
+      const ownBrand = data.products.filter(p => p.ownBrand);
+      ownBrandEl.innerHTML = ownBrand.length
+        ? ownBrand.map(renderOwnBrandCard).join('')
+        : '<p style="text-align:center; width:100%; color:var(--color-text-light);">Coming soon.</p>';
+    }
+
+    // ── Homepage: More From Our Range (everything except own-brand) ───────────
     const dynProducts = document.getElementById('dynamic-products');
     if (dynProducts && data.products) {
-      const shuffled = [...data.products].sort(() => Math.random() - 0.5);
+      const others = data.products.filter(p => !p.ownBrand);
+      const shuffled = [...others].sort(() => Math.random() - 0.5);
       dynProducts.innerHTML = shuffled.slice(0, 8).map(renderProductCard).join('');
     }
 
@@ -234,7 +282,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       const postId = new URLSearchParams(window.location.search).get('id');
       const post = data.posts.find(p => p.id === postId);
       if (post) {
-        document.title = post.title + ' — EAZYOO';
+        document.title = (post.metaTitle || post.title + ' — EAZYOO');
+        injectPostSEO(post);
         singlePost.innerHTML = `
           <article style="max-width:760px;margin:0 auto;padding:80px 0;">
             <a href="blog.html" style="color:var(--color-primary,var(--color-ocean-blue));text-decoration:none;font-weight:600;">← Back to Blog</a>
@@ -292,4 +341,50 @@ function updateSocialLinks(s) {
     a.rel = 'noopener noreferrer';
     a.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V9.17a8.19 8.19 0 004.79 1.52V7.24a4.85 4.85 0 01-1.02-.55z"/></svg>`;
   });
+}
+
+// ── Blog Post SEO (meta tags + Article JSON-LD for Google) ───────────────────
+function injectPostSEO(post) {
+  const setMeta = (key, val, attr = 'name') => {
+    if (!val) return;
+    let el = document.head.querySelector('meta[' + attr + '="' + key + '"]');
+    if (!el) { el = document.createElement('meta'); el.setAttribute(attr, key); document.head.appendChild(el); }
+    el.setAttribute('content', val);
+  };
+  const pageUrl = window.location.href;
+  const imgAbs = post.imgUrl ? new URL(post.imgUrl, window.location.href).href : '';
+  const desc = post.metaDescription || post.excerpt || '';
+
+  setMeta('description', desc);
+  if (post.keywords) setMeta('keywords', post.keywords);
+  setMeta('og:title', post.metaTitle || post.title, 'property');
+  setMeta('og:description', desc, 'property');
+  setMeta('og:type', 'article', 'property');
+  setMeta('og:url', pageUrl, 'property');
+  if (imgAbs) setMeta('og:image', imgAbs, 'property');
+  setMeta('twitter:card', 'summary_large_image');
+  setMeta('twitter:title', post.metaTitle || post.title);
+  setMeta('twitter:description', desc);
+  if (imgAbs) setMeta('twitter:image', imgAbs);
+
+  // Canonical URL
+  let canon = document.head.querySelector('link[rel="canonical"]');
+  if (!canon) { canon = document.createElement('link'); canon.rel = 'canonical'; document.head.appendChild(canon); }
+  canon.href = pageUrl;
+
+  // Article structured data (JSON-LD) so Google can index it as an article
+  const ld = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": post.title,
+    "description": desc,
+    "datePublished": post.date,
+    "author": { "@type": "Organization", "name": "EAZYOO" },
+    "publisher": { "@type": "Organization", "name": "EAZYOO" },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": pageUrl }
+  };
+  if (imgAbs) ld.image = imgAbs;
+  let script = document.getElementById('post-jsonld');
+  if (!script) { script = document.createElement('script'); script.type = 'application/ld+json'; script.id = 'post-jsonld'; document.head.appendChild(script); }
+  script.textContent = JSON.stringify(ld);
 }

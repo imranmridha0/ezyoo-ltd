@@ -151,34 +151,6 @@ function showToast(msg, type = 'success') {
   }, 3000);
 }
 
-// ── Dark Mode Toggle ─────────────────────────────────────────────────────────
-function initDarkMode() {
-  const stored = localStorage.getItem('eazyoo_theme');
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const isDark = stored ? stored === 'dark' : prefersDark;
-  if (isDark) document.documentElement.setAttribute('data-theme', 'dark');
-
-  const btn = document.getElementById('dark-mode-toggle');
-  if (!btn) return;
-  btn.setAttribute('aria-pressed', isDark);
-  btn.title = isDark ? 'Switch to light mode' : 'Switch to dark mode';
-
-  btn.addEventListener('click', () => {
-    const nowDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    if (nowDark) {
-      document.documentElement.removeAttribute('data-theme');
-      localStorage.setItem('eazyoo_theme', 'light');
-      btn.setAttribute('aria-pressed', false);
-      btn.title = 'Switch to dark mode';
-    } else {
-      document.documentElement.setAttribute('data-theme', 'dark');
-      localStorage.setItem('eazyoo_theme', 'dark');
-      btn.setAttribute('aria-pressed', true);
-      btn.title = 'Switch to light mode';
-    }
-  });
-}
-
 // ── Inject Cart Drawer HTML ───────────────────────────────────────────────────
 function injectCartDrawer() {
   if (document.getElementById('cart-drawer')) return;
@@ -219,7 +191,6 @@ function injectCartDrawer() {
 document.addEventListener('DOMContentLoaded', () => {
   injectCartDrawer();
   updateBadge();
-  initDarkMode();
 
   // Wire nav cart buttons (remove Snipcart class so Snipcart doesn't intercept)
   document.querySelectorAll('.cart-btn, .snipcart-checkout').forEach(btn => {

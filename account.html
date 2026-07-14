@@ -274,9 +274,22 @@
   <script src="js/content.js"></script>
   <script>
     // ============================================
-    // SIMPLE CLIENT-SIDE AUTH (localStorage-based)
+    // CLIENT-SIDE AUTH WITH ADMIN APPROVAL
+    // Users are stored in the shared 'eazyoo_users' array
+    // (the same array the Admin Panel → Accounts tab reads).
+    // New registrations are created as PENDING and cannot
+    // sign in until an admin approves them.
     // ============================================
-    const STORAGE_KEY = 'eazyoo_user';
+    const USERS_KEY = 'eazyoo_users';   // array of all registered users
+    const SESSION_KEY = 'eazyoo_session';
+
+    function getUsers() {
+      try { return JSON.parse(localStorage.getItem(USERS_KEY) || '[]'); }
+      catch { return []; }
+    }
+    function saveUsers(users) {
+      localStorage.setItem(USERS_KEY, JSON.stringify(users));
+    }
 
     function switchTab(tab) {
       document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
@@ -288,43 +301,61 @@
     function showMessage(formId, type, msg) {
       const el = document.getElementById(formId + '-message');
       el.className = 'auth-message ' + type;
-      el.textContent = msg;
+      el.innerHTML = msg;
       el.style.display = 'block';
     }
 
     function handleSignIn() {
-      const email = document.getElementById('signin-email').value.trim();
+      const email = document.getElementById('signin-email').value.trim().toLowerCase();
       const password = document.getElementById('signin-password').value;
       if (!email || !password) return showMessage('signin', 'error', 'Please fill in all fields.');
       if (!email.includes('@')) return showMessage('signin', 'error', 'Please enter a valid email address.');
 
-      // Check stored user
-      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
-      if (stored && stored.email === email && stored.password === btoa(password)) {
-        sessionLogin(stored);
-      } else if (!stored) {
-        showMessage('signin', 'error', 'No account found. Please register first.');
-      } else {
-        showMessage('signin', 'error', 'Incorrect email or password.');
+      const user = getUsers().find(u => u.email === email);
+      if (!user) {
+        return showMessage('signin', 'error', 'No account found for this email. Please register first.');
       }
+      if (user.password !== btoa(password)) {
+        return showMessage('signin', 'error', 'Incorrect email or password.');
+      }
+      if (!user.approved) {
+        return showMessage('signin', 'error', '⏳ Your account is <strong>pending admin approval</strong>. You will be able to sign in once the EAZYOO team has reviewed your registration.');
+      }
+      sessionLogin(user);
     }
 
     function handleRegister() {
       const name = document.getElementById('reg-name').value.trim();
-      const email = document.getElementById('reg-email').value.trim();
+      const email = document.getElementById('reg-email').value.trim().toLowerCase();
       const password = document.getElementById('reg-password').value;
       if (!name || !email || !password) return showMessage('register', 'error', 'Please fill in all fields.');
       if (!email.includes('@')) return showMessage('register', 'error', 'Please enter a valid email address.');
       if (password.length < 8) return showMessage('register', 'error', 'Password must be at least 8 characters.');
 
-      const user = { name, email, password: btoa(password), joined: new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) };
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(user));
-      showMessage('register', 'success', 'Account created! Signing you in...');
-      setTimeout(() => sessionLogin(user), 1000);
+      const users = getUsers();
+      if (users.some(u => u.email === email)) {
+        return showMessage('register', 'error', 'An account with this email already exists. Try signing in instead.');
+      }
+
+      users.push({
+        name,
+        email,
+        password: btoa(password),
+        type: 'retail',
+        approved: false,
+        joined: new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
+      });
+      saveUsers(users);
+
+      // Reset the form and show a clear "pending approval" confirmation.
+      document.getElementById('reg-name').value = '';
+      document.getElementById('reg-email').value = '';
+      document.getElementById('reg-password').value = '';
+      showMessage('register', 'success', '✅ Thanks for registering! Your account has been submitted and is <strong>awaiting admin approval</strong>. We\'ll review it shortly — once approved, you can sign in with your email and password.');
     }
 
     function sessionLogin(user) {
-      sessionStorage.setItem('eazyoo_session', JSON.stringify(user));
+      sessionStorage.setItem(SESSION_KEY, JSON.stringify({ name: user.name, email: user.email, joined: user.joined }));
       showDashboard(user);
     }
 
@@ -338,15 +369,21 @@
     }
 
     function handleSignOut() {
-      sessionStorage.removeItem('eazyoo_session');
+      sessionStorage.removeItem(SESSION_KEY);
       document.getElementById('authCard').style.display = 'block';
       document.getElementById('dashboard').classList.remove('active');
     }
 
-    // Auto-login if session exists
+    // Auto-login if a valid session exists AND the account is still approved.
     document.addEventListener('DOMContentLoaded', () => {
-      const session = JSON.parse(sessionStorage.getItem('eazyoo_session') || 'null');
-      if (session) showDashboard(session);
+      const session = JSON.parse(sessionStorage.getItem(SESSION_KEY) || 'null');
+      if (!session) return;
+      const user = getUsers().find(u => u.email === session.email);
+      if (user && user.approved) {
+        showDashboard(user);
+      } else {
+        sessionStorage.removeItem(SESSION_KEY);
+      }
     });
   </script>
 </body>
