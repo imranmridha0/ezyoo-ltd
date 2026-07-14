@@ -32,9 +32,13 @@
       </div>
       
       <div class="nav-actions">
-        <button class="cart-btn snipcart-checkout" aria-label="Open cart">
+        <button id="dark-mode-toggle" class="dark-toggle" aria-label="Toggle dark mode">
+          <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+          <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+        <button class="cart-btn" aria-label="Open cart">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-          <span class="cart-badge snipcart-items-count">0</span>
+          <span class="cart-badge">0</span>
         </button>
         <a href="wholesale.html" class="btn btn-primary btn-sm nav-cta">Become a Stockist</a>
         <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
@@ -219,7 +223,7 @@
       </div>
       
       <div class="footer-bottom">
-        <p>&copy; 2025 EAZYOO. All rights reserved. UK Registered Brand.</p>
+        <p>&copy; 2026 EAZYOO. All rights reserved. UK Registered Brand.</p>
         <div class="social-links">
           <a href="#" aria-label="Facebook">FB</a>
           <a href="#" aria-label="Instagram">IG</a>
@@ -231,6 +235,7 @@
   </footer>
 
   <!-- ========== JAVASCRIPT ========== -->
+  <script src="js/cart.js"></script>
   <script src="js/main.js"></script>
   <script src="js/content.js"></script>
 </body>

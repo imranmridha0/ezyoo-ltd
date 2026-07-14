@@ -1,136 +1,103 @@
 /**
- * EAZYOO CMS Content Manager v2
+ * EAZYOO CMS Content Manager v3
  * Fetches data.json and populates all pages dynamically.
- * Supports: Products, Categories, Blog, Cart, B2B Pricing
+ * Cart handled by cart.js (localStorage-based, no Snipcart dependency).
  */
 
-// ==========================================
-// SNIPCART INTEGRATION
-// ==========================================
-function initSnipcart(apiKey) {
-  if (!apiKey) {
-    console.warn('Snipcart API Key is missing. Cart checkout will not work.');
-    return;
-  }
-  
-  if (document.getElementById('snipcart')) return; // Already injected
-
-  // Add Preconnects
-  const preconnect1 = document.createElement('link');
-  preconnect1.rel = 'preconnect';
-  preconnect1.href = 'https://app.snipcart.com';
-  const preconnect2 = document.createElement('link');
-  preconnect2.rel = 'preconnect';
-  preconnect2.href = 'https://cdn.snipcart.com';
-  document.head.appendChild(preconnect1);
-  document.head.appendChild(preconnect2);
-
-  // Add CSS
-  const css = document.createElement('link');
-  css.rel = 'stylesheet';
-  css.href = 'https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css';
-  document.head.appendChild(css);
-
-  // Add Script
-  const script = document.createElement('script');
-  script.src = 'https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.js';
-  script.async = true;
-  document.body.appendChild(script);
-
-  // Add hidden Snipcart div
-  const snipcartDiv = document.createElement('div');
-  snipcartDiv.id = 'snipcart';
-  snipcartDiv.setAttribute('data-api-key', apiKey);
-  snipcartDiv.setAttribute('hidden', 'true');
-  // Configure Snipcart to allow dynamic product injection (no server validation for this demo)
-  snipcartDiv.setAttribute('data-config-add-product-behavior', 'none'); 
-  document.body.appendChild(snipcartDiv);
-}
-
-// ==========================================
-// MAIN INIT
-// ==========================================
 document.addEventListener('DOMContentLoaded', async () => {
   try {
     const res = await fetch('data.json');
     if (!res.ok) throw new Error('Could not load site data');
     const data = await res.json();
-    
+
     const isWholesale = localStorage.getItem('eazyoo_wholesale_logged_in') === 'true';
 
-    // ==========================================
-    // INJECT SEO & SETTINGS
-    // ==========================================
+    // ── SEO & Brand ──────────────────────────────────────────────────────────
     const s = data.settings || {};
-    
-    // Inject Snipcart
-    // Use test key if none provided in settings for demo purposes
-    const snipcartKey = s.snipcartApiKey || 'NmU2YWI4NDEtYTNhYi00NGQ2LTljNjUtYjM0ZTUwZDcxOTIxNjM4NTM3NjI3MjA1NTY4MDMx';
-    initSnipcart(snipcartKey);
-
-    if (data.seo) {
-      if (data.seo.metaTitle) document.title = data.seo.metaTitle;
-      if (data.seo.metaDescription) {
-        let metaDesc = document.querySelector('meta[name="description"]');
-        if (!metaDesc) { metaDesc = document.createElement('meta'); metaDesc.name = 'description'; document.head.appendChild(metaDesc); }
-        metaDesc.content = data.seo.metaDescription;
-      }
+    if (data.seo?.metaTitle) document.title = data.seo.metaTitle;
+    if (data.seo?.metaDescription) {
+      let el = document.querySelector('meta[name="description"]');
+      if (!el) { el = document.createElement('meta'); el.name = 'description'; document.head.appendChild(el); }
+      el.content = data.seo.metaDescription;
     }
     if (s.brandName) document.querySelectorAll('.logo-text').forEach(el => el.textContent = s.brandName);
 
-    // ==========================================
-    // RENDER CATEGORY NAV (Mega Menu)
-    // ==========================================
+    // Inject social links from settings
+    updateSocialLinks(s);
+
+    // ── Category Navigation Bar ──────────────────────────────────────────────
     const catNav = document.getElementById('category-nav');
     if (catNav && data.categories) {
       catNav.innerHTML = data.categories.map(c => `
         <a href="products.html?cat=${c.id}" class="cat-link" data-cat="${c.id}">
           <span class="cat-icon">${c.icon}</span>
           <span class="cat-name">${c.name}</span>
-        </a>
-      `).join('');
+        </a>`).join('');
     }
 
-    // ==========================================
-    // RENDER PRODUCT CARD (Shared function)
-    // ==========================================
+    // ── Stock badge helper ───────────────────────────────────────────────────
+    function stockBadge(stock) {
+      if (stock === undefined || stock === null) return '';
+      if (stock <= 0) return `<span class="stock-badge stock-out">Out of Stock</span>`;
+      if (stock <= 10) return `<span class="stock-badge stock-low">Low Stock — ${stock} left</span>`;
+      return `<span class="stock-badge stock-in">In Stock</span>`;
+    }
+
+    // ── Product Card ─────────────────────────────────────────────────────────
     function renderProductCard(p) {
-      const imgs = p.images && p.images.length > 0 ? p.images : ['https://placehold.co/600x600/e2e8f0/475569?text=No+Image'];
+      const imgs = p.images?.length ? p.images : ['https://placehold.co/600x600/e2e8f0/475569?text=No+Image'];
       const firstImg = imgs[0];
-      
-      let priceHtml = `<span class="product-price">£${parseFloat(p.price).toFixed(2)}</span>`;
+      const isOutOfStock = typeof p.stock === 'number' && p.stock <= 0;
+
+      const priceToUse = isWholesale && p.priceWholesale ? p.priceWholesale : p.price;
+      let priceHtml;
       if (isWholesale && p.priceWholesale) {
         priceHtml = `
           <div class="price-group">
             <span class="product-price-old">£${parseFloat(p.price).toFixed(2)}</span>
             <span class="product-price wholesale">£${parseFloat(p.priceWholesale).toFixed(2)}</span>
             <span class="wholesale-badge">B2B</span>
-          </div>
-        `;
+          </div>`;
+      } else {
+        priceHtml = `<span class="product-price">£${parseFloat(p.price || 0).toFixed(2)}</span>`;
       }
 
-      // Image slider HTML
+      // Image (slider for multi-image products)
       let imageHtml;
       if (imgs.length > 1) {
         imageHtml = `
           <div class="product-slider">
-            ${imgs.map((src, i) => `<img src="${src}" alt="${p.name}" class="slide" style="opacity:${i === 0 ? 1 : 0};" data-index="${i}">`).join('')}
-          </div>
-        `;
+            ${imgs.map((src, i) => `<img src="${src}" alt="${p.name}" class="slide" style="opacity:${i===0?1:0}" data-index="${i}" loading="lazy">`).join('')}
+          </div>`;
       } else {
-        imageHtml = `<img src="${firstImg}" alt="${p.name}" class="product-card-img">`;
+        imageHtml = `<img src="${firstImg}" alt="${p.name}" class="product-card-img" loading="lazy">`;
       }
 
-      // Star rating
+      // Stars
       const rating = p.rating || 0;
-      const fullStars = Math.floor(rating);
-      const halfStar = rating % 1 >= 0.5 ? 1 : 0;
-      const emptyStars = 5 - fullStars - halfStar;
-      const starsHtml = '★'.repeat(fullStars) + (halfStar ? '½' : '') + '☆'.repeat(emptyStars);
+      const starsHtml = '★'.repeat(Math.floor(rating)) + (rating % 1 >= 0.5 ? '½' : '') + '☆'.repeat(5 - Math.floor(rating) - (rating % 1 >= 0.5 ? 1 : 0));
 
-      const badgeHtml = p.badge ? `<span class="card-badge ${p.badge === 'Best Seller' ? 'badge-hot' : 'badge-new'}">${p.badge}</span>` : '';
+      const badgeHtml = p.badge
+        ? `<span class="card-badge ${p.badge === 'Best Seller' ? 'badge-hot' : 'badge-new'}">${p.badge}</span>`
+        : '';
 
-      const priceToUse = isWholesale && p.priceWholesale ? p.priceWholesale : p.price;
+      // Encode product data for onclick
+      const productData = JSON.stringify({
+        id: p.id,
+        name: p.name,
+        price: priceToUse,
+        image: firstImg
+      }).replace(/"/g, '&quot;');
+
+      const cartBtn = isOutOfStock
+        ? `<button class="btn-add-cart" disabled style="opacity:0.5;cursor:not-allowed;">Out of Stock</button>`
+        : `<button class="btn-add-cart" onclick="addToCart(JSON.parse(this.dataset.product))" data-product="${productData}">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+              <path d="M1 1h4l2.68 13.39a2 2 0 001.96 1.61h9.72a2 2 0 001.95-1.55l1.57-7.45H6"/>
+            </svg>
+            Add to Cart
+           </button>`;
 
       return `
         <div class="product-card" data-category="${p.category}" data-price="${p.price}" data-rating="${rating}" data-id="${p.id}">
@@ -139,110 +106,87 @@ document.addEventListener('DOMContentLoaded', async () => {
             ${imageHtml}
           </div>
           <div class="product-card-body">
-            <span class="product-card-category">${(data.categories || []).find(c => c.id === p.category)?.name || p.category}</span>
+            <span class="product-card-category">${(data.categories||[]).find(c=>c.id===p.category)?.name || p.category}</span>
             <h3 class="product-card-title">${p.name}</h3>
             <p class="product-card-desc">${p.description}</p>
             <div class="product-card-rating">
               <span class="stars">${starsHtml}</span>
               <span class="rating-num">${rating}</span>
             </div>
+            ${stockBadge(p.stock)}
             <div class="product-card-footer">
               ${priceHtml}
-              <button class="snipcart-add-item btn-add-cart" 
-                data-item-id="${p.id}"
-                data-item-price="${priceToUse}"
-                data-item-url="/"
-                data-item-description="${p.description}"
-                data-item-image="${firstImg}"
-                data-item-name="${p.name.replace(/"/g, '&quot;')}">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-                Add to Cart
-              </button>
+              ${cartBtn}
             </div>
           </div>
-        </div>
-      `;
+        </div>`;
     }
 
-    // ==========================================
-    // HOME PAGE: Featured Products (Random Mix)
-    // ==========================================
+    // ── Homepage: Featured Products ──────────────────────────────────────────
     const dynProducts = document.getElementById('dynamic-products');
     if (dynProducts && data.products) {
-      // Shuffle all products and pick 8 random ones for a fresh homepage feel
       const shuffled = [...data.products].sort(() => Math.random() - 0.5);
       dynProducts.innerHTML = shuffled.slice(0, 8).map(renderProductCard).join('');
     }
 
-    // Categories showcase on homepage
+    // ── Homepage: Category Showcase ──────────────────────────────────────────
     const catShowcase = document.getElementById('categories-showcase');
     if (catShowcase && data.categories) {
       catShowcase.innerHTML = data.categories.map(c => {
-        const count = (data.products || []).filter(p => p.category === c.id).length;
+        const count = (data.products||[]).filter(p => p.category === c.id).length;
         return `
           <a href="products.html?cat=${c.id}" class="category-card">
             <span class="category-icon">${c.icon}</span>
             <h4>${c.name}</h4>
             <p>${count} products</p>
-          </a>
-        `;
+          </a>`;
       }).join('');
     }
 
-    // ==========================================
-    // PRODUCTS PAGE: Full catalog with filters
-    // ==========================================
+    // ── Products Page ────────────────────────────────────────────────────────
     const productGrid = document.getElementById('product-grid');
     if (productGrid && data.products) {
       const urlParams = new URLSearchParams(window.location.search);
       const activeCat = urlParams.get('cat') || 'all';
       let products = [...data.products];
 
-      // Highlight active category in filter
-      document.querySelectorAll('.filter-cat-btn').forEach(btn => {
-        if (btn.dataset.cat === activeCat) btn.classList.add('active');
-      });
+      if (activeCat !== 'all') products = products.filter(p => p.category === activeCat);
 
-      // Filter by category from URL
-      if (activeCat !== 'all') {
-        products = products.filter(p => p.category === activeCat);
-      }
-
-      // Update page title
       const pageTitle = document.getElementById('products-page-title');
       if (pageTitle && activeCat !== 'all') {
-        const catObj = (data.categories || []).find(c => c.id === activeCat);
+        const catObj = (data.categories||[]).find(c => c.id === activeCat);
         if (catObj) pageTitle.textContent = catObj.name;
       }
 
-      // Product count
       const countEl = document.getElementById('product-count');
       if (countEl) countEl.textContent = `${products.length} products`;
 
       productGrid.innerHTML = products.map(renderProductCard).join('');
 
-      // Build category filter buttons
+      // Category filter sidebar
       const filterContainer = document.getElementById('filter-categories');
       if (filterContainer && data.categories) {
         filterContainer.innerHTML = `
-          <a href="products.html" class="filter-cat-btn ${activeCat === 'all' ? 'active' : ''}" data-cat="all">All</a>
+          <a href="products.html" class="filter-cat-btn ${activeCat==='all'?'active':''}" data-cat="all">All Products <span class="filter-count">${data.products.length}</span></a>
           ${data.categories.map(c => {
             const count = data.products.filter(p => p.category === c.id).length;
-            return `<a href="products.html?cat=${c.id}" class="filter-cat-btn ${activeCat === c.id ? 'active' : ''}" data-cat="${c.id}">${c.icon} ${c.name} <span class="filter-count">${count}</span></a>`;
-          }).join('')}
-        `;
+            return `<a href="products.html?cat=${c.id}" class="filter-cat-btn ${activeCat===c.id?'active':''}" data-cat="${c.id}">${c.icon} ${c.name} <span class="filter-count">${count}</span></a>`;
+          }).join('')}`;
       }
 
-      // Price filter
+      // Price slider
       const priceSlider = document.getElementById('price-range');
       const priceLabel = document.getElementById('price-label');
+      const maxPriceInData = Math.ceil(Math.max(...data.products.map(p => parseFloat(p.price||0))));
       if (priceSlider) {
+        priceSlider.max = maxPriceInData;
+        priceSlider.value = maxPriceInData;
+        if (priceLabel) priceLabel.textContent = `Up to £${maxPriceInData}`;
         priceSlider.addEventListener('input', () => {
-          const maxPrice = parseFloat(priceSlider.value);
-          if (priceLabel) priceLabel.textContent = `Up to £${maxPrice.toFixed(0)}`;
+          const max = parseFloat(priceSlider.value);
+          if (priceLabel) priceLabel.textContent = `Up to £${max.toFixed(0)}`;
           document.querySelectorAll('.product-card').forEach(card => {
-            const cardPrice = parseFloat(card.dataset.price);
-            card.style.display = cardPrice <= maxPrice ? '' : 'none';
+            card.style.display = parseFloat(card.dataset.price) <= max ? '' : 'none';
           });
         });
       }
@@ -265,27 +209,26 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
     }
 
-    // ==========================================
-    // BLOG
-    // ==========================================
+    // ── Blog ─────────────────────────────────────────────────────────────────
     const blogList = document.getElementById('dynamic-posts');
     if (blogList && data.posts) {
-      blogList.innerHTML = data.posts.sort((a, b) => new Date(b.date) - new Date(a.date)).map(p => `
-        <div class="product-card">
-          <div class="product-card-visual">
-            <img src="${p.imgUrl || 'images/hero-banner.png'}" alt="${p.title}" class="product-card-img" style="object-fit:cover; height:200px;">
-          </div>
-          <div class="product-card-body">
-            <span class="product-card-category">${p.date}</span>
-            <h3 class="product-card-title">${p.title}</h3>
-            <p class="product-card-desc">${p.excerpt}</p>
-            <a href="post.html?id=${p.id}" class="btn-add-cart" style="text-decoration:none; text-align:center;">Read More →</a>
-          </div>
-        </div>
-      `).join('');
+      blogList.innerHTML = data.posts
+        .sort((a, b) => new Date(b.date) - new Date(a.date))
+        .map(p => `
+          <div class="product-card">
+            <div class="product-card-visual">
+              <img src="${p.imgUrl||'images/hero-banner.png'}" alt="${p.title}" class="product-card-img" style="object-fit:cover;height:220px;" loading="lazy">
+            </div>
+            <div class="product-card-body">
+              <span class="product-card-category">${p.date}</span>
+              <h3 class="product-card-title">${p.title}</h3>
+              <p class="product-card-desc">${p.excerpt}</p>
+              <a href="post.html?id=${p.id}" class="btn-add-cart" style="text-decoration:none;text-align:center;display:block;">Read More →</a>
+            </div>
+          </div>`).join('');
     }
 
-    // Single Post
+    // ── Single Post ──────────────────────────────────────────────────────────
     const singlePost = document.getElementById('single-post-view');
     if (singlePost && data.posts) {
       const postId = new URLSearchParams(window.location.search).get('id');
@@ -293,30 +236,27 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (post) {
         document.title = post.title + ' — EAZYOO';
         singlePost.innerHTML = `
-          <article style="max-width:760px; margin:0 auto; padding:80px 0;">
-            <a href="blog.html" style="color:var(--color-primary); text-decoration:none; font-weight:600;">← Back to Blog</a>
-            <h1 style="font-size:2.5rem; margin:24px 0 12px;">${post.title}</h1>
-            <p style="color:var(--color-text-light); margin-bottom:32px;">${post.date}</p>
-            ${post.imgUrl ? `<img src="${post.imgUrl}" style="width:100%; border-radius:16px; margin-bottom:32px;">` : ''}
-            <div style="line-height:1.8; font-size:1.05rem;">${post.content}</div>
-          </article>
-        `;
+          <article style="max-width:760px;margin:0 auto;padding:80px 0;">
+            <a href="blog.html" style="color:var(--color-primary,var(--color-ocean-blue));text-decoration:none;font-weight:600;">← Back to Blog</a>
+            <h1 style="font-size:2.5rem;margin:24px 0 12px;">${post.title}</h1>
+            <p style="color:var(--color-text-light);margin-bottom:32px;">${post.date}</p>
+            ${post.imgUrl ? `<img src="${post.imgUrl}" style="width:100%;border-radius:16px;margin-bottom:32px;" loading="lazy" alt="${post.title}">` : ''}
+            <div style="line-height:1.85;font-size:1.05rem;">${post.content}</div>
+          </article>`;
       } else {
-        singlePost.innerHTML = '<p style="text-align:center; padding:100px 0;">Post not found.</p>';
+        singlePost.innerHTML = '<p style="text-align:center;padding:100px 0;">Post not found.</p>';
       }
     }
 
-    // ==========================================
-    // IMAGE SLIDER AUTO-PLAY
-    // ==========================================
+    // ── Image Slider Auto-Play ───────────────────────────────────────────────
     setInterval(() => {
       document.querySelectorAll('.product-slider').forEach(slider => {
         const slides = slider.querySelectorAll('.slide');
         if (slides.length <= 1) return;
-        let activeIdx = Array.from(slides).findIndex(s => s.style.opacity === '1' || s.style.opacity === 1);
-        if (activeIdx < 0) activeIdx = 0;
-        slides[activeIdx].style.opacity = '0';
-        slides[(activeIdx + 1) % slides.length].style.opacity = '1';
+        let active = Array.from(slides).findIndex(s => parseFloat(s.style.opacity) === 1);
+        if (active < 0) active = 0;
+        slides[active].style.opacity = '0';
+        slides[(active + 1) % slides.length].style.opacity = '1';
       });
     }, 3000);
 
@@ -324,3 +264,32 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.error('EAZYOO CMS Error:', err);
   }
 });
+
+// ── Social Link Injection ────────────────────────────────────────────────────
+function updateSocialLinks(s) {
+  const fbLinks   = document.querySelectorAll('a[aria-label="Facebook"]');
+  const igLinks   = document.querySelectorAll('a[aria-label="Instagram"]');
+  const ttLinks   = document.querySelectorAll('a[aria-label="TikTok"]');
+
+  const fb = (s && s.socialFb && s.socialFb !== '#') ? s.socialFb : 'https://www.facebook.com/eazyoo.ltd';
+  const ig = (s && s.socialIg && s.socialIg !== '#') ? s.socialIg : 'https://www.instagram.com/eazyoo.az';
+
+  fbLinks.forEach(a => {
+    a.href = fb;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    a.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>`;
+  });
+  igLinks.forEach(a => {
+    a.href = ig;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    a.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>`;
+  });
+  ttLinks.forEach(a => {
+    a.href = 'https://www.tiktok.com/@eazyoo';
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    a.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V9.17a8.19 8.19 0 004.79 1.52V7.24a4.85 4.85 0 01-1.02-.55z"/></svg>`;
+  });
+}

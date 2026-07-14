@@ -624,3 +624,122 @@
   .product-card-visual { height: 200px; }
   .cart-drawer { width: 100vw; max-width: 100vw; right: -100vw; }
 }
+
+/* === STOCK BADGES === */
+.stock-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  margin-bottom: 10px;
+  letter-spacing: 0.3px;
+}
+.stock-in {
+  background: #d1fae5;
+  color: #065f46;
+}
+.stock-low {
+  background: #fef3c7;
+  color: #92400e;
+}
+.stock-out {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* === TOAST NOTIFICATIONS === */
+.ez-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--color-charcoal);
+  color: white;
+  padding: 12px 20px;
+  border-radius: var(--radius-full);
+  font-size: 0.88rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 1100;
+  opacity: 0;
+  pointer-events: none;
+  box-shadow: var(--shadow-lg);
+  transition: opacity 0.3s, transform 0.3s;
+  white-space: nowrap;
+}
+.ez-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+.ez-toast-error {
+  background: #ef4444;
+}
+
+/* === CART EMPTY STATE === */
+.cart-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  text-align: center;
+  min-height: 200px;
+}
+
+/* === CART REMOVE BUTTON === */
+.cart-remove-btn {
+  background: none;
+  border: none;
+  color: var(--color-text-lighter);
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 4px;
+  line-height: 1;
+  transition: color var(--transition-fast);
+}
+.cart-remove-btn:hover { color: #ef4444; }
+
+/* === DARK MODE — SHOP ELEMENTS === */
+[data-theme="dark"] .category-bar { background: #0f1117; border-bottom-color: #2e3350; }
+[data-theme="dark"] .cat-link { background: #1a1d27; border-color: #2e3350; color: #c8cce8; }
+[data-theme="dark"] .cat-link:hover, [data-theme="dark"] .cat-link.active { background: var(--color-ocean-blue); border-color: var(--color-ocean-blue); color: white; }
+[data-theme="dark"] .shop-sidebar { background: #1a1d27; border-right-color: #2e3350; }
+[data-theme="dark"] .filter-section h4 { color: #e8eaf6; }
+[data-theme="dark"] .filter-cat-btn { color: #c8cce8; border-color: #2e3350; }
+[data-theme="dark"] .filter-cat-btn:hover { background: #22263a; }
+[data-theme="dark"] .filter-cat-btn.active { background: var(--color-ocean-blue); color: white; }
+[data-theme="dark"] .sort-select { background: #22263a; border-color: #2e3350; color: #e8eaf6; }
+[data-theme="dark"] .product-card { background: #1a1d27; border-color: #2e3350; }
+[data-theme="dark"] .product-card-visual { background: #22263a; }
+[data-theme="dark"] .product-card-title { color: #e8eaf6; }
+[data-theme="dark"] .product-card-footer { border-top-color: #2e3350; }
+[data-theme="dark"] .product-price { color: #e8eaf6; }
+[data-theme="dark"] .btn-add-cart { background: #334155; color: #e8eaf6; }
+[data-theme="dark"] .btn-add-cart:hover { background: var(--color-ocean-blue); }
+[data-theme="dark"] .stock-in { background: #064e3b; color: #6ee7b7; }
+[data-theme="dark"] .stock-low { background: #78350f; color: #fcd34d; }
+[data-theme="dark"] .stock-out { background: #7f1d1d; color: #fca5a5; }
+[data-theme="dark"] .cart-drawer { background: #1a1d27; }
+[data-theme="dark"] .cart-drawer-header { border-bottom-color: #2e3350; }
+[data-theme="dark"] .cart-drawer-header h3 { color: #e8eaf6; }
+[data-theme="dark"] .cart-close { color: #8892b0; }
+[data-theme="dark"] .cart-item { border-bottom-color: #2e3350; }
+[data-theme="dark"] .cart-item-img { background: #22263a; }
+[data-theme="dark"] .cart-item-name { color: #e8eaf6; }
+[data-theme="dark"] .cart-item-controls button { background: #22263a; border-color: #2e3350; color: #c8cce8; }
+[data-theme="dark"] .cart-drawer-footer { border-top-color: #2e3350; }
+[data-theme="dark"] .cart-total-row { color: #e8eaf6; }
+[data-theme="dark"] .category-card { background: #1a1d27; border-color: #2e3350; color: #c8cce8; }
+[data-theme="dark"] .ez-toast { background: #334155; }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .cart-drawer { background: #1a1d27; }
+  :root:not([data-theme="light"]) .product-card { background: #1a1d27; border-color: #2e3350; }
+  :root:not([data-theme="light"]) .product-card-title { color: #e8eaf6; }
+  :root:not([data-theme="light"]) .category-bar { background: #0f1117; border-bottom-color: #2e3350; }
+}

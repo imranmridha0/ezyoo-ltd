@@ -1347,3 +1347,111 @@ textarea.form-control {
   .values-grid { grid-template-columns: 1fr; }
   .container { padding: 0 var(--space-md); }
 }
+
+/* ============================================
+   DARK MODE
+   [data-theme="dark"] on <html> = JS toggle
+   @media block = system preference fallback
+   ============================================ */
+
+/* -- Variables -- */
+[data-theme="dark"] {
+  --color-bg: #0f1117;
+  --color-bg-alt: #1a1d27;
+  --color-white: #1a1d27;
+  --color-charcoal: #e8eaf6;
+  --color-text: #c8cce8;
+  --color-text-light: #8892b0;
+  --color-text-lighter: #5a6380;
+  --color-border: #2e3350;
+  --color-border-light: #22263a;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-bg: #0f1117;
+    --color-bg-alt: #1a1d27;
+    --color-white: #1a1d27;
+    --color-charcoal: #e8eaf6;
+    --color-text: #c8cce8;
+    --color-text-light: #8892b0;
+    --color-text-lighter: #5a6380;
+    --color-border: #2e3350;
+    --color-border-light: #22263a;
+  }
+}
+
+/* -- Navbar -- */
+[data-theme="dark"] .navbar {
+  background: rgba(15,17,23,0.97);
+  border-bottom-color: #2e3350;
+}
+[data-theme="dark"] .navbar.scrolled { background: rgba(15,17,23,0.99); }
+[data-theme="dark"] .nav-links { background: #1a1d27; border-top-color: #2e3350; }
+[data-theme="dark"] .nav-links a { color: #c8cce8; }
+[data-theme="dark"] .mobile-toggle span { background: #c8cce8; }
+[data-theme="dark"] .nav-brand .logo-text { color: #e8eaf6; }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .navbar { background: rgba(15,17,23,0.97); border-bottom-color: #2e3350; }
+  :root:not([data-theme="light"]) .nav-links { background: #1a1d27; }
+  :root:not([data-theme="light"]) .nav-links a { color: #c8cce8; }
+  :root:not([data-theme="light"]) .mobile-toggle span { background: #c8cce8; }
+}
+
+/* -- Headings -- */
+[data-theme="dark"] h1,[data-theme="dark"] h2,[data-theme="dark"] h3,
+[data-theme="dark"] h4,[data-theme="dark"] h5,[data-theme="dark"] h6 { color: #e8eaf6; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) h1,
+  :root:not([data-theme="light"]) h2,
+  :root:not([data-theme="light"]) h3,
+  :root:not([data-theme="light"]) h4 { color: #e8eaf6; }
+}
+
+/* -- Cards & Surfaces -- */
+[data-theme="dark"] .product-card,
+[data-theme="dark"] .mission-card,
+[data-theme="dark"] .collab-card,
+[data-theme="dark"] .value-card { background: #1a1d27; border-color: #2e3350; }
+[data-theme="dark"] .value-card:hover { background: #22263a; }
+[data-theme="dark"] .values-section { background: #1a1d27; border-color: #2e3350; }
+[data-theme="dark"] .category-card { background: #1a1d27; border-color: #2e3350; color: #c8cce8; }
+[data-theme="dark"] .category-card:hover { border-color: var(--color-ocean-blue); }
+
+/* -- Forms -- */
+[data-theme="dark"] .form-control {
+  background: #22263a;
+  border-color: #2e3350;
+  color: #e8eaf6;
+}
+[data-theme="dark"] .form-control:focus { background: #1a1d27; border-color: var(--color-ocean-blue); }
+[data-theme="dark"] .form-container { background: #22263a; border-color: #2e3350; }
+[data-theme="dark"] .form-group label { color: #c8cce8; }
+
+/* -- Page headers -- */
+[data-theme="dark"] body { background: #0f1117; }
+
+/* -- Dark mode toggle button -- */
+.dark-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: var(--color-bg-alt);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  color: var(--color-text);
+  flex-shrink: 0;
+}
+.dark-toggle:hover { background: var(--color-border); transform: scale(1.1); }
+.dark-toggle .icon-sun { display: none; }
+.dark-toggle .icon-moon { display: block; }
+[data-theme="dark"] .dark-toggle .icon-sun { display: block; }
+[data-theme="dark"] .dark-toggle .icon-moon { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .dark-toggle .icon-sun { display: block; }
+  :root:not([data-theme="light"]) .dark-toggle .icon-moon { display: none; }
+}
