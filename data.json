@@ -9,7 +9,7 @@
     "heroImgUrl": "",
     "contactEmail": "",
     "contactPhone": "",
-    "socialFb": "",
+    "socialFb": "https://www.facebook.com/eazyoo.az",
     "socialIg": "",
     "socialTt": "",
     "socialYt": "",
@@ -17,7 +17,7 @@
     "noticeboard": {
       "enabled": true,
       "type": "maintenance",
-      "text": "",
+      "text": "Site Under Maintenance Please Do NOT purchase until 25 July",
       "speed": "slow"
     }
   },
