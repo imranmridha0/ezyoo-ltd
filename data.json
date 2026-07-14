@@ -1,23 +1,29 @@
 {
   "settings": {
-    "brandName": "EAZYOO LTD",
-    "heroTagline": "Smart Products. Smarter Living.",
-    "heroSubtitle": "Innovative collapsible gear designed for active lifestyles and modern kitchens. Fold it. Store it. Go further.",
-    "ctaText": "Shop Now",
-    "ctaUrl": "products.html",
-    "navCtaText": "Become a Stockist",
-    "heroImgUrl": "images/hero-banner.png",
-    "contactEmail": "contact@eazyoo.co.uk",
+    "brandName": "",
+    "heroTagline": "",
+    "heroSubtitle": "",
+    "ctaText": "",
+    "ctaUrl": "",
+    "navCtaText": "",
+    "heroImgUrl": "",
+    "contactEmail": "",
     "contactPhone": "",
-    "socialFb": "https://www.facebook.com/eazyoo.az",
-    "socialIg": "#",
-    "socialTt": "#",
-    "socialYt": "#",
-    "snipcartApiKey": ""
+    "socialFb": "",
+    "socialIg": "",
+    "socialTt": "",
+    "socialYt": "",
+    "snipcartApiKey": "",
+    "noticeboard": {
+      "enabled": true,
+      "type": "maintenance",
+      "text": "",
+      "speed": "slow"
+    }
   },
   "seo": {
-    "metaTitle": "EAZYOO — Smart Products for Smarter Living | UK Store",
-    "metaDescription": "Shop EAZYOO's innovative product range across 8 categories. Premium quality, UK-based brand. Free delivery on orders over £25."
+    "metaTitle": "",
+    "metaDescription": ""
   },
   "categories": [
     {
@@ -73,14 +79,20 @@
     {
       "id": "auto-1",
       "name": "Car Boot Organiser",
+      "brand": "EAZYOO",
+      "sku": "EZ-AUTO-001",
       "description": "Collapsible multi-compartment trunk storage with anti-slip base",
+      "fullDescription": "Keep your car boot tidy with the EAZYOO Car Boot Organiser. Featuring multiple compartments and a non-slip base, it collapses flat when not in use. Waterproof lining protects against spills. Ideal for groceries, tools, sports kit, and everyday essentials.",
       "price": "18.99",
       "priceWholesale": "11.00",
       "badge": "Best Seller",
       "category": "automotive",
-      "amazonUrl": "#",
+      "amazonUrl": "https://www.amazon.co.uk/s?me=AGGGQPAQ7YS4X",
+      "buyNowUrl": "https://www.amazon.co.uk/s?me=AGGGQPAQ7YS4X",
+      "availableOnAmazon": true,
+      "featured": true,
       "images": [
-        "https://placehold.co/600x600/e2e8f0/475569?text=Car+Boot+Organiser"
+        "images/auto-organiser.png"
       ],
       "features": [
         "Foldable design",
@@ -89,20 +101,29 @@
         "Waterproof lining",
         "Universal fit"
       ],
-      "rating": 4.5,
-      "stock": 120
+      "weight": "680g",
+      "dimensions": "40 × 30 × 25 cm",
+      "material": "Oxford fabric / PP board",
+      "stockQty": 120,
+      "rating": 4.5
     },
     {
       "id": "auto-2",
       "name": "Steering Wheel Phone Mount",
+      "brand": "EAZYOO",
+      "sku": "EZ-AUTO-002",
       "description": "360° rotating magnetic car phone holder with secure grip",
+      "fullDescription": "The EAZYOO Magnetic Phone Mount attaches to any air vent and holds your phone securely at any angle. The 360° swivel head lets you position your screen perfectly. Supports all phones up to 7 inches wide.",
       "price": "12.99",
       "priceWholesale": "7.00",
       "badge": "",
       "category": "automotive",
-      "amazonUrl": "#",
+      "amazonUrl": "https://www.amazon.co.uk/s?me=AGGGQPAQ7YS4X",
+      "buyNowUrl": "https://www.amazon.co.uk/s?me=AGGGQPAQ7YS4X",
+      "availableOnAmazon": true,
+      "featured": false,
       "images": [
-        "https://placehold.co/600x600/e2e8f0/475569?text=Phone+Mount"
+        "images/auto-phone-mount.png"
       ],
       "features": [
         "Magnetic hold",
@@ -111,853 +132,2880 @@
         "Universal fit",
         "Anti-scratch pad"
       ],
-      "rating": 4.3,
-      "stock": 200
+      "weight": "95g",
+      "dimensions": "8 × 4 × 3 cm",
+      "material": "ABS plastic / Neodymium magnet",
+      "stockQty": 200,
+      "rating": 4.3
     },
     {
       "id": "auto-3",
       "name": "Car Seat Gap Filler",
+      "brand": "EAZYOO",
+      "sku": "EZ-AUTO-003",
       "description": "Premium leather console side pocket — 2 pack",
+      "fullDescription": "Stop losing phones, keys, and change down the side of your seat. EAZYOO Seat Gap Fillers slip neatly into the gap between your seat and centre console, preventing items from falling through. Comes in a 2-pack with a multi-pocket design.",
       "price": "14.99",
       "priceWholesale": "8.50",
       "badge": "New",
       "category": "automotive",
       "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
       "images": [
         "https://placehold.co/600x600/e2e8f0/475569?text=Seat+Gap+Filler"
       ],
       "features": [
-        "Premium leather",
-        "Prevents drops",
-        "Easy install",
-        "Universal fit",
-        "Pack of 2"
+        "Fits all car seats",
+        "Side pocket storage",
+        "Premium PU leather",
+        "2-pack included",
+        "Easy to install"
       ],
-      "rating": 4.6,
-      "stock": 85
+      "weight": "180g",
+      "dimensions": "38 × 6 × 3 cm",
+      "material": "PU leather / EVA foam",
+      "stockQty": 85,
+      "rating": 4.2
     },
     {
       "id": "auto-4",
       "name": "Windscreen Sun Shade",
+      "brand": "EAZYOO",
+      "sku": "EZ-AUTO-004",
       "description": "Foldable UV-blocking windshield sunshade with storage pouch",
-      "price": "9.99",
-      "priceWholesale": "5.50",
+      "fullDescription": "Protect your car's interior from the sun with the EAZYOO Windscreen Sun Shade. Made from reflective material that blocks up to 99% of UV rays, it folds into a compact disc for easy storage in the included pouch. Fits most standard and large windscreens.",
+      "price": "11.99",
+      "priceWholesale": "6.50",
       "badge": "",
       "category": "automotive",
       "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
       "images": [
         "https://placehold.co/600x600/e2e8f0/475569?text=Sun+Shade"
       ],
       "features": [
-        "UV protection",
-        "Folds compact",
-        "Easy setup",
+        "99% UV blocking",
+        "Folds to disc shape",
         "Storage pouch included",
-        "Reflective surface"
+        "Silver reflective finish",
+        "2 sizes available"
       ],
-      "rating": 4.2,
-      "stock": 150
+      "weight": "220g",
+      "dimensions": "150 × 70 cm (unfolded)",
+      "material": "Reflective polyester / aluminium foil",
+      "stockQty": 150,
+      "rating": 4.4
     },
     {
       "id": "auto-5",
       "name": "Back Seat Protector",
+      "brand": "EAZYOO",
+      "sku": "EZ-AUTO-005",
       "description": "Waterproof kick mat with tablet holder and storage pockets",
+      "fullDescription": "Keep your back seat clean with the EAZYOO Seat Protector. Children's muddy boots won't damage your upholstery. Features a transparent tablet holder at eye level, multiple storage pockets, and attaches securely to headrests with adjustable straps.",
       "price": "16.99",
       "priceWholesale": "9.50",
       "badge": "",
       "category": "automotive",
       "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
       "images": [
         "https://placehold.co/600x600/e2e8f0/475569?text=Seat+Protector"
       ],
       "features": [
-        "Waterproof",
-        "Tablet holder",
-        "Multiple pockets",
-        "Easy clean",
-        "Adjustable straps"
+        "Waterproof 600D Oxford",
+        "Tablet pocket",
+        "Kick mat protection",
+        "Adjustable straps",
+        "Easy to wipe clean"
       ],
-      "rating": 4.4,
-      "stock": 95
+      "weight": "420g",
+      "dimensions": "45 × 50 cm",
+      "material": "Oxford fabric / PVC",
+      "stockQty": 95,
+      "rating": 4.4
+    },
+    {
+      "id": "auto-6",
+      "name": "Car Cup Holder Expander",
+      "brand": "EAZYOO",
+      "sku": "EZ-AUTO-006",
+      "description": "Adjustable cup holder insert fits bottles and mugs up to 4 inches",
+      "fullDescription": "Not all car cup holders are equal. The EAZYOO Cup Holder Expander adjusts from 50mm to 100mm to grip any bottle, mug, or can securely — even on bumpy roads. No tools needed, installs in seconds.",
+      "price": "9.99",
+      "priceWholesale": "5.50",
+      "badge": "",
+      "category": "automotive",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Cup+Holder"
+      ],
+      "features": [
+        "Adjustable 50–100mm",
+        "Rubber grip base",
+        "Fits all bottle sizes",
+        "Non-slip inner ring",
+        "Tool-free install"
+      ],
+      "weight": "65g",
+      "dimensions": "10 × 10 × 6 cm",
+      "material": "ABS plastic / silicone",
+      "stockQty": 300,
+      "rating": 4.1
+    },
+    {
+      "id": "auto-7",
+      "name": "Dashboard Organiser Tray",
+      "brand": "EAZYOO",
+      "sku": "EZ-AUTO-007",
+      "description": "Non-slip silicone dashboard mat with raised edges and multiple sections",
+      "fullDescription": "Keep coins, sunglasses, cards and your phone within easy reach on your dashboard. The EAZYOO Dashboard Tray uses non-slip silicone that grips the dash and holds items securely even during sharp braking.",
+      "price": "8.99",
+      "priceWholesale": "5.00",
+      "badge": "",
+      "category": "automotive",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Dashboard+Tray"
+      ],
+      "features": [
+        "Non-slip silicone",
+        "4 compartments",
+        "Easy to wipe",
+        "Heat resistant",
+        "Universal fit"
+      ],
+      "weight": "120g",
+      "dimensions": "22 × 14 × 3 cm",
+      "material": "Silicone",
+      "stockQty": 220,
+      "rating": 4
+    },
+    {
+      "id": "auto-8",
+      "name": "Car Neck Pillow",
+      "brand": "EAZYOO",
+      "sku": "EZ-AUTO-008",
+      "description": "Memory foam headrest pillow with adjustable strap for all seats",
+      "fullDescription": "Long journey? The EAZYOO Car Neck Pillow supports your neck and head during extended drives. Made from slow-recovery memory foam with a breathable mesh cover. Adjustable strap fits any headrest.",
+      "price": "15.99",
+      "priceWholesale": "9.00",
+      "badge": "",
+      "category": "automotive",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Neck+Pillow"
+      ],
+      "features": [
+        "Memory foam core",
+        "Breathable mesh cover",
+        "Adjustable strap",
+        "Removable & washable cover",
+        "Ergonomic shape"
+      ],
+      "weight": "280g",
+      "dimensions": "35 × 25 × 10 cm",
+      "material": "Memory foam / mesh fabric",
+      "stockQty": 65,
+      "rating": 4.5
+    },
+    {
+      "id": "auto-9",
+      "name": "Car Trash Bin",
+      "brand": "EAZYOO",
+      "sku": "EZ-AUTO-009",
+      "description": "Collapsible waterproof bin with lid — 5 litre capacity",
+      "fullDescription": "Reduce clutter in your car with the EAZYOO Car Trash Bin. The collapsible design folds flat when empty. Includes a secure lid to prevent odours escaping, plus a car hook for easy hanging.",
+      "price": "7.99",
+      "priceWholesale": "4.50",
+      "badge": "New",
+      "category": "automotive",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Car+Bin"
+      ],
+      "features": [
+        "5L capacity",
+        "Collapsible when empty",
+        "Waterproof lining",
+        "Odour-trapping lid",
+        "Car hook included"
+      ],
+      "weight": "145g",
+      "dimensions": "22 × 16 × 24 cm",
+      "material": "Oxford fabric / PVC",
+      "stockQty": 180,
+      "rating": 4.2
+    },
+    {
+      "id": "auto-10",
+      "name": "Tyre Pressure Gauge",
+      "brand": "EAZYOO",
+      "sku": "EZ-AUTO-010",
+      "description": "Digital tyre pressure gauge — reads in PSI, BAR and kPa",
+      "fullDescription": "Check your tyre pressure in seconds with the EAZYOO Digital Tyre Gauge. Accurate to ±1% with an easy-to-read backlit LCD display. Fits all standard valve stems. Comes with a protective carry case.",
+      "price": "13.99",
+      "priceWholesale": "8.00",
+      "badge": "",
+      "category": "automotive",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Tyre+Gauge"
+      ],
+      "features": [
+        "Digital LCD display",
+        "PSI / BAR / kPa",
+        "±1% accuracy",
+        "Auto power-off",
+        "Carry case included"
+      ],
+      "weight": "90g",
+      "dimensions": "15 × 4 × 3 cm",
+      "material": "ABS plastic / metal valve",
+      "stockQty": 140,
+      "rating": 4.6
+    },
+    {
+      "id": "auto-11",
+      "name": "Steering Wheel Cover",
+      "brand": "EAZYOO",
+      "sku": "EZ-AUTO-011",
+      "description": "Universal anti-slip steering wheel cover in microfibre leather",
+      "fullDescription": "Upgrade your driving experience with the EAZYOO Steering Wheel Cover. The perforated microfibre leather provides a firm, comfortable grip and won't slip. Fits wheels 37–38cm in diameter. Available in black.",
+      "price": "12.99",
+      "priceWholesale": "7.50",
+      "badge": "",
+      "category": "automotive",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Wheel+Cover"
+      ],
+      "features": [
+        "Microfibre leather",
+        "Anti-slip grip",
+        "Fits 37–38cm wheels",
+        "Breathable perforations",
+        "Easy to install"
+      ],
+      "weight": "230g",
+      "dimensions": "37–38 cm diameter",
+      "material": "Microfibre leather",
+      "stockQty": 90,
+      "rating": 4.3
+    },
+    {
+      "id": "auto-12",
+      "name": "Car Emergency Kit",
+      "brand": "EAZYOO",
+      "sku": "EZ-AUTO-012",
+      "description": "10-piece roadside emergency kit in compact zip case",
+      "fullDescription": "Be prepared for any roadside situation with the EAZYOO Emergency Kit. Includes jumper cables, reflective triangle, first aid essentials, tow rope, and torch — all packed into a compact zipped bag that fits in your boot or glovebox.",
+      "price": "24.99",
+      "priceWholesale": "15.00",
+      "badge": "Best Seller",
+      "category": "automotive",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": true,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Emergency+Kit"
+      ],
+      "features": [
+        "10-piece kit",
+        "Jumper cables",
+        "Reflective triangle",
+        "First aid basics",
+        "Compact zip case"
+      ],
+      "weight": "1.2kg",
+      "dimensions": "30 × 22 × 15 cm",
+      "material": "Mixed",
+      "stockQty": 45,
+      "rating": 4.7
     },
     {
       "id": "hk-1",
       "name": "Collapsible Cutting Board",
+      "brand": "EAZYOO",
+      "sku": "EZ-HK-001",
       "description": "Foldable chopping board with built-in drain and wash basin",
-      "price": "14.99",
-      "priceWholesale": "8.50",
+      "fullDescription": "The EAZYOO Collapsible Cutting Board is unlike any you've used before. Chop your ingredients then fold the board into a funnel shape to pour them directly into the pan. Features a built-in wash basin. Folds flat to 2cm for drawer storage. BPA-free and dishwasher safe.",
+      "price": "19.99",
+      "priceWholesale": "12.00",
       "badge": "Best Seller",
       "category": "home-kitchen",
       "amazonUrl": "https://www.amazon.co.uk/Collapsible-Cutting-Board-Chopping-Foldable/dp/B0FN9FJXKS",
+      "buyNowUrl": "https://www.amazon.co.uk/Collapsible-Cutting-Board-Chopping-Foldable/dp/B0FN9FJXKS",
+      "availableOnAmazon": true,
+      "featured": true,
       "images": [
-        "images/cutting-board.png"
+        "images/home-kitchen-board.png"
       ],
       "features": [
-        "Folds flat",
-        "Built-in drain",
-        "Food safe",
-        "Multi-use",
-        "Sturdy surface"
+        "Folds to 2cm flat",
+        "Built-in wash basin",
+        "BPA-free PP plastic",
+        "Dishwasher safe",
+        "Non-slip feet"
       ],
-      "rating": 4.7,
-      "stock": 200
+      "weight": "380g",
+      "dimensions": "35 × 25 × 2 cm (folded)",
+      "material": "BPA-free PP plastic",
+      "stockQty": 200,
+      "rating": 4.7
     },
     {
       "id": "hk-2",
-      "name": "Silicone Utensil Set",
-      "description": "12-piece heat-resistant silicone cooking utensils with wooden handles",
-      "price": "22.99",
-      "priceWholesale": "13.00",
-      "badge": "New",
-      "category": "home-kitchen",
-      "amazonUrl": "#",
-      "images": [
-        "https://placehold.co/600x600/e2e8f0/475569?text=Utensil+Set"
-      ],
-      "features": [
-        "Heat resistant",
-        "Non-stick safe",
-        "Wooden handles",
-        "12 pieces",
-        "Dishwasher safe"
-      ],
-      "rating": 4.5,
-      "stock": 150
-    },
-    {
-      "id": "hk-3",
-      "name": "Stackable Storage Containers",
-      "description": "Airtight food storage set — 6 pack with snap-lock lids",
-      "price": "19.99",
-      "priceWholesale": "11.50",
-      "badge": "",
-      "category": "home-kitchen",
-      "amazonUrl": "#",
-      "images": [
-        "https://placehold.co/600x600/e2e8f0/475569?text=Storage+Containers"
-      ],
-      "features": [
-        "Airtight seal",
-        "Stackable design",
-        "BPA-free",
-        "Microwave safe",
-        "6-pack"
-      ],
-      "rating": 4.4,
-      "stock": 180
-    },
-    {
-      "id": "hk-4",
       "name": "Magnetic Knife Strip",
+      "brand": "EAZYOO",
+      "sku": "EZ-HK-002",
       "description": "Wall-mounted bamboo magnetic knife holder — 40cm",
+      "fullDescription": "Free up your kitchen drawer with the EAZYOO Magnetic Knife Strip. The 40cm natural bamboo bar holds up to 10 knives securely with strong neodymium magnets. Mounts to any wall with the included screws. Safe, sleek, and highly functional.",
       "price": "15.99",
       "priceWholesale": "9.00",
       "badge": "",
       "category": "home-kitchen",
       "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
       "images": [
-        "https://placehold.co/600x600/e2e8f0/475569?text=Knife+Strip"
+        "images/magnetic-knife-strip.png"
       ],
       "features": [
-        "Strong magnetic hold",
-        "Natural bamboo",
-        "Easy wall mount",
-        "Space saving",
-        "40cm length"
+        "Strong neodymium magnets",
+        "40cm bamboo bar",
+        "Holds up to 10 knives",
+        "Wall mount screws included",
+        "Safe to touch surface"
       ],
-      "rating": 4.3,
-      "stock": 100
+      "weight": "350g",
+      "dimensions": "40 × 6 × 2 cm",
+      "material": "Natural bamboo / neodymium",
+      "stockQty": 110,
+      "rating": 4.3
+    },
+    {
+      "id": "hk-3",
+      "name": "Collapsible Colander",
+      "brand": "EAZYOO",
+      "sku": "EZ-HK-003",
+      "description": "Silicone foldable strainer for pasta, vegetables and fruit",
+      "fullDescription": "The EAZYOO Collapsible Colander is heat-resistant up to 220°C and collapses to just 4cm for easy storage. Perfect for draining pasta, rinsing vegetables, or washing fruit. Works with pots up to 28cm in diameter.",
+      "price": "12.99",
+      "priceWholesale": "7.50",
+      "badge": "",
+      "category": "home-kitchen",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Colander"
+      ],
+      "features": [
+        "Heat resistant to 220°C",
+        "Collapses to 4cm",
+        "Fits pots up to 28cm",
+        "BPA-free silicone",
+        "Dishwasher safe"
+      ],
+      "weight": "250g",
+      "dimensions": "28 × 28 × 4 cm (folded)",
+      "material": "Food-grade silicone",
+      "stockQty": 160,
+      "rating": 4.4
+    },
+    {
+      "id": "hk-4",
+      "name": "Over-Sink Dish Drainer",
+      "brand": "EAZYOO",
+      "sku": "EZ-HK-004",
+      "description": "Roll-up stainless steel dish rack — sits over the sink",
+      "fullDescription": "Stop wasting worktop space. The EAZYOO Over-Sink Dish Drainer extends across your sink and rolls up for compact storage. Made from food-grade stainless steel with adjustable width feet to fit sinks from 28–55cm wide.",
+      "price": "22.99",
+      "priceWholesale": "14.00",
+      "badge": "New",
+      "category": "home-kitchen",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Dish+Drainer"
+      ],
+      "features": [
+        "Rolls up for storage",
+        "Adjustable width 28–55cm",
+        "Food-grade stainless",
+        "Non-slip legs",
+        "Rust resistant"
+      ],
+      "weight": "580g",
+      "dimensions": "55 × 28 × 2 cm (unrolled)",
+      "material": "304 stainless steel",
+      "stockQty": 75,
+      "rating": 4.5
     },
     {
       "id": "hk-5",
-      "name": "Over-Sink Dish Rack",
-      "description": "Adjustable roll-up dish drying rack — stainless steel",
-      "price": "17.99",
+      "name": "Herb & Spice Rack",
+      "brand": "EAZYOO",
+      "sku": "EZ-HK-005",
+      "description": "Rotating bamboo carousel spice rack — holds 16 jars",
+      "fullDescription": "Organise your spices in style with the EAZYOO Rotating Spice Rack. The bamboo turntable holds 16 standard spice jars (up to 6.5cm diameter) and rotates 360° for easy access. Compact enough for all kitchen worktops.",
+      "price": "18.99",
+      "priceWholesale": "11.00",
+      "badge": "",
+      "category": "home-kitchen",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Spice+Rack"
+      ],
+      "features": [
+        "360° rotating base",
+        "Holds 16 jars",
+        "Natural bamboo",
+        "Easy to wipe clean",
+        "Compact footprint"
+      ],
+      "weight": "460g",
+      "dimensions": "22 × 22 × 16 cm",
+      "material": "Natural bamboo",
+      "stockQty": 95,
+      "rating": 4.6
+    },
+    {
+      "id": "hk-6",
+      "name": "Stackable Food Containers",
+      "brand": "EAZYOO",
+      "sku": "EZ-HK-006",
+      "description": "5-piece airtight meal prep containers — microwave & freezer safe",
+      "fullDescription": "Keep meals fresh with the EAZYOO 5-piece Container Set. Each container has an airtight, leak-proof lid with 4 side clips. Stackable design saves fridge space. Safe for microwave, freezer, and dishwasher. Sizes: 500ml, 800ml (x2), 1.2L, 1.8L.",
+      "price": "16.99",
       "priceWholesale": "10.00",
       "badge": "",
       "category": "home-kitchen",
       "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
       "images": [
-        "https://placehold.co/600x600/e2e8f0/475569?text=Dish+Rack"
+        "https://placehold.co/600x600/e2e8f0/475569?text=Containers"
       ],
       "features": [
-        "Adjustable width",
-        "Rolls up flat",
-        "Stainless steel",
-        "Heat resistant",
-        "Multi-purpose"
+        "5-piece set",
+        "Airtight 4-clip lids",
+        "Microwave safe",
+        "Freezer safe",
+        "Dishwasher safe"
       ],
-      "rating": 4.6,
-      "stock": 130
+      "weight": "620g",
+      "dimensions": "Various (500ml–1.8L)",
+      "material": "BPA-free plastic",
+      "stockQty": 130,
+      "rating": 4.5
     },
     {
-      "id": "gd-1",
-      "name": "Garden Kneeling Pad",
-      "description": "Memory foam garden kneeler with waterproof cover",
-      "price": "11.99",
-      "priceWholesale": "6.50",
-      "badge": "Best Seller",
-      "category": "garden",
-      "amazonUrl": "#",
-      "images": [
-        "https://placehold.co/600x600/e2e8f0/475569?text=Kneeling+Pad"
-      ],
-      "features": [
-        "Memory foam",
-        "Waterproof",
-        "Lightweight",
-        "Non-slip base",
-        "Easy clean"
-      ],
-      "rating": 4.5,
-      "stock": 200
-    },
-    {
-      "id": "gd-2",
-      "name": "Expandable Garden Hose",
-      "description": "50ft expandable hose with 8-pattern spray nozzle",
-      "price": "24.99",
-      "priceWholesale": "14.00",
+      "id": "hk-7",
+      "name": "Soap Dispenser Pump",
+      "brand": "EAZYOO",
+      "sku": "EZ-HK-007",
+      "description": "Refillable stainless steel lotion pump — 300ml capacity",
+      "fullDescription": "Elevate your kitchen sink with the EAZYOO Soap Dispenser. The brushed stainless steel pump holds 300ml of soap or lotion and has a weighted straw to ensure every drop is used. Wide-mouth refill opening for mess-free topping up.",
+      "price": "14.99",
+      "priceWholesale": "8.50",
       "badge": "",
-      "category": "garden",
+      "category": "home-kitchen",
       "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
       "images": [
-        "https://placehold.co/600x600/e2e8f0/475569?text=Garden+Hose"
+        "https://placehold.co/600x600/e2e8f0/475569?text=Soap+Pump"
       ],
       "features": [
-        "Expands 3x",
-        "8 spray patterns",
-        "Leak-proof",
-        "Lightweight",
-        "50ft length"
+        "300ml capacity",
+        "Brushed stainless steel",
+        "Wide-mouth refill",
+        "Weighted straw",
+        "Drip-free pump"
       ],
-      "rating": 4.3,
-      "stock": 90
+      "weight": "180g",
+      "dimensions": "8 × 8 × 20 cm",
+      "material": "304 stainless steel",
+      "stockQty": 200,
+      "rating": 4.4
     },
     {
-      "id": "gd-3",
-      "name": "Solar Garden Lights",
-      "description": "LED solar pathway lights — waterproof, 8 pack",
-      "price": "18.99",
-      "priceWholesale": "10.50",
+      "id": "hk-8",
+      "name": "Cast Iron Trivet",
+      "brand": "EAZYOO",
+      "sku": "EZ-HK-008",
+      "description": "Decorative cast iron pot stand — heat resistant to 400°C",
+      "fullDescription": "Protect your worktops with the EAZYOO Cast Iron Trivet. The decorative geometric pattern looks beautiful and handles extreme heat with ease. Heavy-duty construction means it won't slide or tip. Perfect for cast iron pans, pots, and teapots.",
+      "price": "13.99",
+      "priceWholesale": "8.00",
+      "badge": "",
+      "category": "home-kitchen",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Trivet"
+      ],
+      "features": [
+        "Cast iron construction",
+        "Heat resistant to 400°C",
+        "Non-slip rubber feet",
+        "Decorative geometric design",
+        "Easy to clean"
+      ],
+      "weight": "820g",
+      "dimensions": "20 × 20 × 2 cm",
+      "material": "Cast iron",
+      "stockQty": 60,
+      "rating": 4.7
+    },
+    {
+      "id": "hk-9",
+      "name": "Bamboo Bread Bin",
+      "brand": "EAZYOO",
+      "sku": "EZ-HK-009",
+      "description": "Ventilated bamboo bread box with roll-top lid — keeps loaves fresh",
+      "fullDescription": "The EAZYOO Bamboo Bread Bin features a roll-top lid and ventilation holes to keep your bread fresher for longer. Large enough for two standard loaves. Natural bamboo is naturally antibacterial and moisture resistant.",
+      "price": "29.99",
+      "priceWholesale": "18.00",
       "badge": "New",
-      "category": "garden",
+      "category": "home-kitchen",
       "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
       "images": [
-        "https://placehold.co/600x600/e2e8f0/475569?text=Solar+Lights"
+        "https://placehold.co/600x600/e2e8f0/475569?text=Bread+Bin"
       ],
       "features": [
-        "Solar powered",
-        "Waterproof IP65",
-        "Auto on/off",
-        "8 pack",
-        "Warm white LED"
+        "Natural bamboo",
+        "Roll-top lid",
+        "Ventilation slots",
+        "Holds 2 standard loaves",
+        "Antibacterial material"
       ],
-      "rating": 4.4,
-      "stock": 160
+      "weight": "950g",
+      "dimensions": "36 × 22 × 22 cm",
+      "material": "Natural bamboo",
+      "stockQty": 45,
+      "rating": 4.6
     },
     {
-      "id": "gd-4",
-      "name": "Collapsible Garden Bag",
-      "description": "Pop-up garden waste bag — heavy duty, 120L capacity",
+      "id": "hk-10",
+      "name": "Non-Stick Roasting Tray",
+      "brand": "EAZYOO",
+      "sku": "EZ-HK-010",
+      "description": "Heavy-gauge carbon steel roasting pan with rack — oven safe to 260°C",
+      "fullDescription": "Roast perfectly every time with the EAZYOO Roasting Tray. The heavy-gauge carbon steel pan with non-stick coating handles everything from Sunday roasts to vegetables and fish. Includes a removable rack. Dishwasher safe.",
+      "price": "24.99",
+      "priceWholesale": "15.00",
+      "badge": "",
+      "category": "home-kitchen",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Roasting+Tray"
+      ],
+      "features": [
+        "Heavy-gauge carbon steel",
+        "Non-stick coating",
+        "Removable rack",
+        "Oven safe to 260°C",
+        "Dishwasher safe"
+      ],
+      "weight": "1.1kg",
+      "dimensions": "38 × 28 × 6 cm",
+      "material": "Carbon steel / non-stick",
+      "stockQty": 80,
+      "rating": 4.5
+    },
+    {
+      "id": "hk-11",
+      "name": "Electric Milk Frother",
+      "brand": "EAZYOO",
+      "sku": "EZ-HK-011",
+      "description": "Handheld battery-operated foam maker for coffee and matcha",
+      "fullDescription": "Make barista-quality coffee at home. The EAZYOO Milk Frother creates rich, silky foam in seconds. Works with all types of milk — dairy, oat, almond, and more. Battery operated for easy use anywhere. Includes a stand.",
       "price": "8.99",
       "priceWholesale": "5.00",
       "badge": "",
-      "category": "garden",
+      "category": "home-kitchen",
       "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
       "images": [
-        "https://placehold.co/600x600/e2e8f0/475569?text=Garden+Bag"
+        "https://placehold.co/600x600/e2e8f0/475569?text=Frother"
       ],
       "features": [
-        "120L capacity",
-        "Self-standing",
-        "Heavy duty",
-        "Folds flat",
-        "Carry handles"
+        "Battery operated",
+        "Works with all milk types",
+        "Stainless steel whisk",
+        "Includes stand",
+        "Easy to clean"
       ],
-      "rating": 4.2,
-      "stock": 250
+      "weight": "75g",
+      "dimensions": "20 × 5 cm",
+      "material": "Stainless steel / ABS",
+      "stockQty": 250,
+      "rating": 4.3
     },
     {
-      "id": "gd-5",
-      "name": "Plant Watering Globes",
-      "description": "Self-watering glass globes for indoor plants — 4 pack",
-      "price": "13.99",
+      "id": "hk-12",
+      "name": "Vegetable Spiralizer",
+      "brand": "EAZYOO",
+      "sku": "EZ-HK-012",
+      "description": "5-blade countertop spiralizer for courgette, carrot, and more",
+      "fullDescription": "Create healthy vegetable noodles in seconds with the EAZYOO 5-Blade Spiralizer. Strong suction cups hold it firmly to your worktop while you spiral courgettes, carrots, beetroot and more. Dishwasher-safe blades store inside the unit.",
+      "price": "17.99",
+      "priceWholesale": "10.50",
+      "badge": "",
+      "category": "home-kitchen",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Spiralizer"
+      ],
+      "features": [
+        "5 interchangeable blades",
+        "Strong suction base",
+        "Blade storage inside",
+        "Dishwasher safe",
+        "Handle for easy turning"
+      ],
+      "weight": "540g",
+      "dimensions": "25 × 15 × 20 cm",
+      "material": "ABS plastic / stainless blades",
+      "stockQty": 70,
+      "rating": 4.4
+    },
+    {
+      "id": "garden-1",
+      "name": "Garden Kneeling Pad",
+      "brand": "EAZYOO",
+      "sku": "EZ-GD-001",
+      "description": "Thick EVA foam kneeling mat with handles — waterproof",
+      "fullDescription": "Protect your knees while gardening with the EAZYOO Kneeling Pad. The thick EVA foam cushion provides excellent support, while the waterproof coating prevents soil and moisture from seeping through. Built-in handles make it easy to carry.",
+      "price": "12.99",
       "priceWholesale": "7.50",
       "badge": "",
       "category": "garden",
       "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
       "images": [
-        "https://placehold.co/600x600/e2e8f0/475569?text=Water+Globes"
+        "images/garden-kneeling-pad.png"
       ],
       "features": [
-        "Self-watering",
-        "Glass design",
-        "2 week supply",
-        "4 pack",
-        "Decorative"
+        "5cm EVA foam",
+        "Waterproof coating",
+        "Carrying handles",
+        "Non-slip base",
+        "Easy to clean"
       ],
-      "rating": 4.5,
-      "stock": 140
+      "weight": "340g",
+      "dimensions": "45 × 28 × 5 cm",
+      "material": "EVA foam",
+      "stockQty": 140,
+      "rating": 4.4
+    },
+    {
+      "id": "garden-2",
+      "name": "Solar Garden Lights",
+      "brand": "EAZYOO",
+      "sku": "EZ-GD-002",
+      "description": "Pack of 4 solar-powered pathway spike lights — auto on at dusk",
+      "fullDescription": "Light up your garden paths and flowerbeds with EAZYOO Solar Pathway Lights. Solar charged during the day, they automatically turn on at dusk and off at dawn. Stainless steel construction stands up to all weather. Pack of 4.",
+      "price": "18.99",
+      "priceWholesale": "11.00",
+      "badge": "Best Seller",
+      "category": "garden",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "images/garden-solar-lights.png"
+      ],
+      "features": [
+        "Pack of 4 lights",
+        "Auto on/off sensor",
+        "Solar rechargeable",
+        "IP65 weatherproof",
+        "Stainless steel post"
+      ],
+      "weight": "480g",
+      "dimensions": "8 × 8 × 38 cm each",
+      "material": "Stainless steel / ABS / solar panel",
+      "stockQty": 100,
+      "rating": 4.5
+    },
+    {
+      "id": "garden-3",
+      "name": "Expandable Garden Hose",
+      "brand": "EAZYOO",
+      "sku": "EZ-GD-003",
+      "description": "Lightweight flexible hose — expands to 30m when in use",
+      "fullDescription": "The EAZYOO Expandable Garden Hose collapses to a compact 10m when not in use and expands to the full 30m under water pressure. Lightweight and tangle-free. Includes an 8-pattern spray nozzle and hose connectors.",
+      "price": "26.99",
+      "priceWholesale": "16.00",
+      "badge": "New",
+      "category": "garden",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Garden+Hose"
+      ],
+      "features": [
+        "Expands 10m → 30m",
+        "Tangle-free design",
+        "8-pattern spray nozzle",
+        "Brass fittings",
+        "Lightweight when empty"
+      ],
+      "weight": "920g",
+      "dimensions": "10m (collapsed)",
+      "material": "Latex / polyester fabric / brass",
+      "stockQty": 55,
+      "rating": 4.3
+    },
+    {
+      "id": "garden-4",
+      "name": "Potting Tray",
+      "brand": "EAZYOO",
+      "sku": "EZ-GD-004",
+      "description": "Large waterproof potting mat — reduces mess when repotting",
+      "fullDescription": "Re-pot plants mess-free with the EAZYOO Potting Tray. The large mat catches soil and debris while you work. The raised edges keep everything contained. Wipe or rinse clean afterwards. Folds flat for compact storage.",
+      "price": "10.99",
+      "priceWholesale": "6.00",
+      "badge": "",
+      "category": "garden",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Potting+Tray"
+      ],
+      "features": [
+        "60 × 60cm surface",
+        "Raised edge wall",
+        "Waterproof PE material",
+        "Folds flat for storage",
+        "Easy to wipe clean"
+      ],
+      "weight": "180g",
+      "dimensions": "60 × 60 cm",
+      "material": "PE plastic / polyester",
+      "stockQty": 120,
+      "rating": 4.2
+    },
+    {
+      "id": "garden-5",
+      "name": "Plant Watering Globe",
+      "brand": "EAZYOO",
+      "sku": "EZ-GD-005",
+      "description": "Self-watering glass globe spikes — set of 4, keeps plants hydrated",
+      "fullDescription": "Keep your houseplants hydrated while you're on holiday. EAZYOO Glass Watering Globes slowly release water into the soil over 2–3 weeks. Simply fill, insert into compost, and leave your plants to self-water. Set of 4 in mixed colours.",
+      "price": "14.99",
+      "priceWholesale": "8.50",
+      "badge": "",
+      "category": "garden",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Water+Globe"
+      ],
+      "features": [
+        "Set of 4 globes",
+        "Lasts 2–3 weeks",
+        "Borosilicate glass",
+        "Mixed colours",
+        "For indoor & outdoor plants"
+      ],
+      "weight": "320g",
+      "dimensions": "7 × 7 × 25 cm each",
+      "material": "Borosilicate glass",
+      "stockQty": 95,
+      "rating": 4.5
+    },
+    {
+      "id": "garden-6",
+      "name": "Raised Bed Liner",
+      "brand": "EAZYOO",
+      "sku": "EZ-GD-006",
+      "description": "Heavy-duty weed-suppressing garden bed liner — 2m × 5m roll",
+      "fullDescription": "Suppress weeds and retain moisture with the EAZYOO Raised Bed Liner. The heavy-duty geo-textile fabric lets water and air through while blocking weed growth. Includes 20 ground pins for secure fixing. 2m × 5m roll.",
+      "price": "16.99",
+      "priceWholesale": "10.00",
+      "badge": "",
+      "category": "garden",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Bed+Liner"
+      ],
+      "features": [
+        "2m × 5m roll",
+        "Water & air permeable",
+        "UV stabilised",
+        "20 ground pins included",
+        "5-year lifespan"
+      ],
+      "weight": "480g",
+      "dimensions": "2 × 5 m",
+      "material": "Woven polypropylene geo-textile",
+      "stockQty": 70,
+      "rating": 4.3
+    },
+    {
+      "id": "garden-7",
+      "name": "Garden Tool Set",
+      "brand": "EAZYOO",
+      "sku": "EZ-GD-007",
+      "description": "5-piece stainless steel gardening tools with ergonomic handles",
+      "fullDescription": "Everything you need to maintain your garden. The EAZYOO 5-Piece Garden Tool Set includes a trowel, fork, transplanter, weeder, and hand rake — all with non-slip ergonomic grips. Stainless steel heads won't rust or bend.",
+      "price": "22.99",
+      "priceWholesale": "14.00",
+      "badge": "Best Seller",
+      "category": "garden",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": true,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Garden+Tools"
+      ],
+      "features": [
+        "5-piece set",
+        "Stainless steel heads",
+        "Ergonomic grip handles",
+        "Rust resistant",
+        "Storage bag included"
+      ],
+      "weight": "740g",
+      "dimensions": "30 × 5 cm average",
+      "material": "Stainless steel / TPR rubber",
+      "stockQty": 85,
+      "rating": 4.6
+    },
+    {
+      "id": "garden-8",
+      "name": "Compost Bin",
+      "brand": "EAZYOO",
+      "sku": "EZ-GD-008",
+      "description": "220L capacity outdoor composting bin with lockable lid",
+      "fullDescription": "Turn kitchen and garden waste into rich compost with the EAZYOO Compost Bin. The 220L capacity handles large families. The lockable lid keeps pests out. Ventilation slots on all sides promote aerobic decomposition. Made from 100% recycled plastic.",
+      "price": "34.99",
+      "priceWholesale": "22.00",
+      "badge": "",
+      "category": "garden",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Compost+Bin"
+      ],
+      "features": [
+        "220L capacity",
+        "Lockable lid",
+        "Ventilation slots",
+        "100% recycled plastic",
+        "Easy assembly"
+      ],
+      "weight": "3.2kg",
+      "dimensions": "60 × 60 × 75 cm",
+      "material": "Recycled polyethylene",
+      "stockQty": 30,
+      "rating": 4.4
+    },
+    {
+      "id": "garden-9",
+      "name": "Hanging Basket Liner",
+      "brand": "EAZYOO",
+      "sku": "EZ-GD-009",
+      "description": "Natural coco fibre basket liner — 35cm round, pack of 5",
+      "fullDescription": "Give your hanging baskets a natural, attractive finish with EAZYOO Coco Liner inserts. Natural coco fibre retains moisture while allowing drainage. Pre-shaped to fit 35cm round baskets. Biodegradable and eco-friendly. Pack of 5.",
+      "price": "9.99",
+      "priceWholesale": "5.50",
+      "badge": "",
+      "category": "garden",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Basket+Liner"
+      ],
+      "features": [
+        "Pack of 5",
+        "35cm diameter",
+        "Natural coco fibre",
+        "Good moisture retention",
+        "Biodegradable"
+      ],
+      "weight": "280g",
+      "dimensions": "35 cm diameter each",
+      "material": "Natural coco fibre",
+      "stockQty": 180,
+      "rating": 4.2
+    },
+    {
+      "id": "garden-10",
+      "name": "Patio Furniture Cover",
+      "brand": "EAZYOO",
+      "sku": "EZ-GD-010",
+      "description": "Heavy-duty waterproof cover for outdoor tables and chairs",
+      "fullDescription": "Protect your outdoor furniture all year round with the EAZYOO Patio Cover. Made from 210D Oxford fabric with a waterproof PVC coating, it covers tables up to 180 × 100cm. Adjustable drawstring hem and two securing straps keep it in place on windy days.",
+      "price": "19.99",
+      "priceWholesale": "12.00",
+      "badge": "New",
+      "category": "garden",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Patio+Cover"
+      ],
+      "features": [
+        "210D Oxford fabric",
+        "Waterproof PVC coating",
+        "Adjustable drawstring",
+        "2 securing straps",
+        "UV resistant"
+      ],
+      "weight": "780g",
+      "dimensions": "180 × 100 × 70 cm",
+      "material": "210D Oxford / PVC",
+      "stockQty": 55,
+      "rating": 4.5
+    },
+    {
+      "id": "garden-11",
+      "name": "Seed Starting Kit",
+      "brand": "EAZYOO",
+      "sku": "EZ-GD-011",
+      "description": "72-cell seed tray with humidity dome and drainage tray",
+      "fullDescription": "Get your seeds off to the best start with the EAZYOO Seed Starter Kit. The 72-cell tray provides individual growing cells for perfect root development. The clear humidity dome maintains moisture levels. Drainage holes prevent overwatering.",
+      "price": "11.99",
+      "priceWholesale": "6.50",
+      "badge": "",
+      "category": "garden",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Seed+Kit"
+      ],
+      "features": [
+        "72 individual cells",
+        "Clear humidity dome",
+        "Drainage tray",
+        "Reusable and durable",
+        "Stackable design"
+      ],
+      "weight": "320g",
+      "dimensions": "53 × 28 × 5 cm",
+      "material": "Clear PET / black PVC",
+      "stockQty": 90,
+      "rating": 4.4
     },
     {
       "id": "pet-1",
       "name": "Collapsible Pet Bowl",
-      "description": "Portable silicone travel bowl for dogs and cats — 2 pack",
-      "price": "7.99",
-      "priceWholesale": "4.50",
-      "badge": "Best Seller",
-      "category": "pet-supplies",
-      "amazonUrl": "#",
-      "images": [
-        "https://placehold.co/600x600/e2e8f0/475569?text=Pet+Bowl"
-      ],
-      "features": [
-        "Food-grade silicone",
-        "Folds flat",
-        "Clip-on carabiner",
-        "Dishwasher safe",
-        "Pack of 2"
-      ],
-      "rating": 4.6,
-      "stock": 300
-    },
-    {
-      "id": "pet-2",
-      "name": "Pet Grooming Glove",
-      "description": "Deshedding brush glove for dogs and cats — gentle massage",
+      "brand": "EAZYOO",
+      "sku": "EZ-PET-001",
+      "description": "Foldable silicone travel bowl — food and water safe, 700ml",
+      "fullDescription": "Take your pet's bowl anywhere with the EAZYOO Collapsible Pet Bowl. The flexible food-grade silicone collapses flat to 2cm for pocket storage. Holds 700ml — suitable for food or water. BPA-free and dishwasher safe.",
       "price": "9.99",
       "priceWholesale": "5.50",
       "badge": "",
       "category": "pet-supplies",
       "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
       "images": [
-        "https://placehold.co/600x600/e2e8f0/475569?text=Grooming+Glove"
+        "images/pet-collapsible-bowl.png"
       ],
       "features": [
-        "Gentle bristles",
-        "Fits both hands",
-        "Reduces shedding",
-        "Machine washable",
-        "Adjustable strap"
+        "700ml capacity",
+        "Collapses to 2cm",
+        "Food-grade silicone",
+        "BPA-free",
+        "Dishwasher safe"
       ],
-      "rating": 4.4,
-      "stock": 180
+      "weight": "90g",
+      "dimensions": "14 × 14 × 2 cm (folded)",
+      "material": "Food-grade silicone",
+      "stockQty": 220,
+      "rating": 4.4
+    },
+    {
+      "id": "pet-2",
+      "name": "Slow Feeder Dog Bowl",
+      "brand": "EAZYOO",
+      "sku": "EZ-PET-002",
+      "description": "Anti-gulp maze bowl for dogs — reduces bloat and aids digestion",
+      "fullDescription": "Help your dog eat at a healthier pace with the EAZYOO Slow Feeder Bowl. The raised maze design forces dogs to eat slowly, reducing bloat and improving digestion. The non-slip silicone base keeps it in place. Available in two sizes.",
+      "price": "12.99",
+      "priceWholesale": "7.50",
+      "badge": "Best Seller",
+      "category": "pet-supplies",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": true,
+      "images": [
+        "images/pet-slow-feeder.png"
+      ],
+      "features": [
+        "Maze slow-feed design",
+        "Reduces bloat risk",
+        "Non-slip base",
+        "BPA-free material",
+        "Dishwasher safe"
+      ],
+      "weight": "280g",
+      "dimensions": "22 × 22 × 5 cm",
+      "material": "BPA-free polypropylene / silicone",
+      "stockQty": 180,
+      "rating": 4.6
     },
     {
       "id": "pet-3",
-      "name": "Poo Bag Dispenser",
-      "description": "Bone-shaped dispenser with 200 leak-proof biodegradable bags",
-      "price": "11.99",
-      "priceWholesale": "6.50",
+      "name": "Pet Grooming Glove",
+      "brand": "EAZYOO",
+      "sku": "EZ-PET-003",
+      "description": "Silicone deshedding mitt — removes loose fur gently while petting",
+      "fullDescription": "Turn grooming into a bonding session with the EAZYOO Pet Grooming Glove. The flexible silicone tips massage and deshed simultaneously. Works on dogs, cats, and horses. Adjustable wrist strap for secure fit. Easy to clean — simply rinse under a tap.",
+      "price": "8.99",
+      "priceWholesale": "5.00",
       "badge": "New",
       "category": "pet-supplies",
       "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
       "images": [
-        "https://placehold.co/600x600/e2e8f0/475569?text=Poo+Bags"
+        "https://placehold.co/600x600/e2e8f0/475569?text=Pet+Glove"
       ],
       "features": [
-        "200 bags included",
-        "Biodegradable",
-        "Leak-proof",
-        "Clip-on design",
-        "Bone shaped"
+        "Silicone deshedding tips",
+        "Adjustable wrist strap",
+        "Works on any pet",
+        "Easy to rinse clean",
+        "Gentle on skin"
       ],
-      "rating": 4.5,
-      "stock": 220
+      "weight": "65g",
+      "dimensions": "One size fits most",
+      "material": "Food-grade silicone / nylon",
+      "stockQty": 200,
+      "rating": 4.5
     },
     {
       "id": "pet-4",
-      "name": "Slow Feeder Bowl",
-      "description": "Anti-gulp puzzle bowl for dogs — reduces eating speed by 80%",
-      "price": "10.99",
-      "priceWholesale": "6.00",
+      "name": "Cat Scratching Post",
+      "brand": "EAZYOO",
+      "sku": "EZ-PET-004",
+      "description": "Tall sisal rope cat post with plush top perch — 70cm",
+      "fullDescription": "Give your cat a dedicated place to scratch and play. The EAZYOO Cat Scratching Post features a sturdy base and 70cm sisal-wrapped post topped with a plush perch. Cats can scratch, climb, and nap all in one spot.",
+      "price": "24.99",
+      "priceWholesale": "15.00",
       "badge": "",
       "category": "pet-supplies",
       "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
       "images": [
-        "https://placehold.co/600x600/e2e8f0/475569?text=Slow+Feeder"
+        "https://placehold.co/600x600/e2e8f0/475569?text=Cat+Post"
       ],
       "features": [
-        "Reduces gulping 80%",
-        "Non-slip base",
-        "BPA-free",
-        "Dishwasher safe",
-        "Multiple sizes"
+        "70cm height",
+        "Natural sisal rope",
+        "Plush perch top",
+        "Weighted stable base",
+        "Easy to assemble"
       ],
-      "rating": 4.3,
-      "stock": 150
+      "weight": "2.1kg",
+      "dimensions": "35 × 35 × 70 cm",
+      "material": "Sisal rope / plush / MDF board",
+      "stockQty": 45,
+      "rating": 4.4
     },
     {
       "id": "pet-5",
-      "name": "Pet Car Seat Cover",
-      "description": "Waterproof back seat protector for dogs — scratch-proof",
-      "price": "21.99",
-      "priceWholesale": "12.00",
+      "name": "Pet Travel Carrier",
+      "brand": "EAZYOO",
+      "sku": "EZ-PET-005",
+      "description": "Soft-sided foldable airline-approved carrier — up to 6kg pets",
+      "fullDescription": "Travel stress-free with your small pet. The EAZYOO Pet Carrier features mesh ventilation panels, a fleece inner mat, and multiple entry points. Airline approved carry-on size. Folds flat when not in use. Fits dogs and cats up to 6kg.",
+      "price": "29.99",
+      "priceWholesale": "18.00",
       "badge": "",
       "category": "pet-supplies",
       "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
       "images": [
-        "https://placehold.co/600x600/e2e8f0/475569?text=Car+Seat+Cover"
+        "https://placehold.co/600x600/e2e8f0/475569?text=Pet+Carrier"
       ],
       "features": [
-        "Waterproof",
-        "Scratch-proof",
-        "Universal fit",
-        "Easy install",
-        "Machine washable"
+        "Airline approved size",
+        "Mesh ventilation",
+        "Fleece inner mat",
+        "Top and side entry",
+        "Folds flat for storage"
       ],
-      "rating": 4.6,
-      "stock": 100
+      "weight": "680g",
+      "dimensions": "45 × 30 × 28 cm",
+      "material": "Oxford fabric / mesh / fleece",
+      "stockQty": 60,
+      "rating": 4.5
     },
     {
-      "id": "toy-1",
-      "name": "Magnetic Building Blocks",
-      "description": "50-piece 3D magnetic construction set for kids 3+",
+      "id": "pet-6",
+      "name": "Automatic Pet Feeder",
+      "brand": "EAZYOO",
+      "sku": "EZ-PET-006",
+      "description": "Digital timed food dispenser — up to 4 meals per day, 2.4L hopper",
+      "fullDescription": "Never miss a pet mealtime with the EAZYOO Automatic Feeder. Set up to 4 daily meals with custom portion sizes. The 2.4L hopper holds up to 4kg of dry food. LCD display and simple programming. Works on mains or 3× AA batteries as backup.",
+      "price": "39.99",
+      "priceWholesale": "25.00",
+      "badge": "Best Seller",
+      "category": "pet-supplies",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": true,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Auto+Feeder"
+      ],
+      "features": [
+        "4 meals per day",
+        "2.4L / 4kg hopper",
+        "LCD display",
+        "Mains + battery backup",
+        "Anti-jam mechanism"
+      ],
+      "weight": "1.1kg",
+      "dimensions": "24 × 18 × 34 cm",
+      "material": "ABS plastic / stainless bowl",
+      "stockQty": 70,
+      "rating": 4.6
+    },
+    {
+      "id": "pet-7",
+      "name": "Dog Seat Belt",
+      "brand": "EAZYOO",
+      "sku": "EZ-PET-007",
+      "description": "Adjustable car harness clip — fits all dogs and seat belt buckles",
+      "fullDescription": "Keep your dog safe in the car with the EAZYOO Dog Seat Belt. The elastic bungee cord absorbs sudden braking forces. Clips to your dog's harness on one end and the seat belt buckle on the other. Adjustable from 25–75cm.",
+      "price": "7.99",
+      "priceWholesale": "4.50",
+      "badge": "",
+      "category": "pet-supplies",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Dog+Seatbelt"
+      ],
+      "features": [
+        "Universal seat belt clip",
+        "Elastic bungee cord",
+        "25–75cm adjustable",
+        "Works with any harness",
+        "Carabiner hook"
+      ],
+      "weight": "60g",
+      "dimensions": "25–75 cm adjustable",
+      "material": "Nylon / elastic / steel",
+      "stockQty": 250,
+      "rating": 4.3
+    },
+    {
+      "id": "pet-8",
+      "name": "Pet Water Fountain",
+      "brand": "EAZYOO",
+      "sku": "EZ-PET-008",
+      "description": "1.5L circulating filter fountain — encourages cats & dogs to drink",
+      "fullDescription": "Many pets prefer running water. The EAZYOO Pet Fountain provides a gentle, continuous stream that encourages drinking and helps prevent urinary issues. The replaceable carbon filter removes impurities. Ultra-quiet pump.",
+      "price": "22.99",
+      "priceWholesale": "14.00",
+      "badge": "New",
+      "category": "pet-supplies",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Pet+Fountain"
+      ],
+      "features": [
+        "1.5L capacity",
+        "Carbon filter",
+        "Ultra-quiet pump",
+        "LED indicator",
+        "Dishwasher safe parts"
+      ],
+      "weight": "520g",
+      "dimensions": "20 × 20 × 16 cm",
+      "material": "BPA-free plastic / stainless",
+      "stockQty": 80,
+      "rating": 4.7
+    },
+    {
+      "id": "pet-9",
+      "name": "Flea & Tick Comb",
+      "brand": "EAZYOO",
+      "sku": "EZ-PET-009",
+      "description": "Fine-tooth dual-sided comb for flea detection and grooming",
+      "fullDescription": "The EAZYOO Flea & Tick Comb has fine-tooth and wide-tooth sides for thorough grooming and parasite detection. The stainless steel teeth slide through all coat types. Ergonomic rubber handle prevents hand fatigue during long grooming sessions.",
+      "price": "6.99",
+      "priceWholesale": "4.00",
+      "badge": "",
+      "category": "pet-supplies",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Flea+Comb"
+      ],
+      "features": [
+        "Dual-sided design",
+        "Fine & wide tooth",
+        "Stainless steel teeth",
+        "Ergonomic handle",
+        "Works on all breeds"
+      ],
+      "weight": "45g",
+      "dimensions": "17 × 6 cm",
+      "material": "Stainless steel / ABS rubber",
+      "stockQty": 300,
+      "rating": 4.2
+    },
+    {
+      "id": "pet-10",
+      "name": "Pet Waste Bag Dispenser",
+      "brand": "EAZYOO",
+      "sku": "EZ-PET-010",
+      "description": "Refillable dog poop bag holder with carabiner clip — 180 bags included",
+      "fullDescription": "Never be caught without a bag on a walk again. The EAZYOO Dispenser attaches to your lead with a carabiner clip. Includes 180 biodegradable bags across 12 rolls. Wide-mouth opening makes one-handed use simple.",
+      "price": "9.99",
+      "priceWholesale": "5.50",
+      "badge": "",
+      "category": "pet-supplies",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Bag+Dispenser"
+      ],
+      "features": [
+        "180 bags included (12 rolls)",
+        "Biodegradable bags",
+        "Carabiner clip",
+        "Wide-mouth dispenser",
+        "Refillable design"
+      ],
+      "weight": "95g",
+      "dimensions": "8 × 5 cm",
+      "material": "ABS plastic",
+      "stockQty": 350,
+      "rating": 4.5
+    },
+    {
+      "id": "pet-11",
+      "name": "Dog Cooling Mat",
+      "brand": "EAZYOO",
+      "sku": "EZ-PET-011",
+      "description": "Self-cooling pressure-activated gel mat — no electricity needed, 90×60cm",
+      "fullDescription": "Keep your dog cool in summer with the EAZYOO Cooling Mat. The pressure-activated gel absorbs heat from your pet and self-recharges after 15–20 minutes without use. No electricity, water, or refrigeration needed. Wipe-clean surface.",
       "price": "19.99",
-      "priceWholesale": "11.00",
+      "priceWholesale": "12.00",
+      "badge": "Best Seller",
+      "category": "pet-supplies",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Cooling+Mat"
+      ],
+      "features": [
+        "Self-cooling gel",
+        "No electricity needed",
+        "90 × 60cm (Large)",
+        "Self-recharging",
+        "Wipe-clean surface"
+      ],
+      "weight": "1.3kg",
+      "dimensions": "90 × 60 cm",
+      "material": "Non-toxic gel / PVC outer",
+      "stockQty": 90,
+      "rating": 4.5
+    },
+    {
+      "id": "pet-12",
+      "name": "Interactive Puzzle Feeder",
+      "brand": "EAZYOO",
+      "sku": "EZ-PET-012",
+      "description": "Level 2 mental stimulation puzzle toy — hides treats in sliding compartments",
+      "fullDescription": "Challenge your pet's mind with the EAZYOO Interactive Puzzle Feeder. Hide treats in the sliding drawers and rotating compartments and let your dog or cat work to retrieve them. Level 2 difficulty — suitable for intermediate problem solvers.",
+      "price": "14.99",
+      "priceWholesale": "8.50",
+      "badge": "New",
+      "category": "pet-supplies",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Puzzle+Feeder"
+      ],
+      "features": [
+        "Level 2 difficulty",
+        "Sliding & rotating sections",
+        "Non-toxic materials",
+        "Easy to hide treats",
+        "Dishwasher safe"
+      ],
+      "weight": "310g",
+      "dimensions": "30 × 20 × 5 cm",
+      "material": "ABS plastic",
+      "stockQty": 110,
+      "rating": 4.6
+    },
+    {
+      "id": "pet-13",
+      "name": "Dog Raincoat",
+      "brand": "EAZYOO",
+      "sku": "EZ-PET-013",
+      "description": "Waterproof hooded dog jacket with reflective strips — sizes S–XL",
+      "fullDescription": "Keep your dog dry and visible on wet walks. The EAZYOO Dog Raincoat features a waterproof ripstop outer, a reflective strip for safety in low light, and a velcro fastening belly strap. Available in sizes Small to XL.",
+      "price": "17.99",
+      "priceWholesale": "10.50",
+      "badge": "",
+      "category": "pet-supplies",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Dog+Raincoat"
+      ],
+      "features": [
+        "Waterproof outer",
+        "Reflective safety strip",
+        "Velcro belly strap",
+        "Hood with toggle",
+        "Sizes S, M, L, XL"
+      ],
+      "weight": "160g (medium)",
+      "dimensions": "Various sizes S–XL",
+      "material": "Ripstop polyester / PU coating",
+      "stockQty": 75,
+      "rating": 4.4
+    },
+    {
+      "id": "pet-14",
+      "name": "Orthopedic Dog Bed",
+      "brand": "EAZYOO",
+      "sku": "EZ-PET-014",
+      "description": "Memory foam pet mattress with washable fleece cover — Large 90×70cm",
+      "fullDescription": "Give your dog the best night's sleep with the EAZYOO Orthopedic Bed. The 7cm memory foam base moulds to your dog's body and relieves pressure on joints — ideal for older dogs. The plush fleece cover zips off for machine washing.",
+      "price": "44.99",
+      "priceWholesale": "28.00",
+      "badge": "Best Seller",
+      "category": "pet-supplies",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Dog+Bed"
+      ],
+      "features": [
+        "7cm memory foam base",
+        "Removable fleece cover",
+        "Machine washable",
+        "90 × 70cm Large",
+        "Non-slip base"
+      ],
+      "weight": "2.4kg",
+      "dimensions": "90 × 70 × 9 cm",
+      "material": "Memory foam / fleece / non-slip base",
+      "stockQty": 40,
+      "rating": 4.7
+    },
+    {
+      "id": "toys-1",
+      "name": "Magnetic Building Blocks",
+      "brand": "EAZYOO",
+      "sku": "EZ-TOY-001",
+      "description": "60-piece magnetic tiles set for creative 3D building",
+      "fullDescription": "Inspire creativity in children aged 3+ with EAZYOO Magnetic Building Blocks. The 60-piece set includes squares, triangles, and pentagons with strong magnets in all edges. Build houses, towers, animals, and anything you can imagine. STEM learning through play.",
+      "price": "29.99",
+      "priceWholesale": "18.00",
       "badge": "Best Seller",
       "category": "toys-games",
       "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": true,
       "images": [
-        "https://placehold.co/600x600/e2e8f0/475569?text=Magnetic+Blocks"
+        "images/toys-magnetic-blocks.png"
       ],
       "features": [
-        "50 pieces",
-        "Strong magnets",
-        "BPA-free",
-        "Ages 3+",
-        "Storage bag included"
+        "60-piece set",
+        "Strong edge magnets",
+        "Squares, triangles, pentagons",
+        "3D construction",
+        "Ages 3+"
       ],
-      "rating": 4.7,
-      "stock": 200
+      "weight": "680g",
+      "dimensions": "Various tiles 7–8cm",
+      "material": "ABS plastic / neodymium magnets",
+      "stockQty": 100,
+      "rating": 4.8
     },
     {
-      "id": "toy-2",
-      "name": "LED Finger Lights",
-      "description": "Multi-colour party finger lights — 40 pack",
-      "price": "6.99",
-      "priceWholesale": "3.50",
+      "id": "toys-2",
+      "name": "Wooden Puzzles Set",
+      "brand": "EAZYOO",
+      "sku": "EZ-TOY-002",
+      "description": "4-pack themed wooden jigsaws — animals, vehicles, numbers, letters",
+      "fullDescription": "Help young children develop fine motor skills and problem-solving with EAZYOO Wooden Puzzles. The set of 4 includes animals, vehicles, numbers, and alphabet themed puzzles in a sturdy wooden frame. Chunky pieces for small hands.",
+      "price": "19.99",
+      "priceWholesale": "12.00",
       "badge": "",
       "category": "toys-games",
       "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
       "images": [
-        "https://placehold.co/600x600/e2e8f0/475569?text=Finger+Lights"
+        "https://placehold.co/600x600/e2e8f0/475569?text=Wooden+Puzzles"
       ],
       "features": [
-        "40 pack",
-        "4 colours",
-        "Elastic bands",
-        "Battery included",
-        "Party favourite"
+        "4-puzzle set",
+        "Chunky wooden pieces",
+        "4 themes",
+        "Non-toxic paint",
+        "Ages 2–5"
       ],
-      "rating": 4.2,
-      "stock": 500
+      "weight": "540g",
+      "dimensions": "25 × 20 cm each frame",
+      "material": "Sustainably sourced wood",
+      "stockQty": 120,
+      "rating": 4.6
     },
     {
-      "id": "toy-3",
-      "name": "Fidget Cube Set",
-      "description": "Stress relief sensory fidget toy set — 6 pack assorted",
-      "price": "8.99",
-      "priceWholesale": "4.50",
+      "id": "toys-3",
+      "name": "Outdoor Giant Jenga",
+      "brand": "EAZYOO",
+      "sku": "EZ-TOY-003",
+      "description": "54-block stacking tower game — builds to over 90cm tall",
+      "fullDescription": "Bring the classic stacking game outside with EAZYOO Giant Jenga. The 54 solid pine blocks build to over 90cm before toppling. Includes a carry bag for easy storage and transport. Suitable for all ages.",
+      "price": "34.99",
+      "priceWholesale": "22.00",
+      "badge": "Best Seller",
+      "category": "toys-games",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Giant+Jenga"
+      ],
+      "features": [
+        "54 solid pine blocks",
+        "Builds to 90cm+",
+        "Carry bag included",
+        "Outdoor & indoor",
+        "All ages"
+      ],
+      "weight": "4.2kg",
+      "dimensions": "7.5 × 2.5 × 15 cm per block",
+      "material": "Solid pine wood",
+      "stockQty": 35,
+      "rating": 4.7
+    },
+    {
+      "id": "toys-4",
+      "name": "Kinetic Sand Kit",
+      "brand": "EAZYOO",
+      "sku": "EZ-TOY-004",
+      "description": "1kg kinetic sensory sand with 8 moulds and tray",
+      "fullDescription": "Hours of creative, mess-free play with EAZYOO Kinetic Sand. The magical sand sticks to itself but not to hands or surfaces. Includes 1kg of sand, 8 shaped moulds, and a containment tray. Perfect for developing creativity and sensory play.",
+      "price": "16.99",
+      "priceWholesale": "10.00",
       "badge": "New",
       "category": "toys-games",
       "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
       "images": [
-        "https://placehold.co/600x600/e2e8f0/475569?text=Fidget+Cubes"
+        "https://placehold.co/600x600/e2e8f0/475569?text=Kinetic+Sand"
       ],
       "features": [
-        "6 different designs",
-        "Stress relief",
-        "Pocket-sized",
-        "Silent clicking",
-        "Ages 6+"
+        "1kg kinetic sand",
+        "8 shape moulds",
+        "Containment tray",
+        "Non-toxic formula",
+        "Ages 3+"
       ],
-      "rating": 4.4,
-      "stock": 350
+      "weight": "1.4kg",
+      "dimensions": "30 × 25 × 8 cm (tray)",
+      "material": "Kinetic sand formula",
+      "stockQty": 90,
+      "rating": 4.5
     },
     {
-      "id": "toy-4",
-      "name": "Water Gun Set",
-      "description": "High-pressure water blaster set — 2 pack, 600ml capacity",
-      "price": "14.99",
-      "priceWholesale": "8.00",
+      "id": "toys-5",
+      "name": "Science Experiment Kit",
+      "brand": "EAZYOO",
+      "sku": "EZ-TOY-005",
+      "description": "25 STEM experiments kit for children aged 8–14",
+      "fullDescription": "Ignite curiosity with the EAZYOO Science Kit. 25 fascinating experiments covering chemistry, physics, and biology. Includes all materials, instructions, and a 48-page illustrated guide. Designed for ages 8–14. No lab needed — everything works on your kitchen table.",
+      "price": "24.99",
+      "priceWholesale": "15.00",
+      "badge": "New",
+      "category": "toys-games",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Science+Kit"
+      ],
+      "features": [
+        "25 experiments",
+        "All materials included",
+        "48-page guide",
+        "Ages 8–14",
+        "Safe non-toxic chemicals"
+      ],
+      "weight": "860g",
+      "dimensions": "28 × 22 × 12 cm",
+      "material": "Various / non-toxic",
+      "stockQty": 65,
+      "rating": 4.7
+    },
+    {
+      "id": "toys-6",
+      "name": "RC Racing Car",
+      "brand": "EAZYOO",
+      "sku": "EZ-TOY-006",
+      "description": "1:16 scale remote control racing car — 25km/h, 40m range",
+      "fullDescription": "Full speed ahead! The EAZYOO RC Racing Car reaches 25km/h and responds to controls up to 40 metres away. 4-wheel independent suspension handles bumpy terrain. USB rechargeable in just 90 minutes. Suitable for ages 8+.",
+      "price": "32.99",
+      "priceWholesale": "20.00",
       "badge": "",
       "category": "toys-games",
       "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
       "images": [
-        "https://placehold.co/600x600/e2e8f0/475569?text=Water+Guns"
+        "https://placehold.co/600x600/e2e8f0/475569?text=RC+Car"
       ],
       "features": [
-        "600ml capacity",
-        "10m range",
-        "Easy pump",
-        "Leak-proof",
-        "Pack of 2"
+        "25km/h top speed",
+        "40m control range",
+        "4-wheel suspension",
+        "USB rechargeable (90 min)",
+        "2.4GHz interference-free"
       ],
-      "rating": 4.3,
-      "stock": 180
+      "weight": "480g",
+      "dimensions": "28 × 14 × 10 cm",
+      "material": "ABS plastic / rubber tyres",
+      "stockQty": 50,
+      "rating": 4.5
     },
     {
-      "id": "toy-5",
-      "name": "Glow Sticks Party Pack",
-      "description": "200-piece premium glow sticks with connectors",
-      "price": "10.99",
-      "priceWholesale": "6.00",
+      "id": "toys-7",
+      "name": "Glow-in-Dark Stars Pack",
+      "brand": "EAZYOO",
+      "sku": "EZ-TOY-007",
+      "description": "200-piece adhesive ceiling stars for kids bedrooms — glows 8 hours",
+      "fullDescription": "Transform a child's bedroom into a galaxy. EAZYOO Glow Stars stick to ceilings and walls without marks and glow for up to 8 hours after a few minutes of light exposure. Includes stars in 3 sizes plus a crescent moon. Pack of 200.",
+      "price": "7.99",
+      "priceWholesale": "4.50",
       "badge": "",
       "category": "toys-games",
       "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
       "images": [
-        "https://placehold.co/600x600/e2e8f0/475569?text=Glow+Sticks"
+        "https://placehold.co/600x600/e2e8f0/475569?text=Glow+Stars"
       ],
       "features": [
         "200 pieces",
-        "8+ hour glow",
-        "Non-toxic",
-        "Connectors included",
-        "Multi-colour"
+        "3 star sizes + moon",
+        "8-hour glow",
+        "No-mark adhesive",
+        "Non-toxic phosphorescent"
       ],
-      "rating": 4.5,
-      "stock": 250
+      "weight": "75g",
+      "dimensions": "Various sizes",
+      "material": "PVC / phosphorescent coating",
+      "stockQty": 300,
+      "rating": 4.4
     },
     {
-      "id": "sp-1",
+      "id": "toys-8",
+      "name": "Art Supply Set",
+      "brand": "EAZYOO",
+      "sku": "EZ-TOY-008",
+      "description": "145-piece drawing and colouring kit for young artists",
+      "fullDescription": "Everything a young artist needs in one portable carry case. Includes colouring pencils, washable markers, oil pastels, watercolour paints, fine liners, and a sketchpad. All stored in a zippered fabric carry case with elastic loops.",
+      "price": "22.99",
+      "priceWholesale": "14.00",
+      "badge": "",
+      "category": "toys-games",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Art+Set"
+      ],
+      "features": [
+        "145-piece set",
+        "Pencils, markers, pastels, paints",
+        "Washable markers",
+        "Sketchpad included",
+        "Zippered carry case"
+      ],
+      "weight": "720g",
+      "dimensions": "28 × 20 × 5 cm (case)",
+      "material": "Non-toxic art supplies",
+      "stockQty": 80,
+      "rating": 4.6
+    },
+    {
+      "id": "toys-9",
+      "name": "Foam Pool Noodles",
+      "brand": "EAZYOO",
+      "sku": "EZ-TOY-009",
+      "description": "6-pack foam swimming pool noodles — 160cm each, assorted colours",
+      "fullDescription": "Make pool time more fun. EAZYOO Pool Noodles are full-length 160cm foam tubes in 6 assorted colours. Use them for floating, pool games, swimming aids, or craft projects. High-density foam maintains buoyancy. Pack of 6.",
+      "price": "18.99",
+      "priceWholesale": "11.00",
+      "badge": "",
+      "category": "toys-games",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Pool+Noodles"
+      ],
+      "features": [
+        "Pack of 6",
+        "160cm each",
+        "Assorted colours",
+        "High-density EVA foam",
+        "Multi-use"
+      ],
+      "weight": "1.1kg",
+      "dimensions": "160 × 6 cm each",
+      "material": "EVA foam",
+      "stockQty": 60,
+      "rating": 4.3
+    },
+    {
+      "id": "toys-10",
+      "name": "Card Game Bundle",
+      "brand": "EAZYOO",
+      "sku": "EZ-TOY-010",
+      "description": "Family game night bundle — Uno, Go Fish, Snap and more (5 games)",
+      "fullDescription": "Everything you need for a great family game night. EAZYOO's Card Game Bundle includes 5 classic card games: Uno-style, Go Fish, Snap, Old Maid, and Happy Families. Each game in its own tuck box. Ages 4 and up.",
+      "price": "14.99",
+      "priceWholesale": "8.50",
+      "badge": "",
+      "category": "toys-games",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Card+Games"
+      ],
+      "features": [
+        "5 games included",
+        "Complete rule cards",
+        "Ages 4+",
+        "2–8 players",
+        "Individual tuck boxes"
+      ],
+      "weight": "280g",
+      "dimensions": "12 × 9 × 4 cm (each box)",
+      "material": "Premium card stock",
+      "stockQty": 140,
+      "rating": 4.5
+    },
+    {
+      "id": "sport-1",
       "name": "Running Water Bottle",
-      "description": "500ml soft foldable hydration flask — BPA-free, pack of 2",
-      "price": "12.97",
-      "priceWholesale": "7.50",
+      "brand": "EAZYOO",
+      "sku": "EZ-SP-001",
+      "description": "Collapsible 500ml soft flask — BPA-free, 2-pack",
+      "fullDescription": "The EAZYOO Running Bottle collapses flat as it empties, so there's no sloshing and it takes up less space in your pack. The wide-mouth lid allows easy drinking and filling. BPA-free food-grade silicone. Dishwasher safe. Pack of 2.",
+      "price": "15.99",
+      "priceWholesale": "9.00",
       "badge": "Best Seller",
       "category": "sports-outdoors",
       "amazonUrl": "https://www.amazon.co.uk/Running-Water-Bottle-500ml-pcs/dp/B0FNC3W5CP",
+      "buyNowUrl": "https://www.amazon.co.uk/Running-Water-Bottle-500ml-pcs/dp/B0FNC3W5CP",
+      "availableOnAmazon": true,
+      "featured": true,
       "images": [
-        "images/water-bottle.png"
+        "images/sports-water-bottle.png"
       ],
       "features": [
-        "Collapsible design",
-        "BPA-free",
-        "Leakproof",
-        "Versatile",
-        "Pack of 2"
+        "500ml capacity",
+        "Collapses when empty",
+        "BPA-free silicone",
+        "Wide-mouth lid",
+        "2-pack"
       ],
-      "rating": 4.4,
-      "stock": 250
+      "weight": "120g (pair)",
+      "dimensions": "7 × 7 × 18 cm (full)",
+      "material": "Food-grade silicone",
+      "stockQty": 300,
+      "rating": 4.6
     },
     {
-      "id": "sp-2",
-      "name": "Resistance Bands Set",
-      "description": "5-level latex resistance bands with carry bag",
-      "price": "11.99",
-      "priceWholesale": "6.50",
+      "id": "sport-2",
+      "name": "Foam Roller",
+      "brand": "EAZYOO",
+      "sku": "EZ-SP-002",
+      "description": "High-density EVA foam roller for muscle recovery — 45cm",
+      "fullDescription": "Speed up recovery and reduce muscle soreness with the EAZYOO Foam Roller. The high-density EVA foam maintains its shape through hundreds of sessions. Textured surface provides deeper myofascial release. 45cm length suitable for back, legs, and ITB.",
+      "price": "16.99",
+      "priceWholesale": "10.00",
       "badge": "",
       "category": "sports-outdoors",
       "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Foam+Roller"
+      ],
+      "features": [
+        "High-density EVA",
+        "45cm length",
+        "Textured surface",
+        "Holds up to 150kg",
+        "Easy to clean"
+      ],
+      "weight": "520g",
+      "dimensions": "45 × 15 cm",
+      "material": "High-density EVA foam",
+      "stockQty": 120,
+      "rating": 4.5
+    },
+    {
+      "id": "sport-3",
+      "name": "Resistance Band Set",
+      "brand": "EAZYOO",
+      "sku": "EZ-SP-003",
+      "description": "5-level fabric resistance bands with carry bag — glutes & legs",
+      "fullDescription": "Build strength and improve mobility with the EAZYOO Resistance Band Set. Five bands in progressive resistance levels (Extra Light to Extra Heavy). Fabric construction won't roll up or snap like latex bands. Carry bag included for gym use.",
+      "price": "14.99",
+      "priceWholesale": "8.50",
+      "badge": "Best Seller",
+      "category": "sports-outdoors",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
       "images": [
         "https://placehold.co/600x600/e2e8f0/475569?text=Resistance+Bands"
       ],
       "features": [
         "5 resistance levels",
-        "Natural latex",
-        "Carry bag",
-        "Exercise guide",
-        "Lightweight"
+        "Fabric (won't roll up)",
+        "Carry bag included",
+        "For glutes, legs & arms",
+        "One size fits most"
       ],
-      "rating": 4.5,
-      "stock": 200
+      "weight": "200g",
+      "dimensions": "35 × 8 cm each",
+      "material": "Cotton / polyester blend",
+      "stockQty": 200,
+      "rating": 4.7
     },
     {
-      "id": "sp-3",
-      "name": "Microfibre Sports Towel",
-      "description": "Quick-dry travel towel with zip pouch — 2 sizes included",
-      "price": "9.99",
-      "priceWholesale": "5.50",
+      "id": "sport-4",
+      "name": "Gym Gloves",
+      "brand": "EAZYOO",
+      "sku": "EZ-SP-004",
+      "description": "Half-finger lifting gloves with wrist support — sizes S to XL",
+      "fullDescription": "Protect your palms and wrists with EAZYOO Gym Gloves. The padded palm absorbs barbell pressure while the breathable mesh back keeps your hands cool. Adjustable wrist wrap provides extra support for heavy lifts. Available S to XL.",
+      "price": "12.99",
+      "priceWholesale": "7.50",
+      "badge": "",
+      "category": "sports-outdoors",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Gym+Gloves"
+      ],
+      "features": [
+        "Padded palm",
+        "Breathable mesh back",
+        "Wrist wrap support",
+        "Velcro closure",
+        "Sizes S–XL"
+      ],
+      "weight": "95g (pair)",
+      "dimensions": "Sizes S, M, L, XL",
+      "material": "Neoprene / mesh / nylon",
+      "stockQty": 150,
+      "rating": 4.4
+    },
+    {
+      "id": "sport-5",
+      "name": "Camping Lantern",
+      "brand": "EAZYOO",
+      "sku": "EZ-SP-005",
+      "description": "Collapsible solar LED lantern — 3 modes, 10-hour battery life",
+      "fullDescription": "Light up your campsite without the bulk. The EAZYOO Camping Lantern collapses flat for packing and expands to a 20cm lantern in seconds. Solar-powered with USB backup charging. 3 brightness modes. Water resistant. Carabiner included.",
+      "price": "19.99",
+      "priceWholesale": "12.00",
       "badge": "New",
       "category": "sports-outdoors",
       "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
       "images": [
-        "https://placehold.co/600x600/e2e8f0/475569?text=Sports+Towel"
+        "https://placehold.co/600x600/e2e8f0/475569?text=Camping+Lantern"
       ],
       "features": [
-        "Quick-dry",
-        "Ultra compact",
-        "2 sizes",
-        "Antibacterial",
-        "Zip carry pouch"
+        "Solar + USB charging",
+        "3 brightness modes",
+        "10-hour battery",
+        "Collapses flat",
+        "IPX4 splash resistant"
       ],
-      "rating": 4.6,
-      "stock": 300
+      "weight": "185g",
+      "dimensions": "14 × 14 × 3 cm (flat)",
+      "material": "ABS plastic / solar panel",
+      "stockQty": 85,
+      "rating": 4.6
     },
     {
-      "id": "sp-4",
-      "name": "Grip Strength Trainer",
-      "description": "Adjustable hand grip strengthener — 10-60kg resistance",
-      "price": "8.99",
-      "priceWholesale": "4.50",
+      "id": "sport-6",
+      "name": "Hydration Running Belt",
+      "brand": "EAZYOO",
+      "sku": "EZ-SP-006",
+      "description": "Adjustable waist belt with 2× 250ml flasks and phone pocket",
+      "fullDescription": "Stay hydrated on long runs without carrying a bag. The EAZYOO Hydration Belt sits snugly around your waist with a bounce-free design. Includes two 250ml soft flasks and a zippered phone pocket. Fits waists 60–110cm.",
+      "price": "18.99",
+      "priceWholesale": "11.00",
       "badge": "",
       "category": "sports-outdoors",
       "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
       "images": [
-        "https://placehold.co/600x600/e2e8f0/475569?text=Grip+Trainer"
+        "https://placehold.co/600x600/e2e8f0/475569?text=Run+Belt"
       ],
       "features": [
-        "Adjustable 10-60kg",
-        "Rep counter",
-        "Ergonomic grip",
-        "Compact size",
-        "Spring steel"
+        "2× 250ml soft flasks",
+        "Phone pocket",
+        "Bounce-free design",
+        "Fits 60–110cm waists",
+        "Reflective details"
       ],
-      "rating": 4.3,
-      "stock": 170
+      "weight": "240g (loaded)",
+      "dimensions": "Adjustable 60–110 cm",
+      "material": "Neoprene / lycra / nylon",
+      "stockQty": 110,
+      "rating": 4.4
     },
     {
-      "id": "sp-5",
-      "name": "Foam Roller Set",
-      "description": "High-density EVA foam roller with massage ball — 3 piece set",
-      "price": "16.99",
-      "priceWholesale": "9.50",
+      "id": "sport-7",
+      "name": "Yoga Mat",
+      "brand": "EAZYOO",
+      "sku": "EZ-SP-007",
+      "description": "Non-slip 6mm TPE yoga mat with alignment lines and carry strap",
+      "fullDescription": "The EAZYOO Yoga Mat provides excellent grip for both the top and bottom surface, preventing slipping on any floor. The 6mm TPE foam cushions joints effectively. Built-in alignment lines help perfect your poses. Includes carry strap and bag.",
+      "price": "24.99",
+      "priceWholesale": "15.00",
       "badge": "",
       "category": "sports-outdoors",
       "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
       "images": [
-        "https://placehold.co/600x600/e2e8f0/475569?text=Foam+Roller"
+        "https://placehold.co/600x600/e2e8f0/475569?text=Yoga+Mat"
       ],
       "features": [
-        "High density EVA",
+        "6mm TPE foam",
+        "Double-sided non-slip",
+        "Alignment lines printed",
+        "183 × 61 cm",
+        "Carry bag included"
+      ],
+      "weight": "900g",
+      "dimensions": "183 × 61 × 0.6 cm",
+      "material": "TPE foam",
+      "stockQty": 90,
+      "rating": 4.6
+    },
+    {
+      "id": "sport-8",
+      "name": "Trekking Poles",
+      "brand": "EAZYOO",
+      "sku": "EZ-SP-008",
+      "description": "Collapsible 3-section aluminium walking poles — pair",
+      "fullDescription": "Conquer any terrain with EAZYOO Trekking Poles. The 3-section aluminium construction collapses to 65cm for backpack storage. Comfortable cork grip absorbs vibration and wick sweat. Includes rubber tips and carbide spike tips. Adjustable 105–135cm.",
+      "price": "38.99",
+      "priceWholesale": "24.00",
+      "badge": "Best Seller",
+      "category": "sports-outdoors",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Trekking+Poles"
+      ],
+      "features": [
+        "Pair of 2 poles",
+        "Aluminium 3-section",
+        "Collapses to 65cm",
+        "Cork grip handles",
+        "Adjustable 105–135cm"
+      ],
+      "weight": "480g (pair)",
+      "dimensions": "65 cm (folded) / 105–135 cm",
+      "material": "Aluminium 7075 / cork",
+      "stockQty": 55,
+      "rating": 4.7
+    },
+    {
+      "id": "sport-9",
+      "name": "Jump Rope",
+      "brand": "EAZYOO",
+      "sku": "EZ-SP-009",
+      "description": "Speed skipping rope with ball bearing handles — adjustable to 3m",
+      "fullDescription": "Level up your cardio with the EAZYOO Speed Rope. The precision ball bearings in the handles allow the rope to spin freely for maximum speed. Adjustable length up to 3m. Comfortable foam grip handles. Suitable for all fitness levels.",
+      "price": "9.99",
+      "priceWholesale": "5.50",
+      "badge": "",
+      "category": "sports-outdoors",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Jump+Rope"
+      ],
+      "features": [
+        "Ball bearing handles",
+        "Adjustable to 3m",
+        "Steel cable rope",
+        "Foam grip handles",
+        "For all fitness levels"
+      ],
+      "weight": "130g",
+      "dimensions": "Adjustable up to 3m",
+      "material": "Steel / foam / nylon",
+      "stockQty": 280,
+      "rating": 4.3
+    },
+    {
+      "id": "sport-10",
+      "name": "Insulated Sport Bottle",
+      "brand": "EAZYOO",
+      "sku": "EZ-SP-010",
+      "description": "750ml vacuum-insulated stainless steel bottle — keeps cold 24h / hot 12h",
+      "fullDescription": "The EAZYOO Insulated Bottle keeps drinks cold for 24 hours or hot for 12 hours, thanks to double-wall vacuum insulation. The wide mouth accepts ice cubes and is easy to clean. Leakproof flip lid. BPA-free. 750ml capacity.",
+      "price": "22.99",
+      "priceWholesale": "14.00",
+      "badge": "New",
+      "category": "sports-outdoors",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Steel+Bottle"
+      ],
+      "features": [
+        "750ml capacity",
+        "Cold 24h / Hot 12h",
+        "Wide mouth",
+        "Leakproof flip lid",
+        "BPA-free stainless"
+      ],
+      "weight": "340g",
+      "dimensions": "8 × 8 × 28 cm",
+      "material": "18/8 stainless steel / BPA-free plastic",
+      "stockQty": 160,
+      "rating": 4.7
+    },
+    {
+      "id": "sport-11",
+      "name": "Waterproof Dry Bag",
+      "brand": "EAZYOO",
+      "sku": "EZ-SP-011",
+      "description": "10L roll-top waterproof bag for kayaking, hiking, and beach",
+      "fullDescription": "Keep your valuables dry whatever the conditions. The EAZYOO Dry Bag uses a roll-top closure and fully welded seams to create a 100% waterproof seal. 10L capacity for a day's essentials. Includes a detachable carry strap.",
+      "price": "14.99",
+      "priceWholesale": "8.50",
+      "badge": "",
+      "category": "sports-outdoors",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Dry+Bag"
+      ],
+      "features": [
+        "10L capacity",
+        "Roll-top waterproof seal",
+        "Welded seams",
+        "Detachable carry strap",
+        "PVC free material"
+      ],
+      "weight": "180g",
+      "dimensions": "35 × 20 cm",
+      "material": "500D tarpaulin",
+      "stockQty": 130,
+      "rating": 4.5
+    },
+    {
+      "id": "sport-12",
+      "name": "Exercise Dice Set",
+      "brand": "EAZYOO",
+      "sku": "EZ-SP-012",
+      "description": "7-piece foam workout dice — randomise your exercise routine",
+      "fullDescription": "Never have a boring workout again. Roll the EAZYOO Exercise Dice and let chance decide your routine. 7 large foam dice cover exercises, reps, body parts, duration, and challenges. Great for home gyms, group fitness, and team-building.",
+      "price": "11.99",
+      "priceWholesale": "6.50",
+      "badge": "",
+      "category": "sports-outdoors",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Exercise+Dice"
+      ],
+      "features": [
+        "7-dice set",
+        "Large foam dice",
+        "Covers exercises, reps, etc.",
+        "Carry bag included",
+        "For all fitness levels"
+      ],
+      "weight": "220g",
+      "dimensions": "6 × 6 cm each die",
+      "material": "Soft EVA foam",
+      "stockQty": 95,
+      "rating": 4.4
+    },
+    {
+      "id": "sport-13",
+      "name": "Massage Ball Set",
+      "brand": "EAZYOO",
+      "sku": "EZ-SP-013",
+      "description": "3-piece lacrosse massage balls — smooth, spiky, and peanut",
+      "fullDescription": "Target tight muscles with EAZYOO Massage Balls. The set includes a smooth lacrosse ball for general use, a spiky ball for deep tissue stimulation, and a peanut double ball for spine and hamstrings. All made from natural rubber.",
+      "price": "13.99",
+      "priceWholesale": "8.00",
+      "badge": "",
+      "category": "sports-outdoors",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Massage+Balls"
+      ],
+      "features": [
         "3-piece set",
-        "Muscle recovery",
-        "Exercise guide",
-        "Carry bag"
+        "Smooth, spiky, peanut shapes",
+        "Natural rubber",
+        "For deep tissue use",
+        "6cm diameter balls"
       ],
-      "rating": 4.5,
-      "stock": 140
+      "weight": "310g",
+      "dimensions": "6 cm diameter each",
+      "material": "Natural rubber",
+      "stockQty": 170,
+      "rating": 4.6
     },
     {
-      "id": "st-1",
+      "id": "stat-1",
       "name": "Desk Organiser Set",
-      "description": "Bamboo desktop organiser with phone stand and pen holder",
-      "price": "15.99",
-      "priceWholesale": "9.00",
+      "brand": "EAZYOO",
+      "sku": "EZ-ST-001",
+      "description": "5-compartment bamboo desktop organiser — holds stationery and cables",
+      "fullDescription": "Tidy up your desk with the EAZYOO Bamboo Organiser. Five compartments in varying sizes hold pens, scissors, cables, phones, and notepads. Natural bamboo is sustainably sourced and easy to wipe clean. Weighted base prevents tipping.",
+      "price": "16.99",
+      "priceWholesale": "10.00",
       "badge": "Best Seller",
       "category": "stationery-office",
       "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": true,
       "images": [
-        "https://placehold.co/600x600/e2e8f0/475569?text=Desk+Organiser"
+        "images/stationery-desk-organiser.png"
       ],
       "features": [
+        "5 compartments",
         "Natural bamboo",
-        "Phone stand",
-        "Pen holder",
-        "Cable management",
-        "Compact design"
+        "Weighted base",
+        "Phone slot included",
+        "Easy to wipe clean"
       ],
-      "rating": 4.6,
-      "stock": 120
+      "weight": "420g",
+      "dimensions": "22 × 12 × 10 cm",
+      "material": "Natural bamboo",
+      "stockQty": 110,
+      "rating": 4.5
     },
     {
-      "id": "st-2",
-      "name": "Erasable Notebook",
-      "description": "Reusable smart notebook — wipe clean, cloud sync compatible",
-      "price": "12.99",
-      "priceWholesale": "7.00",
+      "id": "stat-2",
+      "name": "A5 Hardback Notebook",
+      "brand": "EAZYOO",
+      "sku": "EZ-ST-002",
+      "description": "160-page dot-grid hardback journal with ribbon bookmark",
+      "fullDescription": "The EAZYOO A5 Dot Grid Notebook features 160 pages of 90gsm acid-free paper — thick enough to prevent ink bleed-through. The lay-flat binding opens completely flat for comfortable writing. Includes an elastic closure and satin ribbon bookmark.",
+      "price": "9.99",
+      "priceWholesale": "5.50",
+      "badge": "",
+      "category": "stationery-office",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Notebook"
+      ],
+      "features": [
+        "160 pages dot-grid",
+        "90gsm acid-free paper",
+        "Lay-flat binding",
+        "Elastic closure",
+        "Ribbon bookmark"
+      ],
+      "weight": "260g",
+      "dimensions": "21 × 15 × 1.2 cm",
+      "material": "Paper / faux leather cover",
+      "stockQty": 300,
+      "rating": 4.6
+    },
+    {
+      "id": "stat-3",
+      "name": "Monitor Stand Riser",
+      "brand": "EAZYOO",
+      "sku": "EZ-ST-003",
+      "description": "Adjustable bamboo monitor riser with USB hub and storage shelf",
+      "fullDescription": "Elevate your monitor to eye level and reduce neck strain with the EAZYOO Monitor Stand. The bamboo platform holds monitors up to 32 inches and 15kg. Built-in 2-port USB hub at the side. Storage shelf below for keyboard or files.",
+      "price": "28.99",
+      "priceWholesale": "18.00",
       "badge": "New",
       "category": "stationery-office",
       "amazonUrl": "#",
-      "images": [
-        "https://placehold.co/600x600/e2e8f0/475569?text=Smart+Notebook"
-      ],
-      "features": [
-        "Reusable pages",
-        "Wipe clean",
-        "Cloud compatible",
-        "A5 size",
-        "Pen included"
-      ],
-      "rating": 4.4,
-      "stock": 200
-    },
-    {
-      "id": "st-3",
-      "name": "Cable Management Kit",
-      "description": "Adhesive cable clips and cord organiser — 30 piece set",
-      "price": "7.99",
-      "priceWholesale": "4.00",
-      "badge": "",
-      "category": "stationery-office",
-      "amazonUrl": "#",
-      "images": [
-        "https://placehold.co/600x600/e2e8f0/475569?text=Cable+Clips"
-      ],
-      "features": [
-        "30 pieces",
-        "Self-adhesive",
-        "Multiple sizes",
-        "Reusable",
-        "Clean design"
-      ],
-      "rating": 4.3,
-      "stock": 350
-    },
-    {
-      "id": "st-4",
-      "name": "Monitor Stand Riser",
-      "description": "Adjustable monitor riser with USB ports and storage drawer",
-      "price": "24.99",
-      "priceWholesale": "14.00",
-      "badge": "",
-      "category": "stationery-office",
-      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
       "images": [
         "https://placehold.co/600x600/e2e8f0/475569?text=Monitor+Stand"
       ],
       "features": [
-        "Height adjustable",
-        "USB ports",
-        "Storage drawer",
-        "Cable routing",
-        "Supports 20kg"
+        "Bamboo construction",
+        "Holds up to 15kg",
+        "2-port USB hub",
+        "Storage shelf below",
+        "Fits up to 32\" monitors"
       ],
-      "rating": 4.5,
-      "stock": 80
+      "weight": "1.4kg",
+      "dimensions": "40 × 25 × 11 cm",
+      "material": "Natural bamboo / metal legs",
+      "stockQty": 65,
+      "rating": 4.7
     },
     {
-      "id": "st-5",
+      "id": "stat-4",
+      "name": "Wireless Charging Pad",
+      "brand": "EAZYOO",
+      "sku": "EZ-ST-004",
+      "description": "15W fast wireless charger — Qi compatible, LED indicator",
+      "fullDescription": "Charge your phone without the cable clutter. The EAZYOO Wireless Charging Pad delivers up to 15W fast charging for compatible phones. Slim profile sits on your desk with an LED charging indicator. Compatible with all Qi devices including iPhone and Android.",
+      "price": "16.99",
+      "priceWholesale": "10.00",
+      "badge": "",
+      "category": "stationery-office",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Wireless+Charger"
+      ],
+      "features": [
+        "15W fast charge",
+        "Qi compatible",
+        "LED indicator",
+        "Slim 6mm profile",
+        "Foreign object detection"
+      ],
+      "weight": "65g",
+      "dimensions": "10 × 10 × 0.6 cm",
+      "material": "ABS plastic / glass",
+      "stockQty": 200,
+      "rating": 4.4
+    },
+    {
+      "id": "stat-5",
+      "name": "Cable Management Box",
+      "brand": "EAZYOO",
+      "sku": "EZ-ST-005",
+      "description": "Large plastic cable tidy box — hides power strips and trailing leads",
+      "fullDescription": "Eliminate cable clutter with the EAZYOO Cable Box. Large enough to hide a 4-socket power strip with all cables inside. The ventilated lid allows heat to escape safely. Side cable slots keep everything neat and organised.",
+      "price": "18.99",
+      "priceWholesale": "11.00",
+      "badge": "",
+      "category": "stationery-office",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Cable+Box"
+      ],
+      "features": [
+        "Fits 4-socket strip",
+        "Ventilated lid",
+        "Side cable slots",
+        "Smooth matte finish",
+        "Weighted anti-slip base"
+      ],
+      "weight": "380g",
+      "dimensions": "32 × 14 × 12 cm",
+      "material": "ABS plastic",
+      "stockQty": 90,
+      "rating": 4.3
+    },
+    {
+      "id": "stat-6",
       "name": "Whiteboard Planner",
-      "description": "Magnetic weekly planner whiteboard with markers — A3 size",
-      "price": "13.99",
+      "brand": "EAZYOO",
+      "sku": "EZ-ST-006",
+      "description": "A3 magnetic weekly planner whiteboard with pen and eraser",
+      "fullDescription": "Plan your week at a glance with the EAZYOO Magnetic Whiteboard Planner. The A3 board fits neatly on desks or walls with the included magnetic fixings. Wipe-clean surface works with any dry-erase marker. Includes a marker and eraser.",
+      "price": "12.99",
       "priceWholesale": "7.50",
       "badge": "",
       "category": "stationery-office",
       "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
       "images": [
         "https://placehold.co/600x600/e2e8f0/475569?text=Whiteboard"
       ],
       "features": [
-        "Magnetic back",
-        "Weekly layout",
-        "Markers included",
-        "A3 size",
-        "Dry wipe surface"
+        "A3 magnetic surface",
+        "Wipe-clean whiteboard",
+        "Marker & eraser included",
+        "Wall or desk use",
+        "Weekly planner layout"
       ],
-      "rating": 4.4,
-      "stock": 110
+      "weight": "280g",
+      "dimensions": "42 × 30 cm",
+      "material": "Steel / whiteboard laminate",
+      "stockQty": 120,
+      "rating": 4.4
     },
     {
-      "id": "tr-1",
-      "name": "Packing Cubes Set",
-      "description": "Compression packing cubes — 6 piece set with shoe bag",
-      "price": "16.99",
-      "priceWholesale": "9.50",
-      "badge": "Best Seller",
-      "category": "travel-accessories",
-      "amazonUrl": "#",
-      "images": [
-        "https://placehold.co/600x600/e2e8f0/475569?text=Packing+Cubes"
-      ],
-      "features": [
-        "6-piece set",
-        "Compression zips",
-        "Mesh window",
-        "Shoe bag included",
-        "Lightweight"
-      ],
-      "rating": 4.7,
-      "stock": 250
-    },
-    {
-      "id": "tr-2",
-      "name": "Travel Toiletry Bag",
-      "description": "Hanging toiletry organiser — waterproof with multiple compartments",
+      "id": "stat-7",
+      "name": "Pen & Pencil Set",
+      "brand": "EAZYOO",
+      "sku": "EZ-ST-007",
+      "description": "30-piece premium writing set — ballpoints, fineliner, and highlighters",
+      "fullDescription": "The EAZYOO 30-Piece Writing Set covers everything you need for note-taking, journaling, and planning. Includes 10 ballpoint pens in assorted colours, 10 fineliners (0.4mm), and 10 highlighters in classic and pastel colours. All in a zip pouch.",
       "price": "11.99",
       "priceWholesale": "6.50",
       "badge": "",
-      "category": "travel-accessories",
+      "category": "stationery-office",
       "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
       "images": [
-        "https://placehold.co/600x600/e2e8f0/475569?text=Toiletry+Bag"
+        "https://placehold.co/600x600/e2e8f0/475569?text=Pen+Set"
       ],
       "features": [
-        "Hanging hook",
-        "Waterproof",
-        "Multiple pockets",
-        "Compact folding",
-        "Mirror included"
+        "30-piece set",
+        "Ballpoints, fineliners, highlighters",
+        "Assorted colours",
+        "Zip pouch included",
+        "Smooth writing ink"
       ],
-      "rating": 4.5,
-      "stock": 190
+      "weight": "220g",
+      "dimensions": "22 × 12 × 3 cm (pouch)",
+      "material": "Plastic / metal tips",
+      "stockQty": 250,
+      "rating": 4.5
     },
     {
-      "id": "tr-3",
-      "name": "Neck Pillow Memory Foam",
-      "description": "Ergonomic travel neck pillow with eye mask and earplugs",
-      "price": "14.99",
-      "priceWholesale": "8.00",
-      "badge": "New",
-      "category": "travel-accessories",
-      "amazonUrl": "#",
-      "images": [
-        "https://placehold.co/600x600/e2e8f0/475569?text=Neck+Pillow"
-      ],
-      "features": [
-        "Memory foam",
-        "360° support",
-        "Eye mask included",
-        "Earplugs included",
-        "Carry pouch"
-      ],
-      "rating": 4.4,
-      "stock": 170
-    },
-    {
-      "id": "tr-4",
-      "name": "Luggage Scale Digital",
-      "description": "Portable digital luggage scale with LCD display — max 50kg",
+      "id": "stat-8",
+      "name": "Sticky Note Dispenser",
+      "brand": "EAZYOO",
+      "sku": "EZ-ST-008",
+      "description": "Bamboo pop-up sticky note holder — includes 200 notes, 4 colours",
+      "fullDescription": "The EAZYOO Bamboo Note Dispenser automatically presents the next note as you take one, keeping your desk tidy. The natural bamboo base is weighted to prevent sliding. Includes 200 notes across 4 bright colours.",
       "price": "8.99",
+      "priceWholesale": "5.00",
+      "badge": "",
+      "category": "stationery-office",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Note+Dispenser"
+      ],
+      "features": [
+        "Bamboo construction",
+        "Pop-up auto-dispense",
+        "200 notes (4 colours)",
+        "Weighted non-slip base",
+        "Refillable design"
+      ],
+      "weight": "190g",
+      "dimensions": "9 × 9 × 5 cm",
+      "material": "Natural bamboo",
+      "stockQty": 160,
+      "rating": 4.3
+    },
+    {
+      "id": "stat-9",
+      "name": "Lap Desk",
+      "brand": "EAZYOO",
+      "sku": "EZ-ST-009",
+      "description": "Adjustable laptop lap desk with cushion and mouse pad",
+      "fullDescription": "Work comfortably from your sofa with the EAZYOO Lap Desk. The tilt-adjustable surface raises to 6 positions for optimal ergonomics. The built-in cushion distributes weight evenly on your lap. Integrated mousepad and phone groove.",
+      "price": "26.99",
+      "priceWholesale": "17.00",
+      "badge": "New",
+      "category": "stationery-office",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Lap+Desk"
+      ],
+      "features": [
+        "6-position tilt adjust",
+        "Cushioned underside",
+        "Integrated mousepad",
+        "Phone groove",
+        "Wipe-clean surface"
+      ],
+      "weight": "760g",
+      "dimensions": "56 × 33 cm",
+      "material": "MDF / polyester cushion / faux leather",
+      "stockQty": 70,
+      "rating": 4.6
+    },
+    {
+      "id": "stat-10",
+      "name": "Document Scanner Sleeve",
+      "brand": "EAZYOO",
+      "sku": "EZ-ST-010",
+      "description": "Protective A4 document carrier wallet with RFID blocking — 10 pack",
+      "fullDescription": "Protect and organise your important documents with EAZYOO Document Sleeves. The clear front and solid back allow quick identification. RFID-blocking material prevents digital theft. Pack of 10 in A4 size.",
+      "price": "7.99",
       "priceWholesale": "4.50",
       "badge": "",
-      "category": "travel-accessories",
+      "category": "stationery-office",
       "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
       "images": [
-        "https://placehold.co/600x600/e2e8f0/475569?text=Luggage+Scale"
+        "https://placehold.co/600x600/e2e8f0/475569?text=Doc+Sleeves"
       ],
       "features": [
-        "Max 50kg",
-        "LCD display",
-        "Tare function",
-        "Battery included",
-        "Compact size"
+        "Pack of 10",
+        "A4 size",
+        "RFID blocking",
+        "Clear front identification",
+        "Zip closure"
       ],
-      "rating": 4.3,
-      "stock": 220
+      "weight": "110g",
+      "dimensions": "22 × 31 cm each",
+      "material": "Polypropylene / RFID lining",
+      "stockQty": 300,
+      "rating": 4.2
     },
     {
-      "id": "tr-5",
-      "name": "RFID Blocking Wallet",
+      "id": "travel-1",
+      "name": "Packing Cubes Set",
+      "brand": "EAZYOO",
+      "sku": "EZ-TR-001",
+      "description": "6-piece luggage packing cubes in 3 sizes — lightweight mesh",
+      "fullDescription": "Pack smarter and stay organised with EAZYOO Packing Cubes. The set of 6 (2× large, 2× medium, 2× small) fits neatly inside any suitcase or backpack. Breathable mesh top keeps contents visible. Double zip ensures secure closure. Colour-coded by size.",
+      "price": "19.99",
+      "priceWholesale": "12.00",
+      "badge": "Best Seller",
+      "category": "travel-accessories",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": true,
+      "images": [
+        "images/travel-packing-cubes.png"
+      ],
+      "features": [
+        "6-piece set (S, M, L)",
+        "Breathable mesh top",
+        "Double-zip closure",
+        "Colour coded",
+        "Compression panel"
+      ],
+      "weight": "280g (set)",
+      "dimensions": "Large: 33×27, Med: 27×20, Small: 18×13 cm",
+      "material": "Ripstop nylon / mesh",
+      "stockQty": 190,
+      "rating": 4.6
+    },
+    {
+      "id": "travel-2",
+      "name": "RFID Travel Wallet",
+      "brand": "EAZYOO",
+      "sku": "EZ-TR-002",
       "description": "Slim travel wallet with RFID protection — holds passport and cards",
+      "fullDescription": "Travel without worry. The EAZYOO RFID Travel Wallet holds your passport, boarding pass, up to 8 cards, SIM cards, and notes. RFID-blocking lining protects your data from contactless skimming. Premium PU leather outer.",
       "price": "13.99",
       "priceWholesale": "7.50",
       "badge": "",
       "category": "travel-accessories",
       "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
       "images": [
         "https://placehold.co/600x600/e2e8f0/475569?text=RFID+Wallet"
       ],
       "features": [
         "RFID blocking",
         "Passport pocket",
-        "Card slots",
-        "Slim design",
+        "8 card slots",
+        "Note and SIM storage",
         "Premium PU leather"
       ],
-      "rating": 4.6,
-      "stock": 160
+      "weight": "95g",
+      "dimensions": "14 × 10 × 1.5 cm",
+      "material": "PU leather / RFID blocking fabric",
+      "stockQty": 160,
+      "rating": 4.6
+    },
+    {
+      "id": "travel-3",
+      "name": "Travel Neck Pillow",
+      "brand": "EAZYOO",
+      "sku": "EZ-TR-003",
+      "description": "Memory foam U-shaped neck pillow with snap-on carry hook",
+      "fullDescription": "Rest comfortably on any journey with the EAZYOO Travel Neck Pillow. Slow-recovery memory foam moulds to your neck shape. Removable and washable velour cover. The snap-on hook clips to any luggage handle for carrying. Compresses for storage.",
+      "price": "14.99",
+      "priceWholesale": "8.50",
+      "badge": "",
+      "category": "travel-accessories",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Neck+Pillow"
+      ],
+      "features": [
+        "Memory foam fill",
+        "Removable velour cover",
+        "Luggage snap hook",
+        "Compressible for packing",
+        "Ergonomic U-shape"
+      ],
+      "weight": "310g",
+      "dimensions": "30 × 28 × 12 cm",
+      "material": "Memory foam / velour",
+      "stockQty": 130,
+      "rating": 4.5
+    },
+    {
+      "id": "travel-4",
+      "name": "Luggage Scale",
+      "brand": "EAZYOO",
+      "sku": "EZ-TR-004",
+      "description": "Digital hanging luggage scale — up to 50kg, reads in kg and lbs",
+      "fullDescription": "Avoid overweight bag charges with the EAZYOO Digital Luggage Scale. Hook onto any bag handle and lift to get an instant weight reading up to 50kg. Auto-lock feature holds the reading after you set the bag down. Includes CR2032 battery.",
+      "price": "8.99",
+      "priceWholesale": "5.00",
+      "badge": "New",
+      "category": "travel-accessories",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Luggage+Scale"
+      ],
+      "features": [
+        "Reads to 50kg",
+        "kg / lbs display",
+        "Auto-lock reading",
+        "LCD backlit display",
+        "Battery included"
+      ],
+      "weight": "55g",
+      "dimensions": "12 × 4 × 2 cm",
+      "material": "ABS / stainless hook",
+      "stockQty": 220,
+      "rating": 4.4
+    },
+    {
+      "id": "travel-5",
+      "name": "Compression Dry Bags",
+      "brand": "EAZYOO",
+      "sku": "EZ-TR-005",
+      "description": "4-pack vacuum compression bags for suitcase — save 70% space",
+      "fullDescription": "Fit twice as much in your suitcase. EAZYOO Compression Bags roll up to squeeze all the air out — no vacuum pump needed. The waterproof bags protect against damp and mildew. Pack of 4 in mixed sizes (S, M, L, XL).",
+      "price": "16.99",
+      "priceWholesale": "10.00",
+      "badge": "",
+      "category": "travel-accessories",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Compression+Bags"
+      ],
+      "features": [
+        "4-pack mixed sizes",
+        "No pump needed",
+        "Saves 70% space",
+        "Waterproof seal",
+        "Reusable design"
+      ],
+      "weight": "180g (set)",
+      "dimensions": "S/M/L/XL sizes",
+      "material": "Nylon / PE",
+      "stockQty": 145,
+      "rating": 4.5
+    },
+    {
+      "id": "travel-6",
+      "name": "Universal Travel Adapter",
+      "brand": "EAZYOO",
+      "sku": "EZ-TR-006",
+      "description": "Worldwide travel adapter with 3 USB ports — works in 150+ countries",
+      "fullDescription": "One adapter for every destination. The EAZYOO Universal Adapter works in over 150 countries with a slide-out plug selector. Three USB-A ports plus one USB-C port allow simultaneous charging of 4 devices. Built-in surge protection.",
+      "price": "22.99",
+      "priceWholesale": "14.00",
+      "badge": "Best Seller",
+      "category": "travel-accessories",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Travel+Adapter"
+      ],
+      "features": [
+        "150+ countries compatible",
+        "3× USB-A + 1× USB-C",
+        "Surge protection",
+        "Slide-out plug system",
+        "Safety shutter"
+      ],
+      "weight": "145g",
+      "dimensions": "7 × 5 × 4 cm",
+      "material": "Flame-retardant ABS",
+      "stockQty": 175,
+      "rating": 4.7
+    },
+    {
+      "id": "travel-7",
+      "name": "Toiletry Bag",
+      "brand": "EAZYOO",
+      "sku": "EZ-TR-007",
+      "description": "Large hanging travel toiletry bag with waterproof lining — 4 pockets",
+      "fullDescription": "Keep all your travel toiletries in order with the EAZYOO Hanging Toiletry Bag. Unfolds to reveal 4 pockets and a hanging hook — perfect for hotel bathrooms. Waterproof lining protects against spills. Rolls up compact for packing.",
+      "price": "17.99",
+      "priceWholesale": "10.50",
+      "badge": "",
+      "category": "travel-accessories",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Toiletry+Bag"
+      ],
+      "features": [
+        "4 storage pockets",
+        "Hanging hook",
+        "Waterproof lining",
+        "Rolls compact",
+        "Exterior zip pocket"
+      ],
+      "weight": "185g",
+      "dimensions": "25 × 18 × 10 cm",
+      "material": "Oxford fabric / PVC lining",
+      "stockQty": 110,
+      "rating": 4.4
+    },
+    {
+      "id": "travel-8",
+      "name": "Portable Door Lock",
+      "brand": "EAZYOO",
+      "sku": "EZ-TR-008",
+      "description": "Hotel travel safety door lock — works on any inward-opening door",
+      "fullDescription": "Add an extra layer of security to any hotel room or Airbnb with the EAZYOO Portable Door Lock. Simply slot it into the door's strike plate to prevent anyone opening the door from outside — even with a key. Compact and lightweight.",
+      "price": "11.99",
+      "priceWholesale": "6.50",
+      "badge": "",
+      "category": "travel-accessories",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Door+Lock"
+      ],
+      "features": [
+        "Works on any inward door",
+        "No tools needed",
+        "Blocks even keyed entry",
+        "Heavy-duty metal",
+        "Compact and lightweight"
+      ],
+      "weight": "85g",
+      "dimensions": "12 × 4 × 2 cm",
+      "material": "Stainless steel / ABS",
+      "stockQty": 200,
+      "rating": 4.6
+    },
+    {
+      "id": "travel-9",
+      "name": "Travel Umbrella",
+      "brand": "EAZYOO",
+      "sku": "EZ-TR-009",
+      "description": "Windproof compact folding umbrella — auto open/close, 8-rib design",
+      "fullDescription": "Be ready for any weather. The EAZYOO Travel Umbrella features an auto-open/close button, a reinforced 8-rib fibreglass frame that withstands winds up to 60mph, and collapses to just 27cm for bag carry. UV-coating on the canopy.",
+      "price": "16.99",
+      "priceWholesale": "10.00",
+      "badge": "",
+      "category": "travel-accessories",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Umbrella"
+      ],
+      "features": [
+        "Auto open & close",
+        "8-rib fibreglass frame",
+        "Windproof to 60mph",
+        "27cm when folded",
+        "UV-coated canopy"
+      ],
+      "weight": "290g",
+      "dimensions": "27 cm (folded) / 98 cm open",
+      "material": "Fibreglass / polyester / rubber grip",
+      "stockQty": 140,
+      "rating": 4.5
+    },
+    {
+      "id": "travel-10",
+      "name": "Cable Organiser Pouch",
+      "brand": "EAZYOO",
+      "sku": "EZ-TR-010",
+      "description": "Compact tech cable pouch — holds chargers, cables, earbuds, adapters",
+      "fullDescription": "Keep all your travel tech cables and accessories organised in the EAZYOO Cable Pouch. 6 elastic loops and 3 mesh pockets hold chargers, cables, earbuds, SDs cards, USB sticks, and adapters. Hard shell case protects fragile items.",
+      "price": "12.99",
+      "priceWholesale": "7.50",
+      "badge": "",
+      "category": "travel-accessories",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Cable+Pouch"
+      ],
+      "features": [
+        "Hard shell exterior",
+        "6 elastic loops",
+        "3 mesh pockets",
+        "Fits all cable types",
+        "Compact 18cm pouch"
+      ],
+      "weight": "120g",
+      "dimensions": "18 × 12 × 5 cm",
+      "material": "Hard shell EVA / polyester lining",
+      "stockQty": 180,
+      "rating": 4.5
+    },
+    {
+      "id": "travel-11",
+      "name": "Eye Mask & Earplug Set",
+      "brand": "EAZYOO",
+      "sku": "EZ-TR-011",
+      "description": "Contoured 3D sleep mask with 6 foam earplugs — travel sleep kit",
+      "fullDescription": "Sleep anywhere, anytime with the EAZYOO Sleep Kit. The 3D contoured eye mask lets your eyes open and blink naturally while blocking 100% of light. Soft memory foam padding. Includes 6 high-attenuation foam earplugs (33dB reduction). Carry pouch included.",
+      "price": "9.99",
+      "priceWholesale": "5.50",
+      "badge": "",
+      "category": "travel-accessories",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Sleep+Kit"
+      ],
+      "features": [
+        "3D contoured mask",
+        "100% light blocking",
+        "6 earplugs (33dB)",
+        "Memory foam padding",
+        "Carry pouch included"
+      ],
+      "weight": "65g",
+      "dimensions": "One size / adjustable strap",
+      "material": "Memory foam / lycra / foam earplugs",
+      "stockQty": 250,
+      "rating": 4.4
+    },
+    {
+      "id": "travel-12",
+      "name": "Luggage Tag Set",
+      "brand": "EAZYOO",
+      "sku": "EZ-TR-012",
+      "description": "4-pack leather luggage tags with privacy cover — assorted colours",
+      "fullDescription": "Spot your bag on the carousel in seconds. EAZYOO Luggage Tags are made from premium PU leather with a privacy flap to hide your contact details until needed. Set of 4 in assorted colours. Stainless steel loop attachment.",
+      "price": "10.99",
+      "priceWholesale": "6.00",
+      "badge": "",
+      "category": "travel-accessories",
+      "amazonUrl": "#",
+      "buyNowUrl": "#",
+      "availableOnAmazon": false,
+      "featured": false,
+      "images": [
+        "https://placehold.co/600x600/e2e8f0/475569?text=Luggage+Tags"
+      ],
+      "features": [
+        "Set of 4 tags",
+        "PU leather construction",
+        "Privacy cover flap",
+        "Stainless steel loop",
+        "Assorted colours"
+      ],
+      "weight": "80g (set)",
+      "dimensions": "11 × 6 cm each",
+      "material": "PU leather / stainless steel",
+      "stockQty": 200,
+      "rating": 4.3
     }
   ],
   "posts": [
     {
-      "id": "post-1",
-      "title": "Welcome to EAZYOO — Smart Products for Smarter Living",
-      "date": "2026-01-15",
-      "excerpt": "We're EAZYOO, a UK-based brand on a mission to make everyday products more portable, more practical, and built to last.",
-      "content": "<p>Welcome to the EAZYOO blog! We're a UK-based brand creating innovative, space-saving products for active lifestyles and modern kitchens.</p><p>Our journey started with a simple observation: the products we use every day — water bottles, cutting boards, storage containers — take up far too much space. So we asked ourselves: <em>what if they could fold?</em></p><p>That question led to our first two products, now available on Amazon UK: the <strong>Collapsible Running Water Bottle</strong> and the <strong>Foldable Cutting Board</strong>. Both are designed to fold flat when not in use, saving you valuable space at home or on the go.</p><p>This blog is where we'll share product updates, practical tips, and behind-the-scenes stories as we grow. Thanks for being here — we're just getting started.</p>",
+      "id": "post-4",
+      "title": "EAZYOO Now Open to Wholesale Partners Across the UK",
+      "date": "2026-05-05",
+      "excerpt": "We're inviting sports shops, kitchen stores, gyms, and online retailers to stock EAZYOO products. Here's how to apply.",
+      "content": "<p>We're excited to announce that EAZYOO is now accepting wholesale applications from retailers across the United Kingdom.</p><p>Whether you run a physical shop, an online store, a gym, or an outdoor outfitter — if your customers would love smart, space-saving products, we'd love to work with you.</p><h3>What We Offer Partners</h3><ul><li><strong>Competitive wholesale pricing</strong> with healthy margins for your business</li><li><strong>Low minimum order quantities</strong> to suit businesses of all sizes</li><li><strong>UK-based fulfilment</strong> — fast delivery, no import headaches</li><li><strong>Marketing support</strong> — product images, descriptions, and brand assets provided</li></ul><h3>How to Apply</h3><p>Visit our <a href='wholesale.html'>Wholesale Application page</a> and fill in the form. Our team reviews every application and responds within 2-3 business days.</p>",
+      "imgUrl": "images/hero-banner.png"
+    },
+    {
+      "id": "post-3",
+      "title": "Small Kitchen? 7 Space-Saving Hacks You Need to Try",
+      "date": "2026-03-20",
+      "excerpt": "Living with a compact kitchen doesn't mean compromising. These seven practical tips will help you make the most of every inch.",
+      "content": "<p>A small kitchen doesn't have to feel cramped. With the right approach, you can cook, prep, and store everything you need — without clutter. Here are seven hacks we swear by:</p><h3>1. Use Collapsible Tools</h3><p>Foldable cutting boards, collapsible colanders, and nesting bowls store flat in drawers instead of hogging cupboard space.</p><h3>2. Go Vertical</h3><p>Wall-mounted magnetic knife strips, hanging racks, and shelf risers turn dead wall and cupboard space into usable storage.</p><h3>3. Clear Your Worktops</h3><p>If you don't use it daily, store it. A clear worktop makes a small kitchen feel twice the size.</p>",
       "imgUrl": "images/hero-banner.png"
     },
     {
@@ -965,23 +3013,15 @@
       "title": "5 Reasons a Collapsible Water Bottle Beats a Regular One",
       "date": "2026-02-10",
       "excerpt": "Still carrying a bulky water bottle? Here are five reasons to switch to a collapsible flask for running, hiking, and everyday hydration.",
-      "content": "<p>If you're still lugging around a rigid water bottle, you're carrying more than you need to. Here's why collapsible bottles are the smarter choice:</p><h3>1. They Fold Flat</h3><p>When empty, a collapsible bottle rolls up or folds down to a fraction of its size. Toss it in a pocket, handbag, or gym bag without the bulk.</p><h3>2. They're Lighter</h3><p>Made from flexible, food-grade silicone, collapsible bottles weigh significantly less than metal or hard plastic alternatives.</p><h3>3. Perfect for Travel</h3><p>Fold it flat before airport security, then fill up at a water fountain on the other side. No more buying overpriced bottled water at the gate.</p><h3>4. Easy to Clean</h3><p>The wide mouth on most collapsible designs means you can turn them inside out for a thorough wash — something you can't do with a narrow-neck bottle.</p><h3>5. Better for the Planet</h3><p>Reusable and durable, a single collapsible bottle replaces hundreds of single-use plastic bottles over its lifetime.</p><p>Our <strong>EAZYOO Running Water Bottle</strong> (500ml, pack of 2) ticks all five boxes. <a href='https://www.amazon.co.uk/Running-Water-Bottle-500ml-pcs/dp/B0FNC3W5CP' target='_blank'>Check it out on Amazon UK →</a></p>",
-      "imgUrl": "images/water-bottle.png"
+      "content": "<p>If you're still lugging around a rigid water bottle, you're carrying more than you need to. Here's why collapsible bottles are the smarter choice:</p><h3>1. They Fold Flat</h3><p>When empty, a collapsible bottle rolls up or folds down to a fraction of its size.</p><h3>2. They're Lighter</h3><p>Made from flexible, food-grade silicone, collapsible bottles weigh significantly less than metal or hard plastic alternatives.</p><h3>3. Perfect for Travel</h3><p>Fold it flat before airport security, then fill up at a water fountain on the other side.</p>",
+      "imgUrl": "images/hero-banner.png"
     },
     {
-      "id": "post-3",
-      "title": "Small Kitchen? 7 Space-Saving Hacks You Need to Try",
-      "date": "2026-03-20",
-      "excerpt": "Living with a compact kitchen doesn't mean compromising. These seven practical tips will help you make the most of every inch.",
-      "content": "<p>A small kitchen doesn't have to feel cramped. With the right approach, you can cook, prep, and store everything you need — without clutter. Here are seven hacks we swear by:</p><h3>1. Use Collapsible Tools</h3><p>Foldable cutting boards, collapsible colanders, and nesting bowls store flat in drawers instead of hogging cupboard space.</p><h3>2. Go Vertical</h3><p>Wall-mounted magnetic knife strips, hanging racks, and shelf risers turn dead wall and cupboard space into usable storage.</p><h3>3. Clear Your Worktops</h3><p>If you don't use it daily, store it. A clear worktop makes a small kitchen feel twice the size.</p><h3>4. Use the Inside of Cupboard Doors</h3><p>Stick-on hooks or small racks on the inside of doors are perfect for lids, measuring spoons, or tea towels.</p><h3>5. Stackable Containers Over Mismatched Tubs</h3><p>Invest in a uniform set of stackable, airtight containers. They nest inside each other when empty and stack neatly when full.</p><h3>6. Over-Sink Drying Racks</h3><p>A roll-up rack over the sink gives you drying or prep space without taking up any worktop area.</p><h3>7. One In, One Out</h3><p>For every new gadget you bring in, remove one you haven't used in six months. It keeps things lean.</p><p>Our <strong>EAZYOO Collapsible Cutting Board</strong> folds flat and doubles as a wash basin — perfect for tip number one. <a href='https://www.amazon.co.uk/Collapsible-Cutting-Board-Chopping-Foldable/dp/B0FN9FJXKS' target='_blank'>See it on Amazon UK →</a></p>",
-      "imgUrl": "images/cutting-board.png"
-    },
-    {
-      "id": "post-4",
-      "title": "EAZYOO Now Open to Wholesale Partners Across the UK",
-      "date": "2026-05-05",
-      "excerpt": "We're inviting sports shops, kitchen stores, gyms, and online retailers to stock EAZYOO products. Here's how to apply.",
-      "content": "<p>We're excited to announce that EAZYOO is now accepting wholesale applications from retailers across the United Kingdom.</p><p>Whether you run a physical shop, an online store, a gym, or an outdoor outfitter — if your customers would love smart, space-saving products, we'd love to work with you.</p><h3>What We Offer Partners</h3><ul><li><strong>Competitive wholesale pricing</strong> with healthy margins for your business</li><li><strong>Low minimum order quantities</strong> to suit businesses of all sizes</li><li><strong>UK-based fulfilment</strong> — fast delivery, no import headaches</li><li><strong>Marketing support</strong> — product images, descriptions, and brand assets provided</li></ul><h3>How to Apply</h3><p>Visit our <a href='wholesale.html'>Wholesale Application page</a> and fill in the form. Our team reviews every application and responds within 2-3 business days.</p><p>We're building a network of partners who share our passion for practical, well-designed products. If that sounds like you, we'd love to hear from you.</p>",
+      "id": "post-1",
+      "title": "Welcome to EAZYOO — Smart Products for Smarter Living",
+      "date": "2026-01-15",
+      "excerpt": "We're EAZYOO, a UK-based brand on a mission to make everyday products more portable, more practical, and built to last.",
+      "content": "<p>Welcome to the EAZYOO blog! We're a UK-based brand creating innovative, space-saving products for active lifestyles and modern kitchens.</p><p>Our journey started with a simple observation: the products we use every day take up far too much space. So we asked ourselves: <em>what if they could fold?</em></p><p>That question led to our first products, now available on Amazon UK.</p>",
       "imgUrl": "images/hero-banner.png"
     }
   ],

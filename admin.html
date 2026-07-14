@@ -174,20 +174,16 @@
   <div class="admin-body">
     <aside class="sidebar">
       <div class="sidebar-label">Content</div>
-      <div class="nav-item active" data-panel="dashboard" onclick="switchPanel('dashboard')"><span class="nav-icon">📊</span> Dashboard</div>
-      <div class="nav-item" data-panel="products" onclick="switchPanel('products')"><span class="nav-icon">🛍️</span> Products</div>
-      <div class="nav-item" data-panel="categories" onclick="switchPanel('categories')"><span class="nav-icon">📂</span> Categories</div>
-      <div class="nav-item" data-panel="posts" onclick="switchPanel('posts')"><span class="nav-icon">📝</span> Blog Posts</div>
+      <div class="nav-item active" onclick="switchPanel('dashboard')">📊 Dashboard</div>
+      <div class="nav-item" onclick="switchPanel('products')">🛍️ Products</div>
+      <div class="nav-item" onclick="switchPanel('posts')">📝 Blog Posts</div>
+
+      <div class="sidebar-label">Site Controls</div>
+      <div class="nav-item" onclick="switchPanel('noticeboard')">📢 Notice Board</div>
 
       <div class="sidebar-label">Settings</div>
-      <div class="nav-item" data-panel="settings" onclick="switchPanel('settings')"><span class="nav-icon">⚙️</span> General</div>
-      <div class="nav-item" data-panel="seo" onclick="switchPanel('seo')"><span class="nav-icon">🔍</span> SEO &amp; Meta</div>
-      <div class="nav-item" data-panel="wholesale-settings" onclick="switchPanel('wholesale-settings')"><span class="nav-icon">🏬</span> Wholesale / B2B</div>
-
-      <div class="sidebar-label">Tools</div>
-      <div class="nav-item" data-panel="accounts" onclick="switchPanel('accounts')"><span class="nav-icon">👥</span> Accounts</div>
-      <div class="nav-item" data-panel="subscribers" onclick="switchPanel('subscribers')"><span class="nav-icon">📧</span> Subscribers</div>
-      <div class="nav-item" data-panel="backup" onclick="switchPanel('backup')"><span class="nav-icon">💾</span> Backup &amp; Export</div>
+      <div class="nav-item" onclick="switchPanel('settings')">⚙️ General Settings</div>
+      <div class="nav-item" onclick="switchPanel('seo')">🔍 SEO &amp; Meta</div>
     </aside>
 
     <main class="content">
@@ -209,36 +205,13 @@
             <div class="stat-number" id="stat-categories">0</div>
             <div class="stat-label">Categories</div>
           </div>
-          <div class="stat-card" onclick="switchPanel('posts')">
-            <div class="stat-number" id="stat-posts">0</div>
-            <div class="stat-label">Blog Posts</div>
+          <div class="card" style="text-align:center; cursor:pointer;" onclick="switchPanel('noticeboard')">
+            <div style="font-size:3rem; margin-bottom:12px;">📢</div>
+            <h3>Notice Board</h3>
+            <p style="color:var(--text-muted); margin-top:8px;"><span id="stat-noticeboard">Off</span></p>
           </div>
-          <div class="stat-card" onclick="switchPanel('accounts')">
-            <div class="stat-number" id="stat-accounts">0</div>
-            <div class="stat-label">Accounts</div>
-          </div>
-          <div class="stat-card" onclick="switchPanel('subscribers')">
-            <div class="stat-number" id="stat-subscribers">0</div>
-            <div class="stat-label">Subscribers</div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-title">Quick Actions</div>
-          <div style="display:flex; gap:12px; flex-wrap:wrap;">
-            <button class="btn-secondary" onclick="editProduct('new')">+ Add Product</button>
-            <button class="btn-secondary" onclick="editPost('new')">+ Write Blog Post</button>
-            <button class="btn-secondary" onclick="switchPanel('categories')">Manage Categories</button>
-            <button class="btn-secondary" onclick="window.open('https://www.eazyoo.co.uk','_blank')">View Live Site</button>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-title">Publish Status</div>
-          <p style="color:var(--text-muted); font-size:0.9rem;">All changes are saved locally first. Click <strong>"Publish Changes"</strong> in the header to push updates to the live site. Deployment takes ~1-3 minutes via GitHub Pages.</p>
         </div>
       </div>
-
       <!-- ==================== PRODUCTS LIST ==================== -->
       <div class="panel" id="panel-products">
         <div class="panel-header">
@@ -247,6 +220,9 @@
             <p class="panel-desc">Add, edit, or remove products from your store.</p>
           </div>
           <button class="btn-primary" style="width:auto; padding:10px 20px;" onclick="editProduct('new')">+ Add Product</button>
+        </div>
+        <div style="display:flex; gap:12px; margin-bottom:16px;">
+          <input type="text" id="prod-search" placeholder="🔍 Search products by name, SKU, or category..." oninput="filterProductsList()" style="flex:1; padding:10px 14px; border:1.5px solid var(--border); border-radius:var(--radius); font-size:0.92rem; background:var(--bg);">
         </div>
         <div class="card">
           <div class="item-list" id="productsList"></div>
@@ -267,7 +243,7 @@
           <div class="card-title">Basic Info</div>
           <div class="form-grid">
             <div class="form-group full-width"><label>Product Name</label><input type="text" id="prod-name" placeholder="e.g. Collapsible Cutting Board"></div>
-            <div class="form-group full-width"><label>Short Description</label><input type="text" id="prod-desc" placeholder="Brief product description"></div>
+            <div class="form-group full-width"><label>Short Description (for grids)</label><input type="text" id="prod-desc" placeholder="Brief product description"></div>
             <div class="form-group"><label>Category</label><select id="prod-category"></select></div>
             <div class="form-group"><label>Badge</label>
               <select id="prod-badge">
@@ -277,10 +253,18 @@
                 <option value="Sale">Sale</option>
               </select>
             </div>
+            <div class="form-group"><label>Brand Name</label><input type="text" id="prod-brand" placeholder="e.g. EAZYOO"></div>
+            <div class="form-group"><label>SKU Code</label><input type="text" id="prod-sku" placeholder="e.g. EZ-HK-001"></div>
+            <div class="form-group"><label>Featured Status</label>
+              <select id="prod-featured">
+                <option value="false">No (Standard catalog)</option>
+                <option value="true">Yes (Show first on Homepage)</option>
+              </select>
+            </div>
           </div>
         </div>
         <div class="card">
-          <div class="card-title">Pricing &amp; Stock</div>
+          <div class="card-title">Pricing, Stock &amp; Checkout</div>
           <div class="form-grid triple">
             <div class="form-group"><label>Retail Price (GBP)</label><input type="text" id="prod-price" placeholder="14.99"></div>
             <div class="form-group"><label>Wholesale Price (GBP)</label><input type="text" id="prod-price-wholesale" placeholder="8.50"></div>
@@ -288,7 +272,29 @@
           </div>
           <div class="form-grid">
             <div class="form-group"><label>Rating (1-5)</label><input type="number" id="prod-rating" min="0" max="5" step="0.1" placeholder="4.5"></div>
-            <div class="form-group"><label>Amazon URL</label><input type="url" id="prod-amazon" placeholder="https://www.amazon.co.uk/dp/..."></div>
+            <div class="form-group"><label>Available on Amazon</label>
+              <select id="prod-avail-amazon">
+                <option value="true">Yes (Show Buy on Amazon button)</option>
+                <option value="false">No (Local sale / disabled)</option>
+              </select>
+            </div>
+            <div class="form-group"><label>Amazon URL</label><input type="url" id="prod-amazon" placeholder="https://www.amazon.co.uk/dp/... (Amazon product page)"></div>
+            <div class="form-group"><label>Buy Now URL (custom checkout fallback)</label><input type="url" id="prod-buynowurl" placeholder="https://... (Only if not using standard Snipcart)"></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Technical Specifications</div>
+          <div class="form-grid triple">
+            <div class="form-group"><label>Weight</label><input type="text" id="prod-weight" placeholder="e.g. 350g"></div>
+            <div class="form-group"><label>Dimensions</label><input type="text" id="prod-dimensions" placeholder="e.g. 35 × 25 × 2 cm"></div>
+            <div class="form-group"><label>Material</label><input type="text" id="prod-material" placeholder="e.g. Food-grade silicone"></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Full Description (for details page)</div>
+          <div class="form-group">
+            <label>Product Details (Detailed story / paragraphs)</label>
+            <textarea id="prod-full-desc" style="min-height:120px;" placeholder="Describe details, specifications, use cases and highlights of the product..."></textarea>
           </div>
         </div>
         <div class="card">
@@ -364,7 +370,73 @@
         </div>
       </div>
 
-      <!-- ==================== GENERAL SETTINGS ==================== -->
+      <!-- Notice Board -->
+      <div class="panel" id="panel-noticeboard">
+        <div class="panel-header">
+          <div>
+            <h1 class="panel-title">📢 Notice Board</h1>
+            <p class="panel-desc">Display a scrolling banner on your site. Perfect for maintenance alerts, deals, and announcements.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Banner Status &amp; Type</div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Enable Notice Board</label>
+              <select id="nb-enabled">
+                <option value="true">✅ Enabled — Show on site</option>
+                <option value="false">❌ Disabled — Hidden</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Banner Type</label>
+              <select id="nb-type">
+                <option value="maintenance">🚧 Maintenance / Under Construction</option>
+                <option value="deals">🔥 Big Deals / Sale</option>
+                <option value="hourly_deal">⏰ Hourly Deal</option>
+                <option value="sale">💸 Sale / Discount</option>
+                <option value="custom">📢 Custom / Occasional</option>
+              </select>
+            </div>
+            <div class="form-group full-width">
+              <label>Banner Message Text</label>
+              <input type="text" id="nb-text" placeholder="e.g. 🚧 Site under maintenance — do not purchase 🚧">
+              <div style="font-size:0.8rem; color:var(--text-muted); margin-top:4px;">Emojis are supported. The text will scroll across the full width of the page.</div>
+            </div>
+            <div class="form-group">
+              <label>Scroll Speed</label>
+              <select id="nb-speed">
+                <option value="slow">🐢 Slow</option>
+                <option value="normal">➡️ Normal</option>
+                <option value="fast">⚡ Fast</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Preview</div>
+          <div style="border-radius:8px; overflow:hidden; border: 1px solid var(--border);">
+            <div id="nb-preview" style="background:#991b1b; color:#fff; padding:10px 16px; font-size:0.88rem; font-weight:600;">
+              🚧 Notice Board Preview — edit the fields above and click "Preview" to see it here
+            </div>
+          </div>
+          <button class="btn-secondary" style="margin-top:16px;" onclick="previewNoticeboard()">👁 Preview Banner</button>
+        </div>
+
+        <div class="card" style="background:rgba(251,191,36,0.08); border-color:rgba(251,191,36,0.3);">
+          <div style="display:flex; gap:12px; align-items:flex-start;">
+            <span style="font-size:1.5rem;">⚠️</span>
+            <div>
+              <div style="font-weight:600; margin-bottom:4px; color:var(--warning);">How to publish changes</div>
+              <p style="color:var(--text-muted); font-size:0.9rem; margin:0;">After editing notice board settings, click <strong style="color:var(--text)">"Publish Changes"</strong> in the top header. GitHub Pages will update your live site within <strong style="color:var(--text)">1–5 minutes</strong>. If you don't see changes, do a hard refresh (Ctrl+Shift+R).</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- General Settings -->
       <div class="panel" id="panel-settings">
         <div class="panel-header">
           <div>
@@ -671,9 +743,13 @@ function populateUI() {
   document.getElementById('stat-products').textContent = siteData.products.length;
   document.getElementById('stat-categories').textContent = siteData.categories.length;
   document.getElementById('stat-posts').textContent = siteData.posts.length;
-  document.getElementById('stat-accounts').textContent = getAccounts().length;
-  document.getElementById('stat-subscribers').textContent = getSubscribers().length;
 
+  // Noticeboard stat
+  const nb = (siteData.settings && siteData.settings.noticeboard) || {};
+  const nbStat = document.getElementById('stat-noticeboard');
+  if (nbStat) nbStat.textContent = nb.enabled ? '✅ Active: ' + (nb.type || 'custom') : '⏸ Disabled';
+  
+  // Settings
   const s = siteData.settings;
   const ids = ['brandName','heroTagline','heroSubtitle','heroImgUrl','ctaText','ctaUrl','navCtaText','contactEmail','contactPhone','socialFb','socialIg','socialTt','socialYt','snipcartApiKey'];
   ids.forEach(id => {
@@ -681,11 +757,17 @@ function populateUI() {
     if (el) el.value = s[id] || '';
   });
 
-  const seo = siteData.seo || {};
-  const seoTitle = document.getElementById('seo-metaTitle');
-  const seoDesc = document.getElementById('seo-metaDescription');
-  if (seoTitle) seoTitle.value = seo.metaTitle || '';
-  if (seoDesc) seoDesc.value = seo.metaDescription || '';
+  // Noticeboard fields
+  if (document.getElementById('nb-enabled')) {
+    document.getElementById('nb-enabled').value = nb.enabled ? 'true' : 'false';
+    document.getElementById('nb-type').value = nb.type || 'maintenance';
+    document.getElementById('nb-text').value = nb.text || '';
+    document.getElementById('nb-speed').value = nb.speed || 'normal';
+  }
+  
+  // SEO
+  if(document.getElementById('seo-metaTitle')) document.getElementById('seo-metaTitle').value = siteData.seo.metaTitle || '';
+  if(document.getElementById('seo-metaDescription')) document.getElementById('seo-metaDescription').value = siteData.seo.metaDescription || '';
 }
 
 function syncSettingsFromUI() {
@@ -694,10 +776,29 @@ function syncSettingsFromUI() {
     const el = document.getElementById('set-' + id);
     if (el) siteData.settings[id] = el.value;
   });
-  const seoTitle = document.getElementById('seo-metaTitle');
-  const seoDesc = document.getElementById('seo-metaDescription');
-  if (seoTitle) siteData.seo.metaTitle = seoTitle.value;
-  if (seoDesc) siteData.seo.metaDescription = seoDesc.value;
+  // Noticeboard
+  if (document.getElementById('nb-enabled')) {
+    if (!siteData.settings.noticeboard) siteData.settings.noticeboard = {};
+    siteData.settings.noticeboard.enabled = document.getElementById('nb-enabled').value === 'true';
+    siteData.settings.noticeboard.type    = document.getElementById('nb-type').value;
+    siteData.settings.noticeboard.text    = document.getElementById('nb-text').value;
+    siteData.settings.noticeboard.speed   = document.getElementById('nb-speed').value;
+  }
+  siteData.seo.metaTitle = document.getElementById('seo-metaTitle').value;
+  siteData.seo.metaDescription = document.getElementById('seo-metaDescription').value;
+}
+
+function previewNoticeboard() {
+  const type = document.getElementById('nb-type').value;
+  const text = document.getElementById('nb-text').value || 'Preview text goes here...';
+  const bgMap = {
+    maintenance: '#991b1b', deals: '#92400e', hourly_deal: '#1e3a5f',
+    sale: '#065f46', custom: '#312e81'
+  };
+  const preview = document.getElementById('nb-preview');
+  preview.style.background = bgMap[type] || '#312e81';
+  preview.textContent = text;
+  showToast('Preview updated!', 'info');
 }
 
 // ==========================================
@@ -711,12 +812,22 @@ function renderProductsList() {
   }
 
   list.innerHTML = siteData.products.map(p => {
-    const img = (p.images && p.images.length > 0) ? p.images[0] : (p.imgUrl || 'https://placehold.co/48x48/22263a/8892b0?text=?');
+    const img = (p.images && p.images.length > 0) ? p.images[0] : 'https://placehold.co/48x48/22263a/8892b0?text=?';
     const cat = (siteData.categories || []).find(c => c.id === p.category);
     const catName = cat ? cat.name : (p.category || 'Uncategorized');
     const badgeHtml = p.badge ? ' <span class="badge-tag ' + (p.badge === 'Best Seller' ? 'badge-green' : p.badge === 'New' ? 'badge-blue' : 'badge-amber') + '">' + p.badge + '</span>' : '';
-    return '<div class="item-row"><div class="item-info"><img src="' + img + '" class="item-img" onerror="this.src=\'https://placehold.co/48x48/22263a/8892b0?text=?\'"><div><div class="item-title">' + p.name + badgeHtml + '</div><div class="item-meta">' + catName + ' &middot; £' + (p.price || '0.00') + (p.priceWholesale ? ' (W: £' + p.priceWholesale + ')' : '') + ' &middot; ★' + (p.rating || '-') + '</div></div></div><div class="item-actions"><button class="btn-icon" onclick="editProduct(\'' + p.id + '\')">✏️</button><button class="btn-icon danger" onclick="deleteProduct(\'' + p.id + '\')">🗑️</button></div></div>';
+    const stock = p.stockQty !== undefined ? p.stockQty : (p.stock || 0);
+    return '<div class="item-row"><div class="item-info"><img src="' + img + '" class="item-img" onerror="this.src=\'https://placehold.co/48x48/22263a/8892b0?text=?\'"><div><div class="item-title">' + p.name + badgeHtml + '</div><div class="item-meta">' + catName + ' &middot; £' + (p.price || '0.00') + ' (W: £' + (p.priceWholesale || '0.00') + ') &middot; Stock: ' + stock + ' &middot; SKU: ' + (p.sku || 'N/A') + '</div></div></div><div class="item-actions"><button class="btn-icon" onclick="editProduct(\'' + p.id + '\')">✏️</button><button class="btn-icon danger" onclick="deleteProduct(\'' + p.id + '\')">🗑️</button></div></div>';
   }).join('');
+}
+
+function filterProductsList() {
+  const query = document.getElementById('prod-search').value.toLowerCase().trim();
+  const rows = document.querySelectorAll('#productsList .item-row');
+  rows.forEach(row => {
+    const text = row.textContent.toLowerCase();
+    row.style.display = text.includes(query) ? '' : 'none';
+  });
 }
 
 function buildCategoryDropdown(selectId, selectedValue) {
@@ -729,18 +840,49 @@ function editProduct(id) {
   const isNew = id === 'new';
   document.getElementById('productEditorTitle').textContent = isNew ? 'Add Product' : 'Edit Product';
 
-  const p = isNew ? { id: 'prod-' + Date.now(), name:'', description:'', price:'', priceWholesale:'', badge:'', category:'', amazonUrl:'', images:[], features:[], rating: '', stock: '' }
-               : siteData.products.find(x => x.id === id);
+  const p = isNew ? { 
+    id: 'prod-' + Date.now(), 
+    name: '', 
+    description: '', 
+    price: '', 
+    priceWholesale: '', 
+    badge: '', 
+    category: '', 
+    amazonUrl: '', 
+    images: [], 
+    features: [], 
+    rating: '4.5', 
+    stockQty: 100, 
+    stock: 100,
+    brand: 'EAZYOO',
+    sku: '',
+    featured: false,
+    availableOnAmazon: true,
+    buyNowUrl: '',
+    weight: '',
+    dimensions: '',
+    material: '',
+    fullDescription: ''
+  } : siteData.products.find(x => x.id === id);
 
   document.getElementById('prod-id').value = p.id;
   document.getElementById('prod-name').value = p.name || '';
   document.getElementById('prod-desc').value = p.description || '';
   document.getElementById('prod-price').value = p.price || '';
   document.getElementById('prod-price-wholesale').value = p.priceWholesale || '';
-  document.getElementById('prod-stock').value = p.stock || '';
+  document.getElementById('prod-stock').value = p.stockQty !== undefined ? p.stockQty : (p.stock || 0);
   document.getElementById('prod-rating').value = p.rating || '';
   document.getElementById('prod-amazon').value = p.amazonUrl || '';
   document.getElementById('prod-img').value = (p.images || []).join('\n');
+  document.getElementById('prod-brand').value = p.brand || '';
+  document.getElementById('prod-sku').value = p.sku || '';
+  document.getElementById('prod-featured').value = p.featured ? 'true' : 'false';
+  document.getElementById('prod-avail-amazon').value = p.availableOnAmazon !== false ? 'true' : 'false';
+  document.getElementById('prod-buynowurl').value = p.buyNowUrl || '';
+  document.getElementById('prod-weight').value = p.weight || '';
+  document.getElementById('prod-dimensions').value = p.dimensions || '';
+  document.getElementById('prod-material').value = p.material || '';
+  document.getElementById('prod-full-desc').value = p.fullDescription || '';
 
   buildCategoryDropdown('prod-category', p.category || '');
 
@@ -757,6 +899,8 @@ function editProduct(id) {
 
 function saveProduct() {
   const id = document.getElementById('prod-id').value;
+  const stockVal = parseInt(document.getElementById('prod-stock').value) || 0;
+  
   const p = {
     id: id,
     name: document.getElementById('prod-name').value,
@@ -769,7 +913,17 @@ function saveProduct() {
     images: document.getElementById('prod-img').value.split('\n').map(u => u.trim()).filter(u => u),
     features: Array.from(document.querySelectorAll('#prod-features-container input')).map(i => i.value).filter(v => v.trim()),
     rating: parseFloat(document.getElementById('prod-rating').value) || 0,
-    stock: parseInt(document.getElementById('prod-stock').value) || 0
+    stock: stockVal,
+    stockQty: stockVal,
+    brand: document.getElementById('prod-brand').value,
+    sku: document.getElementById('prod-sku').value || ('EZ-' + id.replace('prod-', '').toUpperCase()),
+    featured: document.getElementById('prod-featured').value === 'true',
+    availableOnAmazon: document.getElementById('prod-avail-amazon').value === 'true',
+    buyNowUrl: document.getElementById('prod-buynowurl').value,
+    weight: document.getElementById('prod-weight').value,
+    dimensions: document.getElementById('prod-dimensions').value,
+    material: document.getElementById('prod-material').value,
+    fullDescription: document.getElementById('prod-full-desc').value
   };
 
   if (!p.name) { showToast('Product name is required', 'error'); return; }
@@ -790,6 +944,7 @@ function deleteProduct(id) {
   populateUI();
   showToast('Product deleted locally. Publish to update live site.', 'info');
 }
+
 
 function addFeatureInput(containerId, value) {
   const c = document.querySelector(containerId);
