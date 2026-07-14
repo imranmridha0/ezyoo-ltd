@@ -25,6 +25,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Inject social links from settings
     updateSocialLinks(s);
 
+    // Render noticeboard / banner from settings
+    renderNoticeboard(s.noticeboard);
+
     // ── Category Navigation Bar ──────────────────────────────────────────────
     const catNav = document.getElementById('category-nav');
     if (catNav && data.categories) {
@@ -102,13 +105,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       return `
         <div class="product-card" data-category="${p.category}" data-price="${p.price}" data-rating="${rating}" data-id="${p.id}">
-          <div class="product-card-visual">
+          <div class="product-card-visual" onclick="location.href='product.html?id=${p.id}'">
             ${badgeHtml}
             ${imageHtml}
           </div>
           <div class="product-card-body">
             <span class="product-card-category">${(data.categories||[]).find(c=>c.id===p.category)?.name || p.category}</span>
-            <h3 class="product-card-title">${p.name}</h3>
+            <h3 class="product-card-title" onclick="location.href='product.html?id=${p.id}'">${p.name}</h3>
             <p class="product-card-desc">${p.description}</p>
             <div class="product-card-rating">
               <span class="stars">${starsHtml}</span>
@@ -136,13 +139,13 @@ document.addEventListener('DOMContentLoaded', async () => {
       const catName = (data.categories || []).find(c => c.id === p.category)?.name || '';
       return `
         <div class="product-card own-brand-card" data-id="${p.id}">
-          <div class="product-card-visual">
+          <div class="product-card-visual" onclick="location.href='product.html?id=${p.id}'">
             <span class="card-badge badge-amazon">Available on Amazon</span>
             <img src="${firstImg}" alt="${p.name}" class="product-card-img" loading="lazy">
           </div>
           <div class="product-card-body">
             <span class="product-card-category">EAZYOO${catName ? ' · ' + catName : ''}</span>
-            <h3 class="product-card-title">${p.name}</h3>
+            <h3 class="product-card-title" onclick="location.href='product.html?id=${p.id}'">${p.name}</h3>
             <p class="product-card-desc">${p.description}</p>
             <div class="product-card-rating">
               <span class="stars">${starsHtml}</span>
@@ -257,6 +260,113 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
     }
 
+    // ── Single Product Detail Page (product.html?id=…) ───────────────────────
+    const detailView = document.getElementById('product-detail-view');
+    if (detailView && data.products) {
+      const prodId = new URLSearchParams(window.location.search).get('id');
+      const p = data.products.find(x => x.id === prodId);
+
+      if (p) {
+        document.title = `${p.name} — EAZYOO`;
+        const crumbName = document.getElementById('crumb-product-name');
+        if (crumbName) crumbName.textContent = p.name;
+
+        const imgs = p.images && p.images.length ? p.images : ['https://placehold.co/600x600/e2e8f0/475569?text=No+Image'];
+        const firstImg = imgs[0];
+        const stock = (typeof p.stockQty === 'number') ? p.stockQty : (p.stock || 0);
+
+        let stockHtml;
+        if (stock === 0) stockHtml = `<span class="stock-badge stock-out">Out of Stock</span>`;
+        else if (stock <= 10) stockHtml = `<span class="stock-badge stock-low">Only ${stock} left</span>`;
+        else stockHtml = `<span class="stock-badge stock-in">In Stock (${stock} available)</span>`;
+
+        const priceToUse = isWholesale && p.priceWholesale ? p.priceWholesale : p.price;
+        let pricingHtml = `<div class="detail-price">£${parseFloat(p.price).toFixed(2)}</div>`;
+        if (isWholesale && p.priceWholesale) {
+          pricingHtml = `
+            <div class="detail-price-wholesale-wrap">
+              <span class="detail-price-old">£${parseFloat(p.price).toFixed(2)}</span>
+              <span class="detail-price-wholesale">£${parseFloat(p.priceWholesale).toFixed(2)}</span>
+              <span class="wholesale-badge" style="font-size:0.75rem; padding:4px 8px;">B2B Wholesale</span>
+            </div>`;
+        }
+
+        // Buttons: Add to Cart (our cart engine) + Amazon
+        let buttonsHtml = '';
+        if (stock > 0) {
+          const pdata = JSON.stringify({ id: p.id, name: p.name, price: priceToUse, image: firstImg }).replace(/"/g, '&quot;');
+          buttonsHtml += `<button class="detail-btn detail-btn-primary" onclick="addToCart(JSON.parse(this.dataset.product))" data-product="${pdata}">🛒 Add to Cart</button>`;
+        } else {
+          buttonsHtml += `<button class="detail-btn" style="background:#e5e7eb; color:#9ca3af; cursor:not-allowed; border:none;" disabled>❌ Out of Stock</button>`;
+        }
+        if (p.amazonUrl && p.amazonUrl !== '#') {
+          buttonsHtml += `<a href="${p.amazonUrl}" target="_blank" rel="noopener" class="detail-btn detail-btn-amazon">📦 View on Amazon</a>`;
+        }
+
+        let featuresHtml = '';
+        if (p.features && p.features.length) {
+          featuresHtml = `<div class="detail-features-title">Highlights</div><ul class="detail-features">${p.features.map(f => `<li>${f}</li>`).join('')}</ul>`;
+        }
+
+        const specs = [
+          { label: 'Brand', value: p.brand || 'EAZYOO' },
+          { label: 'SKU Code', value: p.sku || 'EZ-' + p.id.toUpperCase() },
+          { label: 'Weight', value: p.weight || 'N/A' },
+          { label: 'Dimensions', value: p.dimensions || 'N/A' },
+          { label: 'Material', value: p.material || 'Premium Quality' },
+          { label: 'Stock Status', value: stock > 0 ? 'Available' : 'Out of stock' }
+        ];
+
+        const galleryHtml = `
+          <div class="detail-gallery">
+            <div class="main-img-wrap">
+              <img src="${firstImg}" alt="${p.name}" id="main-product-image">
+            </div>
+            ${imgs.length > 1 ? `
+              <div class="thumb-list">
+                ${imgs.map((src, i) => `
+                  <div class="thumb-item ${i === 0 ? 'active' : ''}" onclick="switchProductImage('${src}', this)">
+                    <img src="${src}" alt="Thumbnail ${i + 1}">
+                  </div>`).join('')}
+              </div>` : ''}
+          </div>`;
+
+        const rating = p.rating || 0;
+        const starsHtml = '★'.repeat(Math.floor(rating)) + (rating % 1 >= 0.5 ? '½' : '') + '☆'.repeat(5 - Math.floor(rating) - (rating % 1 >= 0.5 ? 1 : 0));
+
+        detailView.innerHTML = `
+          ${galleryHtml}
+          <div class="detail-info">
+            <div class="detail-brand">${p.brand || 'EAZYOO'}</div>
+            <h1 class="detail-title">${p.name}</h1>
+            <div class="detail-meta">
+              <div class="detail-rating"><span class="stars">${starsHtml}</span><span style="font-weight:600; color:var(--color-text);">${rating}</span></div>
+              <span class="detail-sku">SKU: ${p.sku || 'EZ-' + p.id.toUpperCase()}</span>
+              ${stockHtml}
+            </div>
+            <div class="detail-price-wrap">${pricingHtml}</div>
+            <p class="detail-desc">${p.fullDescription || p.description}</p>
+            <div class="detail-actions"><div class="detail-buttons-row">${buttonsHtml}</div></div>
+            ${featuresHtml}
+            <div class="detail-specs-title">Specifications</div>
+            <table class="detail-specs-table"><tbody>
+              ${specs.map(sp => `<tr><td>${sp.label}</td><td>${sp.value}</td></tr>`).join('')}
+            </tbody></table>
+          </div>`;
+
+        // Related products (same category)
+        const relatedGrid = document.getElementById('related-products-grid');
+        if (relatedGrid) {
+          const related = data.products.filter(x => x.category === p.category && x.id !== p.id).sort(() => Math.random() - 0.5).slice(0, 4);
+          relatedGrid.innerHTML = related.length
+            ? related.map(renderProductCard).join('')
+            : '<p style="color:var(--color-text-light); text-align:center; width:100%;">No related products found.</p>';
+        }
+      } else {
+        detailView.innerHTML = '<p style="text-align:center; padding:100px 0; color:var(--color-text-light); grid-column:span 2;">Product not found.</p>';
+      }
+    }
+
     // ── Blog ─────────────────────────────────────────────────────────────────
     const blogList = document.getElementById('dynamic-posts');
     if (blogList && data.posts) {
@@ -313,6 +423,53 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.error('EAZYOO CMS Error:', err);
   }
 });
+
+// ── Noticeboard / Banner ─────────────────────────────────────────────────────
+const NB_ICONS = {
+  maintenance: { label: '⚠️ Maintenance', emoji: '🚧' },
+  deals:       { label: '🔥 Big Deals',   emoji: '🔥' },
+  hourly_deal: { label: '⏰ Hourly Deal',  emoji: '⏰' },
+  sale:        { label: '💸 Sale',         emoji: '💸' },
+  custom:      { label: '📢 Notice',       emoji: '📢' }
+};
+
+function renderNoticeboard(nb) {
+  if (!nb || !nb.enabled || !nb.text || !nb.text.trim()) return;
+  const type  = nb.type || 'custom';
+  const speed = nb.speed || 'normal';
+  const info  = NB_ICONS[type] || NB_ICONS.custom;
+  const inner = `
+    <div class="nb-inner">
+      <span class="nb-icon-pill">${info.label}</span>
+      <div class="nb-marquee-wrap">
+        <span class="nb-marquee speed-${speed}">${nb.text}&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;${nb.text}&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;${nb.text}</span>
+      </div>
+      <button class="nb-dismiss" onclick="this.closest('#site-noticeboard').classList.add('nb-hidden')" title="Dismiss">✕</button>
+    </div>`;
+
+  // Use the existing placeholder div if present, else insert after the navbar.
+  let board = document.getElementById('site-noticeboard');
+  if (board) {
+    board.className = `nb-type-${type}`;
+    board.innerHTML = inner;
+  } else {
+    const nav = document.getElementById('navbar');
+    if (!nav) return;
+    board = document.createElement('div');
+    board.id = 'site-noticeboard';
+    board.className = `nb-type-${type}`;
+    board.innerHTML = inner;
+    nav.insertAdjacentElement('afterend', board);
+  }
+}
+
+// ── Product Detail: switch main image from thumbnail ─────────────────────────
+window.switchProductImage = function(src, el) {
+  const main = document.getElementById('main-product-image');
+  if (main) main.src = src;
+  document.querySelectorAll('.thumb-item').forEach(t => t.classList.remove('active'));
+  if (el) el.classList.add('active');
+};
 
 // ── Social Link Injection ────────────────────────────────────────────────────
 function updateSocialLinks(s) {

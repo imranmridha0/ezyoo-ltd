@@ -465,7 +465,9 @@
       "ownBrand": true,
       "featured": true,
       "images": [
-        "images/home-kitchen-board.png"
+        "images/cb-1.jpg",
+        "images/cb-2.jpg",
+        "images/cb-3.jpg"
       ],
       "features": [
         "Folds to 2cm flat",
@@ -1923,7 +1925,9 @@
       "ownBrand": true,
       "featured": true,
       "images": [
-        "images/sports-water-bottle.png"
+        "images/wb-1.jpg",
+        "images/wb-2.jpg",
+        "images/wb-3.jpg"
       ],
       "features": [
         "500ml capacity",
