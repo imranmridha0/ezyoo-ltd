@@ -1149,3 +1149,61 @@
   color: var(--color-charcoal);
   text-align: center;
 }
+
+/* === ORDER CONFIRMATION MODAL === */
+.ez-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: ezFade 0.2s ease;
+}
+@keyframes ezFade { from { opacity: 0; } to { opacity: 1; } }
+.ez-modal {
+  position: relative;
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  max-width: 460px;
+  width: 100%;
+  padding: 32px 28px 24px;
+  box-shadow: var(--shadow-xl);
+}
+.ez-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  line-height: 1;
+  color: var(--color-text-light);
+  cursor: pointer;
+}
+.ez-modal-title {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+.ez-modal-sub { font-size: 0.9rem; color: var(--color-text-light); margin-bottom: 16px; }
+.ez-modal-textarea {
+  width: 100%;
+  min-height: 150px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  font-family: inherit;
+  font-size: 0.85rem;
+  color: var(--color-text);
+  background: var(--color-bg);
+  resize: vertical;
+  margin-bottom: 16px;
+}
+.ez-modal-actions { display: flex; gap: 10px; margin-bottom: 12px; }
+.ez-modal-note { font-size: 0.8rem; color: var(--color-text-light); text-align: center; margin: 0; }
+.ez-modal-note a { color: var(--color-ocean-blue); font-weight: 600; }
+@media (max-width: 480px) { .ez-modal-actions { flex-direction: column; } }

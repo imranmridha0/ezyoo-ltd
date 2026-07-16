@@ -679,43 +679,73 @@ function logout() {
 
 async function saveToGitHub() {
   const token = localStorage.getItem('eazyoo_gh_token');
-  if (!token) return;
+  if (!token) { showToast('You are not logged in. Please log in with your token again.', 'error'); return; }
 
-  syncSettingsFromUI();
+  // Reading the form fields must not crash the publish — guard it.
+  try {
+    syncSettingsFromUI();
+  } catch (e) {
+    showToast('Could not read the form fields: ' + e.message, 'error');
+    return;
+  }
 
   showLoader('Publishing to GitHub...');
   try {
-    const contentStr = JSON.stringify(siteData, null, 2);
-    const base64Content = btoa(unescape(encodeURIComponent(contentStr)));
-
-    const body = { message: 'CMS Update via Admin Panel', content: base64Content };
-    if (fileSha) body.sha = fileSha;
-
-    const headers = { ...getAuthHeader(token), 'Content-Type': 'application/json' };
-    const res = await fetch('https://api.github.com/repos/' + REPO + '/contents/' + DATA_FILE, {
-      method: 'PUT', headers, body: JSON.stringify(body)
-    });
-
-    if (!res.ok) {
-      const errData = await res.json().catch(() => ({}));
-      if (res.status === 403) {
-        throw new Error('Permission denied. Your token cannot write to this repo.\n\nClassic token: needs "repo" scope.\nFine-grained token: needs "Contents: Read and write".\n\nGo to github.com/settings/tokens to update your token.');
-      }
-      if (res.status === 409) {
-        throw new Error('Conflict: the file was changed on GitHub since you loaded it. Refresh the page and try again.');
-      }
-      throw new Error(errData.message || 'Failed to publish (HTTP ' + res.status + ')');
-    }
-
-    const data = await res.json();
-    fileSha = data.content.sha;
-
+    await putDataFile(token, false);
     hideLoader();
     showToast('Published! Live site updates in ~1-3 minutes.', 'success');
   } catch (err) {
     hideLoader();
     showToast(err.message, 'error');
   }
+}
+
+// Fetch the newest SHA of data.json (used to recover from stale-SHA conflicts).
+async function refreshFileSha(token) {
+  const res = await fetch('https://api.github.com/repos/' + REPO + '/contents/' + DATA_FILE, { headers: getAuthHeader(token) });
+  if (res.ok) {
+    const data = await res.json();
+    fileSha = data.sha;
+  }
+}
+
+// PUT data.json. If the SHA is stale (409 — the repo also receives pushes from
+// elsewhere), silently fetch the latest SHA and retry once so the admin never
+// has to manually refresh.
+async function putDataFile(token, isRetry) {
+  const contentStr = JSON.stringify(siteData, null, 2);
+  const base64Content = btoa(unescape(encodeURIComponent(contentStr)));
+
+  const body = { message: 'CMS Update via Admin Panel', content: base64Content };
+  if (fileSha) body.sha = fileSha;
+
+  const headers = { ...getAuthHeader(token), 'Content-Type': 'application/json' };
+  const res = await fetch('https://api.github.com/repos/' + REPO + '/contents/' + DATA_FILE, {
+    method: 'PUT', headers, body: JSON.stringify(body)
+  });
+
+  if (res.status === 409 && !isRetry) {
+    // Someone else pushed since we loaded — grab the fresh SHA and retry once.
+    await refreshFileSha(token);
+    return putDataFile(token, true);
+  }
+
+  if (!res.ok) {
+    const errData = await res.json().catch(() => ({}));
+    if (res.status === 401) {
+      throw new Error('Your token is invalid or has expired. Click "Log Out", then log in again with a fresh Personal Access Token.');
+    }
+    if (res.status === 403) {
+      throw new Error('Permission denied. Your token cannot write to this repo.\n\nClassic token: needs "repo" scope.\nFine-grained token: needs "Contents: Read and write".\n\nUpdate your token at github.com/settings/tokens.');
+    }
+    if (res.status === 409) {
+      throw new Error('Conflict: the file kept changing during publish. Please try again in a moment.');
+    }
+    throw new Error(errData.message || 'Failed to publish (HTTP ' + res.status + ')');
+  }
+
+  const data = await res.json();
+  fileSha = data.content.sha;
 }
 
 // ==========================================
@@ -784,8 +814,11 @@ function syncSettingsFromUI() {
     siteData.settings.noticeboard.text    = document.getElementById('nb-text').value;
     siteData.settings.noticeboard.speed   = document.getElementById('nb-speed').value;
   }
-  siteData.seo.metaTitle = document.getElementById('seo-metaTitle').value;
-  siteData.seo.metaDescription = document.getElementById('seo-metaDescription').value;
+  if (!siteData.seo) siteData.seo = {};
+  const seoTitleEl = document.getElementById('seo-metaTitle');
+  const seoDescEl = document.getElementById('seo-metaDescription');
+  if (seoTitleEl) siteData.seo.metaTitle = seoTitleEl.value;
+  if (seoDescEl) siteData.seo.metaDescription = seoDescEl.value;
 }
 
 function previewNoticeboard() {

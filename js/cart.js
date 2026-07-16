@@ -119,22 +119,61 @@ window.closeCart = function() {
 };
 
 // ── Checkout (email-based for static site) ───────────────────────────────────
+const ORDER_EMAIL = 'contact@eazyoo.co.uk';
+
 window.checkoutCart = function() {
   const cart = getCart();
   if (cart.length === 0) { showToast('Your cart is empty', 'error'); return; }
 
   const total = getTotal();
   const lines = cart.map(i =>
-    `• ${i.qty}× ${i.name} @ £${parseFloat(i.price).toFixed(2)} = £${(parseFloat(i.price) * i.qty).toFixed(2)}`
+    `• ${i.qty}x ${i.name} @ £${parseFloat(i.price).toFixed(2)} = £${(parseFloat(i.price) * i.qty).toFixed(2)}`
   ).join('\n');
 
-  const subject = encodeURIComponent('Order Request — EAZYOO');
-  const body = encodeURIComponent(
+  const subject = 'Order Request — EAZYOO';
+  const bodyText =
     `Hello EAZYOO,\n\nI would like to place the following order:\n\n${lines}\n\nOrder Total: £${total.toFixed(2)}\n\n` +
-    `Please confirm availability and send payment details.\n\nThank you!`
-  );
+    `Please confirm availability and send payment details.\n\nName:\nDelivery address:\nContact number:\n\nThank you!`;
 
-  window.location.href = `mailto:contact@eazyoo.co.uk?subject=${subject}&body=${body}`;
+  showOrderModal(subject, bodyText, total);
+};
+
+// A reliable order-confirmation modal. mailto: alone fails silently when no mail
+// app is set up, so we ALSO show the full order and a copy button — the order is
+// never lost, and the customer can email it from any account.
+function showOrderModal(subject, bodyText, total) {
+  document.getElementById('ez-order-modal')?.remove();
+  const mailto = `mailto:${ORDER_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyText)}`;
+
+  const wrap = document.createElement('div');
+  wrap.id = 'ez-order-modal';
+  wrap.className = 'ez-modal-overlay';
+  wrap.innerHTML = `
+    <div class="ez-modal" role="dialog" aria-modal="true" aria-label="Confirm your order">
+      <button class="ez-modal-close" aria-label="Close" onclick="document.getElementById('ez-order-modal').remove()">&times;</button>
+      <h3 class="ez-modal-title">Request Your Order</h3>
+      <p class="ez-modal-sub">Your order total is <strong>£${total.toFixed(2)}</strong>. Send it to us and we'll confirm availability and payment within 24 hours.</p>
+      <textarea id="ez-order-text" class="ez-modal-textarea" readonly>${bodyText}</textarea>
+      <div class="ez-modal-actions">
+        <a href="${mailto}" class="btn btn-primary" style="flex:1;justify-content:center;text-decoration:none;">Send via Email</a>
+        <button class="btn btn-outline" style="flex:1;justify-content:center;" onclick="copyOrderText(this)">Copy Order</button>
+      </div>
+      <p class="ez-modal-note">Or email your order to <a href="mailto:${ORDER_EMAIL}">${ORDER_EMAIL}</a> directly.</p>
+    </div>`;
+  document.body.appendChild(wrap);
+  wrap.addEventListener('click', e => { if (e.target === wrap) wrap.remove(); });
+  closeCart();
+}
+
+window.copyOrderText = function(btn) {
+  const ta = document.getElementById('ez-order-text');
+  if (!ta) return;
+  const done = () => { const o = btn.textContent; btn.textContent = '✓ Copied!'; setTimeout(() => btn.textContent = o, 2000); };
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(ta.value).then(done).catch(() => { ta.select(); document.execCommand('copy'); done(); });
+  } else {
+    ta.select(); document.execCommand('copy'); done();
+  }
 };
 
 // ── Toast ────────────────────────────────────────────────────────────────────

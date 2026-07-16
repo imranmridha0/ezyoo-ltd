@@ -28,6 +28,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Render noticeboard / banner from settings
     renderNoticeboard(s.noticeboard);
 
+    // Show a Sign Out button in the nav if a customer is signed in
+    updateNavAuthState();
+
     // ── Category Navigation Bar ──────────────────────────────────────────────
     const catNav = document.getElementById('category-nav');
     if (catNav && data.categories) {
@@ -461,6 +464,33 @@ function renderNoticeboard(nb) {
     board.innerHTML = inner;
     nav.insertAdjacentElement('afterend', board);
   }
+}
+
+// ── Nav Sign-Out (shows on every page when a customer is signed in) ──────────
+function updateNavAuthState() {
+  const session = JSON.parse(sessionStorage.getItem('eazyoo_session') || 'null');
+  const navActions = document.querySelector('.nav-actions');
+  if (!navActions) return;
+
+  const existing = document.getElementById('nav-signout-btn');
+  if (!session) { if (existing) existing.remove(); return; }
+  if (existing) return;
+
+  const btn = document.createElement('button');
+  btn.id = 'nav-signout-btn';
+  btn.title = `Signed in as ${session.email} — click to sign out`;
+  btn.style.cssText = 'background:none; border:1px solid rgba(0,95,204,0.3); border-radius:20px; padding:5px 14px; font-size:0.78rem; font-weight:600; color:var(--color-primary,#005fcc); cursor:pointer; display:flex; align-items:center; gap:5px; font-family:inherit; transition:all 0.2s; white-space:nowrap; margin-right:6px;';
+  btn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/></svg> Sign Out`;
+  btn.onmouseenter = () => { btn.style.background = 'rgba(0,95,204,0.08)'; };
+  btn.onmouseleave = () => { btn.style.background = 'none'; };
+  btn.onclick = () => {
+    sessionStorage.removeItem('eazyoo_session');
+    window.location.href = 'account.html';
+  };
+
+  const cta = navActions.querySelector('.nav-cta');
+  if (cta) navActions.insertBefore(btn, cta);
+  else navActions.prepend(btn);
 }
 
 // ── Product Detail: switch main image from thumbnail ─────────────────────────
